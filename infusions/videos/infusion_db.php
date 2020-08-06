@@ -74,7 +74,6 @@ if (method_exists(\PHPFusion\Admins::getInstance(), 'setFolderPermissions')) {
     ]);
 }
 
-
 if (method_exists(\PHPFusion\Admins::getInstance(), 'setCustomFolder')) {
     \PHPFusion\Admins::getInstance()->setCustomFolder('VID', [
         [
