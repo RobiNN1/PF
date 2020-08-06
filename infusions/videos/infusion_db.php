@@ -73,3 +73,19 @@ if (method_exists(\PHPFusion\Admins::getInstance(), 'setFolderPermissions')) {
         'infusions/videos/cache/'              => TRUE
     ]);
 }
+
+
+if (method_exists(\PHPFusion\Admins::getInstance(), 'setCustomFolder')) {
+    \PHPFusion\Admins::getInstance()->setCustomFolder('VID', [
+        [
+            'path'  => VIDEOS.'videos/',
+            'URL'   => fusion_get_settings('siteurl').'infusions/videos/videos/',
+            'alias' => 'videos'
+        ],
+        [
+            'path'  => VIDEOS.'images/',
+            'URL'   => fusion_get_settings('siteurl').'infusions/videos/images/',
+            'alias' => 'videos_images'
+        ]
+    ]);
+}
