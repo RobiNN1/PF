@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: content_creator/content_creator.php
+| Filename: content_creator.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -401,7 +401,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $download_cats = dbcount('(download_cat_id)', DB_DOWNLOAD_CATS);
                 $download_cats = rand(1, $download_cats);
-                $values .= "('".rand(1, $this->users)."', '".$this->locale['cc_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://www.php-fusion.co.uk/home.php', ".$download_cats.", '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1)";
+                $values .= "('".rand(1, $this->users)."', '".$this->locale['cc_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://www.phpfusion.com/home.php', ".$download_cats.", '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1)";
                 $values .= $i < $num ? ', ' : ';';
             }
 

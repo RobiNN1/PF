@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: locale/Hungarian/permalinks/videos.php
+| Filename: videos.php
 | Author: Karrak
 +--------------------------------------------------------+
 | This program is released as free software under the

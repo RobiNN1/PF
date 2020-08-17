@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: sitemap_panel/classes/TempFileGZIPWriter.php
+| Filename: TempFileGZIPWriter.php
 | Author: Alexander Makarov <sam@rmcreative.ru>
 | Github: https://github.com/samdark/sitemap
 | Release: 2.2.0

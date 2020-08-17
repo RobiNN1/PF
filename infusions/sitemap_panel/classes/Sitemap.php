@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: sitemap_panel/classes/Sitemap.php
+| Filename: Sitemap.php
 | Author: Alexander Makarov <sam@rmcreative.ru>
 | Co-Author: RobiNN - several code modifications for PHP-Fusion 9
 | Github: https://github.com/samdark/sitemap

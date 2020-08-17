@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: docs/locale/English.php
+| Filename: English.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the

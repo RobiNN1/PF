@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: videos/admin/video_submissions.php
+| Filename: video_submissions.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the

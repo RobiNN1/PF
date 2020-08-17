@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: content_creator/locale/Romanian.php
+| Filename: Romanian.php
 | Author: Keddy
 +--------------------------------------------------------+
 | This program is released as free software under the

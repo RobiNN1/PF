@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: videos/upgrade/1.1.3.upgrade.inc
+| Filename: 1.1.3.upgrade.inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the

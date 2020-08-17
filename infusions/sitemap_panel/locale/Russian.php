@@ -2,9 +2,9 @@
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
 | Copyright (C) PHP-Fusion Inc
-| https://www.php-fusion.co.uk/
+| https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: sitemap_panel/locale/Russian.php
+| Filename: Russian.php
 | Author: zizub
 +--------------------------------------------------------+
 | This program is released as free software under the
