@@ -6,7 +6,7 @@ You can use custom video (.flv, .mp4, .mov and many others types, can be added i
 
 **Audio files are not supported**
 
-If need Permalinks, video searching or RSS Feeds, upload all the relevant files from `additional_files` to the appropriate folder.
+If need you Latest videos panel or RSS Feeds, upload all the relevant files from `additional_files` to the appropriate folder.
 
 E.g. `additional_files/infusions/latest_videos_panel/` upload to `root/infusions/latest_videos_panel/`
 
