@@ -17,4 +17,4 @@ Package includes:
 - Permalinks (SEO friendly URLs)
 - Search
 
-![Preview](preview.png)
+![Preview](screenshot.jpg)

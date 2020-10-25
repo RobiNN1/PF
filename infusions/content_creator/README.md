@@ -5,4 +5,4 @@ Simple Content Creator for PHP Fusion 9
 
 **Warning: Not for use in a live environment!**
 
-![Preview](preview.png)
+![Preview](screenshot.jpg)
