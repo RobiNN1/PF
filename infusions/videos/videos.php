@@ -208,6 +208,7 @@ if (isset($_GET['video_id'])) {
 
             $data['admin_link'] = '';
             if (iADMIN && checkrights('VID')) {
+                $aidlink = fusion_get_aidlink();
                 $data['admin_link'] = [
                     'edit'   => INFUSIONS.'videos/admin.php'.$aidlink.'&action=edit&section=form&video_id='.$data['video_id'],
                     'delete' => INFUSIONS.'videos/admin.php'.$aidlink.'&action=delete&section=form&video_id='.$data['video_id']
@@ -283,15 +284,15 @@ if (isset($_GET['video_id'])) {
                 }
 
                 $result = dbquery("SELECT v.*, vc.*, u.user_id, u.user_name, u.user_status, u.user_avatar , u.user_level, u.user_joined, ".(!empty($filter_count) ? $filter_count : '')." MAX(v.video_datestamp) as last_updated
-                FROM ".DB_VIDEOS." v
-                INNER JOIN ".DB_VIDEO_CATS." vc ON v.video_cat=vc.video_cat_id
-                LEFT JOIN ".DB_USERS." u ON v.video_user=u.user_id
-                ".(!empty($filter_join) ? $filter_join : '')."
-                ".(multilang_table('VL') ? " WHERE ".in_group('video_cat_language', LANGUAGE)." AND " : " WHERE ")." ".groupaccess('video_visibility')."
-                AND v.video_cat = '".intval($_GET['cat_id'])."'
-                GROUP BY v.video_id
-                ORDER BY ".(!empty($filter_condition) ? $filter_condition : 'vc.video_cat_sorting')."
-                LIMIT ".intval($_GET['rowstart']).', '.intval($video_settings['video_pagination'])
+                    FROM ".DB_VIDEOS." v
+                    INNER JOIN ".DB_VIDEO_CATS." vc ON v.video_cat=vc.video_cat_id
+                    LEFT JOIN ".DB_USERS." u ON v.video_user=u.user_id
+                    ".(!empty($filter_join) ? $filter_join : '')."
+                    ".(multilang_table('VL') ? " WHERE ".in_group('video_cat_language', LANGUAGE)." AND " : " WHERE ")." ".groupaccess('video_visibility')."
+                    AND v.video_cat = '".intval($_GET['cat_id'])."'
+                    GROUP BY v.video_id
+                    ORDER BY ".(!empty($filter_condition) ? $filter_condition : 'vc.video_cat_sorting')."
+                    LIMIT ".intval($_GET['rowstart']).', '.intval($video_settings['video_pagination'])
                 );
 
                 $info['video_rows'] = dbrows($result);

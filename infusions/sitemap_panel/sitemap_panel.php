@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-require_once INFUSIONS.'sitemap_panel/autoloader.php';
+require_once INFUSIONS.'sitemap_panel/includes/SitemapGenerator.php';
 
 $smg = new SitemapGenerator();
 

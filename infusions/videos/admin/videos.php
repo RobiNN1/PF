@@ -252,6 +252,7 @@ echo '<div class="row">';
         $tab_video_type['id'][]    = 'videoembed';
         $tab_video_type['icon'][]  = 'fa fa-code fa-fw';
 
+        $tab_video_type_active = tab_active($tab_video_type, 0);
         if (!empty($data['video_type'])) {
             if ($data['video_type'] === 'file') {
                 $tab_video_type_active = 'videofile';
@@ -260,8 +261,6 @@ echo '<div class="row">';
             } else if ($data['video_type'] === 'embed') {
                 $tab_video_type_active = 'videoembed';
             }
-        } else {
-            $tab_video_type_active = tab_active($tab_video_type, 0);
         }
 
         echo opentab($tab_video_type, $tab_video_type_active, 'videotab', FALSE, 'nav-tabs m-b-10');

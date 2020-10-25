@@ -21,7 +21,6 @@ require_once INFUSIONS.'videos/functions.php';
 
 pageAccess('VID');
 
-
 class VideosAdmin {
     private $locale;
     private $video_settings;

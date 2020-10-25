@@ -79,6 +79,12 @@
         "keywords": [
             "gameq",
             "serverstatus"
+        ],
+        "funding": [
+            {
+                "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VAU2KADATP5PU",
+                "type": "custom"
+            }
         ]
     },
     {
@@ -181,6 +187,16 @@
             "zend disk cache",
             "zend memory cache",
             "zend server"
+        ],
+        "funding": [
+            {
+                "url": "https://github.com/geolim4",
+                "type": "github"
+            },
+            {
+                "url": "https://www.patreon.com/geolim4",
+                "type": "patreon"
+            }
         ]
     },
     {

@@ -50,7 +50,7 @@ foreach ($db_vid_settings as $key => $value) {
 }
 
 if (!db_exists(DB_VIDEO_LIKES)) {
-    $inf_newtable[] = $db_prefix."video_likes (
+    $inf_newtable[] = DB_PREFIX."video_likes (
         like_id MEDIUMINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         video_id MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
         like_user MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',

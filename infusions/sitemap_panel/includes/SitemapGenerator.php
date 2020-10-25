@@ -16,6 +16,11 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 
+use samdark\sitemap\Sitemap;
+use samdark\sitemap\Index;
+
+require_once INFUSIONS.'sitemap_panel/includes/vendor/autoload.php';
+
 class SitemapGenerator {
     private $locale;
     private $settings;
@@ -79,7 +84,7 @@ class SitemapGenerator {
 
         if (dbrows($result) > 0) {
             while ($data = dbarray($result)) {
-                $this->sitemap->addItem($data['url'], '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($data['url'], NULL, $options['frequency'], $options['priority']);
             }
         }
     }
@@ -91,21 +96,21 @@ class SitemapGenerator {
         ");
 
         while ($data = dbarray($result)) {
-            $this->sitemap->addItem($this->siteurl.'profile.php?lookup='.$data['user_id'], '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'profile.php?lookup='.$data['user_id'], NULL, $options['frequency'], $options['priority']);
         }
     }
 
     private function articles($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=recent', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=recent', NULL, $options['frequency'], $options['priority']);
 
             if ($this->settings['comments_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=comment', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=comment', NULL, $options['frequency'], $options['priority']);
             }
 
             if ($this->settings['ratings_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=rating', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?type=rating', NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -119,7 +124,7 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?cat_id='.$data['article_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/articles/articles.php?cat_id='.$data['article_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
         } else {
@@ -141,15 +146,15 @@ class SitemapGenerator {
 
     private function blog($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=recent', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=recent', NULL, $options['frequency'], $options['priority']);
 
             if ($this->settings['comments_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=comment', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=comment', NULL, $options['frequency'], $options['priority']);
             }
 
             if ($this->settings['ratings_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=rating', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?type=rating', NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -161,11 +166,11 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?cat_id='.$data['blog_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?cat_id='.$data['blog_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
 
-            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?cat_id=0', '', $options['frequency_cat'], $options['priority_cat']);
+            $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?cat_id=0', NULL, $options['frequency_cat'], $options['priority_cat']);
         } else {
             $result = dbquery("SELECT blog_id, blog_datestamp, blog_language, blog_visibility, blog_draft
                 FROM ".DB_BLOG."
@@ -198,16 +203,16 @@ class SitemapGenerator {
 
     private function downloads($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=download', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=recent', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=download', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=recent', NULL, $options['frequency'], $options['priority']);
 
             if ($this->settings['comments_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=comments', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=comments', NULL, $options['frequency'], $options['priority']);
             }
 
             if ($this->settings['ratings_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=ratings', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?type=ratings', NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -219,7 +224,7 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?cat_id='.$data['download_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/downloads/downloads.php?cat_id='.$data['download_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
         } else {
@@ -238,7 +243,7 @@ class SitemapGenerator {
     }
 
     private function faq($options = []) {
-        $this->sitemap->addItem($this->siteurl.'infusions/faq/faq.php', '', $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/faq/faq.php', NULL, $options['frequency'], $options['priority']);
 
         $result = dbquery("SELECT faq_cat_id, faq_cat_language
             FROM ".DB_FAQ_CATS."
@@ -247,17 +252,17 @@ class SitemapGenerator {
 
         if (dbrows($result) > 0) {
             while ($data = dbarray($result)) {
-                $this->sitemap->addItem($this->siteurl.'infusions/faq/faq.php?cat_id='.$data['faq_cat_id'], '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/faq/faq.php?cat_id='.$data['faq_cat_id'], NULL, $options['frequency'], $options['priority']);
             }
         }
     }
 
     private function forum($options = []) {
-        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php', '', $options['frequency'], $options['priority']);
-        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=latest', '', $options['frequency'], $options['priority']);
-        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=unanswered', '', $options['frequency'], $options['priority']);
-        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=unsolved', '', $options['frequency'], $options['priority']);
-        $this->sitemap->addItem($this->siteurl.'infusions/forum/tags.php', '', $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php', NULL, $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=latest', NULL, $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=unanswered', NULL, $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?section=unsolved', NULL, $options['frequency'], $options['priority']);
+        $this->sitemap->addItem($this->siteurl.'infusions/forum/tags.php', NULL, $options['frequency'], $options['priority']);
 
         $result_tags = dbquery("SELECT tag_id, tag_status, tag_language
             FROM ".DB_FORUM_TAGS."
@@ -267,7 +272,7 @@ class SitemapGenerator {
 
         if (dbrows($result_tags) > 0) {
             while ($data = dbarray($result_tags)) {
-                $this->sitemap->addItem($this->siteurl.'infusions/forum/tags.php?tag_id='.$data['tag_id'], '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/forum/tags.php?tag_id='.$data['tag_id'], NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -278,7 +283,7 @@ class SitemapGenerator {
 
         if (dbrows($result_forums) > 0) {
             while ($data = dbarray($result_forums)) {
-                $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?viewforum&forum_id='.$data['forum_id'], '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/forum/index.php?viewforum&forum_id='.$data['forum_id'], NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -297,7 +302,7 @@ class SitemapGenerator {
 
     private function gallery($albums = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/gallery/gallery.php', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/gallery/gallery.php', NULL, $options['frequency'], $options['priority']);
         }
 
         if ($albums == TRUE) {
@@ -328,15 +333,15 @@ class SitemapGenerator {
 
     private function news($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/news/news.php', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=recent', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/news/news.php', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=recent', NULL, $options['frequency'], $options['priority']);
 
             if ($this->settings['comments_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=comment', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=comment', NULL, $options['frequency'], $options['priority']);
             }
 
             if ($this->settings['ratings_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=rating', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?type=rating', NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -350,7 +355,7 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?cat_id='.$data['news_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/news/news.php?cat_id='.$data['news_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
         } else {
@@ -371,16 +376,16 @@ class SitemapGenerator {
 
     private function videos($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=view', '', $options['frequency'], $options['priority']);
-            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=recent', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=view', NULL, $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=recent', NULL, $options['frequency'], $options['priority']);
 
             if ($this->settings['comments_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=comments', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=comments', NULL, $options['frequency'], $options['priority']);
             }
 
             if ($this->settings['ratings_enabled'] == 1) {
-                $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=ratings', '', $options['frequency'], $options['priority']);
+                $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?type=ratings', NULL, $options['frequency'], $options['priority']);
             }
         }
 
@@ -393,7 +398,7 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?cat_id='.$data['video_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?cat_id='.$data['video_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
         } else {
@@ -453,7 +458,7 @@ class SitemapGenerator {
 
     private function webLinks($cats = FALSE, $base_links = TRUE, $options = []) {
         if ($base_links == TRUE) {
-            $this->sitemap->addItem($this->siteurl.'infusions/weblinks/weblinks.php', '', $options['frequency'], $options['priority']);
+            $this->sitemap->addItem($this->siteurl.'infusions/weblinks/weblinks.php', NULL, $options['frequency'], $options['priority']);
         }
 
         if ($cats == TRUE) {
@@ -466,7 +471,7 @@ class SitemapGenerator {
 
             if (dbrows($result) > 0) {
                 while ($data = dbarray($result)) {
-                    $this->sitemap->addItem($this->siteurl.'infusions/weblinks/weblinks.php?cat_id='.$data['weblink_cat_id'], '', $options['frequency_cat'], $options['priority_cat']);
+                    $this->sitemap->addItem($this->siteurl.'infusions/weblinks/weblinks.php?cat_id='.$data['weblink_cat_id'], NULL, $options['frequency_cat'], $options['priority_cat']);
                 }
             }
         } else {
@@ -496,33 +501,38 @@ class SitemapGenerator {
         if ($this->customlinks) {
             $customlinks = $this->getSettings('customlinks');
             if ($customlinks['enabled'] == 1) {
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_customlinks.xml');
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_customlinks.xml');
 
                 $this->customLinks([
                     'frequency' => $customlinks['frequency'],
                     'priority'  => $customlinks['priority']
                 ]);
 
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap->write();
             }
         }
 
         if ($this->profiles) {
             $profiles = $this->getSettings('profiles');
             if ($profiles['enabled'] == 1) {
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_profiles.xml');
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_profiles.xml');
 
                 $this->profiels([
                     'frequency' => $profiles['frequency'],
                     'priority'  => $profiles['priority']
                 ]);
 
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap->write();
             }
         }
 
         if ($this->articles) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_articles.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_articles.xml');
 
             $articles = $this->getSettings('articles');
             if ($articles['enabled'] == 1) {
@@ -540,11 +550,13 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->blogs) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_blogs.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_blogs.xml');
 
             $blogs = $this->getSettings('blogs');
             if ($blogs['enabled'] == 1) {
@@ -562,23 +574,27 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         $custompages = $this->getSettings('custompages');
         if ($custompages['enabled'] == 1) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_custompages.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_custompages.xml');
 
             $this->customPages([
                 'frequency' => $custompages['frequency'],
                 'priority'  => $custompages['priority']
             ]);
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->downloads) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_downloads.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_downloads.xml');
 
             $downloads = $this->getSettings('downloads');
             if ($downloads['enabled'] == 1) {
@@ -596,39 +612,45 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->faqs) {
             $faqs = $this->getSettings('faq_cats');
             if ($faqs['enabled'] == 1) {
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_faqs.xml');
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_faqs.xml');
 
                 $this->faq([
                     'frequency' => $faqs['frequency'],
                     'priority'  => $faqs['priority']
                 ]);
 
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap->write();
             }
         }
 
         if ($this->forum) {
             $forum = $this->getSettings('forum');
             if ($forum['enabled'] == 1) {
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_forum.xml');
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_forum.xml');
 
                 $this->forum([
                     'frequency' => $forum['frequency'],
                     'priority'  => $forum['priority']
                 ]);
 
-                if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+                if ($this->sitemap_settings['sitemap_index'] == 1)
+                    $this->sitemap->write();
             }
         }
 
         if ($this->gallery) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_gallery.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_gallery.xml');
 
             $gallery = $this->getSettings('gallery');
             if ($gallery['enabled'] == 1) {
@@ -646,11 +668,13 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->news) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_news.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_news.xml');
 
             $news = $this->getSettings('news');
             if ($news['enabled'] == 1) {
@@ -668,11 +692,13 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->videos) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_videos.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_videos.xml');
 
             $videos = $this->getSettings('videos');
             if ($videos['enabled'] == 1) {
@@ -690,11 +716,13 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->weblinks) {
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_weblinks.xml');
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_weblinks.xml');
 
             $weblinks = $this->getSettings('weblinks');
             if ($weblinks['enabled'] == 1) {
@@ -712,11 +740,12 @@ class SitemapGenerator {
                 ]);
             }
 
-            if ($this->sitemap_settings['sitemap_index'] == 1) $this->sitemap->write();
+            if ($this->sitemap_settings['sitemap_index'] == 1)
+                $this->sitemap->write();
         }
 
         if ($this->sitemap_settings['sitemap_index'] == 1) {
-            $index = new SitemapIndex($this->sitemap_file);
+            $index = new Index($this->sitemap_file);
 
             foreach ($this->modules as $module) {
                 if (file_exists($this->sitemap_folder.'sitemap_'.$module.'.xml')) {
