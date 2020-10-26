@@ -5,6 +5,7 @@
 - ### Infusions:
     - [Content Creator](infusions/content_creator)
     - [Docs](infusions/docs)
+    - [GitHub Client](infusions/github)
     - [Most Read Blogs Panel](infusions/most_read_blogs_panel)
     - [Most Read News Panel](infusions/most_read_news_panel)
     - [Newsletter](infusions/newsletter_panel)
