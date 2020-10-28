@@ -413,7 +413,7 @@ class SitemapGenerator {
                 require_once INFUSIONS.'videos/functions.php';
 
                 while ($data = dbarray($result)) {
-                    $video = '';
+                    /*$video = '';
                     if ($data['video_type'] == 'file' && !empty($data['video_file'])) {
                         $video = fusion_get_settings('siteurl').'infusions/videos/videos/'.$data['video_file'];
                     } else if ($data['video_type'] == 'url' && !empty($data['video_url'])) {
@@ -448,7 +448,7 @@ class SitemapGenerator {
                         'video'       => $video,
                         'views'       => $data['video_views'],
                         'player_loc'  => $player
-                    ]);
+                    ]);*/
 
                     $this->sitemap->addItem($this->siteurl.'infusions/videos/videos.php?video_id='.$data['video_id'], $data['video_datestamp'], $options['frequency'], $options['priority']);
                 }
