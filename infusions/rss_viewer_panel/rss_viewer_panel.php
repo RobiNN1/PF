@@ -31,24 +31,23 @@ $sites = [
 
 echo '<div class="row">';
 
+libxml_set_streams_context(stream_context_create(['http' => ['user_agent' => 'php']]));
+$dom = new \DOMDocument();
+
 foreach ($sites as $site) {
-    $dom = new \DOMDocument();
     $rss = $dom->load($site['url']);
     $channel = $dom->getElementsByTagName('channel')->item(0);
 
     echo '<div class="col-xs-12 col-sm-6">';
     openside($site['name']);
 
-    foreach($channel->getElementsByTagName('item') as $item) {
-        $title = $item->getElementsByTagName('title')->item(0)->firstChild->data;
-        $link = $item->getElementsByTagName('link')->item(0)->firstChild->data;
-        //$description = $item->getElementsByTagName('description')->item(0)->firstChild->data;
-
-        echo '<a href="'.$link.'" target="_blank">'.$title.'</a>';
-        /*echo '<div>';
-            echo trimlink(strip_tags(parse_textarea($description, FALSE, TRUE)), 100);
-        echo '</div>';*/
-        echo '<hr class="m-0">';
+    if (!empty($channel->getElementsByTagName('item'))) {
+        foreach ($channel->getElementsByTagName('item') as $item) {
+            $title = $item->getElementsByTagName('title')->item(0)->firstChild->data;
+            $link = $item->getElementsByTagName('link')->item(0)->firstChild->data;
+            echo '<a href="'.$link.'" target="_blank">'.$title.'</a>';
+            echo '<hr class="m-0">';
+        }
     }
 
     closeside();
