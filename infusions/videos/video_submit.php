@@ -20,7 +20,7 @@ defined('IN_FUSION') || exit;
 $locale = fusion_get_locale();
 $video_settings = get_settings('videos');
 
-add_to_title($locale['global_200'].$locale['vid_076']);
+add_to_title($locale['vid_076']);
 
 opentable('<i class="fa fa-play fa-lg fa-fw"></i>'.$locale['vid_076']);
 

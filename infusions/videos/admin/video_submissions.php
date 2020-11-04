@@ -128,8 +128,6 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                     'video_allow_ratings'  => 1
                 ];
 
-                add_to_title($locale['global_200'].$locale['global_201'].$callback_data['video_title'].'?');
-
                 echo openform('publish_video', 'post', FUSION_REQUEST);
                 echo '<div class="well clearfix">';
                     echo '<div class="pull-left">';
