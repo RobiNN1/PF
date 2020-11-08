@@ -25,24 +25,26 @@ if (!function_exists('render_team')) {
 
         echo '<div class="table-responsive"><table class="table table-striped table-bordered">';
         echo '<thead><tr>';
-        echo '<td>'.$locale['tm_001'].'</td>';
-        echo '<td>'.$locale['tm_002'].'</td>';
-        echo '<td>'.$locale['tm_003'].'</td>';
-        echo '<td>'.$locale['tm_004'].'</td>';
-        if (iMEMBER) echo '<td>'.$locale['tm_005'].'</td>';
+            echo '<th></th>';
+            echo '<th>'.$locale['tm_001'].'</th>';
+            echo '<th>'.$locale['tm_002'].'</th>';
+            echo '<th>'.$locale['tm_003'].'</th>';
+            echo '<th>'.$locale['tm_004'].'</th>';
         echo '</tr></thead>';
 
         if (!empty($info)) {
             foreach ($info as $data) {
                 echo '<tr>';
-                    echo '<td>';
-                    echo display_avatar($data, '35px', '', false, 'img-circle m-r-5');
-                    echo profile_link($data['user_id'], $data['user_name'], $data['user_status']);
-                    echo '</td>';
+                    echo '<td><img style="width:40px;height:40px;" src="'.$data['photo'].'" alt="'.$data['name'].'"></td>';
+                    echo '<td>'.$data['name'].'</td>';
                     echo '<td>'.$data['position'].'</td>';
                     echo '<td>'.$data['profession'].'</td>';
-                    echo '<td>'.showdate('shortdate', $data['user_joined']).'</td>';
-                    if (iMEMBER) echo '<td><a href="'.BASEDIR.'messages.php?msg_send='.$data['user_id'].'"><i class="fa fa-envelope fa-fw fa-2x"></i></a></td>';
+                    echo '<td>';
+                        echo $data['info'];
+                        if (!empty($data['user_data'])) {
+                            echo '<a class="display-block" href="'.BASEDIR.'profile.php?lookup='.$data['user_data']['user_id'].'">'.$locale['tm_006'].'</a>';
+                        }
+                    echo '</td>';
                 echo '</tr>';
             }
         } else {

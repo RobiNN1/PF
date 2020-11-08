@@ -4,8 +4,8 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: team.php
-| Author: Helmuth Mikkelsen (helmuth)
+| Filename: 2.0.upgrade.inc
+| Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -15,5 +15,17 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['pl_team_title'] = 'Team';
-$locale['pl_team_desc'] = 'Aktiver permalinks til team på denne hjemmeside.';
+$inf_version = '2.0';
+
+$check_team = [
+    'name'       => " ADD name VARCHAR(50) NOT NULL DEFAULT '' AFTER userid",
+    'info'       => " ADD info TEXT NOT NULL AFTER profession",
+    'image'      => " ADD image VARCHAR(120) NOT NULL AFTER info",
+    'item_order' => " ADD item_order SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0' AFTER image"
+];
+
+foreach ($check_team as $key => $value) {
+    if (!column_exists(DB_TEAM, $key, FALSE)) {
+        $inf_altertable[] = DB_TEAM.$value;
+    }
+}

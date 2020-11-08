@@ -22,7 +22,7 @@ $locale = fusion_get_locale('', TM_LOCALE);
 // Infusion general information
 $inf_title       = $locale['tm_title'];
 $inf_description = $locale['tm_desc'];
-$inf_version     = '1.0.2';
+$inf_version     = '2.0';
 $inf_developer   = 'RobiNN';
 $inf_email       = 'robinn@php-fusion.eu';
 $inf_weburl      = 'https://github.com/RobiNN1';
@@ -33,8 +33,12 @@ $inf_image       = 'team.svg';
 $inf_newtable[] = DB_TEAM." (
     team_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
     userid MEDIUMINT(8) NOT NULL DEFAULT 0,
+    name VARCHAR(50) NOT NULL DEFAULT '',
     position VARCHAR(50) NOT NULL DEFAULT '',
     profession VARCHAR(50) NOT NULL DEFAULT '',
+    info TEXT NOT NULL,
+    image VARCHAR(120) NOT NULL,
+    item_order SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0',
     language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
     PRIMARY KEY (team_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
@@ -89,3 +93,4 @@ $inf_droptable[] = DB_TEAM;
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='TM'";
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='TM'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/team/team.php'";
+$inf_delfiles[] = TEAM.'images/';

@@ -31,14 +31,12 @@ add_breadcrumb(['link' => INFUSIONS.'team/team.php', 'title' => $locale['tm_titl
 
 $info = [];
 
-$result = dbquery("SELECT t.*, u.user_id, u.user_name, u.user_status, u.user_avatar, u.user_level, u.user_joined
-    FROM ".DB_TEAM." t
-    LEFT JOIN ".DB_USERS." u ON t.userid=u.user_id
-    ".(multilang_table('TM') ? " WHERE ".in_group('t.language', LANGUAGE) : '')
-);
+$result = dbquery("SELECT * FROM ".DB_TEAM.(multilang_table('TM') ? " WHERE ".in_group('language', LANGUAGE) : '')." ORDER BY item_order ASC");
 
 if (dbrows($result)) {
     while ($data = dbarray($result)) {
+        $data['photo'] = TEAM.'images/'.(!empty($data['image']) && file_exists(TEAM.'images/'.$data['image']) ? $data['image'] : 'nophoto.png');
+        $data['user_data'] = fusion_get_user($data['userid']);
         $info[] = $data;
     }
 }

@@ -34,3 +34,17 @@ if (!defined('DB_TEAM')) {
 }
 
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('TM', '<i class="admin-ico fa fa-fw fa-users"></i>');
+
+\PHPFusion\Admins::getInstance()->setFolderPermissions('team', [
+    'infusions/team/images/' => TRUE
+]);
+
+if (method_exists(\PHPFusion\Admins::getInstance(), 'setCustomFolder')) {
+    \PHPFusion\Admins::getInstance()->setCustomFolder('TM', [
+        [
+            'path'  => TEAM.'images/',
+            'URL'   => fusion_get_settings('siteurl').'infusions/team/images/',
+            'alias' => 'team'
+        ]
+    ]);
+}
