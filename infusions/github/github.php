@@ -161,7 +161,7 @@ if ($rate_limit > 2) {
 
         echo '<div class="m-b-10">';
             echo '<div class="dropdown display-inline m-r-10">';
-                echo '<button class="btn btn-default dropdown-toggle" type="button" id="'.$repo['full_name'].'-branhces" data-toggle="dropdown">'.$locale['gh_012'].(isset($_GET['branch']) ? $_GET['branch'] : $repo['default_branch']).' <span class="caret"></span></button>';
+                echo '<button class="btn btn-default dropdown-toggle" type="button" id="'.$repo['full_name'].'-branhces" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$locale['gh_012'].(isset($_GET['branch']) ? $_GET['branch'] : $repo['default_branch']).' <span class="caret"></span></button>';
                 echo '<ul class="dropdown-menu" aria-labelledby="'.$repo['full_name'].'-branhces">';
                     foreach ($branches as $key => $branch) {
                         $active_branch = (!isset($_GET['branch']) && $branch['name'] == $repo['default_branch']) || (isset($_GET['branch']) && $_GET['branch'] == $branch['name']) ? ' class="active"' : '';
@@ -312,7 +312,7 @@ if ($rate_limit > 2) {
                                         }
 
                                         if (!empty($issue['body'])) {
-                                            echo '<a data-toggle="collapse" href="#collapse-issue-'.$issue['id'].'" class="m-r-10"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$issue['title'].' <span class="caret"></span></h5></a>';
+                                            echo '<a data-toggle="collapse" href="#collapse-issue-'.$issue['id'].'" aria-expanded="false" aria-controls="collapse-issue-'.$issue['id'].'" class="m-r-10"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$issue['title'].' <span class="caret"></span></h5></a>';
                                         } else {
                                             echo '<div class="m-r-10 display-inline"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$issue['title'].'</h5></div>';
                                         }
@@ -379,7 +379,7 @@ if ($rate_limit > 2) {
 
                             echo '<div class="list-group-item">';
                                 if (!empty($pull_request['body'])) {
-                                    echo '<a data-toggle="collapse" href="#collapse-issue-'.$pull_request['id'].'" class="m-r-10"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$pull_request['title'].' <span class="caret"></span></h5></a>';
+                                    echo '<a data-toggle="collapse" href="#collapse-pr-'.$pull_request['id'].'" aria-expanded="false" aria-controls="collapse-pr-'.$pull_request['id'].'" class="m-r-10"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$pull_request['title'].' <span class="caret"></span></h5></a>';
                                 } else {
                                     echo '<div class="m-r-10 display-inline"><h5 style="font-weight: 600;" class="m-0 display-inline">'.$pull_request['title'].'</h5></div>';
                                 }
@@ -421,7 +421,7 @@ if ($rate_limit > 2) {
                                     $parsedown = new Parsedown;
                                     $parsedown->setSafeMode(TRUE);
                                     $body = $parsedown->text($body);
-                                    echo '<div class="collapse panel panel-default p-10 m-t-10" id="collapse-issue-'.$pull_request['id'].'">'.$body.'</div>';
+                                    echo '<div class="collapse panel panel-default p-10 m-t-10" id="collapse-pr-'.$pull_request['id'].'">'.$body.'</div>';
                                 }
 
                                 echo '<a class="m-t-10" target="_blank" href="'.$pull_request['html_url'].'">'.$locale['gh_036'].'</a>';
@@ -519,7 +519,7 @@ if ($rate_limit > 2) {
         if (!empty($tab['dropdown'])) {
             $active = (!isset($_GET['tab']) && $i == 0) || (isset($_GET['tab']) && $_GET['tab'] == $key) ? ' active' : '';
             echo '<li class="dropdown'.$active.'">';
-                echo '<a href="#" class="dropdown-toggle" id="'.$key.'-tab" data-toggle="dropdown" aria-controls="'.$key.'-tab-contents" aria-expanded="false">'.(!empty($tab['icon']) ? '<i class="'.$tab['icon'].'"></i> ' : '').$tab['name'].' <span class="caret"></span></a>';
+                echo '<a href="#" class="dropdown-toggle" id="'.$key.'-tab" data-toggle="dropdown" aria-controls="'.$key.'-tab-contents" aria-haspopup="true" aria-expanded="false">'.(!empty($tab['icon']) ? '<i class="'.$tab['icon'].'"></i> ' : '').$tab['name'].' <span class="caret"></span></a>';
                     echo '<ul class="dropdown-menu" aria-labelledby="'.$key.'-tab" id="'.$key.'-tab-contents">';
                         $active_ = (!isset($_GET['tab']) && $i == 0) || (isset($_GET['tab']) && $_GET['tab'] == $key) ? ' class="active"' : '';
                         // echo '<li'.$active_.'><a href="'.(!empty($tab['link']) ? $tab['link'] : FUSION_SELF.fusion_get_aidlink().'&tab='.$key).'">'.(!empty($tab['icon']) ? '<i class="'.$tab['icon'].'"></i> ' : '').$tab['name'].'</a></li>';
