@@ -48,4 +48,5 @@ $inf_adminpanel[] = [
 ];
 
 // Uninstallation
+$inf_droptable[] = DB_LEGAL;
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='LG'";
