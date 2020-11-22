@@ -35,3 +35,7 @@ if (!defined('DB_SERVER_STATUS')) {
 
 // Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SS', '<i class="admin-ico fa fa-fw fa-server"></i>');
+
+\PHPFusion\Admins::getInstance()->setFolderPermissions('server_status_panel', [
+    'infusions/server_status_panel/cache/' => TRUE
+]);
