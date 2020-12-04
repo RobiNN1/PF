@@ -21,7 +21,7 @@ $locale = fusion_get_locale('', GH_LOCALE);
 
 $inf_title       = $locale['gh_title'];
 $inf_description = $locale['gh_desc'];
-$inf_version     = '1.0.0';
+$inf_version     = '1.0.1';
 $inf_developer   = 'RobiNN';
 $inf_email       = 'robinn@php-fusion.eu';
 $inf_weburl      = 'https://github.com/RobiNN1';

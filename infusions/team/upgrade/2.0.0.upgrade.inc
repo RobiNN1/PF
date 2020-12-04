@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: 2.0.upgrade.inc
+| Filename: 2.0.0.upgrade.inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,7 +15,7 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$inf_version = '2.0';
+$inf_version = '2.0.0';
 
 $check_team = [
     'name'       => " ADD name VARCHAR(50) NOT NULL DEFAULT '' AFTER userid",

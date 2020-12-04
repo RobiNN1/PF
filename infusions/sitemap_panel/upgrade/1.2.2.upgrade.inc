@@ -4,7 +4,7 @@
 | Copyright (C) PHP-Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: 1.2.1.upgrade.inc
+| Filename: 1.2.2.upgrade.inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,7 +15,7 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$inf_version = '1.2.1';
+$inf_version = '1.2.2';
 
 $insert_settings = [
     'sitemap_index' => 0

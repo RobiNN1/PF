@@ -11,7 +11,7 @@ Simple Newsletter and email marketing system.
  - DKIM signature in email header
  - User field for site members (one click to subscribe/unsubscribe)
 
-![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.0.1-blue.svg)
 
 
 ![Preview](screenshot.jpg)

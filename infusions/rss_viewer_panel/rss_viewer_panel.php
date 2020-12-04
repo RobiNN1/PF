@@ -6,7 +6,7 @@
 +--------------------------------------------------------+
 | Filename: rss_viewer_panel.php
 | Author: RobiNN
-| Version: 1.0.0
+| Version: 1.0.1
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or

@@ -22,7 +22,7 @@ $locale = fusion_get_locale('', TM_LOCALE);
 // Infusion general information
 $inf_title       = $locale['tm_title'];
 $inf_description = $locale['tm_desc'];
-$inf_version     = '2.0';
+$inf_version     = '2.0.0';
 $inf_developer   = 'RobiNN';
 $inf_email       = 'robinn@php-fusion.eu';
 $inf_weburl      = 'https://github.com/RobiNN1';
