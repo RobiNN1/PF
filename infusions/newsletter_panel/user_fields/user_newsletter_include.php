@@ -21,7 +21,7 @@ if ($profile_method == "input") {
     $options = [
             'reverse_label' => TRUE,
             'class'         => 'user-newsletter',
-            'inner_width'   => '370px;max-width:370px;margin-left:-15px;'
+            'inline'        => FALSE
         ] + $options;
     $user_fields = form_checkbox('user_newsletter', $locale['uf_newsletter_title'], $field_value, $options);
 }
