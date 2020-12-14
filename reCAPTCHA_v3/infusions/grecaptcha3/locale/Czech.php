@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) PHP-Fusion Inc
+| Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
 | Filename: Czech.php
@@ -22,4 +22,4 @@ $locale['rc3_02'] = 'Zaregistrujte se a získejte [LINK]své klíče zde[/LINK].
 $locale['rc3_03'] = 'Site Key';
 $locale['rc3_04'] = 'Secret Key';
 $locale['rc3_05'] = 'Skóre';
-$locale['rc3_06'] = 'Recaptcha bude hodnotit provoz a interakce na základě skóre od 0,0 do 1,0, přičemž 1,0 je dobrá interakce a skóre se blíží k 0,0, což naznačuje dobrou pravděpodobnost, že provoz byl generován roboty. Nastavení příliš vysoké hodnoty může potenciálně blokovat oprávněné uživatele.';
+$locale['rc3_06'] = 'Recaptcha bude hodnotit provoz a interakce na základě skóre od 0,0 do 1,0, přičemž 1,0 je dobrá interakce a skóre blížíci se k 0,0 naznačuje dobrou pravděpodobnost, že provoz byl generován roboty. Nastavení příliš vysoké hodnoty může potenciálně blokovat oprávněné uživatele.';
