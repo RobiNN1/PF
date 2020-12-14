@@ -1,4 +1,4 @@
-# PHP-Fusion v9 Infusions
+# PHPFusion v9 Addons
 
 #### Not all infusions are fully compatible with older PHP-Fusion releases.
 
