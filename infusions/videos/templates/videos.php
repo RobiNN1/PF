@@ -164,12 +164,14 @@ if (!function_exists('display_video_menu')) {
         }
 
         ob_start();
+        openside('');
         echo '<ul class="block">';
             echo '<li><a href="'.VIDEOS.'videos.php">'.$locale['vid_067'].'</a></li>';
             foreach ($info['video_filter'] as $filter_key => $filter) {
                 echo '<li'.(isset($_GET['type']) && $_GET['type'] == $filter_key ? ' class="active strong"' : '').'><a href="'.$filter['link'].'">'.$filter['title'].'</a></li>';
             }
         echo '</ul>';
+        closeside();
 
         openside($locale['vid_001']);
         echo '<ul class="block">';
