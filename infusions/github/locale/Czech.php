@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -16,7 +16,7 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 $locale['gh_title'] = 'GitHub klient';
-$locale['gh_desc'] = 'GitHub klient pro PHP-Fusion';
+$locale['gh_desc'] = 'GitHub klient pro PHPFusion';
 $locale['gh_001'] = '<b>Poznámka: </b>Neodstraňujte soubory ve vyrovnávací paměti! (složka cache)';
 $locale['gh_002'] = 'Nastavení';
 $locale['gh_003'] = 'Nastavení byly aktualizovány.';

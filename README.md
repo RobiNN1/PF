@@ -1,6 +1,6 @@
 # PHPFusion v9 Addons
 
-#### Not all infusions are fully compatible with older PHP-Fusion releases.
+#### Not all infusions are fully compatible with older PHPFusion releases.
 
 - ### Infusions:
     - [Content Creator](infusions/content_creator)

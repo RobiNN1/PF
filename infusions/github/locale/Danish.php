@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -16,7 +16,7 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 $locale['gh_title'] = 'GitHub klient';
-$locale['gh_desc'] = 'GitHub klient til PHP-Fusion';
+$locale['gh_desc'] = 'GitHub klient til PHPFusion';
 $locale['gh_001'] = '<b>Bemærk: </b>Slet ikke cachede filer! (cache folder)';
 $locale['gh_002'] = 'Indstillinger';
 $locale['gh_003'] = 'Indstillinger er blevet opdateret.';

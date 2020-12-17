@@ -1,6 +1,6 @@
 <?php
 /*-------------------------------------------------------+
-| PHP-Fusion Content Management System
+| PHPFusion Content Management System
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
@@ -44,7 +44,7 @@ $context = stream_context_create([
     'http' => [
         'method' => 'GET',
         'header' => [
-            'User-Agent: PHP-Fusion'
+            'User-Agent: PHPFusion'
         ]
     ]
 ]);
@@ -133,7 +133,7 @@ if ($rate_limit > 2) {
         echo form_text('access_token', $locale['gh_007'], $userdata['user_github_access_token'], [
             'inline'  => TRUE,
             'ext_tip' => $locale['gh_008'].' <a target="_blank" href="https://github.com/settings/tokens/new">https://github.com/settings/tokens/new</a><br>'.
-                         $locale['gh_009'].': PHP-Fusion GitHub Client<br>'.
+                         $locale['gh_009'].': PHPFusion GitHub Client<br>'.
                          $locale['gh_010'].' <b>repo</b>, <b>write:discussion</b>'
         ]);
         echo form_button('add_access_token', $locale['save'], $locale['save'], ['class' => 'btn-success', 'icon' => 'fa fa-hdd-o']);
