@@ -37,7 +37,7 @@ $inf_adminpanel[] = [
     'language' => LANGUAGE
 ];
 
-$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES ('owner', 'php-fusion', '".$inf_folder."')";
+$inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES ('owner', 'PHPFusion', '".$inf_folder."')";
 
 if (!column_exists('users', 'user_github_access_token')) {
     $inf_altertable[] = DB_USERS." ADD user_github_access_token VARCHAR(50)";
