@@ -1,8 +1,6 @@
 # PHPFusion Addons
 Addon is a term for Infusions, Panels, [Themes](https://github.com/PF-Projects/PF-Themes), User Fields and BB Codes.
 
-All of these addons are created for PHPFusion 9.03
-
 > Compatibility with older versions is not guaranteed.
 If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
 
@@ -23,8 +21,8 @@ If something doesn't work, make sure you're using the latest version. Everything
 ## Other:
 - [reCAPTCHA v3](reCAPTCHA_v3)
 
-Old and unsupported addons can be found in this branch https://github.com/PF-Projects/PF-Addons/tree/old
+Old and unsupported addons can be found in this [branch](https://github.com/PF-Projects/PF-Addons/tree/old).
 
-Other Addons and SDK https://github.com/PHPFusion/Addons
+Other addons and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
 
 <!-- Don't copy my code! -->
