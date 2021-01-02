@@ -4,7 +4,7 @@ Addon is a term for Infusions, Panels, [Themes](https://github.com/PF-Projects/P
 > Compatibility with older versions is not guaranteed.
 If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
 
-## Infusions:
+## Infusions
 - [Content Creator](infusions/content_creator)
 - [Docs](infusions/docs)
 - [GitHub Client](infusions/github)
@@ -18,7 +18,7 @@ If something doesn't work, make sure you're using the latest version. Everything
 - [Team](infusions/team)
 - [Videos](infusions/videos)
 
-## Other:
+## Other
 - [reCAPTCHA v3](reCAPTCHA_v3)
 
 Old and unsupported addons can be found in this [branch](https://github.com/PF-Projects/PF-Addons/tree/old).
