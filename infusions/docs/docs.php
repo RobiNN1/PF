@@ -23,7 +23,7 @@ if (!defined('DOCS_EXIST')) {
 
 require_once THEMES.'templates/header.php';
 require_once DOCS.'functions.php';
-require_once DOCS.'templates/docs.php';
+require_once DOCS.'templates/docs.tpl.php';
 
 $locale = fusion_get_locale('', DOCS_LOCALE);
 

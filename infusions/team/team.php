@@ -22,7 +22,7 @@ if (!defined('TEAM_EXIST')) {
 }
 
 require_once THEMES.'templates/header.php';
-require_once TEAM.'templates/team.php';
+require_once TEAM.'templates/team.tpl.php';
 
 $locale = fusion_get_locale('', TM_LOCALE);
 

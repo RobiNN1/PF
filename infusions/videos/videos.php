@@ -23,7 +23,7 @@ if (!defined('VIDEOS_EXIST')) {
 
 require_once THEMES.'templates/header.php';
 require_once INCLUDES.'infusions_include.php';
-require_once VIDEOS.'templates/videos.php';
+require_once VIDEOS.'templates/videos.tpl.php';
 require_once INFUSIONS.'videos/OpenGraphVideos.php';
 require_once INFUSIONS.'videos/functions.php';
 

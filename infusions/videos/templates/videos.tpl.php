@@ -4,7 +4,7 @@
 | Copyright (C) PHP Fusion Inc
 | https://www.phpfusion.com/
 +--------------------------------------------------------+
-| Filename: videos.php
+| Filename: videos.tpl.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the

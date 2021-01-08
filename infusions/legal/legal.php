@@ -22,7 +22,7 @@ if (!defined('LEGAL_EXIST')) {
 }
 
 require_once THEMES.'templates/header.php';
-require_once LEGAL.'templates/legal.php';
+require_once LEGAL.'templates/legal.tpl.php';
 
 $locale = fusion_get_locale('', LG_LOCALE);
 
