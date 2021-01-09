@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-if (defined('GRECAPTCHA3_EXIST')) {
+if (defined('GRECAPTCHA3_EXISTS')) {
     if (isset($_POST['g-recaptcha-response'])) {
         $rc3_settings = get_settings('grecaptcha3');
 

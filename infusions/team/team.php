@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 require_once dirname(__FILE__).'/../../maincore.php';
 
-if (!defined('TEAM_EXIST')) {
+if (!defined('TEAM_EXISTS')) {
     redirect(BASEDIR.'error.php?code=404');
 }
 

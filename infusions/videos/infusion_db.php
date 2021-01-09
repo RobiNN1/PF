@@ -48,43 +48,33 @@ if (!defined('DB_VIDEO_CATS')) {
 
 $inf_settings = get_settings('videos');
 if (!empty($inf_settings['video_allow_submission']) && $inf_settings['video_allow_submission']) {
-    if (method_exists(\PHPFusion\Admins::getInstance(), 'setSubmitData')) {
-        \PHPFusion\Admins::getInstance()->setSubmitData('v', [
-            'infusion_name' => 'videos',
-            'link'          => INFUSIONS.'videos/video_submit.php',
-            'submit_link'   => 'submit.php?stype=v',
-            'submit_locale' => fusion_get_locale('vid_title', VID_LOCALE),
-            'title'         => fusion_get_locale('video_submit', VID_LOCALE),
-            'admin_link'    => INFUSIONS.'videos/admin.php'.fusion_get_aidlink().'&section=submissions&submit_id=%s'
-        ]);
-    } else {
-        // 9.0
-        \PHPFusion\Admins::getInstance()->setSubmitType('v', fusion_get_locale('vid_title', VID_LOCALE));
-        \PHPFusion\Admins::getInstance()->setSubmitLink('v', INFUSIONS.'videos/admin.php'.fusion_get_aidlink().'&section=submissions&submit_id=%s');
-    }
-}
-
-if (method_exists(\PHPFusion\Admins::getInstance(), 'setFolderPermissions')) {
-    \PHPFusion\Admins::getInstance()->setFolderPermissions('videos', [
-        'infusions/videos/videos/'             => TRUE,
-        'infusions/videos/images/'             => TRUE,
-        'infusions/videos/submissions/'        => TRUE,
-        'infusions/videos/submissions/images/' => TRUE,
-        'infusions/videos/cache/'              => TRUE
+    \PHPFusion\Admins::getInstance()->setSubmitData('v', [
+        'infusion_name' => 'videos',
+        'link'          => INFUSIONS.'videos/video_submit.php',
+        'submit_link'   => 'submit.php?stype=v',
+        'submit_locale' => fusion_get_locale('vid_title', VID_LOCALE),
+        'title'         => fusion_get_locale('video_submit', VID_LOCALE),
+        'admin_link'    => INFUSIONS.'videos/admin.php'.fusion_get_aidlink().'&section=submissions&submit_id=%s'
     ]);
 }
 
-if (method_exists(\PHPFusion\Admins::getInstance(), 'setCustomFolder')) {
-    \PHPFusion\Admins::getInstance()->setCustomFolder('VID', [
-        [
-            'path'  => VIDEOS.'videos/',
-            'URL'   => fusion_get_settings('siteurl').'infusions/videos/videos/',
-            'alias' => 'videos'
-        ],
-        [
-            'path'  => VIDEOS.'images/',
-            'URL'   => fusion_get_settings('siteurl').'infusions/videos/images/',
-            'alias' => 'videos_images'
-        ]
-    ]);
-}
+\PHPFusion\Admins::getInstance()->setFolderPermissions('videos', [
+    'infusions/videos/videos/'             => TRUE,
+    'infusions/videos/images/'             => TRUE,
+    'infusions/videos/submissions/'        => TRUE,
+    'infusions/videos/submissions/images/' => TRUE,
+    'infusions/videos/cache/'              => TRUE
+]);
+
+\PHPFusion\Admins::getInstance()->setCustomFolder('VID', [
+    [
+        'path'  => VIDEOS.'videos/',
+        'URL'   => fusion_get_settings('siteurl').'infusions/videos/videos/',
+        'alias' => 'videos'
+    ],
+    [
+        'path'  => VIDEOS.'images/',
+        'URL'   => fusion_get_settings('siteurl').'infusions/videos/images/',
+        'alias' => 'videos_images'
+    ]
+]);

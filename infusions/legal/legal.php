@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 require_once __DIR__.'/../../maincore.php';
 
-if (!defined('LEGAL_EXIST')) {
+if (!defined('LEGAL_EXISTS')) {
     redirect(BASEDIR.'error.php?code=404');
 }
 

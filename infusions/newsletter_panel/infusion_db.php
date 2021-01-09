@@ -55,12 +55,10 @@ require_once NEWSLETTER.'includes/functions.php';
     'infusions/newsletter_panel/email_templates/uploads/' => TRUE
 ]);
 
-if (method_exists(\PHPFusion\Admins::getInstance(), 'setCustomFolder')) {
-    \PHPFusion\Admins::getInstance()->setCustomFolder('NSL', [
-        [
-            'path'  => NEWSLETTER.'email_templates/',
-            'URL'   => fusion_get_settings('siteurl').'infusions/newsletter_panel/email_templates/',
-            'alias' => 'newsletter'
-        ]
-    ]);
-}
+\PHPFusion\Admins::getInstance()->setCustomFolder('NSL', [
+    [
+        'path'  => NEWSLETTER.'email_templates/',
+        'URL'   => fusion_get_settings('siteurl').'infusions/newsletter_panel/email_templates/',
+        'alias' => 'newsletter'
+    ]
+]);

@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-if (defined('VIDEOS_EXIST')) {
+if (defined('VIDEOS_EXISTS')) {
     $side_panel = FALSE;
     require_once INFUSIONS.'videos/functions.php';
 

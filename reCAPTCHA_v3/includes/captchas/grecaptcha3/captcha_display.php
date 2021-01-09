@@ -27,7 +27,7 @@ if (!function_exists('display_captcha')) {
 
         $options += $default_options;
 
-        if (defined('GRECAPTCHA3_EXIST')) {
+        if (defined('GRECAPTCHA3_EXISTS')) {
             $rc3_settings = get_settings('grecaptcha3');
 
             //add_to_css('.grecaptcha-badge{display:none!important;}');

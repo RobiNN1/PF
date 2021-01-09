@@ -282,32 +282,32 @@ class ContentCreator {
         $type = [];
         $max_items = [];
 
-        if (defined('ARTICLES_EXIST')) {
+        if (defined('ARTICLES_EXISTS')) {
             $type[1] = 'A';
             $max_items[1] = dbcount('(article_id)', DB_ARTICLES);
         }
 
-        if (defined('BLOG_EXIST')) {
+        if (defined('BLOG_EXISTS')) {
             $type[2] = 'B';
             $max_items[2] = dbcount('(blog_id)', DB_BLOG);
         }
 
-        if (defined('DOWNLOADS_EXIST')) {
+        if (defined('DOWNLOADS_EXISTS')) {
             $type[3] = 'D';
             $max_items[3] = dbcount('(download_id)', DB_DOWNLOADS);
         }
 
-        if (defined('GALLERY_EXIST')) {
+        if (defined('GALLERY_EXISTS')) {
             $type[4] = 'P';
             $max_items[4] = dbcount('(album_id)', DB_PHOTO_ALBUMS);
         }
 
-        if (defined('NEWS_EXIST')) {
+        if (defined('NEWS_EXISTS')) {
             $type[5] = 'N';
             $max_items[5] = dbcount('(news_id)', DB_NEWS);
         }
 
-        if (defined('VIDEOS_EXIST')) {
+        if (defined('VIDEOS_EXISTS')) {
             $type[6] = 'VID';
             $max_items[6] = dbcount('(video_id)', DB_VIDEOS);
         }
@@ -737,7 +737,7 @@ class ContentCreator {
         echo '<td>'.$this->button('private_messages', TRUE).'</td>';
         echo '</tr>';
 
-        if (defined('ARTICLES_EXIST')) {
+        if (defined('ARTICLES_EXISTS')) {
             $this->articles();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_012'].'</td></tr>';
             echo '<tr>';
@@ -760,7 +760,7 @@ class ContentCreator {
             }
         }
 
-        if (defined('BLOG_EXIST')) {
+        if (defined('BLOG_EXISTS')) {
             $this->blog();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_015'].'</td></tr>';
             echo '<tr>';
@@ -793,7 +793,7 @@ class ContentCreator {
         echo '<td>'.$this->button('custom_pages', TRUE).'</td>';
         echo '</tr>';
 
-        if (defined('DOWNLOADS_EXIST')) {
+        if (defined('DOWNLOADS_EXISTS')) {
             $this->downloads();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_020'].'</td></tr>';
             echo '<tr>';
@@ -816,7 +816,7 @@ class ContentCreator {
             }
         }
 
-        if (defined('FAQ_EXIST')) {
+        if (defined('FAQ_EXISTS')) {
             $this->faq();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_023'].'</td></tr>';
             echo '<tr>';
@@ -839,7 +839,7 @@ class ContentCreator {
             }
         }
 
-        if (defined('FORUM_EXIST')) {
+        if (defined('FORUM_EXISTS')) {
             $this->forum();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_043'].'</td></tr>';
             echo '<tr>';
@@ -851,7 +851,7 @@ class ContentCreator {
             echo '</tr>';
         }
 
-        if (defined('GALLERY_EXIST')) {
+        if (defined('GALLERY_EXISTS')) {
             $this->gallery();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_045'].'</td></tr>';
             echo '<tr>';
@@ -863,7 +863,7 @@ class ContentCreator {
             echo '</tr>';
         }
 
-        if (defined('NEWS_EXIST')) {
+        if (defined('NEWS_EXISTS')) {
             $this->news();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_026'].'</td></tr>';
             echo '<tr>';
@@ -887,7 +887,7 @@ class ContentCreator {
             }
         }
 
-        if (defined('MEMBER_POLL_PANEL_EXIST')) {
+        if (defined('MEMBER_POLL_PANEL_EXISTS')) {
             $this->polls();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_030'].'</td></tr>';
             echo '<tr>';
@@ -899,7 +899,7 @@ class ContentCreator {
             echo '</tr>';
         }
 
-        if (defined('SHOUTBOX_PANEL_EXIST')) {
+        if (defined('SHOUTBOX_PANEL_EXISTS')) {
             $this->shouts();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_032'].'</td></tr>';
             echo '<tr>';
@@ -911,7 +911,7 @@ class ContentCreator {
             echo '</tr>';
         }
 
-        if (defined('VIDEOS_EXIST')) {
+        if (defined('VIDEOS_EXISTS')) {
             $this->videos();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_052'].'</td></tr>';
             echo '<tr>';
@@ -935,7 +935,7 @@ class ContentCreator {
             }
         }
 
-        if (defined('WEBLINKS_EXIST')) {
+        if (defined('WEBLINKS_EXISTS')) {
             $this->weblinks();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_035'].'</td></tr>';
             echo '<tr>';

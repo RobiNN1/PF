@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 require_once __DIR__.'/../../maincore.php';
 
-if (!defined('VIDEOS_EXIST')) {
+if (!defined('VIDEOS_EXISTS')) {
     redirect(BASEDIR.'error.php?code=404');
 }
 
