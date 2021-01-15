@@ -44,7 +44,7 @@ if (isset($_POST['save_page']) || isset($_POST['save_and_close'])) {
         'docs_name'     => form_sanitizer($_POST['docs_name'], '', 'docs_name'),
         'docs_cat'      => form_sanitizer($_POST['docs_cat'], 0, 'docs_cat'),
         'docs_article'  => form_sanitizer($_POST['docs_article'], '', 'docs_article'),
-        'docs_language' => form_sanitizer($_POST['docs_language'], '', 'docs_language'),
+        'docs_language' => form_sanitizer($_POST['docs_language'], LANGUAGE, 'docs_language'),
         'docs_hidden'   => []
     ];
 
@@ -220,7 +220,7 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'form') {
     $filter_values = [
         'docs_text'     => !empty($_POST['docs_text']) ? form_sanitizer($_POST['docs_text'], '', 'docs_text') : '',
         'docs_category' => !empty($_POST['docs_category']) ? form_sanitizer($_POST['docs_category'], '', 'docs_category') : '',
-        'docs_language' => !empty($_POST['docs_language']) ? form_sanitizer($_POST['docs_language'], '', 'docs_language') : ''
+        'docs_language' => !empty($_POST['docs_language']) ? form_sanitizer($_POST['docs_language'], LANGUAGE, 'docs_language') : ''
     ];
 
     $filter_empty = TRUE;

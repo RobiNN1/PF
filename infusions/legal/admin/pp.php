@@ -39,7 +39,7 @@ if (isset($_POST['save_item'])) {
         'legal_id'       => form_sanitizer($_POST['legal_id'], '', 'legal_id'),
         'legal_type'     => form_sanitizer($_POST['legal_type'], '', 'legal_type'),
         'legal_text'     => form_sanitizer($_POST['legal_text'], '', 'legal_text'),
-        'legal_language' => form_sanitizer($_POST['legal_language'], '', 'legal_language')
+        'legal_language' => form_sanitizer($_POST['legal_language'], LANGUAGE, 'legal_language')
     ];
 
     if (dbcount('(legal_id)', DB_LEGAL, "legal_id='".$data['legal_id']."'")) {

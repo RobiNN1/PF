@@ -52,7 +52,7 @@ if (isset($_POST['save_cat'])) {
         'video_cat_description' => form_sanitizer($_POST['video_cat_description'], '', 'video_cat_description'),
         'video_cat_sort_by'     => form_sanitizer($_POST['video_cat_sort_by'], '', 'video_cat_sort_by'),
         'video_cat_sort_order'  => form_sanitizer($_POST['video_cat_sort_order'], 'DESC', 'video_cat_sort_order'),
-        'video_cat_language'    => form_sanitizer($_POST['video_cat_language'], '', 'video_cat_language'),
+        'video_cat_language'    => form_sanitizer($_POST['video_cat_language'], LANGUAGE, 'video_cat_language'),
         'video_cat_hidden'      => []
     ];
 

@@ -51,7 +51,7 @@ if (isset($_POST['save_cat']) || isset($_POST['save_and_close'])) {
         'docs_cat_parent'      => form_sanitizer($_POST['docs_cat_parent'], 0, 'docs_cat_parent'),
         'docs_cat_name'        => form_sanitizer($_POST['docs_cat_name'], '', 'docs_cat_name'),
         'docs_cat_description' => form_sanitizer($_POST['docs_cat_description'], '', 'docs_cat_description'),
-        'docs_cat_language'    => form_sanitizer($_POST['docs_cat_language'], '', 'docs_cat_language'),
+        'docs_cat_language'    => form_sanitizer($_POST['docs_cat_language'], LANGUAGE, 'docs_cat_language'),
         'docs_cat_hidden'      => []
     ];
 
@@ -196,7 +196,7 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'docs_cat_form') {
 
     if (!empty($_POST['docs_cat_language'])) {
         $search_string['docs_cat_language'] = [
-            'input'    => form_sanitizer($_POST['docs_cat_language'], '', 'docs_cat_language'),
+            'input'    => form_sanitizer($_POST['docs_cat_language'], LANGUAGE, 'docs_cat_language'),
             'operator' => "="
         ];
     }
