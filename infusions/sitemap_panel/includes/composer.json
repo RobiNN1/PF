@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^7 || ^8",
         "samdark/sitemap": "^2.2"
     }
 }
