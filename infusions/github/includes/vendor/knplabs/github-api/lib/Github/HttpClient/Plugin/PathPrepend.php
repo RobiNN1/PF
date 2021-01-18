@@ -11,17 +11,17 @@ use Psr\Http\Message\RequestInterface;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class PathPrepend implements Plugin
+final class PathPrepend implements Plugin
 {
-    use Plugin\VersionBridgePlugin;
-
-    /** @var string */
+    /**
+     * @var string
+     */
     private $path;
 
     /**
      * @param string $path
      */
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
     }
@@ -33,7 +33,7 @@ class PathPrepend implements Plugin
      *
      * @return Promise
      */
-    public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         $currentPath = $request->getUri()->getPath();
         if (strpos($currentPath, $this->path) !== 0) {

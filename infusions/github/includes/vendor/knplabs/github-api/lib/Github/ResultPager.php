@@ -2,36 +2,51 @@
 
 namespace Github;
 
-use Github\Api\ApiInterface;
-use Github\Api\Search;
+use Closure;
+use Generator;
+use Github\Api\AbstractApi;
 use Github\HttpClient\Message\ResponseMediator;
+use ValueError;
 
 /**
  * Pager class for supporting pagination in github classes.
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 class ResultPager implements ResultPagerInterface
 {
     /**
-     * The GitHub Client to use for pagination.
+     * The default number of entries to request per page.
      *
-     * @var \Github\Client
+     * @var int
      */
-    protected $client;
+    private const PER_PAGE = 100;
 
     /**
-     * Comes from pagination headers in Github API results.
+     * The client to use for pagination.
      *
-     * @var array
+     * @var Client
      */
-    protected $pagination;
+    private $client;
 
     /**
-     * The Github client to use for pagination.
+     * The number of entries to request per page.
      *
-     * This must be the same instance that you got the Api instance from.
+     * @var int
+     */
+    private $perPage;
+
+    /**
+     * The pagination result from the API.
+     *
+     * @var array<string,string>
+     */
+    private $pagination;
+
+    /**
+     * Create a new result pager instance.
      *
      * Example code:
      *
@@ -39,27 +54,38 @@ class ResultPager implements ResultPagerInterface
      * $api = $client->api('someApi');
      * $pager = new \Github\ResultPager($client);
      *
-     * @param \Github\Client $client
+     * @param Client   $client
+     * @param int|null $perPage
+     *
+     * @return void
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, int $perPage = null)
     {
+        if (null !== $perPage && ($perPage < 1 || $perPage > 100)) {
+            throw new ValueError(sprintf('%s::__construct(): Argument #2 ($perPage) must be between 1 and 100, or null', self::class));
+        }
+
         $this->client = $client;
+        $this->perPage = $perPage ?? self::PER_PAGE;
+        $this->pagination = [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPagination()
+    public function fetch(AbstractApi $api, string $method, array $parameters = []): array
     {
-        return $this->pagination;
-    }
+        $paginatorPerPage = $this->perPage;
+        $closure = Closure::bind(function (AbstractApi $api) use ($paginatorPerPage) {
+            $clone = clone $api;
+            $clone->perPage = $paginatorPerPage;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fetch(ApiInterface $api, $method, array $parameters = [])
-    {
-        $result = $this->callApi($api, $method, $parameters);
+            return $clone;
+        }, null, AbstractApi::class);
+
+        $api = $closure($api);
+        $result = $api->$method(...$parameters);
+
         $this->postFetch();
 
         return $result;
@@ -68,45 +94,43 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = [])
+    public function fetchAll(AbstractApi $api, string $method, array $parameters = []): array
     {
-        $isSearch = $api instanceof Search;
-
-        // get the perPage from the api
-        $perPage = $api->getPerPage();
-
-        // set parameters per_page to GitHub max to minimize number of requests
-        $api->setPerPage(100);
-
-        try {
-            $result = $this->callApi($api, $method, $parameters);
-            $this->postFetch();
-
-            if ($isSearch) {
-                $result = isset($result['items']) ? $result['items'] : $result;
-            }
-
-            while ($this->hasNext()) {
-                $next = $this->fetchNext();
-
-                if ($isSearch) {
-                    $result = array_merge($result, $next['items']);
-                } else {
-                    $result = array_merge($result, $next);
-                }
-            }
-        } finally {
-            // restore the perPage
-            $api->setPerPage($perPage);
-        }
-
-        return $result;
+        return iterator_to_array($this->fetchAllLazy($api, $method, $parameters));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function postFetch()
+    public function fetchAllLazy(AbstractApi $api, string $method, array $parameters = []): Generator
+    {
+        $result = $this->fetch($api, $method, $parameters);
+
+        foreach ($result['items'] ?? $result as $key => $item) {
+            if (is_string($key)) {
+                yield $key => $item;
+            } else {
+                yield $item;
+            }
+        }
+
+        while ($this->hasNext()) {
+            $result = $this->fetchNext();
+
+            foreach ($result['items'] ?? $result as $key => $item) {
+                if (is_string($key)) {
+                    yield $key => $item;
+                } else {
+                    yield $item;
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postFetch(): void
     {
         $this->pagination = ResponseMediator::getPagination($this->client->getLastResponse());
     }
@@ -114,15 +138,15 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
-        return $this->has('next');
+        return isset($this->pagination['next']);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function fetchNext()
+    public function fetchNext(): array
     {
         return $this->get('next');
     }
@@ -130,15 +154,15 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPrevious()
+    public function hasPrevious(): bool
     {
-        return $this->has('prev');
+        return isset($this->pagination['prev']);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function fetchPrevious()
+    public function fetchPrevious(): array
     {
         return $this->get('prev');
     }
@@ -146,7 +170,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchFirst()
+    public function fetchFirst(): array
     {
         return $this->get('first');
     }
@@ -154,7 +178,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchLast()
+    public function fetchLast(): array
     {
         return $this->get('last');
     }
@@ -162,39 +186,18 @@ class ResultPager implements ResultPagerInterface
     /**
      * @param string $key
      *
-     * @return bool
-     */
-    protected function has($key)
-    {
-        return !empty($this->pagination) && isset($this->pagination[$key]);
-    }
-
-    /**
-     * @param string $key
-     *
      * @return array
      */
-    protected function get($key)
+    protected function get(string $key): array
     {
-        if ($this->has($key)) {
-            $result = $this->client->getHttpClient()->get($this->pagination[$key]);
-            $this->postFetch();
-
-            return ResponseMediator::getContent($result);
+        if (!isset($this->pagination[$key])) {
+            return [];
         }
 
-        return [];
-    }
+        $result = $this->client->getHttpClient()->get($this->pagination[$key]);
 
-    /**
-     * @param ApiInterface $api
-     * @param string       $method
-     * @param array        $parameters
-     *
-     * @return mixed
-     */
-    protected function callApi(ApiInterface $api, $method, array $parameters)
-    {
-        return call_user_func_array([$api, $method], $parameters);
+        $this->postFetch();
+
+        return ResponseMediator::getContent($result);
     }
 }

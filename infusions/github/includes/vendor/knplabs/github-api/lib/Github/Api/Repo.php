@@ -2,7 +2,14 @@
 
 namespace Github\Api;
 
-use Github\Api\Repository\Checks;
+use Github\Api\Repository\Actions\Artifacts;
+use Github\Api\Repository\Actions\Secrets;
+use Github\Api\Repository\Actions\SelfHostedRunners;
+use Github\Api\Repository\Actions\WorkflowJobs;
+use Github\Api\Repository\Actions\WorkflowRuns;
+use Github\Api\Repository\Actions\Workflows;
+use Github\Api\Repository\Checks\CheckRuns;
+use Github\Api\Repository\Checks\CheckSuites;
 use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
@@ -32,22 +39,6 @@ use Github\Api\Repository\Traffic;
 class Repo extends AbstractApi
 {
     use AcceptHeaderTrait;
-
-    /**
-     * Search repositories by keyword.
-     *
-     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     * @link http://developer.github.com/v3/search/#search-repositories
-     *
-     * @param string $keyword the search query
-     * @param array  $params
-     *
-     * @return array list of found repositories
-     */
-    public function find($keyword, array $params = [])
-    {
-        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(['start_page' => 1], $params));
-    }
 
     /**
      * List all public repositories.
@@ -183,7 +174,7 @@ class Repo extends AbstractApi
      * @param string      $description  repository description
      * @param string      $homepage     homepage url
      * @param bool        $public       `true` for public, `false` for private
-     * @param null|string $organization username of organization if applicable
+     * @param string|null $organization username of organization if applicable
      * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
      * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
      * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them
@@ -277,6 +268,25 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Create a repository dispatch event.
+     *
+     * @link https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     * @param string $eventType  A custom webhook event name
+     *
+     * @return mixed null on success, array on error with 'message'
+     */
+    public function dispatch($username, $repository, $eventType, array $clientPayload)
+    {
+        return $this->post(\sprintf('/repos/%s/%s/dispatches', rawurlencode($username), rawurlencode($repository)), [
+            'event_type' => $eventType,
+            'client_payload' => $clientPayload,
+        ]);
+    }
+
+    /**
      * Manage the collaborators of a repository.
      *
      * @link http://developer.github.com/v3/repos/collaborators/
@@ -285,7 +295,7 @@ class Repo extends AbstractApi
      */
     public function collaborators()
     {
-        return new Collaborators($this->client);
+        return new Collaborators($this->getClient());
     }
 
     /**
@@ -297,7 +307,7 @@ class Repo extends AbstractApi
      */
     public function comments()
     {
-        return new Comments($this->client);
+        return new Comments($this->getClient());
     }
 
     /**
@@ -309,19 +319,71 @@ class Repo extends AbstractApi
      */
     public function commits()
     {
-        return new Commits($this->client);
+        return new Commits($this->getClient());
     }
 
     /**
-     * Manage checks on a repository.
-     *
-     * @link https://developer.github.com/v3/checks/
-     *
-     * @return Checks
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-runs
      */
-    public function checks()
+    public function checkRuns(): CheckRuns
     {
-        return new Checks($this->client);
+        return new CheckRuns($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-suites
+     */
+    public function checkSuites(): CheckSuites
+    {
+        return new CheckSuites($this->getClient());
+    }
+
+    /**
+     * @link https://developer.github.com/v3/actions/artifacts/#artifacts
+     */
+    public function artifacts(): Artifacts
+    {
+        return new Artifacts($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflows
+     */
+    public function workflows(): Workflows
+    {
+        return new Workflows($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
+     */
+    public function workflowRuns(): WorkflowRuns
+    {
+        return new WorkflowRuns($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-jobs
+     */
+    public function workflowJobs(): WorkflowJobs
+    {
+        return new WorkflowJobs($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#self-hosted-runners
+     */
+    public function selfHostedRunners(): SelfHostedRunners
+    {
+        return new SelfHostedRunners($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->getClient());
     }
 
     /**
@@ -333,7 +395,7 @@ class Repo extends AbstractApi
      */
     public function contents()
     {
-        return new Contents($this->client);
+        return new Contents($this->getClient());
     }
 
     /**
@@ -345,7 +407,7 @@ class Repo extends AbstractApi
      */
     public function downloads()
     {
-        return new Downloads($this->client);
+        return new Downloads($this->getClient());
     }
 
     /**
@@ -357,7 +419,7 @@ class Repo extends AbstractApi
      */
     public function releases()
     {
-        return new Releases($this->client);
+        return new Releases($this->getClient());
     }
 
     /**
@@ -369,7 +431,7 @@ class Repo extends AbstractApi
      */
     public function keys()
     {
-        return new DeployKeys($this->client);
+        return new DeployKeys($this->getClient());
     }
 
     /**
@@ -381,7 +443,7 @@ class Repo extends AbstractApi
      */
     public function forks()
     {
-        return new Forks($this->client);
+        return new Forks($this->getClient());
     }
 
     /**
@@ -393,7 +455,7 @@ class Repo extends AbstractApi
      */
     public function stargazers()
     {
-        return new Stargazers($this->client);
+        return new Stargazers($this->getClient());
     }
 
     /**
@@ -405,7 +467,7 @@ class Repo extends AbstractApi
      */
     public function hooks()
     {
-        return new Hooks($this->client);
+        return new Hooks($this->getClient());
     }
 
     /**
@@ -417,7 +479,7 @@ class Repo extends AbstractApi
      */
     public function labels()
     {
-        return new Labels($this->client);
+        return new Labels($this->getClient());
     }
 
     /**
@@ -429,7 +491,7 @@ class Repo extends AbstractApi
      */
     public function statuses()
     {
-        return new Statuses($this->client);
+        return new Statuses($this->getClient());
     }
 
     /**
@@ -462,7 +524,7 @@ class Repo extends AbstractApi
      */
     public function protection()
     {
-        return new Protection($this->client);
+        return new Protection($this->getClient());
     }
 
     /**
@@ -531,22 +593,6 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @deprecated see subscribers method
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
-     * @return array
-     */
-    public function watchers($username, $repository, $page = 1)
-    {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', [
-            'page' => $page,
-        ]);
-    }
-
-    /**
      * @param string $username
      * @param string $repository
      * @param int    $page
@@ -599,19 +645,49 @@ class Repo extends AbstractApi
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones', $parameters);
     }
 
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#enable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function enableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#disable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function disableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
+    }
+
     public function projects()
     {
-        return new Projects($this->client);
+        return new Projects($this->getClient());
     }
 
     public function traffic()
     {
-        return new Traffic($this->client);
+        return new Traffic($this->getClient());
     }
 
     public function pages()
     {
-        return new Pages($this->client);
+        return new Pages($this->getClient());
     }
 
     /**

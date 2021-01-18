@@ -27,12 +27,12 @@ class PullRequest extends AbstractApi
      * @param string|null $bodyType
      * @param string|null $apiVersion
      *
-     * @return self
+     * @return $this
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
         if (null === $apiVersion) {
-            $apiVersion = $this->client->getApiVersion();
+            $apiVersion = $this->getApiVersion();
         }
 
         if (!in_array($bodyType, ['text', 'html', 'full', 'diff', 'patch'])) {
@@ -80,9 +80,9 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$id);
     }
 
-    public function commits($username, $repository, $id)
+    public function commits($username, $repository, $id, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits', $parameters);
     }
 
     public function files($username, $repository, $id, array $parameters = [])
@@ -110,17 +110,17 @@ class PullRequest extends AbstractApi
 
     public function comments()
     {
-        return new Comments($this->client);
+        return new Comments($this->getClient());
     }
 
     public function reviews()
     {
-        return new Review($this->client);
+        return new Review($this->getClient());
     }
 
     public function reviewRequests()
     {
-        return new ReviewRequest($this->client);
+        return new ReviewRequest($this->getClient());
     }
 
     /**

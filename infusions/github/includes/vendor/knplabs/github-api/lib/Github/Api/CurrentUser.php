@@ -35,7 +35,7 @@ class CurrentUser extends AbstractApi
      */
     public function emails()
     {
-        return new Emails($this->client);
+        return new Emails($this->getClient());
     }
 
     /**
@@ -43,7 +43,7 @@ class CurrentUser extends AbstractApi
      */
     public function follow()
     {
-        return new Followers($this->client);
+        return new Followers($this->getClient());
     }
 
     public function followers($page = 1)
@@ -71,7 +71,7 @@ class CurrentUser extends AbstractApi
      */
     public function keys()
     {
-        return new PublicKeys($this->client);
+        return new PublicKeys($this->getClient());
     }
 
     /**
@@ -79,7 +79,7 @@ class CurrentUser extends AbstractApi
      */
     public function notifications()
     {
-        return new Notifications($this->client);
+        return new Notifications($this->getClient());
     }
 
     /**
@@ -87,7 +87,7 @@ class CurrentUser extends AbstractApi
      */
     public function memberships()
     {
-        return new Memberships($this->client);
+        return new Memberships($this->getClient());
     }
 
     /**
@@ -147,17 +147,7 @@ class CurrentUser extends AbstractApi
      */
     public function watchers()
     {
-        return new Watchers($this->client);
-    }
-
-    /**
-     * @deprecated Use watchers() instead
-     */
-    public function watched($page = 1)
-    {
-        return $this->get('/user/watched', [
-            'page' => $page,
-        ]);
+        return new Watchers($this->getClient());
     }
 
     /**
@@ -165,17 +155,7 @@ class CurrentUser extends AbstractApi
      */
     public function starring()
     {
-        return new Starring($this->client);
-    }
-
-    /**
-     * @deprecated Use starring() instead
-     */
-    public function starred($page = 1)
-    {
-        return $this->get('/user/starred', [
-            'page' => $page,
-        ]);
+        return new Starring($this->getClient());
     }
 
     /**
