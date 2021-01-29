@@ -31,23 +31,17 @@ $sites = [
 
 echo '<div class="row">';
 
-libxml_set_streams_context(stream_context_create(['http' => ['user_agent' => 'php']]));
-$dom = new \DOMDocument();
+require_once __DIR__.'/Feed.php';
+Feed::$cacheDir = __DIR__.'/cache';
 
 foreach ($sites as $site) {
-    $rss = $dom->load($site['url']);
-    $channel = $dom->getElementsByTagName('channel')->item(0);
-
+    $rss = Feed::loadRss($site['url']);
     echo '<div class="col-xs-12 col-sm-6">';
     openside($site['name']);
 
-    if (!empty($channel->getElementsByTagName('item'))) {
-        foreach ($channel->getElementsByTagName('item') as $item) {
-            $title = $item->getElementsByTagName('title')->item(0)->firstChild->data;
-            $link = $item->getElementsByTagName('link')->item(0)->firstChild->data;
-            echo '<a href="'.$link.'" target="_blank">'.$title.'</a>';
-            echo '<hr class="m-0">';
-        }
+    foreach ($rss->item as $item) {
+        echo '<a href="'.htmlspecialchars($item->url).'" target="_blank">'.htmlspecialchars($item->title).'</a>';
+        echo '<hr class="m-0">';
     }
 
     closeside();
