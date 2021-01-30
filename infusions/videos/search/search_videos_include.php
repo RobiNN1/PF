@@ -65,7 +65,7 @@ if (db_exists(DB_VIDEOS)) {
                 ".(multilang_table('VL') ? "WHERE ".in_group('vc.video_cat_language', LANGUAGE)." AND " : "WHERE ")
                 .groupaccess('video_visibility')." AND ".Search_Engine::search_conditions('videos').$date_search;
 
-            $result = dbquery($query, Search_Engine::get_param('search_param'));
+            $result = dbquery($query." LIMIT 100", Search_Engine::get_param('search_param'));
 
             $rows = dbrows($result);
         } else {
