@@ -35,17 +35,19 @@ require_once __DIR__.'/Feed.php';
 Feed::$cacheDir = __DIR__.'/cache';
 
 foreach ($sites as $site) {
-    $rss = Feed::loadRss($site['url']);
-    echo '<div class="col-xs-12 col-sm-6">';
-    openside($site['name']);
+    if (@get_http_response_code($site['url']) == 200) {
+        $rss = Feed::loadRss($site['url']);
+        echo '<div class="col-xs-12 col-sm-6">';
+        openside($site['name']);
 
-    foreach ($rss->item as $item) {
-        echo '<a href="'.htmlspecialchars($item->url).'" target="_blank">'.htmlspecialchars($item->title).'</a>';
-        echo '<hr class="m-0">';
+        foreach ($rss->item as $item) {
+            echo '<a href="'.htmlspecialchars($item->url).'" target="_blank">'.htmlspecialchars($item->title).'</a>';
+            echo '<hr class="m-0">';
+        }
+
+        closeside();
+        echo '</div>';
     }
-
-    closeside();
-    echo '</div>';
 }
 
 echo '</div>';

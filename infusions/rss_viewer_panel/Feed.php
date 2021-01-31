@@ -167,26 +167,17 @@ class Feed {
      * @param string
      *
      * @return SimpleXMLElement
-     * @throws FeedException
      */
     private static function loadXml($url, $user, $pass) {
         $e = self::$cacheExpire;
         $cacheFile = self::$cacheDir.'/feed.'.md5(serialize(func_get_args())).'.xml';
 
-        if (self::$cacheDir
-            && is_file($cacheFile)
-            && (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e))
-            && $data = @file_get_contents($cacheFile)
-        ) {
-            // ok
+        if (self::$cacheDir && is_file($cacheFile) && (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e))) {
+            $data = @file_get_contents($cacheFile);
         } else if ($data = trim(self::httpRequest($url, $user, $pass))) {
             if (self::$cacheDir) {
                 file_put_contents($cacheFile, $data);
             }
-        } else if (self::$cacheDir && $data = @file_get_contents($cacheFile)) {
-            // ok
-        } else {
-            throw new FeedException('Cannot load feed.');
         }
 
         return new SimpleXMLElement($data, LIBXML_NOWARNING | LIBXML_NOERROR | LIBXML_NOCDATA);
