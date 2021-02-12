@@ -69,3 +69,5 @@ $locale['cc_049'] = 'Ratings';
 $locale['cc_050'] = 'Video';
 $locale['cc_051'] = 'Video Cats';
 $locale['cc_052'] = 'Videos';
+$locale['cc_053'] = 'Site Links';
+$locale['cc_054'] = 'Panels';

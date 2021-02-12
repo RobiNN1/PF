@@ -69,3 +69,5 @@ $locale['cc_049'] = 'Hodnocení';
 $locale['cc_050'] = 'Video';
 $locale['cc_051'] = 'Kategorie videii';
 $locale['cc_052'] = 'Videa';
+$locale['cc_053'] = 'Odkazy na stránku';
+$locale['cc_054'] = 'Panely';

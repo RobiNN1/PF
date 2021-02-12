@@ -24,7 +24,7 @@ class ContentCreator {
     private $locale;
     private $snippet;
     private $body;
-    private $short_text ;
+    private $short_text;
     private $shout_text;
     private $message_text;
     private $users;
@@ -282,32 +282,32 @@ class ContentCreator {
         $type = [];
         $max_items = [];
 
-        if (defined('ARTICLES_EXISTS')) {
+        if (defined('ARTICLES_EXISTS') && defined(DB_ARTICLES)) {
             $type[1] = 'A';
             $max_items[1] = dbcount('(article_id)', DB_ARTICLES);
         }
 
-        if (defined('BLOG_EXISTS')) {
+        if (defined('BLOG_EXISTS') && defined('DB_BLOG')) {
             $type[2] = 'B';
             $max_items[2] = dbcount('(blog_id)', DB_BLOG);
         }
 
-        if (defined('DOWNLOADS_EXISTS')) {
+        if (defined('DOWNLOADS_EXISTS') && defined('DB_DOWNLOADS')) {
             $type[3] = 'D';
             $max_items[3] = dbcount('(download_id)', DB_DOWNLOADS);
         }
 
-        if (defined('GALLERY_EXISTS')) {
+        if (defined('GALLERY_EXISTS') && defined('DB_PHOTO_ALBUMS')) {
             $type[4] = 'P';
             $max_items[4] = dbcount('(album_id)', DB_PHOTO_ALBUMS);
         }
 
-        if (defined('NEWS_EXISTS')) {
+        if (defined('NEWS_EXISTS') && defined('DB_NEWS')) {
             $type[5] = 'N';
             $max_items[5] = dbcount('(news_id)', DB_NEWS);
         }
 
-        if (defined('VIDEOS_EXISTS')) {
+        if (defined('VIDEOS_EXISTS') && defined('DB_VIDEOS')) {
             $type[6] = 'VID';
             $max_items[6] = dbcount('(video_id)', DB_VIDEOS);
         }
@@ -590,7 +590,7 @@ class ContentCreator {
     }
 
     private function videos() {
-        if (isset($_POST['create_video_cats'])) {
+        if (isset($_POST['create_video_cats']) && defined('DB_VIDEO_CATS')) {
             $num = $_POST['num_video_cats'];
             $insert = 'video_cat_parent, video_cat_name, video_cat_description, video_cat_sorting, video_cat_language';
             $values = '';
@@ -604,7 +604,7 @@ class ContentCreator {
             $this->notice($num);
         }
 
-        if (isset($_POST['create_videos'])) {
+        if (isset($_POST['create_videos']) && defined('DB_VIDEOS')) {
             $num = $_POST['num_videos'];
             $insert = 'video_cat, video_user, video_title, video_description, video_length, video_datestamp, video_visibility, video_type, video_url, video_views, video_allow_comments, video_allow_ratings';
             $values = '';
@@ -637,7 +637,7 @@ class ContentCreator {
         }
     }
 
-    private function weblinks() {
+    private function webLinks() {
         if (isset($_POST['create_weblink_cats'])) {
             $num = $_POST['num_weblink_cats'];
             $insert = 'weblink_cat_parent, weblink_cat_name, weblink_cat_description, weblink_cat_status, weblink_cat_visibility, weblink_cat_language';
@@ -660,7 +660,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $weblink_cats = dbcount('(weblink_cat_id)', DB_WEBLINK_CATS);
                 $weblink_cats = rand(1, $weblink_cats);
-                $values .= "('".$this->locale['cc_033']." ".$i."', '".$this->locale['cc_007']."', 'http://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - rand(0, time() / 2))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
+                $values .= "('".$this->locale['cc_033']." ".$i."', '".$this->locale['cc_007']."', 'https://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - rand(0, time() / 2))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -679,6 +679,50 @@ class ContentCreator {
         }
     }
 
+    private function siteLinks() {
+        if (isset($_POST['create_sitelinks'])) {
+            $num = $_POST['num_sitelinks'];
+            $insert = 'link_cat, link_name, link_url, link_icon, link_visibility, link_position, link_status, link_window, link_order, link_language';
+            $values = '';
+
+            for ($i = 1; $i <= $num; $i++) {
+                $name = strtolower($this->randomName());
+                $values .= "(0, '".ucfirst($name)."', 'https://".$name.".com', '', 0, '".rand(1, 3)."', 1, 0, 0, '".LANGUAGE."')";
+                $values .= $i < $num ? ', ' : ';';
+            }
+
+            $this->query(DB_SITE_LINKS, $insert, $values);
+            $this->notice($num);
+        }
+
+        if (isset($_POST['delete_sitelinks'])) {
+            $this->delete(DB_SITE_LINKS);
+            $this->notice('', TRUE);
+        }
+    }
+
+    private function panels() {
+        if (isset($_POST['create_panels'])) {
+            $num = $_POST['num_panels'];
+            $insert = 'panel_name, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_restriction, panel_languages';
+            $values = '';
+
+            for ($i = 1; $i <= $num; $i++) {
+                $name = strtolower($this->randomName());
+                $values .= "('".ucfirst($name)."', '".$this->short_text."', '".rand(1, 10)."', 1, 'php', 0, 1, 1, '".rand(0, 3)."', '".LANGUAGE."')";
+                $values .= $i < $num ? ', ' : ';';
+            }
+
+            $this->query(DB_PANELS, $insert, $values);
+            $this->notice($num);
+        }
+
+        if (isset($_POST['delete_panels'])) {
+            $this->delete(DB_PANELS);
+            $this->notice('', TRUE);
+        }
+    }
+
     public function displayAdmin() {
         add_to_title($this->locale['cc_title']);
 
@@ -693,7 +737,7 @@ class ContentCreator {
         echo '<strong class="text-danger">'.$this->locale['cc_037'].'</strong><br />';
         echo $this->locale['cc_038'].'<br />';
         echo $this->locale['cc_039'].': <strong>test123456</strong><br />';
-        echo $this->locale['cc_040'].': <strong> test123456789</strong>';
+        echo $this->locale['cc_040'].': <strong>test123456789</strong>';
         echo '</div>';
 
         echo openform('content', 'post', FUSION_REQUEST);
@@ -911,7 +955,7 @@ class ContentCreator {
             echo '</tr>';
         }
 
-        if (defined('VIDEOS_EXISTS')) {
+        if (defined('VIDEOS_EXISTS') && defined('DB_VIDEO_CATS')) {
             $this->videos();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_052'].'</td></tr>';
             echo '<tr>';
@@ -922,7 +966,7 @@ class ContentCreator {
             echo '<td>'.$this->button('video_cats', TRUE).'</td>';
             echo '</tr>';
 
-            if (!empty($video_cats)) {
+            if (!empty($video_cats) && defined('DB_VIDEOS')) {
                 echo '<tr>';
                 echo '<td>'.$this->numField('videos').'</td>';
                 echo '<td>'.$this->button('videos').'</td>';
@@ -936,7 +980,7 @@ class ContentCreator {
         }
 
         if (defined('WEBLINKS_EXISTS')) {
-            $this->weblinks();
+            $this->webLinks();
             echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_035'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('weblink_cats', 5).'</td>';
@@ -975,6 +1019,26 @@ class ContentCreator {
         $ratings = dbcount('(rating_id)', DB_RATINGS);
         echo '<td>'.$this->locale['cc_049'].': '.$ratings.'</td>';
         echo '<td>'.$this->button('ratings', TRUE).'</td>';
+        echo '</tr>';
+
+        $this->siteLinks();
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_053'].'</td></tr>';
+        echo '<tr>';
+        echo '<td>'.$this->numField('sitelinks', 10).'</td>';
+        echo '<td>'.$this->button('sitelinks').'</td>';
+        $sitelinks = dbcount('(link_id)', DB_SITE_LINKS);
+        echo '<td>'.$this->locale['cc_053'].': '.$sitelinks.'</td>';
+        echo '<td>'.$this->button('sitelinks', TRUE).'</td>';
+        echo '</tr>';
+
+        $this->panels();
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_054'].'</td></tr>';
+        echo '<tr>';
+        echo '<td>'.$this->numField('panels', 10).'</td>';
+        echo '<td>'.$this->button('panels').'</td>';
+        $panels = dbcount('(panel_id)', DB_PANELS);
+        echo '<td>'.$this->locale['cc_054'].': '.$panels.'</td>';
+        echo '<td>'.$this->button('panels', TRUE).'</td>';
         echo '</tr>';
 
         echo '</tbody>';
