@@ -15,8 +15,8 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['cg_title'] = 'Content generator';
-$locale['cg_desc'] = 'Simple Content generator for developers.';
+$locale['cg_title'] = 'Content Generator';
+$locale['cg_desc'] = 'Simple Content Generator for developers.';
 $locale['cg_001'] = 'Create';
 $locale['cg_002'] = 'Items has been deleted.';
 $locale['cg_003'] = 'Items has been created.';

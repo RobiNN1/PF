@@ -1,5 +1,5 @@
 # Content Generator
-Simple Content generator for PHPFusion 9
+Simple Content Generator for PHPFusion 9
 
 ![Version](https://img.shields.io/badge/Version-1.1.6-blue.svg)
 
