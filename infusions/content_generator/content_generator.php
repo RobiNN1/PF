@@ -4,7 +4,7 @@
 | Copyright (C) PHP Fusion Inc
 | https://phpfusion.com/
 +--------------------------------------------------------+
-| Filename: content_creator.php
+| Filename: content_generator.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -18,9 +18,9 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('CC');
+pageAccess('CG');
 
-class ContentCreator {
+class ContentGenerator {
     private $locale;
     private $snippet;
     private $body;
@@ -30,7 +30,7 @@ class ContentCreator {
     private $users;
 
     public function __construct() {
-        $this->locale = fusion_get_locale('', CC_LOCALE);
+        $this->locale = fusion_get_locale('', CG_LOCALE);
 
         $this->snippet = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum aliquam felis nunc, in dignissim metus suscipit eget. Nunc scelerisque laoreet purus, in ullamcorper magna sagittis eget. Aliquam ac rhoncus orci, a lacinia ante. Integer sed erat ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce ullamcorper sapien mauris, et tempus mi tincidunt laoreet. Proin aliquam vulputate felis in viverra.';
         $this->body = $this->snippet."\n<p>Duis sed lorem vitae nibh sagittis tempus sed sed enim. Mauris egestas varius purus, a varius odio vehicula quis. Donec cursus interdum libero, et ornare tellus mattis vitae. Phasellus et ligula velit. Vivamus ac turpis dictum, congue metus facilisis, ultrices lorem. Cras imperdiet lacus in tincidunt pellentesque. Sed consectetur nunc vitae fringilla volutpat. Mauris nibh justo, luctus eu dapibus in, pellentesque non urna. Nulla ullamcorper varius lacus, ut finibus eros interdum id. Proin at pellentesque sapien. Integer imperdiet, sapien nec tristique laoreet, sapien lacus porta nunc, tincidunt cursus risus mauris id quam.</p>";
@@ -48,7 +48,7 @@ class ContentCreator {
     }
 
     private function numField($id, $value = 20) {
-        return form_text('num_'.$id, $this->locale['cc_001'], $value, [
+        return form_text('num_'.$id, $this->locale['cg_001'], $value, [
             'type'        => 'number',
             'number_min'  => 1,
             'number_max'  => 2000,
@@ -62,7 +62,7 @@ class ContentCreator {
         if ($delete == TRUE) {
             $button = form_button('delete_'.$id, $this->locale['delete'], $this->locale['delete'], ['class' => 'btn-sm btn-danger']);
         } else {
-            $button = form_button('create_'.$id, $this->locale['cc_001'], $this->locale['cc_001'], ['class' => 'btn-sm btn-default']);
+            $button = form_button('create_'.$id, $this->locale['cg_001'], $this->locale['cg_001'], ['class' => 'btn-sm btn-default']);
         }
 
         return $button;
@@ -93,9 +93,9 @@ class ContentCreator {
 
     private function notice($num, $delete = FALSE) {
         if ($delete == TRUE) {
-            addNotice('success', $this->locale['cc_002']);
+            addNotice('success', $this->locale['cg_002']);
         } else {
-            addNotice('success', $this->locale['cc_003'].' ('.$num.')');
+            addNotice('success', $this->locale['cg_003'].' ('.$num.')');
         }
 
         redirect(FUSION_REQUEST);
@@ -164,7 +164,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cc_006']." ".$i."', '".$this->locale['cc_007']."')";
+                $values .= "('".$this->locale['cg_006']." ".$i."', '".$this->locale['cg_007']."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -182,7 +182,7 @@ class ContentCreator {
         if (isset($_POST['create_private_messages'])) {
             $num = $_POST['num_private_messages'];
             for ($i = 1; $i <= $num; $i++) {
-                send_pm(rand(1, $this->users / 2), rand($this->users / 2, $this->users), $this->locale['cc_041'].' '.$i, $this->message_text);
+                send_pm(rand(1, $this->users / 2), rand($this->users / 2, $this->users), $this->locale['cg_041'].' '.$i, $this->message_text);
             }
 
             $this->notice($num);
@@ -201,7 +201,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', '".$this->locale['cc_007']."', 0, 1, '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', '".$this->locale['cg_007']."', 0, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -217,7 +217,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $article_cats = dbcount('(article_cat_id)', DB_ARTICLE_CATS);
                 $article_cats = rand(1, $article_cats);
-                $values .= "('".$this->locale['cc_010']." ".$i."', ".$article_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_010']." ".$i."', ".$article_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -243,7 +243,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -259,7 +259,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $blog_cats = dbcount('(blog_cat_id)', DB_BLOG_CATS);
                 $blog_cats = rand(1, $blog_cats);
-                $values .= "('".$this->locale['cc_013']." ".$i."', ".$blog_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_013']." ".$i."', ".$blog_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -319,7 +319,7 @@ class ContentCreator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".rand(1, $max_items[rand(1, count($max_items))])."', '".$type[rand(1, count($type))]."', '".rand(1, $this->users)."', '".$this->locale['cc_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
+                $values .= "('".rand(1, $max_items[rand(1, count($max_items))])."', '".$type[rand(1, count($type))]."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -363,7 +363,7 @@ class ContentCreator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cc_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -385,7 +385,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', '".$this->locale['cc_007']."', 'download_id ASC', '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', '".$this->locale['cg_007']."', 'download_id ASC', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -401,7 +401,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $download_cats = dbcount('(download_cat_id)', DB_DOWNLOAD_CATS);
                 $download_cats = rand(1, $download_cats);
-                $values .= "('".rand(1, $this->users)."', '".$this->locale['cc_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://phpfusion.com/home.php', ".$download_cats.", '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1)";
+                $values .= "('".rand(1, $this->users)."', '".$this->locale['cg_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://phpfusion.com/home.php', ".$download_cats.", '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -427,7 +427,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cc_009']." ".$i."', '".$this->locale['cc_007']."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_009']." ".$i."', '".$this->locale['cg_007']."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -443,7 +443,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $faq_cats = dbcount('(faq_cat_id)', DB_FAQ_CATS);
                 $faq_cats = rand(1, $faq_cats);
-                $values .= "(".$faq_cats.", '".$this->locale['cc_021']." ".$i."', '".$this->short_text."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, 1, '".LANGUAGE."')";
+                $values .= "(".$faq_cats.", '".$this->locale['cg_021']." ".$i."', '".$this->short_text."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -470,7 +470,7 @@ class ContentCreator {
 
             for ($i = 1; $i <= $num; $i++) {
                 $type = rand(1, 4);
-                $values .= "('".$this->locale['cc_044']." ".$i."', '".$type."', '".$this->locale['cc_007']."', '".USER_LEVEL_MEMBER."', '".USER_LEVEL_MEMBER."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_044']." ".$i."', '".$type."', '".$this->locale['cg_007']."', '".USER_LEVEL_MEMBER."', '".USER_LEVEL_MEMBER."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -491,7 +491,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cc_046']." ".$i."', '".$this->locale['cc_007']."', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_046']." ".$i."', '".$this->locale['cg_007']."', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -512,7 +512,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', 0, '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', 0, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -528,7 +528,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $news_cats = dbcount('(news_cat_id)', DB_NEWS_CATS);
                 $news_cats = rand(1, $news_cats);
-                $values .= "('".$this->locale['cc_024']." ".$i."', ".$news_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_024']." ".$i."', ".$news_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -554,7 +554,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".serialize([LANGUAGE => $this->locale['cc_027'].' '.$i])."', '".serialize([[LANGUAGE => $this->locale['cc_028']], [LANGUAGE => $this->locale['cc_029']]])."', '".(time() - rand(0, time() / 2))."', 0, 0)";
+                $values .= "('".serialize([LANGUAGE => $this->locale['cg_027'].' '.$i])."', '".serialize([[LANGUAGE => $this->locale['cg_028']], [LANGUAGE => $this->locale['cg_029']]])."', '".(time() - rand(0, time() / 2))."', 0, 0)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -596,7 +596,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', '".$this->locale['cc_007']."', 'video_id ASC', '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', '".$this->locale['cg_007']."', 'video_id ASC', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -618,7 +618,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $video_cats = dbcount('(video_cat_id)', DB_VIDEO_CATS);
                 $video_cats = rand(1, $video_cats);
-                $values .= "(".$video_cats.", '".rand(1, $this->users)."', '".$this->locale['cc_050']." ".$i."', '".$this->body."', '".rand(0, 60).":".rand(0, 60)."', '".(time() - rand(0, time() / 2))."', 0, 'youtube', '".$video_urls[rand(1, 3)]."', ".rand(1, 10000).", 1, 1)";
+                $values .= "(".$video_cats.", '".rand(1, $this->users)."', '".$this->locale['cg_050']." ".$i."', '".$this->body."', '".rand(0, 60).":".rand(0, 60)."', '".(time() - rand(0, time() / 2))."', 0, 'youtube', '".$video_urls[rand(1, 3)]."', ".rand(1, 10000).", 1, 1)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -644,7 +644,7 @@ class ContentCreator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(0, '".$this->locale['cc_009']." ".$i."', '".$this->locale['cc_007']."', 1, 0, '".LANGUAGE."')";
+                $values .= "(0, '".$this->locale['cg_009']." ".$i."', '".$this->locale['cg_007']."', 1, 0, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -660,7 +660,7 @@ class ContentCreator {
             for ($i = 1; $i <= $num; $i++) {
                 $weblink_cats = dbcount('(weblink_cat_id)', DB_WEBLINK_CATS);
                 $weblink_cats = rand(1, $weblink_cats);
-                $values .= "('".$this->locale['cc_033']." ".$i."', '".$this->locale['cc_007']."', 'https://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - rand(0, time() / 2))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_033']." ".$i."', '".$this->locale['cg_007']."', 'https://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - rand(0, time() / 2))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -724,20 +724,20 @@ class ContentCreator {
     }
 
     public function displayAdmin() {
-        add_to_title($this->locale['cc_title']);
+        add_to_title($this->locale['cg_title']);
 
         add_breadcrumb([
-            'link'  => INFUSIONS.'content_creator/content_creator.php'.fusion_get_aidlink(),
-            'title' => $this->locale['cc_title']
+            'link'  => INFUSIONS.'content_generator/content_generator.php'.fusion_get_aidlink(),
+            'title' => $this->locale['cg_title']
         ]);
 
-        opentable($this->locale['cc_title']);
+        opentable($this->locale['cg_title']);
 
         echo '<div class="well">';
-        echo '<strong class="text-danger">'.$this->locale['cc_037'].'</strong><br />';
-        echo $this->locale['cc_038'].'<br />';
-        echo $this->locale['cc_039'].': <strong>test123456</strong><br />';
-        echo $this->locale['cc_040'].': <strong>test123456789</strong>';
+        echo '<strong class="text-danger">'.$this->locale['cg_037'].'</strong><br />';
+        echo $this->locale['cg_038'].'<br />';
+        echo $this->locale['cg_039'].': <strong>test123456</strong><br />';
+        echo $this->locale['cg_040'].': <strong>test123456789</strong>';
         echo '</div>';
 
         echo openform('content', 'post', FUSION_REQUEST);
@@ -746,12 +746,12 @@ class ContentCreator {
         echo '<tbody>';
         $this->users();
         $total_users = dbcount('(user_id)', DB_USERS, 'user_status=0');
-        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_042'].': '.$total_users.'</td></tr>';
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_042'].': '.$total_users.'</td></tr>';
         echo '<tr>';
         echo '<td>'.$this->numField('users', 50).'</td>';
         echo '<td>'.$this->button('users').'</td>';
         $users = dbcount('(user_id)', DB_USERS, 'user_status=0 AND user_level='.USER_LEVEL_MEMBER.'');
-        echo '<td>'.$this->locale['cc_004'].': '.$users.'</td>';
+        echo '<td>'.$this->locale['cg_004'].': '.$users.'</td>';
         echo '<td>'.$this->button('users', TRUE).'</td>';
         echo '</tr>';
 
@@ -759,7 +759,7 @@ class ContentCreator {
         echo '<td>'.$this->numField('admins', 5).'</td>';
         echo '<td>'.$this->button('admins').'</td>';
         $admins = dbcount('(user_id)', DB_USERS, 'user_status=0 AND user_level='.USER_LEVEL_ADMIN.' OR user_level='.USER_LEVEL_SUPER_ADMIN.'');
-        echo '<td>'.$this->locale['cc_005'].': '.$admins.'</td>';
+        echo '<td>'.$this->locale['cg_005'].': '.$admins.'</td>';
         echo '<td>'.$this->button('admins', TRUE).'</td>';
         echo '</tr>';
 
@@ -768,7 +768,7 @@ class ContentCreator {
         echo '<td>'.$this->numField('user_groups', 5).'</td>';
         echo '<td>'.$this->button('user_groups').'</td>';
         $user_groups = dbcount('(group_id)', DB_USER_GROUPS);
-        echo '<td>'.$this->locale['cc_008'].': '.$user_groups.'</td>';
+        echo '<td>'.$this->locale['cg_008'].': '.$user_groups.'</td>';
         echo '<td>'.$this->button('user_groups', TRUE).'</td>';
         echo '</tr>';
 
@@ -777,18 +777,18 @@ class ContentCreator {
         echo '<td>'.$this->numField('private_messages', 50).'</td>';
         echo '<td>'.$this->button('private_messages').'</td>';
         $private_messages = dbcount('(message_id)', DB_MESSAGES) / 2;
-        echo '<td>'.$this->locale['cc_041'].': '.$private_messages.'</td>';
+        echo '<td>'.$this->locale['cg_041'].': '.$private_messages.'</td>';
         echo '<td>'.$this->button('private_messages', TRUE).'</td>';
         echo '</tr>';
 
         if (defined('ARTICLES_EXISTS')) {
             $this->articles();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_012'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_012'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('article_cats', 5).'</td>';
             echo '<td>'.$this->button('article_cats').'</td>';
             $article_cats = dbcount('(article_cat_id)', DB_ARTICLE_CATS);
-            echo '<td>'.$this->locale['cc_011'].': '.$article_cats.'</td>';
+            echo '<td>'.$this->locale['cg_011'].': '.$article_cats.'</td>';
             echo '<td>'.$this->button('article_cats', TRUE).'</td>';
             echo '</tr>';
             if (!empty($article_cats)) {
@@ -796,22 +796,22 @@ class ContentCreator {
                 echo '<td>'.$this->numField('articles').'</td>';
                 echo '<td>'.$this->button('articles').'</td>';
                 $articles = dbcount('(article_id)', DB_ARTICLES);
-                echo '<td>'.$this->locale['cc_012'].': '.$articles.'</td>';
+                echo '<td>'.$this->locale['cg_012'].': '.$articles.'</td>';
                 echo '<td>'.$this->button('articles', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_011']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_011']).'</td></tr>';
             }
         }
 
         if (defined('BLOG_EXISTS')) {
             $this->blog();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_015'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_015'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('blog_cats', 5).'</td>';
             echo '<td>'.$this->button('blog_cats').'</td>';
             $blog_cats = dbcount('(blog_cat_id)', DB_BLOG_CATS);
-            echo '<td>'.$this->locale['cc_014'].': '.$blog_cats.'</td>';
+            echo '<td>'.$this->locale['cg_014'].': '.$blog_cats.'</td>';
             echo '<td>'.$this->button('blog_cats', TRUE).'</td>';
             echo '</tr>';
             if (!empty($blog_cats)) {
@@ -819,32 +819,32 @@ class ContentCreator {
                 echo '<td>'.$this->numField('blogs').'</td>';
                 echo '<td>'.$this->button('blogs').'</td>';
                 $blogs = dbcount('(blog_id)', DB_BLOG);
-                echo '<td>'.$this->locale['cc_015'].': '.$blogs.'</td>';
+                echo '<td>'.$this->locale['cg_015'].': '.$blogs.'</td>';
                 echo '<td>'.$this->button('blogs', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_014']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_014']).'</td></tr>';
             }
         }
 
-        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_017'].'</td></tr>';
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_017'].'</td></tr>';
         echo '<tr>';
         $this->customPages();
         echo '<td>'.$this->numField('custom_pages', 5).'</td>';
         echo '<td>'.$this->button('custom_pages').'</td>';
         $custom_pages = dbcount('(page_id)', DB_CUSTOM_PAGES);
-        echo '<td>'.$this->locale['cc_017'].': '.$custom_pages.'</td>';
+        echo '<td>'.$this->locale['cg_017'].': '.$custom_pages.'</td>';
         echo '<td>'.$this->button('custom_pages', TRUE).'</td>';
         echo '</tr>';
 
         if (defined('DOWNLOADS_EXISTS')) {
             $this->downloads();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_020'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_020'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('download_cats', 5).'</td>';
             echo '<td>'.$this->button('download_cats').'</td>';
             $download_cats = dbcount('(download_cat_id)', DB_DOWNLOAD_CATS);
-            echo '<td>'.$this->locale['cc_019'].': '.$download_cats.'</td>';
+            echo '<td>'.$this->locale['cg_019'].': '.$download_cats.'</td>';
             echo '<td>'.$this->button('download_cats', TRUE).'</td>';
             echo '</tr>';
             if (!empty($download_cats)) {
@@ -852,22 +852,22 @@ class ContentCreator {
                 echo '<td>'.$this->numField('downloads').'</td>';
                 echo '<td>'.$this->button('downloads').'</td>';
                 $downloads = dbcount('(download_id)', DB_DOWNLOADS);
-                echo '<td>'.$this->locale['cc_020'].': '.$downloads.'</td>';
+                echo '<td>'.$this->locale['cg_020'].': '.$downloads.'</td>';
                 echo '<td>'.$this->button('downloads', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_019']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_019']).'</td></tr>';
             }
         }
 
         if (defined('FAQ_EXISTS')) {
             $this->faq();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_023'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_023'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('faq_cats', 5).'</td>';
             echo '<td>'.$this->button('faq_cats').'</td>';
             $faq_cats = dbcount('(faq_cat_id)', DB_FAQ_CATS);
-            echo '<td>'.$this->locale['cc_022'].': '.$faq_cats.'</td>';
+            echo '<td>'.$this->locale['cg_022'].': '.$faq_cats.'</td>';
             echo '<td>'.$this->button('faq_cats', TRUE).'</td>';
             echo '</tr>';
             if (!empty($faq_cats)) {
@@ -875,46 +875,46 @@ class ContentCreator {
                 echo '<td>'.$this->numField('faqs').'</td>';
                 echo '<td>'.$this->button('faqs').'</td>';
                 $faqs = dbcount('(faq_id)', DB_FAQS);
-                echo '<td>'.$this->locale['cc_023'].': '.$faqs.'</td>';
+                echo '<td>'.$this->locale['cg_023'].': '.$faqs.'</td>';
                 echo '<td>'.$this->button('faqs', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_022']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_022']).'</td></tr>';
             }
         }
 
         if (defined('FORUM_EXISTS')) {
             $this->forum();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_043'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_043'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('forums', 5).'</td>';
             echo '<td>'.$this->button('forums').'</td>';
             $forums = dbcount('(forum_id)', DB_FORUMS);
-            echo '<td>'.$this->locale['cc_043'].': '.$forums.'</td>';
+            echo '<td>'.$this->locale['cg_043'].': '.$forums.'</td>';
             echo '<td>'.$this->button('forums', TRUE).'</td>';
             echo '</tr>';
         }
 
         if (defined('GALLERY_EXISTS')) {
             $this->gallery();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_045'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_045'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('photo_albums', 5).'</td>';
             echo '<td>'.$this->button('photo_albums').'</td>';
             $photo_albums = dbcount('(album_id)', DB_PHOTO_ALBUMS);
-            echo '<td>'.$this->locale['cc_045'].': '.$photo_albums.'</td>';
+            echo '<td>'.$this->locale['cg_045'].': '.$photo_albums.'</td>';
             echo '<td>'.$this->button('photo_albums', TRUE).'</td>';
             echo '</tr>';
         }
 
         if (defined('NEWS_EXISTS')) {
             $this->news();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_026'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_026'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('news_cats', 5).'</td>';
             echo '<td>'.$this->button('news_cats').'</td>';
             $news_cats = dbcount('(news_cat_id)', DB_NEWS_CATS);
-            echo '<td>'.$this->locale['cc_025'].': '.$news_cats.'</td>';
+            echo '<td>'.$this->locale['cg_025'].': '.$news_cats.'</td>';
             echo '<td>'.$this->button('news_cats', TRUE).'</td>';
             echo '</tr>';
 
@@ -923,46 +923,46 @@ class ContentCreator {
                 echo '<td>'.$this->numField('news').'</td>';
                 echo '<td>'.$this->button('news').'</td>';
                 $news = dbcount('(news_id)', DB_NEWS);
-                echo '<td>'.$this->locale['cc_026'].': '.$news.'</td>';
+                echo '<td>'.$this->locale['cg_026'].': '.$news.'</td>';
                 echo '<td>'.$this->button('news', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_025']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_025']).'</td></tr>';
             }
         }
 
         if (defined('MEMBER_POLL_PANEL_EXISTS')) {
             $this->polls();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_030'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_030'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('polls', 5).'</td>';
             echo '<td>'.$this->button('polls').'</td>';
             $polls = dbcount('(poll_id)', DB_POLLS);
-            echo '<td>'.$this->locale['cc_030'].': '.$polls.'</td>';
+            echo '<td>'.$this->locale['cg_030'].': '.$polls.'</td>';
             echo '<td>'.$this->button('polls', TRUE).'</td>';
             echo '</tr>';
         }
 
         if (defined('SHOUTBOX_PANEL_EXISTS')) {
             $this->shouts();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_032'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_032'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('shouts').'</td>';
             echo '<td>'.$this->button('shouts').'</td>';
             $shouts = dbcount('(shout_id)', DB_SHOUTBOX);
-            echo '<td>'.$this->locale['cc_031'].': '.$shouts.'</td>';
+            echo '<td>'.$this->locale['cg_031'].': '.$shouts.'</td>';
             echo '<td>'.$this->button('shouts', TRUE).'</td>';
             echo '</tr>';
         }
 
         if (defined('VIDEOS_EXISTS') && defined('DB_VIDEO_CATS')) {
             $this->videos();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_052'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_052'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('video_cats', 5).'</td>';
             echo '<td>'.$this->button('video_cats').'</td>';
             $video_cats = dbcount('(video_cat_id)', DB_VIDEO_CATS);
-            echo '<td>'.$this->locale['cc_051'].': '.$video_cats.'</td>';
+            echo '<td>'.$this->locale['cg_051'].': '.$video_cats.'</td>';
             echo '<td>'.$this->button('video_cats', TRUE).'</td>';
             echo '</tr>';
 
@@ -971,22 +971,22 @@ class ContentCreator {
                 echo '<td>'.$this->numField('videos').'</td>';
                 echo '<td>'.$this->button('videos').'</td>';
                 $videos = dbcount('(video_id)', DB_VIDEOS);
-                echo '<td>'.$this->locale['cc_052'].': '.$videos.'</td>';
+                echo '<td>'.$this->locale['cg_052'].': '.$videos.'</td>';
                 echo '<td>'.$this->button('videos', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_051']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_051']).'</td></tr>';
             }
         }
 
         if (defined('WEBLINKS_EXISTS')) {
             $this->webLinks();
-            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_035'].'</td></tr>';
+            echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_035'].'</td></tr>';
             echo '<tr>';
             echo '<td>'.$this->numField('weblink_cats', 5).'</td>';
             echo '<td>'.$this->button('weblink_cats').'</td>';
             $weblink_cats = dbcount('(weblink_cat_id)', DB_WEBLINK_CATS);
-            echo '<td>'.$this->locale['cc_034'].': '.$weblink_cats.'</td>';
+            echo '<td>'.$this->locale['cg_034'].': '.$weblink_cats.'</td>';
             echo '<td>'.$this->button('weblink_cats', TRUE).'</td>';
             echo '</tr>';
 
@@ -995,21 +995,21 @@ class ContentCreator {
                 echo '<td>'.$this->numField('weblinks').'</td>';
                 echo '<td>'.$this->button('weblinks').'</td>';
                 $weblinks = dbcount('(weblink_id)', DB_WEBLINKS);
-                echo '<td>'.$this->locale['cc_035'].': '.$weblinks.'</td>';
+                echo '<td>'.$this->locale['cg_035'].': '.$weblinks.'</td>';
                 echo '<td>'.$this->button('weblinks', TRUE).'</td>';
                 echo '</tr>';
             } else {
-                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cc_036'], $this->locale['cc_034']).'</td></tr>';
+                echo '<tr><td colspan="4" class="warning text-center">'.sprintf($this->locale['cg_036'], $this->locale['cg_034']).'</td></tr>';
             }
         }
 
-        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_047'].' & '.$this->locale['cc_049'].'</td></tr>';
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_047'].' & '.$this->locale['cg_049'].'</td></tr>';
         $this->commentsAndRatings();
         echo '<tr>';
         echo '<td>'.$this->numField('comments', 50).'</td>';
         echo '<td>'.$this->button('comments').'</td>';
         $comments = dbcount('(comment_id)', DB_COMMENTS);
-        echo '<td>'.$this->locale['cc_047'].': '.$comments.'</td>';
+        echo '<td>'.$this->locale['cg_047'].': '.$comments.'</td>';
         echo '<td>'.$this->button('comments', TRUE).'</td>';
         echo '</tr>';
 
@@ -1017,27 +1017,27 @@ class ContentCreator {
         echo '<td>'.$this->numField('ratings', 50).'</td>';
         echo '<td>'.$this->button('ratings').'</td>';
         $ratings = dbcount('(rating_id)', DB_RATINGS);
-        echo '<td>'.$this->locale['cc_049'].': '.$ratings.'</td>';
+        echo '<td>'.$this->locale['cg_049'].': '.$ratings.'</td>';
         echo '<td>'.$this->button('ratings', TRUE).'</td>';
         echo '</tr>';
 
         $this->siteLinks();
-        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_053'].'</td></tr>';
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_053'].'</td></tr>';
         echo '<tr>';
         echo '<td>'.$this->numField('sitelinks', 10).'</td>';
         echo '<td>'.$this->button('sitelinks').'</td>';
         $sitelinks = dbcount('(link_id)', DB_SITE_LINKS);
-        echo '<td>'.$this->locale['cc_053'].': '.$sitelinks.'</td>';
+        echo '<td>'.$this->locale['cg_053'].': '.$sitelinks.'</td>';
         echo '<td>'.$this->button('sitelinks', TRUE).'</td>';
         echo '</tr>';
 
         $this->panels();
-        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cc_054'].'</td></tr>';
+        echo '<tr><td colspan="4" class="info text-center strong">'.$this->locale['cg_054'].'</td></tr>';
         echo '<tr>';
         echo '<td>'.$this->numField('panels', 10).'</td>';
         echo '<td>'.$this->button('panels').'</td>';
         $panels = dbcount('(panel_id)', DB_PANELS);
-        echo '<td>'.$this->locale['cc_054'].': '.$panels.'</td>';
+        echo '<td>'.$this->locale['cg_054'].': '.$panels.'</td>';
         echo '<td>'.$this->button('panels', TRUE).'</td>';
         echo '</tr>';
 
@@ -1049,7 +1049,7 @@ class ContentCreator {
     }
 }
 
-$cc = new ContentCreator();
+$cc = new ContentGenerator();
 $cc->displayAdmin();
 
 require_once THEMES.'templates/footer.php';

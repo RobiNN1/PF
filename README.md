@@ -5,7 +5,7 @@ Addon is a term for Infusions, Panels, [Themes](https://github.com/PF-Projects/P
 If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
 
 ## Infusions
-- [Content Creator](infusions/content_creator)
+- [Content Generator](infusions/content_generator)
 - [Docs](infusions/docs)
 - [GitHub Client](infusions/github)
 - [Legal Pages](infusions/legal)

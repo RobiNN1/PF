@@ -17,12 +17,12 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-if (!defined('CC_LOCALE')) {
-    if (file_exists(INFUSIONS.'content_creator/locale/'.LANGUAGE.'.php')) {
-        define('CC_LOCALE', INFUSIONS.'content_creator/locale/'.LANGUAGE.'.php');
+if (!defined('CG_LOCALE')) {
+    if (file_exists(INFUSIONS.'content_generator/locale/'.LANGUAGE.'.php')) {
+        define('CG_LOCALE', INFUSIONS.'content_generator/locale/'.LANGUAGE.'.php');
     } else {
-        define('CC_LOCALE', INFUSIONS.'content_creator/locale/English.php');
+        define('CG_LOCALE', INFUSIONS.'content_generator/locale/English.php');
     }
 }
 
-\PHPFusion\Admins::getInstance()->setAdminPageIcons('CC', '<i class="admin-ico fa fa-fw fa-microphone"></i>');
+\PHPFusion\Admins::getInstance()->setAdminPageIcons('CG', '<i class="admin-ico fa fa-fw fa-microphone"></i>');

@@ -17,50 +17,50 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-$locale = fusion_get_locale('', CC_LOCALE);
+$locale = fusion_get_locale('', CG_LOCALE);
 
 // Infusion general information
-$inf_title       = $locale['cc_title'];
-$inf_description = $locale['cc_desc'];
+$inf_title       = $locale['cg_title'];
+$inf_description = $locale['cg_desc'];
 $inf_version     = '1.1.6';
 $inf_developer   = 'RobiNN';
 $inf_email       = 'robinn@php-fusion.eu';
 $inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'content_creator';
-$inf_image       = 'content_creator.svg';
+$inf_folder      = 'content_generator';
+$inf_image       = 'content_generator.svg';
 
 // Multilanguage links
 $enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
 if (!empty($enabled_languages)) {
     foreach ($enabled_languages as $language) {
-        if (file_exists(INFUSIONS.'content_creator/locale/'.$language.'.php')) {
-            include INFUSIONS.'content_creator/locale/'.$language.'.php';
+        if (file_exists(INFUSIONS.'content_generator/locale/'.$language.'.php')) {
+            include INFUSIONS.'content_generator/locale/'.$language.'.php';
         } else {
-            include INFUSIONS.'content_creator/locale/English.php';
+            include INFUSIONS.'content_generator/locale/English.php';
         }
 
         $mlt_adminpanel[$language][] = [
-            'rights'   => 'CC',
+            'rights'   => 'CG',
             'image'    => $inf_image,
             'title'    => $inf_title,
-            'panel'    => 'content_creator.php',
+            'panel'    => 'content_generator.php',
             'page'     => 5,
             'language' => $language
         ];
 
         // Delete
-        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='CC' AND admin_language='".$language."'";
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='CG' AND admin_language='".$language."'";
     }
 } else {
     $inf_adminpanel[] = [
-        'rights'   => 'CC',
+        'rights'   => 'CG',
         'image'    => $inf_image,
         'title'    => $inf_title,
-        'panel'    => 'content_creator.php',
+        'panel'    => 'content_generator.php',
         'page'     => 5,
         'language' => LANGUAGE
     ];
 }
 
 // Uninstallation
-$inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='CC'";
+$inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='CG'";

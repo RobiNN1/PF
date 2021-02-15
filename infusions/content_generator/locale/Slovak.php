@@ -15,7 +15,7 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$locale['cc_title'] = 'Tvorca obsahu';
+$locale['cc_title'] = 'Generátor obsahu';
 $locale['cc_desc'] = 'Jednoduchý tvorca obsahu pre vývojárov.';
 $locale['cc_001'] = 'Vytvoriť';
 $locale['cc_002'] = 'Položky boli odstránené.';
