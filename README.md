@@ -13,6 +13,7 @@ If something doesn't work, make sure you're using the latest version. Everything
 - [Most Read News Panel](infusions/most_read_news_panel)
 - [Newsletter](infusions/newsletter_panel)
 - [RSS Viewer](infusions/rss_viewer_panel)
+- [Script Loader](infusions/script_loader)
 - [Server Status](infusions/server_status_panel)
 - [Sitemap Generator](infusions/sitemap_panel)
 - [Team](infusions/team)
