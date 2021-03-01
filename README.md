@@ -25,4 +25,7 @@ Old and unsupported addons can be found in this [branch](https://github.com/PF-P
 
 Other addons and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
 
+
+Icons used in addons made by [Freepik](https://www.flaticon.com/).
+
 <!-- Don't copy my code! -->
