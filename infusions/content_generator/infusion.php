@@ -42,7 +42,7 @@ if (!empty($enabled_languages)) {
         $mlt_adminpanel[$language][] = [
             'rights'   => 'CG',
             'image'    => $inf_image,
-            'title'    => $inf_title,
+            'title'    => $locale['cg_title'],
             'panel'    => 'content_generator.php',
             'page'     => 5,
             'language' => $language

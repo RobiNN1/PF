@@ -39,14 +39,38 @@ $inf_newtable[] = DB_SCRIPT_LOADER." (
 $inf_insertdbrow[] = DB_SCRIPT_LOADER." (type, code) VALUES ('head', '')";
 $inf_insertdbrow[] = DB_SCRIPT_LOADER." (type, code) VALUES ('footer', '')";
 
-$inf_adminpanel[] = [
-    'rights'   => 'SCL',
-    'image'    => $inf_image,
-    'title'    => $locale['scl_title'],
-    'panel'    => 'admin.php',
-    'page'     => 5,
-    'language' => LANGUAGE
-];
+// Multilanguage links
+$enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
+if (!empty($enabled_languages)) {
+    foreach ($enabled_languages as $language) {
+        if (file_exists(INFUSIONS.'script_loader/locale/'.$language.'.php')) {
+            include INFUSIONS.'script_loader/locale/'.$language.'.php';
+        } else {
+            include INFUSIONS.'script_loader/locale/English.php';
+        }
+
+        $mlt_adminpanel[$language][] = [
+            'rights'   => 'SCL',
+            'image'    => $inf_image,
+            'title'    => $locale['scl_title'],
+            'panel'    => 'admin.php',
+            'page'     => 5,
+            'language' => $language
+        ];
+
+        // Delete
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='SCL' AND admin_language='".$language."'";
+    }
+} else {
+    $inf_adminpanel[] = [
+        'rights'   => 'SCL',
+        'image'    => $inf_image,
+        'title'    => $locale['scl_title'],
+        'panel'    => 'admin.php',
+        'page'     => 5,
+        'language' => LANGUAGE
+    ];
+}
 
 // Uninstallation
 $inf_droptable[] = DB_SCRIPT_LOADER;

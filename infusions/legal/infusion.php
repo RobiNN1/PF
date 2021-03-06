@@ -38,14 +38,38 @@ $inf_newtable[] = DB_LEGAL." (
     PRIMARY KEY (legal_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
 
-$inf_adminpanel[] = [
-    'rights'   => 'LG',
-    'image'    => $inf_image,
-    'title'    => $locale['lg_title'],
-    'panel'    => 'admin.php',
-    'page'     => 5,
-    'language' => LANGUAGE
-];
+// Multilanguage links
+$enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
+if (!empty($enabled_languages)) {
+    foreach ($enabled_languages as $language) {
+        if (file_exists(INFUSIONS.'legal/locale/'.$language.'/legal.php')) {
+            include INFUSIONS.'legal/locale/'.$language.'/legal.php';
+        } else {
+            include INFUSIONS.'legal/locale/English/legal.php';
+        }
+
+        $mlt_adminpanel[$language][] = [
+            'rights'   => 'LG',
+            'image'    => $inf_image,
+            'title'    => $locale['lg_title'],
+            'panel'    => 'admin.php',
+            'page'     => 5,
+            'language' => $language
+        ];
+
+        // Delete
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='LG' AND admin_language='".$language."'";
+    }
+} else {
+    $inf_adminpanel[] = [
+        'rights'   => 'LG',
+        'image'    => $inf_image,
+        'title'    => $locale['lg_title'],
+        'panel'    => 'admin.php',
+        'page'     => 5,
+        'language' => LANGUAGE
+    ];
+}
 
 // Uninstallation
 $inf_droptable[] = DB_LEGAL;

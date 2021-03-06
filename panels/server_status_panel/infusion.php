@@ -43,14 +43,38 @@ $inf_newtable[] = DB_SERVER_STATUS." (
 // Insert panel
 $inf_insertdbrow[] = DB_PANELS." (panel_name, panel_filename, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_url_list, panel_restriction, panel_languages) VALUES('".$locale['ss_title']."', 'server_status_panel', '', '3', '5', 'file', '0', '1', '1', '', '3', '".fusion_get_settings('enabled_languages')."')";
 
-$inf_adminpanel[] = [
-    'rights'   => 'SS',
-    'image'    => $inf_image,
-    'title'    => $locale['ss_title'],
-    'panel'    => 'admin.php',
-    'page'     => 5,
-    'language' => LANGUAGE
-];
+// Multilanguage links
+$enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
+if (!empty($enabled_languages)) {
+    foreach ($enabled_languages as $language) {
+        if (file_exists(INFUSIONS.'server_status_panel/locale/'.$language.'.php')) {
+            include INFUSIONS.'server_status_panel/locale/'.$language.'.php';
+        } else {
+            include INFUSIONS.'server_status_panel/locale/English.php';
+        }
+
+        $mlt_adminpanel[$language][] = [
+            'rights'   => 'SS',
+            'image'    => $inf_image,
+            'title'    => $locale['ss_title'],
+            'panel'    => 'admin.php',
+            'page'     => 5,
+            'language' => $language
+        ];
+
+        // Delete
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='SS' AND admin_language='".$language."'";
+    }
+} else {
+    $inf_adminpanel[] = [
+        'rights'   => 'SS',
+        'image'    => $inf_image,
+        'title'    => $locale['ss_title'],
+        'panel'    => 'admin.php',
+        'page'     => 5,
+        'language' => LANGUAGE
+    ];
+}
 
 // Uninstallation
 $inf_droptable[] = DB_SERVER_STATUS;

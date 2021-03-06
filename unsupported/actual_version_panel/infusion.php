@@ -56,7 +56,7 @@ if (!empty($enabled_languages)) {
         $mlt_adminpanel[$language][] = [
             'rights'   => 'AV',
             'image'    => $inf_image,
-            'title'    => $inf_title,
+            'title'    => $locale['av_title'],
             'panel'    => 'admin.php',
             'page'     => 5,
             'language' => $language

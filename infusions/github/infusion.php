@@ -28,14 +28,38 @@ $inf_weburl      = 'https://github.com/RobiNN1';
 $inf_folder      = 'github';
 $inf_image       = 'github.svg';
 
-$inf_adminpanel[] = [
-    'title'    => $inf_title,
-    'image'    => $inf_image,
-    'panel'    => 'github.php',
-    'rights'   => 'GH',
-    'page'     => 5,
-    'language' => LANGUAGE
-];
+// Multilanguage links
+$enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
+if (!empty($enabled_languages)) {
+    foreach ($enabled_languages as $language) {
+        if (file_exists(INFUSIONS.'github/locale/'.$language.'.php')) {
+            include INFUSIONS.'github/locale/'.$language.'.php';
+        } else {
+            include INFUSIONS.'github/locale/English.php';
+        }
+
+        $mlt_adminpanel[$language][] = [
+            'title'    => $locale['gh_title'],
+            'image'    => $inf_image,
+            'panel'    => 'github.php',
+            'rights'   => 'GH',
+            'page'     => 5,
+            'language' => $language
+        ];
+
+        // Delete
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='GH' AND admin_language='".$language."'";
+    }
+} else {
+    $inf_adminpanel[] = [
+        'title'    => $inf_title,
+        'image'    => $inf_image,
+        'panel'    => 'github.php',
+        'rights'   => 'GH',
+        'page'     => 5,
+        'language' => LANGUAGE
+    ];
+}
 
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES ('owner', 'PHPFusion', '".$inf_folder."')";
 

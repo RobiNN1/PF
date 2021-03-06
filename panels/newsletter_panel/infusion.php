@@ -102,14 +102,38 @@ if (!column_exists('users', 'user_newsletter')) {
     $inf_insertdbrow[] = DB_USER_FIELDS." (field_title, field_name, field_cat, field_type, field_order) VALUES ('Newsletter', 'user_newsletter', ".$last_category.", 'file', 4)";
 }
 
-$inf_adminpanel[] = [
-    'rights'   => 'NSL',
-    'image'    => $inf_image,
-    'title'    => $locale['nsl_title'],
-    'panel'    => 'admin.php',
-    'page'     => 5,
-    'language' => LANGUAGE
-];
+// Multilanguage links
+$enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
+if (!empty($enabled_languages)) {
+    foreach ($enabled_languages as $language) {
+        if (file_exists(INFUSIONS.'newsletter_panel/locale/'.$language.'/newsletter.php')) {
+            include INFUSIONS.'newsletter_panel/locale/'.$language.'/newsletter.php';
+        } else {
+            include INFUSIONS.'newsletter_panel/locale/English/newsletter.php';
+        }
+
+        $mlt_adminpanel[$language][] = [
+            'rights'   => 'NSL',
+            'image'    => $inf_image,
+            'title'    => $locale['nsl_title'],
+            'panel'    => 'admin.php',
+            'page'     => 5,
+            'language' => $language
+        ];
+
+        // Delete
+        $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='NSL' AND admin_language='".$language."'";
+    }
+} else {
+    $inf_adminpanel[] = [
+        'rights'   => 'NSL',
+        'image'    => $inf_image,
+        'title'    => $locale['nsl_title'],
+        'panel'    => 'admin.php',
+        'page'     => 5,
+        'language' => LANGUAGE
+    ];
+}
 
 // Uninstallation
 $inf_droptable[] = DB_NEWSLETTER_HEADERS;
