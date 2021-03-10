@@ -18,8 +18,8 @@
 defined('IN_FUSION') || exit;
 
 if (!defined('SCL_LOCALE')) {
-    if (file_exists(INFUSIONS.'script_loader/locale/'.LOCALESET.'.php')) {
-        define('SCL_LOCALE', INFUSIONS.'script_loader/locale/'.LOCALESET.'.php');
+    if (file_exists(INFUSIONS.'script_loader/locale/'.LANGUAGE.'.php')) {
+        define('SCL_LOCALE', INFUSIONS.'script_loader/locale/'.LANGUAGE.'.php');
     } else {
         define('SCL_LOCALE', INFUSIONS.'script_loader/locale/English.php');
     }
