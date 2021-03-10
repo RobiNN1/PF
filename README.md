@@ -24,11 +24,6 @@ Some addons may require newer PHP.
 - [RSS Viewer](panels/rss_viewer_panel)
 - [Server Status](panels/server_status_panel)
 
-## Unsupported
-- [Actual Version Panel](unsupported/actual_version_panel)
-- [Snow Effect](unsupported/snow_panel)
-- [Geocaching User Field](unsupported/user_geocaching)
-
 ---
 
 Other addons and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
