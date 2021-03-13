@@ -72,7 +72,7 @@ function cache_curl($url) {
     $cache_time = 604800; // One week
     $hash = md5($url);
 
-    if (is_array($config_inc['cache']) && class_exists('PHPFusion\Cache\Cache')) {
+    if (!empty($config_inc['cache']) && class_exists('PHPFusion\Cache\Cache')) {
         $cache = new PHPFusion\Cache\Cache();
 
         if (!empty($cache->get($hash))) {

@@ -62,8 +62,7 @@ if (!empty($inf_settings['video_allow_submission']) && $inf_settings['video_allo
     'infusions/videos/videos/'             => TRUE,
     'infusions/videos/images/'             => TRUE,
     'infusions/videos/submissions/'        => TRUE,
-    'infusions/videos/submissions/images/' => TRUE,
-    'infusions/videos/cache/'              => TRUE
+    'infusions/videos/submissions/images/' => TRUE
 ]);
 
 \PHPFusion\Admins::getInstance()->setCustomFolder('VID', [
