@@ -2,6 +2,10 @@
 
 ![Version](https://img.shields.io/badge/Version-1.5.1-blue.svg)
 
+Atom-X2 theme from Official PHPFusion UK Support ported to v9.
+
+---
+
 Custom templates:
 - Downloads
 - News

@@ -2,6 +2,10 @@
 
 ![Version](https://img.shields.io/badge/Version-1.5.1-blue.svg)
 
+Atom-X theme originally for v7 ported to v9.
+
+---
+
 Custom templates:
 - Downloads
 - News

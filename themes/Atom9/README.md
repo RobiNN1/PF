@@ -1,7 +1,10 @@
 # Atom9 Ignition Pack
-Atom9 is a package of 3 themes with a shared core.
 
 ![Version](https://img.shields.io/badge/Version-1.5.1-blue.svg)
+
+Atom9 is a package of 3 themes with a shared core.
+
+---
 
 Themes:
 - DefaultPack
