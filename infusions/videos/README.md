@@ -2,16 +2,15 @@
 
 ![Version](https://img.shields.io/badge/Version-1.1.4-blue.svg)
 
-You can use custom video (.flv, .mp4, .mov and many others types, can be added in the settings), URL, YouTube or if you want custom embed code.
+Upload own videos, load video from URL, YouTube, Vimeo or embed code.
 
 **Audio files are not supported**
 
-If need you Latest videos panel or RSS Feeds, upload all the relevant files from `additional_files` to the appropriate folder.
+If you need Latest videos panel or RSS Feeds, upload all the relevant files from `additional_files` to the appropriate folder.
 
 E.g. `additional_files/infusions/latest_videos_panel/` upload to `root/infusions/latest_videos_panel/`
 
-Package includes:
-- Videos Infusion
+Infusion also includes:
 - Latest Videos Panel (Is installed automatically with an infusion.)
 - RSS Feeds for Videos
 - Permalinks (SEO friendly URLs)

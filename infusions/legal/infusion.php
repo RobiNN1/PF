@@ -33,7 +33,7 @@ $inf_image       = 'legal.svg';
 $inf_newtable[] = DB_LEGAL." (
     legal_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
     legal_type VARCHAR(50) NOT NULL DEFAULT '',
-    legal_text TEXT NOT NULL,
+    legal_text LONGTEXT NOT NULL,
     legal_language VARCHAR(50) NOT NULL DEFAULT '".LANGUAGE."',
     PRIMARY KEY (legal_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";

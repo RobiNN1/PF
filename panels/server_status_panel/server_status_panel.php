@@ -22,6 +22,7 @@ if (defined('SERVER_STATUS_PANEL_EXISTS')) {
     $inf_settings = get_settings('server_status_panel');
 
     require_once S_STATUS.'includes/functions.php';
+    require_once S_STATUS.'templates/server_status.tpl.php';
 
     $result = dbquery("SELECT * FROM ".DB_SERVER_STATUS." ORDER BY server_order");
 
@@ -63,44 +64,6 @@ if (defined('SERVER_STATUS_PANEL_EXISTS')) {
                 'data'   => $data,
                 'server' => $server
             ];
-        }
-    }
-
-    if (!function_exists('render_server_status')) {
-        function render_server_status($servers) {
-            $locale = fusion_get_locale();
-
-            echo '<div class="table-responsive"><table class="table table-striped table-bordered">';
-                echo '<thead><tr>';
-                    echo '<td>'.$locale['ss_006'].'</td>';
-                    echo '<td>IP:Port</td>';
-                    echo '<td>'.$locale['ss_007'].'</td>';
-                    echo '<td>'.$locale['ss_008'].'</td>';
-                echo '</tr></thead>';
-                echo '<tbody>';
-                    if (!empty($servers)) {
-                        foreach ($servers as $item) {
-                            $data = $item['data'];
-                            $server = $item['server'];
-                            $host = $data['server_ip'].':'.$data['server_port'];
-
-                            echo '<tr>';
-                                echo '<td class="no-break text-overflow-hide">';
-                                    if (file_exists(S_STATUS.'icons/'.$data['server_type'].'.png')) {
-                                        echo '<img alt="'.$server['gq_name'].'" title="'.$server['gq_name'].'" class="img-responsive display-inline m-r-10" style="width: 32px;" src="'.S_STATUS.'icons/'.$data['server_type'].'.png">';
-                                    }
-                                    echo '<i class="fa fa-circle text-'.($server['gq_online'] ? 'success' : 'danger').'"></i> '.$server['gq_hostname'];
-                                echo '</td>';
-                                echo '<td>'.$host.(!empty($server['gq_joinlink']) ? ' <a href="'.$server['gq_joinlink'].'"><i class="fa fa-external-link-alt"></i></a>' : '').'</td>';
-                                echo '<td>'.(!empty($server['gq_numplayers']) && !empty($server['gq_maxplayers']) ? $server['gq_numplayers'].'/'.$server['gq_maxplayers'] : 'N/A').'</td>';
-                                echo '<td>'.(!empty($server['gq_mapname']) ? $server['gq_mapname'] : 'N/A').'</td>';
-                            echo '</tr>';
-                        }
-                    } else {
-                        echo '<tr><td colspan="4" class="text-center">'.$locale['ss_notice_05'].'</td></tr>';
-                    }
-                echo '</tbody>';
-            echo '</table></div>';
         }
     }
 
