@@ -8,7 +8,8 @@ Game/Service server status.
 
 Supported servers: https://github.com/Austinb/GameQ/wiki/Supported-servers-list-v3
 
-## Requirements
+**Requirements**
+
 - PHP bz2 extension
 - PHP +7.3
 

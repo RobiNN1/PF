@@ -4,7 +4,8 @@
 
 Simple alternative to Custom Pages, that allows you to have this important pages in one place.
 
-## Usage
+**Usage**
+
 Add these links to your page (usually in the footer)
 
 Privacy Policy - `echo '<a href="'.INFUSIONS.'legal/legal.php?page=pp">Privacy Policy</a>';` or for menu `infusions/legal/legal.php?page=pp`

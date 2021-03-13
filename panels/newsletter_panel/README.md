@@ -6,7 +6,8 @@ Newsletter and email marketing system.
 
 ---
 
-## Features
+**Features**
+
 - Drag & Drop HTML editor with image uploads
 - Ability to use template from HTML file
 - Support for multiiple SMTP servers
