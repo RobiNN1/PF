@@ -4,9 +4,8 @@
 
 Atom-X theme originally for v7 ported to v9.
 
----
+**Custom templates**
 
-Custom templates:
 - Downloads
 - News
 - Private Messages

@@ -4,9 +4,8 @@
 
 Atom9 is a package of 3 themes with a shared core.
 
----
+**Included themes**
 
-Themes:
 - DefaultPack
     - Custom templates: Home
 - ModFusion

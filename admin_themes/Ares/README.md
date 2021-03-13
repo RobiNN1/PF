@@ -2,6 +2,6 @@
 
 ![Version](https://img.shields.io/badge/Version-1.1.1-blue.svg)
 
-Ares theme originally designed for PHPFusion v8 Tesseract (original v8 from 2013)
+Ares theme originally designed for PHPFusion v8 Tesseract (original v8 from 2013).
 
 ![Preview](screenshot.png)

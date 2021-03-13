@@ -4,9 +4,8 @@
 
 Atom-X2 theme from Official PHPFusion UK Support ported to v9.
 
----
+**Custom templates**
 
-Custom templates:
 - Downloads
 - News
 - Private Messages

@@ -2,11 +2,10 @@
 
 ![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)
 
-Theme is inspired by Google Material Design
+Theme is inspired by Google Material Design.
 
----
+**Custom templates**
 
-Custom templates:
 - Articles
 - Blog
 - Downloads
@@ -15,7 +14,8 @@ Custom templates:
 - News
 - Profile
 
-Features:
+**Features**
+
 - Light and Dark mode
 - Social Networks Admin
 - Built-in Footer Panels with Excluding
