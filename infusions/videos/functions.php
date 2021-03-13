@@ -67,58 +67,64 @@ function get_video_thumb($data, $full_url = FALSE) {
 }
 
 function cache_curl($url) {
+    global $config_inc;
+
     $cache_time = 604800; // One week
-    $cache_dir = dirname(__FILE__).'/cache/';
-
-    if (!is_dir($cache_dir)) {
-        mkdir($cache_dir, 0777, TRUE);
-    }
-
     $hash = md5($url);
-    $file = $cache_dir.$hash.'.cache';
-    $file_time = 0;
 
-    if (file_exists($file)) {
-        $file_time = filemtime($file);
-    }
+    if (is_array($config_inc['cache']) && class_exists('PHPFusion\Cache\Cache')) {
+        $cache = new PHPFusion\Cache\Cache();
 
-    $filetimemod = $file_time + $cache_time;
-
-    if ($filetimemod < time()) {
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_HEADER         => FALSE,
-            CURLOPT_RETURNTRANSFER => TRUE,
-            CURLOPT_USERAGENT      => 'Googlebot/2.1 (+http://www.google.com/bot.html)',
-            CURLOPT_FOLLOWLOCATION => TRUE,
-            CURLOPT_MAXREDIRS      => 5,
-            CURLOPT_CONNECTTIMEOUT => 15,
-            CURLOPT_TIMEOUT        => 30
-        ]);
-
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        if ($data) {
-            file_put_contents($file, $data);
+        if (!empty($cache->get($hash))) {
+            $data = $cache->get($hash);
+        } else {
+            $data = get_data_from_url($url);
+            $cache->set($hash, $data, $cache_time);
         }
     } else {
-        $data = file_get_contents($file);
+        $cache_dir = BASEDIR.'cache/videos/';
+
+        if (!is_dir($cache_dir)) {
+            mkdir($cache_dir, 0777, TRUE);
+        }
+
+        $file = $cache_dir.$hash.'.cache';
+        $file_time = 0;
+
+        if (file_exists($file)) {
+            $file_time = filemtime($file);
+        }
+
+        $filetimemod = $file_time + $cache_time;
+
+        if ($filetimemod < time()) {
+            $data = get_data_from_url($url);
+
+            if ($data) {
+                file_put_contents($file, $data);
+            }
+        } else {
+            $data = file_get_contents($file);
+        }
     }
 
     return $data;
 }
 
-// Delete cache files older than two weeks
-$files = glob(dirname(__FILE__).'/cache/*.cache');
-$now = time();
+function get_data_from_url($url) {
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_HEADER         => FALSE,
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_USERAGENT      => 'Googlebot/2.1 (+http://www.google.com/bot.html)',
+        CURLOPT_FOLLOWLOCATION => TRUE,
+        CURLOPT_MAXREDIRS      => 5,
+        CURLOPT_CONNECTTIMEOUT => 15,
+        CURLOPT_TIMEOUT        => 30
+    ]);
 
-if ($files) {
-    foreach ($files as $file) {
-        if (is_file($file)) {
-            if ($now - filemtime($file) >= 1209600) {
-                unlink($file);
-            }
-        }
-    }
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
 }
