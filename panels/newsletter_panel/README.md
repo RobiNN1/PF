@@ -4,8 +4,6 @@
 
 Newsletter and email marketing system.
 
----
-
 **Features**
 
 - Drag & Drop HTML editor with image uploads

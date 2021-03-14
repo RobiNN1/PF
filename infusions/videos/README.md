@@ -10,7 +10,7 @@ If you need Latest videos panel or RSS Feeds, upload all the relevant files from
 
 E.g. `additional_files/infusions/latest_videos_panel/` upload to `root/infusions/latest_videos_panel/`
 
-**Infusion also includes:**
+**Infusion also includes**
 
 - Latest Videos Panel (Is installed automatically with an infusion.)
 - RSS Feeds for Videos

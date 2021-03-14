@@ -4,9 +4,9 @@
 
 Game/Service server status.
 
----
+**Supported servers**
 
-Supported servers: https://github.com/Austinb/GameQ/wiki/Supported-servers-list-v3
+https://github.com/Austinb/GameQ/wiki/Supported-servers-list-v3
 
 **Requirements**
 
