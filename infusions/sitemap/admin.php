@@ -4,7 +4,7 @@
 | Copyright (C) PHP Fusion Inc
 | https://phpfusion.com/
 +--------------------------------------------------------+
-| Filename: sitemap_panel.php
+| Filename: admin.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,16 +15,14 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-defined('IN_FUSION') || exit;
+require_once '../../maincore.php';
+require_once THEMES.'templates/admin_header.php';
 
-require_once INFUSIONS.'sitemap_panel/includes/SitemapGenerator.php';
+require_once INFUSIONS.'sitemap/includes/SitemapGenerator.php';
+
+pageAccess('SMG');
 
 $smg = new SitemapGenerator();
+$smg->displayAdmin();
 
-if (file_exists($smg->sitemap_file)) {
-    if ($smg->sitemap_settings['auto_update'] == 1) {
-        if ((TIME - filemtime($smg->sitemap_file)) > $smg->sitemap_settings['update_interval']) {
-            $smg->generateXml();
-        }
-    }
-}
+require_once THEMES.'templates/footer.php';

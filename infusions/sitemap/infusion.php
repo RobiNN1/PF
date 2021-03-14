@@ -22,11 +22,11 @@ $locale = fusion_get_locale('', SMG_LOCALE);
 // Infusion general information
 $inf_title       = $locale['smg_title'];
 $inf_description = $locale['smg_desc'];
-$inf_version     = '1.2.2';
+$inf_version     = '1.3.0';
 $inf_developer   = 'RobiNN';
 $inf_email       = 'robinn@php-fusion.eu';
 $inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'sitemap_panel';
+$inf_folder      = 'sitemap';
 $inf_image       = 'sitemap.svg';
 
 // Create tables
@@ -71,9 +71,6 @@ foreach ($modules as $name => $data) {
     $inf_insertdbrow[] = DB_SITEMAP." (name, enabled, frequency, priority) VALUES ('".$name."', '".$data['enabled']."', '".$data['frequency']."', '".$data['priority']."')";
 }
 
-// Insert panel
-$inf_insertdbrow[] = DB_PANELS." (panel_name, panel_filename, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_url_list, panel_restriction, panel_languages) VALUES ('".$inf_title."', '".$inf_folder."', '', '3', '1', 'file', '0', '1', '1', '', '3', '".fusion_get_settings('enabled_languages')."')";
-
 // Insert settings
 $settings = [
     'auto_update'     => 1,
@@ -89,10 +86,10 @@ foreach ($settings as $name => $value) {
 $enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
 if (!empty($enabled_languages)) {
     foreach ($enabled_languages as $language) {
-        if (file_exists(INFUSIONS.'sitemap_panel/locale/'.$language.'.php')) {
-            include INFUSIONS.'sitemap_panel/locale/'.$language.'.php';
+        if (file_exists(INFUSIONS.'sitemap/locale/'.$language.'.php')) {
+            include INFUSIONS.'sitemap/locale/'.$language.'.php';
         } else {
-            include INFUSIONS.'sitemap_panel/locale/English.php';
+            include INFUSIONS.'sitemap/locale/English.php';
         }
 
         $mlt_adminpanel[$language][] = [
@@ -122,5 +119,4 @@ if (!empty($enabled_languages)) {
 $inf_droptable[] = DB_SITEMAP;
 $inf_droptable[] = DB_SITEMAP_LINKS;
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='SMG'";
-$inf_deldbrow[] = DB_PANELS." WHERE panel_filename='".$inf_folder."'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='".$inf_folder."'";

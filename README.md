@@ -11,7 +11,7 @@ Some addons may require newer PHP.
 - [GitHub Client](infusions/github)
 - [Legal Pages](infusions/legal)
 - [Script Loader](infusions/script_loader)
-- [Sitemap Generator](infusions/sitemap_panel)
+- [Sitemap Generator](infusions/sitemap)
 - [Team](infusions/team)
 - [Videos](infusions/videos)
 

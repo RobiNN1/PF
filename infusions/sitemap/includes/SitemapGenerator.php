@@ -19,7 +19,7 @@
 use samdark\sitemap\Sitemap;
 use samdark\sitemap\Index;
 
-require_once INFUSIONS.'sitemap_panel/includes/vendor/autoload.php';
+require_once INFUSIONS.'sitemap/includes/vendor/autoload.php';
 
 class SitemapGenerator {
     private $locale;
@@ -64,7 +64,7 @@ class SitemapGenerator {
         $this->settings = fusion_get_settings();
         $this->siteurl = $this->settings['siteurl'];
         $this->sitemap = new Sitemap($this->sitemap_file);
-        $this->sitemap_settings = get_settings('sitemap_panel');
+        $this->sitemap_settings = get_settings('sitemap');
 
         $this->customlinks = dbcount('(link_id)', DB_SITEMAP_LINKS) > 0;
         $this->profiles = $this->settings['hide_userprofiles'] == 0;
@@ -116,7 +116,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT article_cat_id, article_cat_status, article_cat_visibility, article_cat_language
-                FROM ".DB_ARTICLE_CATS."
+                FROM ". DB_PREFIX."article_cats
                 WHERE article_cat_status=1 AND ".groupaccess('article_cat_visibility')."
                 ".(multilang_table('AR') ? " AND ".in_group('article_cat_language', LANGUAGE) : '')."
                 ORDER BY article_cat_id ASC
@@ -129,8 +129,8 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT a.article_id, a.article_datestamp, a.article_language, a.article_visibility, a.article_draft
-                FROM ".DB_ARTICLES." AS a
-                LEFT JOIN ".DB_ARTICLE_CATS." AS ac ON a.article_cat=ac.article_cat_id
+                FROM ".DB_PREFIX."articles AS a
+                LEFT JOIN ". DB_PREFIX."article_cats AS ac ON a.article_cat=ac.article_cat_id
                 ".(multilang_table('AR') ? "WHERE ".in_group('a.article_language', LANGUAGE)." AND ".in_group('ac.article_cat_language', LANGUAGE)." AND " : "WHERE ")."
                 a.article_draft=0 AND ".groupaccess('a.article_visibility')." AND ac.article_cat_status=1 AND ".groupaccess('ac.article_cat_visibility')."
                 ORDER BY article_datestamp DESC
@@ -160,7 +160,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT blog_cat_id, blog_cat_language
-                FROM ".DB_BLOG_CATS."
+                FROM ".DB_PREFIX."blog_cats
                 ".(multilang_column('BL') ? "WHERE ".in_group('blog_cat_language', LANGUAGE) : '')."
             ");
 
@@ -173,7 +173,7 @@ class SitemapGenerator {
             $this->sitemap->addItem($this->siteurl.'infusions/blog/blog.php?cat_id=0', NULL, $options['frequency_cat'], $options['priority_cat']);
         } else {
             $result = dbquery("SELECT blog_id, blog_datestamp, blog_language, blog_visibility, blog_draft
-                FROM ".DB_BLOG."
+                FROM ".DB_PREFIX."blog
                 ".(multilang_table('BL') ? "WHERE ".in_group('blog_language', LANGUAGE)." AND" : 'WHERE')." ".groupaccess('blog_visibility')." AND blog_draft=0
                 AND (blog_start=0 || blog_start<=".TIME.") AND (blog_end=0 || blog_end>=".TIME.")
                 ORDER BY blog_datestamp DESC
@@ -218,7 +218,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT download_cat_id, download_cat_language
-                FROM ".DB_DOWNLOAD_CATS."
+                FROM ".DB_PREFIX."download_cats
                 ".(multilang_table('DL') ? " WHERE ".in_group('download_cat_language', LANGUAGE) : '')."
             ");
 
@@ -229,7 +229,7 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT download_id, download_datestamp, download_visibility
-                FROM ".DB_DOWNLOADS."
+                FROM ".DB_PREFIX."downloads
                 WHERE ".groupaccess('download_visibility')."
                 ORDER BY download_datestamp DESC
             ");
@@ -246,7 +246,7 @@ class SitemapGenerator {
         $this->sitemap->addItem($this->siteurl.'infusions/faq/faq.php', NULL, $options['frequency'], $options['priority']);
 
         $result = dbquery("SELECT faq_cat_id, faq_cat_language
-            FROM ".DB_FAQ_CATS."
+            FROM ".DB_PREFIX."faq_cats
             ".(multilang_table('FQ') ? " WHERE ".in_group('faq_cat_language', LANGUAGE) : '')."
         ");
 
@@ -265,7 +265,7 @@ class SitemapGenerator {
         $this->sitemap->addItem($this->siteurl.'infusions/forum/tags.php', NULL, $options['frequency'], $options['priority']);
 
         $result_tags = dbquery("SELECT tag_id, tag_status, tag_language
-            FROM ".DB_FORUM_TAGS."
+            FROM ".DB_PREFIX."forum_thread_tags
             WHERE tag_status=1
             ".(multilang_table('FO') ? "AND ".in_group('tag_language', LANGUAGE) : '')."
         ");
@@ -277,7 +277,7 @@ class SitemapGenerator {
         }
 
         $result_forums = dbquery("SELECT forum_id, forum_access, forum_language
-            FROM ".DB_FORUMS."
+            FROM ".DB_PREFIX."forums
             ".(multilang_table('FO') ? " WHERE ".in_group('forum_language', LANGUAGE)." AND " : ' WHERE ').groupaccess('forum_access')."
         ");
 
@@ -288,8 +288,8 @@ class SitemapGenerator {
         }
 
         $result_threads = dbquery("SELECT t.thread_id, t.thread_lastpost
-            FROM ".DB_FORUM_THREADS." t
-            INNER JOIN ".DB_FORUMS." f ON t.forum_id=f.forum_id
+            FROM ".DB_PREFIX."forum_threads t
+            INNER JOIN ".DB_PREFIX."forums f ON t.forum_id=f.forum_id
             WHERE ".groupaccess('forum_access')." AND t.thread_hidden=0
         ");
 
@@ -307,7 +307,7 @@ class SitemapGenerator {
 
         if ($albums == TRUE) {
             $result = dbquery("SELECT album_id, album_access, album_datestamp
-                FROM ".DB_PHOTO_ALBUMS."
+                FROM ".DB_PREFIX."photo_albums
                 WHERE ".groupaccess('album_access')."
             ");
 
@@ -318,8 +318,8 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT p.photo_id, p.album_id, p.photo_datestamp, a.album_access
-                FROM ".DB_PHOTOS." p
-                LEFT JOIN ".DB_PHOTO_ALBUMS." a ON p.album_id=a.album_id
+                FROM ".DB_PREFIX."photos p
+                LEFT JOIN ".DB_PREFIX."photo_albums a ON p.album_id=a.album_id
                 WHERE ".groupaccess('a.album_access')."
             ");
 
@@ -347,7 +347,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT news_cat_id, news_cat_visibility, news_cat_language
-                FROM ".DB_NEWS_CATS."
+                FROM ".DB_PREFIX."news_cats
                 WHERE ".groupaccess('news_cat_visibility')."
                 ".(multilang_table('NS') ? " AND ".in_group('news_cat_language', LANGUAGE) : '')."
                 ORDER BY news_cat_id ASC
@@ -360,7 +360,7 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT news_id, news_datestamp, news_language, news_visibility, news_draft
-                FROM ".DB_NEWS."
+                FROM ".DB_PREFIX."news
                 ".(multilang_table('NS') ? "WHERE ".in_group('news_language', LANGUAGE)." AND " : "WHERE ").groupaccess('news_visibility')." AND news_draft=0
                 AND (news_start=0 || news_start<='".TIME."') AND (news_end=0 || news_end>='".TIME."')
                 ORDER BY news_datestamp DESC
@@ -391,7 +391,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT video_cat_id, video_cat_language
-                FROM ".DB_VIDEO_CATS."
+                FROM ".DB_PREFIX."video_cats
                 ".(multilang_table('VL') ? " WHERE ".in_group('video_cat_language', LANGUAGE) : '')."
                 ORDER BY video_cat_id ASC
             ");
@@ -403,8 +403,8 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT v.*, vc.*
-                FROM ".DB_VIDEOS." v
-                INNER JOIN ".DB_VIDEO_CATS." vc ON v.video_cat=vc.video_cat_id
+                FROM ".DB_PREFIX."videos v
+                INNER JOIN ".DB_PREFIX."video_cats vc ON v.video_cat=vc.video_cat_id
                 ".(multilang_table('VL') ? "WHERE ".in_group('vc.video_cat_language', LANGUAGE)." AND" : "WHERE")." ".groupaccess('video_visibility')."
                 ORDER BY v.video_datestamp DESC
             ");
@@ -463,7 +463,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT weblink_cat_id, weblink_cat_visibility, weblink_cat_language
-                FROM ".DB_WEBLINK_CATS."
+                FROM ".DB_PREFIX."weblink_cats
                 WHERE ".groupaccess('weblink_cat_visibility')."
                 ".(multilang_table('WL') ? " AND ".in_group('weblink_cat_language', LANGUAGE) : '')."
                 ORDER BY weblink_cat_id ASC
@@ -476,8 +476,8 @@ class SitemapGenerator {
             }
         } else {
             $result = dbquery("SELECT w.*, wc.*
-                 FROM ".DB_WEBLINKS." w
-                 LEFT JOIN ".DB_WEBLINK_CATS." wc ON wc.weblink_cat_id=w.weblink_cat
+                 FROM ".DB_PREFIX."weblinks w
+                 LEFT JOIN ".DB_PREFIX."weblink_cats wc ON wc.weblink_cat_id=w.weblink_cat
                  WHERE w.weblink_status='1' AND ".groupaccess('w.weblink_visibility')." AND wc.weblink_cat_status='1' AND ".groupaccess('wc.weblink_cat_visibility')."
                  ".(multilang_table('WL') ? " AND w.weblink_language='".LANGUAGE."' AND wc.weblink_cat_language='".LANGUAGE."'" : '')."
                  GROUP BY w.weblink_id
@@ -1025,7 +1025,7 @@ class SitemapGenerator {
             }
 
             addNotice('success', $this->locale['smg_notice_06']);
-            redirect(INFUSIONS.'sitemap_panel/admin.php'.fusion_get_aidlink());
+            redirect(INFUSIONS.'sitemap/admin.php'.fusion_get_aidlink());
         }
 
         if (isset($_POST['cancel'])) {
@@ -1078,7 +1078,7 @@ class SitemapGenerator {
                     $db = [
                         'settings_name'  => $settings_name,
                         'settings_value' => $settings_value,
-                        'settings_inf'   => 'sitemap_panel'
+                        'settings_inf'   => 'sitemap'
                     ];
 
                     dbquery_insert(DB_SETTINGS_INF, $db, 'update', ['primary_key' => 'settings_name']);

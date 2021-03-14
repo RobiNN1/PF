@@ -18,10 +18,10 @@
 defined('IN_FUSION') || exit;
 
 if (!defined('SMG_LOCALE')) {
-    if (file_exists(INFUSIONS.'sitemap_panel/locale/'.LANGUAGE.'.php')) {
-        define('SMG_LOCALE', INFUSIONS.'sitemap_panel/locale/'.LANGUAGE.'.php');
+    if (file_exists(INFUSIONS.'sitemap/locale/'.LANGUAGE.'.php')) {
+        define('SMG_LOCALE', INFUSIONS.'sitemap/locale/'.LANGUAGE.'.php');
     } else {
-        define('SMG_LOCALE', INFUSIONS.'sitemap_panel/locale/English.php');
+        define('SMG_LOCALE', INFUSIONS.'sitemap/locale/English.php');
     }
 }
 
@@ -34,3 +34,15 @@ if (!defined('DB_SITEMAP_LINKS')) {
 }
 
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SMG', '<i class="admin-ico fa fa-fw fa-sitemap"></i>');
+
+if (db_exists(DB_SITEMAP)) {
+    require_once INFUSIONS.'sitemap/includes/SitemapGenerator.php';
+
+    $smg = new SitemapGenerator();
+
+    if (is_file($smg->sitemap_file) && $smg->sitemap_settings['auto_update'] == 1) {
+        if ((TIME - filemtime($smg->sitemap_file)) > $smg->sitemap_settings['update_interval']) {
+            $smg->generateXml();
+        }
+    }
+}
