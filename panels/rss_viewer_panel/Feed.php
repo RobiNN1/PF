@@ -170,7 +170,12 @@ class Feed {
      */
     private static function loadXml($url, $user, $pass) {
         $e = self::$cacheExpire;
-        $cacheFile = self::$cacheDir.'/feed.'.md5(serialize(func_get_args())).'.xml';
+
+        if (!is_dir(self::$cacheDir)) {
+            mkdir(self::$cacheDir, 0777, TRUE);
+        }
+
+        $cacheFile = self::$cacheDir.'feed.'.md5(serialize(func_get_args())).'.xml';
 
         if (self::$cacheDir && is_file($cacheFile) && (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e))) {
             $data = @file_get_contents($cacheFile);

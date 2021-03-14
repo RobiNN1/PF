@@ -32,7 +32,8 @@ $sites = [
 echo '<div class="row">';
 
 require_once __DIR__.'/Feed.php';
-Feed::$cacheDir = __DIR__.'/cache';
+
+Feed::$cacheDir = BASEDIR.'cache/rss/';
 
 foreach ($sites as $site) {
     if (@get_http_response_code($site['url']) == 200) {
