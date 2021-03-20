@@ -36,7 +36,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['leg
 
 if (isset($_POST['save_item'])) {
     $data = [
-        'legal_id'       => form_sanitizer($_POST['legal_id'], '', 'legal_id'),
+        'legal_id'       => form_sanitizer($_POST['legal_id'], 0, 'legal_id'),
         'legal_type'     => form_sanitizer($_POST['legal_type'], '', 'legal_type'),
         'legal_text'     => form_sanitizer($_POST['legal_text'], '', 'legal_text'),
         'legal_language' => form_sanitizer($_POST['legal_language'], LANGUAGE, 'legal_language')

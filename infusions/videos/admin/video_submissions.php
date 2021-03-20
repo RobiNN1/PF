@@ -85,7 +85,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
 
             if (dbrows($result) > 0) {
                 $callback_data = dbarray($result);
-                $delete_criteria = unserialize($callback_data['submit_criteria']);
+                $delete_criteria = unserialize(stripslashes($callback_data['submit_criteria']));
 
                 if (!empty($delete_criteria['video_file']) && file_exists(VIDEOS.'submisisons/'.$delete_criteria['video_file'])) {
                     unlink(VIDEOS.'submisisons/'.$delete_criteria['video_file']);
@@ -286,7 +286,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
             echo '</tr></thead>';
             echo '<tbody>';
                 while ($callback_data = dbarray($result)) {
-                    $submit_criteria = unserialize($callback_data['submit_criteria']);
+                    $submit_criteria = unserialize(stripslashes($callback_data['submit_criteria']));
                     echo '<tr>';
                         echo '<td>'.$callback_data['submit_id'].'</td>';
                         echo '<td>'.display_avatar($callback_data, '20px', '', TRUE, 'img-rounded m-r-5').profile_link($callback_data['user_id'], $callback_data['user_name'], $callback_data['user_status']).'</td>';

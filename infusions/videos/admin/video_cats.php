@@ -46,8 +46,8 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
 
 if (isset($_POST['save_cat'])) {
     $data = [
-        'video_cat_id'          => form_sanitizer($_POST['video_cat_id'], '', 'video_cat_id'),
-        'video_cat_parent'      => form_sanitizer($_POST['video_cat_parent'], '', 'video_cat_parent'),
+        'video_cat_id'          => form_sanitizer($_POST['video_cat_id'], 0, 'video_cat_id'),
+        'video_cat_parent'      => form_sanitizer($_POST['video_cat_parent'], 0, 'video_cat_parent'),
         'video_cat_name'        => form_sanitizer($_POST['video_cat_name'], '', 'video_cat_name'),
         'video_cat_description' => form_sanitizer($_POST['video_cat_description'], '', 'video_cat_description'),
         'video_cat_sort_by'     => form_sanitizer($_POST['video_cat_sort_by'], '', 'video_cat_sort_by'),

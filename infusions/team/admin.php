@@ -89,7 +89,7 @@ switch ($_GET['section']) {
         if (isset($_POST['save'])) {
             $data = [
                 'team_id'    => form_sanitizer($_POST['team_id'], 0, 'team_id'),
-                'userid'     => form_sanitizer($_POST['userid'], '', 'userid'),
+                'userid'     => form_sanitizer($_POST['userid'], 0, 'userid'),
                 'name'       => form_sanitizer($_POST['name'], '', 'name'),
                 'position'   => form_sanitizer($_POST['position'], '', 'position'),
                 'profession' => form_sanitizer($_POST['profession'], '', 'profession'),
