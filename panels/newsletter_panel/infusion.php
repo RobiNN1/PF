@@ -99,7 +99,7 @@ foreach ($settings as $name => $value) {
 if (!column_exists('users', 'user_newsletter')) {
     $inf_altertable[] = DB_USERS." ADD user_newsletter TINYINT(1) NOT NULL DEFAULT 0";
     $last_category = dbresult(dbquery("SELECT MAX(field_cat_id) FROM ".DB_USER_FIELD_CATS), 0);
-    $inf_insertdbrow[] = DB_USER_FIELDS." (field_title, field_name, field_cat, field_type, field_order) VALUES ('Newsletter', 'user_newsletter', ".$last_category.", 'file', 4)";
+    $inf_insertdbrow[] = DB_USER_FIELDS." (field_title, field_name, field_cat, field_type, field_order, field_default, field_options) VALUES ('Newsletter', 'user_newsletter', ".$last_category.", 'file', 4, '', '')";
 }
 
 // Multilanguage links

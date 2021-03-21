@@ -51,17 +51,20 @@ echo openform('sendemail', 'post', FUSION_REQUEST);
 
 $result_tpls = dbquery("SELECT * FROM ".DB_NEWSLETTER_TEMPLATES);
 $templates = [];
+$deactivate = TRUE;
 if (dbrows($result_tpls) > 0) {
     while ($tpl = dbarray($result_tpls)) {
         $templates[$tpl['tpl_id']] = $tpl['tpl_name'];
     }
+
+    $deactivate = FALSE;
 }
 
 echo form_select('template', $locale['nsl_004'], '', [
     'options' => $templates
 ]);
 
-echo form_button('send_nsl', $locale['nsl_005'], 'send_nsl');
+echo form_button('send_nsl', $locale['nsl_005'], 'send_nsl', ['deactivate' => $deactivate]);
 
 echo closeform();
 

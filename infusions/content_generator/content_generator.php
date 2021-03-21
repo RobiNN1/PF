@@ -122,7 +122,7 @@ class ContentGenerator {
         $rights = $admin ? '' : $rights;
         $algo = 'sha256';
 
-        $query = "INSERT INTO ".DB_USERS." (user_name, user_algo, user_salt, user_password, user_admin_algo, user_admin_salt, user_admin_password, user_email, user_hide_email, user_joined, user_lastvisit, user_ip, user_ip_type, user_rights, user_level) VALUES ";
+        $query = "INSERT INTO ".DB_USERS." (user_name, user_algo, user_salt, user_password, user_admin_algo, user_admin_salt, user_admin_password, user_email, user_hide_email, user_joined, user_lastvisit, user_ip, user_ip_type, user_rights, user_level, user_threads, user_groups) VALUES ";
 
         if (isset($_POST['create_users']) || isset($_POST['create_admins'])) {
             $num_users = $_POST['num_users'];
@@ -137,7 +137,7 @@ class ContentGenerator {
                 $joined = time() - $joined_rand;
                 $lastvisit = time() - rand(0, $joined_rand);
 
-                $query .= "('".$username."', '".$algo."', '".$salt."', '".$password."', '".$algo."', '".$admin_salt."', '".$admin_password."', '".$mail."', 0, '".$joined."', '".$lastvisit."', '".$ip."', 4, '".$rights."', '".$user_level."')";
+                $query .= "('".$username."', '".$algo."', '".$salt."', '".$password."', '".$algo."', '".$admin_salt."', '".$admin_password."', '".$mail."', 0, '".$joined."', '".$lastvisit."', '".$ip."', 4, '".$rights."', '".$user_level."', '', '')";
                 $query .= $i < $num ? ', ' : ';';
             }
 
@@ -282,7 +282,7 @@ class ContentGenerator {
         $type = [];
         $max_items = [];
 
-        if (defined('ARTICLES_EXISTS') && defined(DB_ARTICLES)) {
+        if (defined('ARTICLES_EXISTS') && defined('DB_ARTICLES')) {
             $type[1] = 'A';
             $max_items[1] = dbcount('(article_id)', DB_ARTICLES);
         }
@@ -328,7 +328,7 @@ class ContentGenerator {
         }
 
 
-        if (isset($_POST['delete_ratings'])) {
+        if (isset($_POST['delete_comments'])) {
             $this->delete(DB_COMMENTS);
             $this->notice('', TRUE);
         }
@@ -359,21 +359,35 @@ class ContentGenerator {
         if (isset($_POST['create_custom_pages'])) {
             $num = $_POST['num_custom_pages'];
 
-            $insert = 'page_title, page_access, page_content, page_status, page_user, page_datestamp, page_language';
+            $insert = 'page_id, page_title, page_access, page_content, page_status, page_user, page_datestamp, page_language';
+            $insert2 = 'page_id, page_grid_id, page_content_id, page_content_type, page_content, page_options, page_widget';
+            $insert3 = 'page_id, page_grid_id, page_grid_column_count, page_grid_html_id, page_grid_class';
 
             $values = '';
+            $values2 = '';
+            $values3 = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cg_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
+                $values .= "(".$i.", '".$this->locale['cg_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
+
+                $values2 .= "(".$i.", ".$i.", ".$i.", 'content', '".$this->body."', '', '')";
+                $values2 .= $i < $num ? ', ' : ';';
+
+                $values3 .= "(".$i.", ".$i.", 1, ".$i.", '')";
+                $values3 .= $i < $num ? ', ' : ';';
             }
 
             $this->query(DB_CUSTOM_PAGES, $insert, $values);
+            $this->query(DB_CUSTOM_PAGES_CONTENT, $insert2, $values2);
+            $this->query(DB_CUSTOM_PAGES_GRID, $insert3, $values3);
             $this->notice($num);
         }
 
 
         if (isset($_POST['delete_custom_pages'])) {
             $this->delete(DB_CUSTOM_PAGES);
+            $this->delete(DB_CUSTOM_PAGES_CONTENT);
+            $this->delete(DB_CUSTOM_PAGES_GRID);
             $this->notice('', TRUE);
         }
     }
@@ -465,12 +479,12 @@ class ContentGenerator {
     private function forum() {
         if (isset($_POST['create_forums'])) {
             $num = $_POST['num_forums'];
-            $insert = 'forum_name, forum_type, forum_description, forum_post, forum_reply, forum_language';
+            $insert = 'forum_name, forum_type, forum_description, forum_post, forum_reply, forum_language, forum_rules, forum_mods, forum_meta';
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
                 $type = rand(1, 4);
-                $values .= "('".$this->locale['cg_044']." ".$i."', '".$type."', '".$this->locale['cg_007']."', '".USER_LEVEL_MEMBER."', '".USER_LEVEL_MEMBER."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_044']." ".$i."', '".$type."', '".$this->locale['cg_007']."', '".USER_LEVEL_MEMBER."', '".USER_LEVEL_MEMBER."', '".LANGUAGE."', '', '', '')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -704,12 +718,12 @@ class ContentGenerator {
     private function panels() {
         if (isset($_POST['create_panels'])) {
             $num = $_POST['num_panels'];
-            $insert = 'panel_name, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_restriction, panel_languages';
+            $insert = 'panel_name, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_restriction, panel_languages, panel_url_list';
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
                 $name = strtolower($this->randomName());
-                $values .= "('".ucfirst($name)."', '".$this->short_text."', '".rand(1, 10)."', 1, 'php', 0, 1, 1, '".rand(0, 3)."', '".LANGUAGE."')";
+                $values .= "('".ucfirst($name)."', '".$this->short_text."', '".rand(1, 10)."', 1, 'php', 0, 1, 1, '".rand(0, 3)."', '".LANGUAGE."', '')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
