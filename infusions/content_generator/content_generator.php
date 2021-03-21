@@ -279,38 +279,51 @@ class ContentGenerator {
     }
 
     private function commentsAndRatings() {
-        $type = [];
-        $max_items = [];
+        $addons = [];
 
         if (defined('ARTICLES_EXISTS') && defined('DB_ARTICLES')) {
-            $type[1] = 'A';
-            $max_items[1] = dbcount('(article_id)', DB_ARTICLES);
+            $count = dbcount('(article_id)', DB_ARTICLES);
+            if ($count > 0) {
+                $addons[] = ['type' => 'A', 'max' => $count];
+            }
         }
 
         if (defined('BLOG_EXISTS') && defined('DB_BLOG')) {
-            $type[2] = 'B';
-            $max_items[2] = dbcount('(blog_id)', DB_BLOG);
+            $count = dbcount('(blog_id)', DB_BLOG);
+            if ($count > 0) {
+                $addons[] = ['type' => 'B', 'max' => $count];
+            }
         }
 
         if (defined('DOWNLOADS_EXISTS') && defined('DB_DOWNLOADS')) {
-            $type[3] = 'D';
-            $max_items[3] = dbcount('(download_id)', DB_DOWNLOADS);
+            $count = dbcount('(download_id)', DB_DOWNLOADS);
+            if ($count > 0) {
+                $addons[] = ['type' => 'D', 'max' => $count];
+            }
         }
 
         if (defined('GALLERY_EXISTS') && defined('DB_PHOTO_ALBUMS')) {
-            $type[4] = 'P';
-            $max_items[4] = dbcount('(album_id)', DB_PHOTO_ALBUMS);
+            $count = dbcount('(album_id)', DB_PHOTO_ALBUMS);
+            if ($count > 0) {
+                $addons[] = ['type' => 'P', 'max' => $count];
+            }
         }
 
         if (defined('NEWS_EXISTS') && defined('DB_NEWS')) {
-            $type[5] = 'N';
-            $max_items[5] = dbcount('(news_id)', DB_NEWS);
+            $count = dbcount('(news_id)', DB_NEWS);
+            if ($count > 0) {
+                $addons[] = ['type' => 'N', 'max' => $count];
+            }
         }
 
         if (defined('VIDEOS_EXISTS') && defined('DB_VIDEOS')) {
-            $type[6] = 'VID';
-            $max_items[6] = dbcount('(video_id)', DB_VIDEOS);
+            $count = dbcount('(video_id)', DB_VIDEOS);
+            if ($count > 0) {
+                $addons[] = ['type' => 'VID', 'max' => $count];
+            }
         }
+
+        shuffle($addons);
 
         if (isset($_POST['create_comments'])) {
             $num = $_POST['num_comments'];
@@ -319,7 +332,9 @@ class ContentGenerator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".rand(1, $max_items[rand(1, count($max_items))])."', '".$type[rand(1, count($type))]."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
+                $type = $addons[array_rand($addons, 1)];
+
+                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -340,7 +355,9 @@ class ContentGenerator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".rand(1, $max_items[rand(1, count($max_items))])."', '".$type[rand(1, count($type))]."', '".rand(1, $this->users)."', '".rand(1, 5)."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 4)";
+                $type = $addons[array_rand($addons, 1)];
+
+                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".rand(1, 5)."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 4)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
