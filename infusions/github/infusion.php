@@ -70,3 +70,4 @@ if (!column_exists('users', 'user_github_access_token')) {
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='GH'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='".$inf_folder."'";
 $inf_dropcol[] = ['table' => DB_USERS, 'column' => 'user_github_access_token'];
+$inf_delfiles[] = INFUSIONS.'github/cache/';

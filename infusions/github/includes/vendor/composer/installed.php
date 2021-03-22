@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '787b4eef572f64fc90656047c4984466ba60afba',
+    'reference' => '82f3b6bd59a63293dae4398b7425c76bc1c6133c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '787b4eef572f64fc90656047c4984466ba60afba',
+      'reference' => '82f3b6bd59a63293dae4398b7425c76bc1c6133c',
     ),
     'cache/adapter-common' => 
     array (
@@ -67,30 +67,30 @@
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '7.0.1',
-      'version' => '7.0.1.0',
+      'pretty_version' => '7.2.0',
+      'version' => '7.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2d9d3c186a6637a43193e66b097c50e4451eaab2',
+      'reference' => '0aa74dfb41ae110835923ef10a9d803a22d50e79',
     ),
     'guzzlehttp/promises' => 
     array (
-      'pretty_version' => '1.4.0',
-      'version' => '1.4.0.0',
+      'pretty_version' => '1.4.1',
+      'version' => '1.4.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '60d379c243457e073cff02bc323a2a86cb355631',
+      'reference' => '8e7d04f1f6450fef59366c399cfad4b9383aa30d',
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => '1.7.0',
-      'version' => '1.7.0.0',
+      'pretty_version' => '1.8.1',
+      'version' => '1.8.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
+      'reference' => '35ea11d335fd638b5882ff1725228b3d35496ab1',
     ),
     'http-interop/http-factory-guzzle' => 
     array (
@@ -103,12 +103,12 @@
     ),
     'knplabs/github-api' => 
     array (
-      'pretty_version' => 'v3.0.0',
-      'version' => '3.0.0.0',
+      'pretty_version' => 'v3.1.0',
+      'version' => '3.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'adf4ecaafc96e2c7a43370e229b58d722f2ad97a',
+      'reference' => '95a5ced277a62e9a1253b12b9435e637603a2cbf',
     ),
     'league/flysystem' => 
     array (
@@ -121,12 +121,12 @@
     ),
     'league/mime-type-detection' => 
     array (
-      'pretty_version' => '1.5.1',
-      'version' => '1.5.1.0',
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '353f66d7555d8a90781f6f5e7091932f9a4250aa',
+      'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
     ),
     'php-http/cache-plugin' => 
     array (
@@ -166,12 +166,12 @@
     ),
     'php-http/message' => 
     array (
-      'pretty_version' => '1.10.0',
-      'version' => '1.10.0.0',
+      'pretty_version' => '1.11.0',
+      'version' => '1.11.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '39db36d5972e9e6d00ea852b650953f928d8f10d',
+      'reference' => 'fb0dbce7355cad4f4f6a225f537c34d013571f29',
     ),
     'php-http/message-factory' => 
     array (
@@ -316,17 +316,17 @@
     ),
     'symfony/options-resolver' => 
     array (
-      'pretty_version' => 'v5.2.1',
-      'version' => '5.2.1.0',
+      'pretty_version' => 'v5.2.4',
+      'version' => '5.2.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '87a2a4a766244e796dd9cb9d6f58c123358cd986',
+      'reference' => '5d0f633f9bbfcf7ec642a2b5037268e61b0a62ce',
     ),
     'symfony/polyfill-php73' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
@@ -334,8 +334,8 @@
     ),
     'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
