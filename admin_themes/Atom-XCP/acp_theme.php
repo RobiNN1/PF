@@ -58,24 +58,18 @@ function render_admin_panel() {
                                     $html .= '<li><a class="adl-link" href="'.ADMIN.'index.php'.$aidlink.'&pagenum='.$i.'">'.$section_name.'</a></li>';
 
                                     foreach ($admin_pages[$i] as $key => $data) {
-                                        $title = $data['admin_title'];
-
-                                        if ($data['admin_page'] !== 5) {
-                                            $title = isset($locale[$data['admin_rights']]) ? $locale[$data['admin_rights']] : $title;
-                                        }
-
                                         $secondary_active = $data['admin_link'] == Admins::getInstance()->_currentPage();
                                         $icons = Admins::getInstance()->get_admin_icons($data['admin_rights']);
 
                                         if (!empty($admin_pages[$data['admin_rights']])) {
                                             if (checkrights($data['admin_rights'])) {
-                                                $html .= '<li><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icons.' '.$title.'</a></li>';
+                                                $html .= '<li><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icons.' '.$data['admin_title'].'</a></li>';
                                                 foreach ($admin_pages[$data['admin_rights']] as $sub_key => $sub_page) {
                                                     $html .= '<li><a style="padding-left: 45px;" href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
                                                 }
                                             }
                                         } else {
-                                            $html .= checkrights($data['admin_rights']) ? '<li'.($secondary_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icons.' '.$title.'</a></li>' : '';
+                                            $html .= checkrights($data['admin_rights']) ? '<li'.($secondary_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$icons.' '.$data['admin_title'].'</a></li>' : '';
                                         }
                                     }
 

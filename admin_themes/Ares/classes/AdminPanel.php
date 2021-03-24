@@ -130,17 +130,12 @@ class AdminPanel {
                                     if (checkrights($data['admin_rights'])) {
                                         $sub_active = $data['admin_link'] == Admins::getInstance()->_currentPage();
 
-                                        $title = $data['admin_title'];
-                                        if ($data['admin_page'] !== 5) {
-                                            $title = isset($locale[$data['admin_rights']]) ? $locale[$data['admin_rights']] : $title;
-                                        }
-
-                                        $icon = '<img class="m-r-5 admin-image" src="'.get_image('ac_'.$data['admin_rights']).'" alt="'.$title.'"/>';
+                                        $icon = '<img class="m-r-5 admin-image" src="'.get_image('ac_'.$data['admin_rights']).'" alt="'.$data['admin_title'].'">';
 
                                         if (!empty($admin_pages[$data['admin_rights']])) {
                                             if (checkrights($data['admin_rights'])) {
                                                 $html .= '<li>';
-                                                    $html .= '<a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$title.' '.$icon.'</a>';
+                                                    $html .= '<a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$data['admin_title'].' '.$icon.'</a>';
                                                     $html .= '<ul>';
                                                         foreach ($admin_pages[$data['admin_rights']] as $sub_page) {
                                                             $html .= '<li><a class="aressubitem" href="'.$sub_page['admin_link'].'">'.$sub_page['admin_title'].'</a></li>';
@@ -149,7 +144,7 @@ class AdminPanel {
                                                 $html .= '</li>';
                                             }
                                         } else {
-                                            $html .= '<li'.($sub_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$title.' '.$icon.'</a></li>';
+                                            $html .= '<li'.($sub_active ? ' class="active"' : '').'><a href="'.ADMIN.$data['admin_link'].$aidlink.'">'.$data['admin_title'].' '.$icon.'</a></li>';
                                         }
                                     }
                                 }
