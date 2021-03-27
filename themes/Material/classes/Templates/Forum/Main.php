@@ -4,7 +4,7 @@
 | Copyright (C) PHP Fusion Inc
 | https://phpfusion.com/
 +--------------------------------------------------------+
-| Filename: Mian.php
+| Filename: Main.php
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
