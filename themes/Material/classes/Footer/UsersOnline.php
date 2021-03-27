@@ -75,7 +75,7 @@ class UsersOnline extends Core {
 
         // New members
         $data = dbarray(dbquery("SELECT user_id, user_name, user_status FROM ".DB_USERS." WHERE user_status='0' ORDER BY user_joined DESC LIMIT 0,1"));
-        echo '<i class="fa fa-user-add fa-fw"></i> ';
+        echo '<i class="fa fa-user-plus fa-fw"></i> ';
         echo self::setLocale('uo_05').': '.profile_link($data['user_id'], $data['user_name'], $data['user_status']);
         echo '<br/>';
 
