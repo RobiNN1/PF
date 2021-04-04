@@ -63,7 +63,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['ser
     redirect($link);
 }
 
-echo opentab($tab, $_GET['section'], 'ssdmin', TRUE, 'nav-tabs m-b-20');
+echo opentab($tab, $_GET['section'], 'ssdmin', TRUE, 'nav-tabs');
 switch ($_GET['section']) {
     case 'form':
         if ($edit) {
@@ -241,7 +241,12 @@ function server_listing() {
                         if (file_exists(S_STATUS.'icons/'.$data['server_type'].'.png')) {
                             echo '<img alt="'.$server['gq_name'].'" title="'.$server['gq_name'].'" class="img-responsive display-inline m-r-10" style="width: 32px;" src="'.S_STATUS.'icons/'.$data['server_type'].'.png">';
                         }
-                        echo $server['gq_hostname'];
+
+                        if ($data['server_type'] == 'minecraft') {
+                            echo remove_minecraft_formatting($server['gq_hostname']);
+                        } else {
+                            echo $server['gq_hostname'];
+                        }
                     echo '</td>';
                     echo '<td>'.$data['server_ip'].':'.$data['server_port'].'</td>';
                     echo '<td>';

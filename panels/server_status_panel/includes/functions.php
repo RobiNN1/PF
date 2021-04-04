@@ -55,3 +55,10 @@ function protocols_list() {
 
     return $games;
 }
+
+function remove_minecraft_formatting($string) {
+    $string = utf8_decode(htmlspecialchars($string, ENT_QUOTES));
+    $string = preg_replace('/\xA7([0-9a-f])/i', '', $string, -1, $count); // colors
+    $string = preg_replace('/\xA7([k-or])/i', '', $string, -1, $count); // formatting
+    return utf8_encode($string);
+}

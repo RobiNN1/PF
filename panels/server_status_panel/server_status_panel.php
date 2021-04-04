@@ -42,8 +42,8 @@ if (defined('SERVER_STATUS_PANEL_EXISTS')) {
             $host = $data['server_ip'].':'.$data['server_port'];
 
             $GameQ->addServer([
-                'type' => $data['server_type'],
-                'host' => $host,
+                'type'    => $data['server_type'],
+                'host'    => $host,
                 'options' => [
                     'query_port' => $data['server_qport']
                 ]
@@ -59,6 +59,10 @@ if (defined('SERVER_STATUS_PANEL_EXISTS')) {
             }
 
             $server = $CachedString->get();
+
+            if ($data['server_type'] == 'minecraft') {
+                $server['gq_hostname'] = remove_minecraft_formatting($server['gq_hostname']);
+            }
 
             $servers[] = [
                 'data'   => $data,
