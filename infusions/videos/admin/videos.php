@@ -263,7 +263,7 @@ echo '<div class="row">';
             }
         }
 
-        echo opentab($tab_video_type, $tab_video_type_active, 'videotab', FALSE, 'nav-tabs m-b-10');
+        echo opentab($tab_video_type, $tab_video_type_active, 'videotab', FALSE, 'nav-tabs');
             echo opentabbody($tab_video_type['title'][0], $tab_video_type['id'][0], $tab_video_type_active);
                 if (!empty($data['video_file'])) {
                     echo '<div class="m-t-20 m-b-20">';

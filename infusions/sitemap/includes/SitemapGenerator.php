@@ -1129,7 +1129,7 @@ class SitemapGenerator {
         $tab['id'][] = 'settings';
         $tab['icon'][] = 'fa fa-cog';
 
-        echo opentab($tab, $_GET['section'], 'sitemapadmin', TRUE, 'nav-tabs m-b-20');
+        echo opentab($tab, $_GET['section'], 'sitemapadmin', TRUE, 'nav-tabs');
         switch ($_GET['section']) {
             case 'links':
                 add_breadcrumb(['link' => FUSION_REQUEST, 'title' => $this->locale['smg_type_01']]);

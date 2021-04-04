@@ -77,7 +77,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['tea
     redirect(FUSION_SELF.$aidlink);
 }
 
-echo opentab($tab, $_GET['section'], 'teamadmin', TRUE, 'nav-tabs m-b-20');
+echo opentab($tab, $_GET['section'], 'teamadmin', TRUE, 'nav-tabs');
 switch ($_GET['section']) {
     case 'form':
         if ($edit) {

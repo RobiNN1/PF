@@ -29,7 +29,7 @@ $tab_settings['id'][]    = 'headers';
 $tab_settings['title'][] = 'SMTP';
 $tab_settings['id'][]    = 'smtp';
 
-echo opentab($tab_settings, $_GET['settings'], 'nslsettings', TRUE, 'nav-tabs m-b-20', 'settings');
+echo opentab($tab_settings, $_GET['settings'], 'nslsettings', TRUE, 'nav-tabs', 'settings');
 switch ($_GET['settings']) {
     case 'headers':
         additional_headers();

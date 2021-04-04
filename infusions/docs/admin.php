@@ -63,7 +63,7 @@ class DocsAdmin {
         $tab['id'][]    = 'categories';
         $tab['icon'][]  = 'fa fa-folder';
 
-        echo opentab($tab, $_GET['section'], 'docsadmin', TRUE, 'nav-tabs m-b-20');
+        echo opentab($tab, $_GET['section'], 'docsadmin', TRUE, 'nav-tabs');
         switch ($_GET['section']) {
             case 'categories':
                 require_once 'admin/categories.php';

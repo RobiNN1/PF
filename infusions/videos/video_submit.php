@@ -204,7 +204,7 @@ if (iMEMBER && $video_settings['video_allow_submission']) {
             $tab_video_type['icon'][]  = 'fa fa-code fa-fw';
             $tab_video_type_active = tab_active($tab_video_type, 0);
 
-            echo opentab($tab_video_type, $tab_video_type_active, 'videotab', FALSE, 'nav-tabs m-b-10');
+            echo opentab($tab_video_type, $tab_video_type_active, 'videotab', FALSE, 'nav-tabs');
                 echo opentabbody($tab_video_type['title'][0], $tab_video_type['id'][0], $tab_video_type_active);
                     echo form_fileinput('video_file', $locale['vid_021'], $criteria_array['video_file'], [
                         'class'       => 'm-t-10',

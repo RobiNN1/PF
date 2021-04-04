@@ -77,7 +77,7 @@ class NewsLetterAdmin {
         $tab['id'][]    = 'settings';
         $tab['icon'][]  = 'fa fa-cogs';
 
-        echo opentab($tab, $_GET['section'], 'nsladmin', TRUE, 'nav-tabs m-b-20');
+        echo opentab($tab, $_GET['section'], 'nsladmin', TRUE, 'nav-tabs');
         switch ($_GET['section']) {
             case 'newsletter':
                 require_once 'admin/newsletter.php';

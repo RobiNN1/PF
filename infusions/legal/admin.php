@@ -41,7 +41,7 @@ $tab['title'][] = $locale['lg_01'];
 $tab['id'][]    = 'tos';
 $tab['icon'][]  = '';
 
-echo opentab($tab, $_GET['section'], 'legaladmin', TRUE, 'nav-tabs m-b-20');
+echo opentab($tab, $_GET['section'], 'legaladmin', TRUE, 'nav-tabs');
 switch ($_GET['section']) {
     case 'pp':
         require_once 'admin/pp.php';

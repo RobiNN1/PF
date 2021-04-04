@@ -192,7 +192,7 @@ class VideosAdmin {
         $tab['id'][]    = 'settings';
         $tab['icon'][]  = 'fa fa-cogs';
 
-        echo opentab($tab, $_GET['section'], 'videoadmin', TRUE, 'nav-tabs m-b-20');
+        echo opentab($tab, $_GET['section'], 'videoadmin', TRUE, 'nav-tabs');
         switch ($_GET['section']) {
             case 'form':
             if (dbcount("(video_cat_id)", DB_VIDEO_CATS)) {

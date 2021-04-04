@@ -53,7 +53,7 @@ if (isset($_POST['savecode'])) {
     redirect(FUSION_REQUEST);
 }
 
-echo opentab($tab, $_GET['section'], 'scriptsadmin', TRUE, 'nav-tabs m-b-20');
+echo opentab($tab, $_GET['section'], 'scriptsadmin', TRUE, 'nav-tabs');
 $type = '';
 switch ($_GET['section']) {
     case 'head':

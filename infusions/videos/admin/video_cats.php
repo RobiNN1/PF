@@ -131,7 +131,7 @@ $tab_cats['id'][]    = 'cats';
 $tab_cats['icon'][]  = '';
 $tab_cats_active = tab_active($tab_cats, isset($_GET['cat_view']) ? 1 : 0);
 
-echo opentab($tab_cats, $tab_cats_active, 'categories', FALSE, 'nav-tabs m-b-10');
+echo opentab($tab_cats, $tab_cats_active, 'categories', FALSE, 'nav-tabs');
     echo opentabbody($tab_cats['title'][0], $tab_cats['id'][0], $tab_cats_active);
     echo openform('addcat', 'post', FUSION_REQUEST, ['enctype' => 1, 'class' => 'm-t-20']);
     echo '<div class="row">';

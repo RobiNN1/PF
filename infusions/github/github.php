@@ -200,7 +200,7 @@ if ($rate_limit > 2) {
 
         add_to_jquery('$(\'[data-toggle="tooltip"]\').tooltip();');
 
-        echo opentab($tab, $_GET['section'], $repo['name'], TRUE, 'nav-tabs m-b-20');
+        echo opentab($tab, $_GET['section'], $repo['name'], TRUE, 'nav-tabs');
         switch ($_GET['section']) {
             case 'contributors':
                 add_breadcrumb(['link' => FUSION_REQUEST, 'title' => $locale['gh_018']]);

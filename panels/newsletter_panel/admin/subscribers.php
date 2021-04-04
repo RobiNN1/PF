@@ -87,7 +87,7 @@ if (get('ref') == 'form') {
     $tab_settings['title'][] = $locale['nsl_034'];
     $tab_settings['id'][]    = 'members';
 
-    echo opentab($tab_settings, $_GET['subs'], 'subslist', TRUE, 'nav-tabs m-b-20', 'subs');
+    echo opentab($tab_settings, $_GET['subs'], 'subslist', TRUE, 'nav-tabs', 'subs');
     switch ($_GET['subs']) {
         case 'members':
             if (column_exists('users', 'user_newsletter')) {
