@@ -74,9 +74,9 @@ foreach ($info['allowed_filters'] as $type => $filter_name) {
 
 switch ($_GET['type']) {
     case 'comments':
-        $filter_condition = 'count_comment DESC';
-        $filter_count = 'COUNT(c.comment_item_id) AS count_comment,';
-        $filter_join = "LEFT JOIN ".DB_COMMENTS." c ON c.comment_item_id = v.video_id AND c.comment_type='VID' AND c.comment_hidden='0'";
+        $filter_condition = 'comments_count DESC';
+        $filter_count = 'COUNT(c.comment_item_id) AS comments_count,';
+        $filter_join = "LEFT JOIN ".DB_COMMENTS." c ON c.comment_item_id = v.video_id AND c.comment_type='VID'";
         break;
     case 'ratings':
         $filter_condition = 'sum_rating DESC';
@@ -267,9 +267,9 @@ if (isset($_GET['video_id'])) {
                         $filter_condition = 'video_datestamp DESC';
                         break;
                     case 'comments':
-                        $filter_condition = 'count_comment DESC';
-                        $filter_count = 'COUNT(c.comment_item_id) AS count_comment,';
-                        $filter_join = "LEFT JOIN ".DB_COMMENTS." c ON c.comment_item_id = v.video_id AND c.comment_type='VID' AND c.comment_hidden='0'";
+                        $filter_condition = 'comments_count DESC';
+                        $filter_count = 'COUNT(c.comment_item_id) AS comments_count,';
+                        $filter_join = "LEFT JOIN ".DB_COMMENTS." c ON c.comment_item_id = v.video_id AND c.comment_type='VID'";
                         break;
                     case 'ratings':
                         $filter_condition = 'sum_rating DESC';
@@ -340,7 +340,7 @@ if (!empty($info['video_max_rows']) && ($info['video_max_rows'] > $video_setting
 
 if (!empty($info['video_rows'])) {
     while ($data = dbarray($result)) {
-        $data['count_comment'] = !empty($data['count_comment']) ? $data['count_comment'] : count_db($data['video_id'], 'VID');
+        $data['comments_count'] = !empty($data['comments_count']) ? $data['comments_count'] : count_db($data['video_id'], 'VID');
         $data['count_votes'] = !empty($data['count_votes']) ? $data['count_votes'] : sum_db($data['video_id'], 'VID');
         $data['sum_rating'] = !empty($data['sum_rating']) ? $data['sum_rating'] : rating_db($data['video_id'], 'VID');
 
@@ -488,12 +488,12 @@ function sum_db($id, $type) {
 }
 
 function count_db($id, $type) {
-    $count_db = dbarray(dbquery("SELECT COUNT(comment_item_id) AS count_comment
+    $count_db = dbarray(dbquery("SELECT COUNT(comment_item_id) AS comments_count
         FROM ".DB_COMMENTS."
-        WHERE comment_item_id='".$id."' AND comment_type='".$type."' AND comment_hidden='0'
+        WHERE comment_item_id='".$id."' AND comment_type='".$type."'
     "));
 
-    return $count_db['count_comment'];
+    return $count_db['comments_count'];
 }
 
 function get_likes($id, $type) {
