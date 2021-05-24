@@ -30,7 +30,7 @@ class LatestNews extends Core {
         if ($news) {
             $result = dbquery("SELECT n.*, COUNT(c.comment_item_id) AS news_comments
                 FROM ".DB_NEWS." n
-                LEFT JOIN ".DB_COMMENTS." c ON comment_item_id = n.news_id AND c.comment_type = 'N' AND c.comment_hidden = 0
+                LEFT JOIN ".DB_COMMENTS." c ON comment_item_id = n.news_id AND c.comment_type = 'N'
                 ".(multilang_table('NS') ? "WHERE n.news_language='".LANGUAGE."' AND" : "WHERE")." ".groupaccess('n.news_visibility')."
                 AND (n.news_start = 0 || n.news_start <= ".time().") AND (n.news_end = 0 || n.news_end >= ".time().") AND n.news_draft = 0
                 GROUP BY n.news_id

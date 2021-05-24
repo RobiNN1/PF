@@ -30,7 +30,7 @@ class LatestBlogs extends Core {
         if ($blogs) {
             $result = dbquery("SELECT b.*, COUNT(c.comment_item_id) AS blog_comments
                 FROM ".DB_BLOG." AS b
-                LEFT JOIN ".DB_COMMENTS." c ON comment_item_id = b.blog_id AND c.comment_type = 'B' AND c.comment_hidden = 0
+                LEFT JOIN ".DB_COMMENTS." c ON comment_item_id = b.blog_id AND c.comment_type = 'B'
                 ".(multilang_table('BL') ? "WHERE b.blog_language = '".LANGUAGE."' AND" : "WHERE")." ".groupaccess('b.blog_visibility')." AND (b.blog_start = 0 || b.blog_start <= ".time().")
                 AND (b.blog_end = 0 || b.blog_end >= ".time().") AND b.blog_draft = 0
                 GROUP BY b.blog_id

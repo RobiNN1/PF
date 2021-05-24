@@ -33,7 +33,6 @@ class LatestComments extends Core {
         $result = dbquery("SELECT c.*, u.user_id, u.user_name, u.user_status, u.user_avatar
             FROM ".DB_COMMENTS." c
             LEFT JOIN ".DB_USERS." u ON u.user_id=c.comment_name
-            WHERE c.comment_hidden=0
             ORDER BY c.comment_datestamp DESC
             LIMIT ".$display_comments."
         ");
