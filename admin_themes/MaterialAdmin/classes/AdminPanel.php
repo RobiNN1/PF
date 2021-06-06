@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 namespace MaterialAdmin;
 
-use \PHPFusion\Admins;
+use PHPFusion\Admins;
 
 class AdminPanel {
     private $messages = [];

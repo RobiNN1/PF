@@ -146,7 +146,7 @@ class Dashboard {
                 }
 
                 if (!empty($modules)) {
-                    foreach ($modules as $name => $module) {
+                    foreach ($modules as $module) {
                         $html .= '<div class="col-xs-'.$grid['mobile'].' col-sm-'.$grid['tablet'].' col-md-'.$grid['laptop'].' col-lg-'.$grid['desktop'].'">';
                             $html .= fusion_get_function('openside', '');
                             $html .= '<strong class="text-uppercase">'.$module['title'].' '.$locale['258'].'</strong>';
@@ -185,8 +185,7 @@ class Dashboard {
                                                 $html .= '<strong>'.(!empty($comment_data['user_id']) ? profile_link($comment_data['user_id'], $comment_data['user_name'], $comment_data['user_status']) : $comment_data['comment_name']).' </strong>';
                                                 $html .= $locale['273'].' <a href="'.sprintf($link_type[$comment_data['comment_type']], $comment_data['comment_item_id']).'"><strong>'.$comments_type[$comment_data['comment_type']].'</strong></a> ';
                                                 $html .= timer($comment_data['comment_datestamp']).'<br/>';
-                                                $comment = trimlink(strip_tags(parse_textarea($comment_data['comment_message'], FALSE, TRUE)), 130);
-                                                $html .= '<span class="text-smaller">'.parse_textarea($comment, TRUE, FALSE).'</span>';
+                                                $html .= '<span class="text-smaller">'.trimlink(strip_tags(parse_textarea($comment_data['comment_message'], FALSE)), 130).'</span>';
                                             $html .= '</div>';
                                         }
                                     }
@@ -261,7 +260,7 @@ class Dashboard {
                 if (checkrights('I')) {
                     $html .= '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">';
                         $html .= '<div id="infusions">';
-                            $html .= fusion_get_function('openside', '<strong class="text-uppercase">'.$locale['283'].'</strong><span class="pull-right badge">'.number_format((int)$infusions_count).'</span>');
+                            $html .= fusion_get_function('openside', '<strong class="text-uppercase">'.$locale['283'].'</strong><span class="pull-right badge">'.number_format($infusions_count).'</span>');
                                 $content = '';
                                 if ($infusions_count > 0) {
                                     if (!empty($global_infusions)) {

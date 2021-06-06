@@ -6,7 +6,7 @@
 +--------------------------------------------------------+
 | Filename: acp_theme.php
 | Author: RobiNN
-| Version: 1.0.1
+| Version: 1.0.2
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -18,11 +18,11 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-define('ADMINLTE3', THEMES.'admin_themes/AdminLTE3/');
+const ADMINLTE3 = THEMES.'admin_themes/AdminLTE3/';
 require_once ADMINLTE3.'acp_autoloader.php';
 
-define('BOOTSTRAP4', TRUE);
-define('FONTAWESOME', TRUE);
+const BOOTSTRAP4 = TRUE;
+const FONTAWESOME = TRUE;
 
 if (!check_admin_pass('')) {
     define('THEME_BODY', '<body class="hold-transition lockscreen">');
@@ -33,14 +33,16 @@ if (!check_admin_pass('')) {
 add_handler(function ($output = '') {
     return preg_replace_callback("/class=(['\"])[^('|\")]*/im", function ($m) {
         return strtr($m[0], [
-            'btn-default'   => 'btn-secondary',
-            'panel-group'   => 'panel-group',
-            'panel'         => 'card',
-            'panel-heading' => 'card-header',
-            'panel-title'   => 'card-title',
-            'panel-body'    => 'card-body',
-            'panel-footer'  => 'card-footer',
-            'badge-defaul'  => 'badge-secondary'
+            'btn-default'    => 'btn-secondary',
+            'panel-group'    => 'panel-group',
+            'panel'          => 'card',
+            'panel-heading'  => 'card-header',
+            'panel-title'    => 'card-title',
+            'panel-body'     => 'card-body',
+            'panel-footer'   => 'card-footer',
+            'badge-defaul'   => 'badge-secondary',
+            'thumbnail'      => 'img-thumbnail',
+            'img-responsive' => 'img-fluid'
         ]);
     }, $output);
 });

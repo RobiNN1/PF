@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 namespace MDashboard;
 
-use \PHPFusion\Admins;
+use PHPFusion\Admins;
 
 class AdminPanel {
     private $messages = [];

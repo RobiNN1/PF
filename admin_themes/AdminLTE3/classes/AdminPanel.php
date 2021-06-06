@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 namespace AdminLTE3;
 
-use \PHPFusion\Admins;
+use PHPFusion\Admins;
 
 class AdminPanel {
     protected static $instance = NULL;
@@ -245,7 +245,7 @@ class AdminPanel {
                             $html .= '</p>';
                         $html .= '</a>';
                         $html .= '<ul class="nav nav-treeview">';
-                            foreach ($admin_pages[$i] as $key => $data) {
+                            foreach ($admin_pages[$i] as $data) {
                                 if (checkrights($data['admin_rights'])) {
                                     $sub_active = $data['admin_link'] == Admins::getInstance()->_currentPage();
 
@@ -310,7 +310,6 @@ class AdminPanel {
             WHERE message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'
             GROUP BY message_id
             ORDER BY message_datestamp DESC
-            LIMIT 5
         ");
 
         if (dbcount("(message_id)", DB_MESSAGES, "message_to='".$userdata['user_id']."' AND message_user='".$userdata['user_id']."' AND message_read='0' AND message_folder='0'")) {
@@ -343,7 +342,7 @@ class AdminPanel {
             $html .= '<div class="col-sm-6"><h1 class="m-0 text-dark">'.$title.'</h1></div><h1></h1>';
 
             if (self::$breadcrumbs == FALSE) {
-                $breadcrumbs = \PHPFusion\BreadCrumbs::getInstance('default');
+                $breadcrumbs = \PHPFusion\BreadCrumbs::getInstance();
                 $breadcrumbs->setCssClasses('breadcrumb float-sm-right');
                 $html .= '<div class="col-sm-6">';
                 $html .= render_breadcrumbs();
@@ -363,8 +362,7 @@ class AdminPanel {
     }
 
     public static function closeTable($bg = TRUE) {
-        $html = '';
-        $html .= '</div>';
+        $html = '</div>';
         if ($bg === TRUE) $html .= '</div>';
         $html .= '</section>';
 

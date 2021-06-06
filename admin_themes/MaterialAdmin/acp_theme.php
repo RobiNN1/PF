@@ -6,7 +6,7 @@
 +--------------------------------------------------------+
 | Filename: acp_theme.php
 | Author: RobiNN
-| Version: 1.4.1
+| Version: 1.5.2
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -26,11 +26,11 @@ if (!defined('MDT_LOCALE')) {
     }
 }
 
-define('MDT', THEMES.'admin_themes/MaterialAdmin/');
+const MDT = THEMES.'admin_themes/MaterialAdmin/';
 require_once MDT.'acp_autoloader.php';
 
-define('BOOTSTRAP', TRUE);
-define('FONTAWESOME', TRUE);
+const BOOTSTRAP = TRUE;
+const FONTAWESOME = TRUE;
 
 $toggled = (isset($_COOKIE['sidebar-toggled']) && $_COOKIE['sidebar-toggled'] == 1) ? ' sidebar-toggled' : '';
 $sm = (isset($_COOKIE['sidebar-sm']) && $_COOKIE['sidebar-sm'] == 1) ? ' sidebar-sm' : '';

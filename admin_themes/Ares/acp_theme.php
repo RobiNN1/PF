@@ -6,7 +6,7 @@
 +--------------------------------------------------------+
 | Filename: acp_theme.php
 | Author: RobiNN
-| Version: 1.1.1
+| Version: 1.1.2
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -26,13 +26,13 @@ if (!defined('ARS_LOCALE')) {
     }
 }
 
-define('ARES', THEMES.'admin_themes/Ares/');
+const ARES = THEMES.'admin_themes/Ares/';
 require_once INCLUDES.'theme_functions_include.php';
 require_once ARES.'acp_autoloader.php';
 
-define('BOOTSTRAP', TRUE);
-define('ENTYPO', TRUE);
-define('FONTAWESOME', TRUE);
+const BOOTSTRAP = TRUE;
+const ENTYPO = TRUE;
+const FONTAWESOME = TRUE;
 
 if (!check_admin_pass('')) {
     define('THEME_BODY', '<body class="login-page">');

@@ -17,7 +17,7 @@
 +--------------------------------------------------------*/
 namespace Ares;
 
-use \PHPFusion\Admins;
+use PHPFusion\Admins;
 
 class AdminPanel {
     private $pagenum;
@@ -126,7 +126,7 @@ class AdminPanel {
                                 $html .= '<span class="caret"></span>';
                             $html .= '</a>';
                             $html .= '<ul class="collapse'.($active ? ' in' : '').'" id="aresnavsection'.$i.'">';
-                                foreach ($admin_pages[$i] as $key => $data) {
+                                foreach ($admin_pages[$i] as $data) {
                                     if (checkrights($data['admin_rights'])) {
                                         $sub_active = $data['admin_link'] == Admins::getInstance()->_currentPage();
 

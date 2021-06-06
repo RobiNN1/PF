@@ -38,8 +38,7 @@ class Dashboard {
         $aidlink = fusion_get_aidlink();
         $settings = fusion_get_settings();
 
-        $html = '';
-        $html .= '<h3 class="dashboard-title">'.$locale['ac10'].'</h3>';
+        $html = '<h3 class="dashboard-title">'.$locale['ac10'].'</h3>';
 
         $grid = ['mobile' => 12, 'tablet' => 6, 'laptop' => 3, 'desktop' => 3];
 
@@ -173,7 +172,7 @@ class Dashboard {
 
             if (!empty($modules)) {
                 $i = 0;
-                foreach ($modules as $name => $module) {
+                foreach ($modules as $module) {
                     $html .= '<div class="col-xs-'.$grid['mobile'].' col-sm-'.$grid['tablet'].' col-md-'.$grid['laptop'].' col-lg-'.$grid['desktop'].'">';
                         $html .= '<div class="panel panel-ares">';
                         $html .= '<div class="panel-heading"><i class="'.$module['icon'].'"></i> '.$module['title'].' '.$locale['258'].'</div>';
@@ -212,8 +211,7 @@ class Dashboard {
                                     $html .= '<strong>'.(!empty($comment_data['user_id']) ? profile_link($comment_data['user_id'], $comment_data['user_name'], $comment_data['user_status']) : $comment_data['comment_name']).' </strong>';
                                     $html .= $locale['273'].' <a href="'.sprintf($link_type[$comment_data['comment_type']], $comment_data['comment_item_id']).'"><strong>'.$comments_type[$comment_data['comment_type']].'</strong></a> ';
                                     $html .= timer($comment_data['comment_datestamp']).'<br/>';
-                                    $comment = trimlink(strip_tags(parse_textarea($comment_data['comment_message'], FALSE, TRUE)), 130);
-                                    $html .= '<span class="text-smaller">'.parse_textarea($comment, TRUE, FALSE).'</span>';
+                                    $html .= '<span class="text-smaller">'.trimlink(strip_tags(parse_textarea($comment_data['comment_message'], FALSE)), 130).'</span>';
                                 $html .= '</div>';
                             }
                         }

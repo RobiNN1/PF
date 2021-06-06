@@ -6,7 +6,7 @@
 +--------------------------------------------------------+
 | Filename: acp_theme.php
 | Author: RobiNN
-| Version: 1.4.1
+| Version: 1.5.2
 +--------------------------------------------------------+
 | This program is released as free software under the
 | Affero GPL license. You can redistribute it and/or
@@ -18,7 +18,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-define('MD', THEMES.'admin_themes/MDashboard/');
+const MD = THEMES.'admin_themes/MDashboard/';
 require_once INCLUDES.'theme_functions_include.php';
 require_once MD.'acp_autoloader.php';
 
@@ -30,10 +30,10 @@ if (!defined('MD_LOCALE')) {
     }
 }
 
-define('BOOTSTRAP', TRUE);
-define('FONTAWESOME', TRUE);
+const BOOTSTRAP = TRUE;
+const FONTAWESOME = TRUE;
 
-define("IS_V9", (version_compare(fusion_get_settings('version'), '8.0', (strpos(fusion_get_settings('version'), '9.') === 0 ? '>' : '<'))) ? TRUE : FALSE);
+define("IS_V9", (bool)version_compare(fusion_get_settings('version'), '8.0', (strpos(fusion_get_settings('version'), '9.') === 0 ? '>' : '<')));
 
 if (isset($_COOKIE['sidebar-toggled']) && $_COOKIE['sidebar-toggled'] == 1) {
     define('THEME_BODY', '<body class="sidebar-toggled">');

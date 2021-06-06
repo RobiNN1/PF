@@ -395,6 +395,10 @@ select:focus {
     }
 }
 
+.tab-content {
+    padding-top: 10px;
+}
+
 .panel-txtarea {
     box-shadow: initial;
     border: 1px solid #ddd !important;
