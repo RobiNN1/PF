@@ -20,9 +20,9 @@ defined('IN_FUSION') || exit;
 
 require_once INCLUDES.'theme_functions_include.php';
 
-define('THEME_BULLET', '&middot;');
-define('BOOTSTRAP', TRUE);
-define('FONTAWESOME', TRUE);
+const THEME_BULLET = '&middot;';
+const BOOTSTRAP = TRUE;
+const FONTAWESOME = TRUE;
 
 if (!defined('GLOWIE_LOCALE')) {
     if (file_exists(THEME.'locale/'.LANGUAGE.'.php')) {
@@ -214,7 +214,7 @@ function render_page() {
 
         echo '<br/>'.showcounter();
 
-        echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
+        echo nl2br(parse_textarea($settings['footer'], FALSE));
 
     echo '</div></footer>';
 }

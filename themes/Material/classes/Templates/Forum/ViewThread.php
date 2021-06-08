@@ -65,7 +65,7 @@ class ViewThread extends Core {
 
                                 if (!empty($info['post-filters'])) {
                                     echo '<ul class="dropdown-menu" aria-labelledby="ddfiltertime">';
-                                        foreach ($info['post-filters'] as $i => $filters) {
+                                        foreach ($info['post-filters'] as $filters) {
                                             echo '<li><a class="text-smaller" href="'.$filters['value'].'">'.$filters['locale'].'</a></li>';
                                         }
                                     echo '</ul>';

@@ -18,7 +18,7 @@
 namespace MaterialTheme;
 
 use PHPFusion\Panels;
-use \PHPFusion\SiteLinks;
+use PHPFusion\SiteLinks;
 
 class Main extends Core {
     public function __construct() {
@@ -347,9 +347,7 @@ class Main extends Core {
             $action_url = cleanurl(urldecode($_GET['redirect']));
         }
 
-        $html = '';
-
-        $html .= openform('loginform', 'post', $action_url, ['form_id' => 'login-form']);
+        $html = openform('loginform', 'post', $action_url, ['form_id' => 'login-form']);
             switch (fusion_get_settings('login_method')) {
                 case 2:
                     $placeholder = $locale['global_101c'];

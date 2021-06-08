@@ -19,7 +19,7 @@
 namespace Atom9Theme;
 
 use PHPFusion\Rewrite\Router;
-use \PHPFusion\SiteLinks;
+use PHPFusion\SiteLinks;
 
 class Main extends Core {
     protected static $instance = NULL;
@@ -323,7 +323,7 @@ class Main extends Core {
             echo '</div>';
 
             echo '<div class="col-xs-12 col-sm-7 text-right">';
-                echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
+                echo nl2br(parse_textarea($settings['footer'], FALSE));
 
                 if ($settings['visitorcounter_enabled']) {
                     echo '<br/>';

@@ -120,10 +120,7 @@ class Profile extends Core {
                                                 }
                                                 break;
                                             case 'profile_user_joined':
-                                                $user_level['user_joined'] = $data['value'];
-                                                break;
                                             case 'profile_user_visit':
-                                                $user_level['user_lastvisit'] = $data['value'];
                                                 break;
                                             default:
                                                 if (!empty($data['value'])) {
@@ -158,7 +155,7 @@ class Profile extends Core {
                                 echo '<div class="pull-right">';
                                     if (!empty($user_groups) && is_array($user_groups)) {
                                         $i = 0;
-                                        foreach ($user_groups as $id => $group) {
+                                        foreach ($user_groups as $group) {
                                             echo $i > 0 ? ', ' : '';
                                             echo '<a href="'.$group['group_url'].'">'.$group['group_name'].'</a>';
                                             $i++;
@@ -188,7 +185,7 @@ class Profile extends Core {
 
                 if (!empty($info['user_field'])) {
                     echo '<div class="row profile-fields equal-height" id="extra-info">';
-                    foreach ($info['user_field'] as $field_cat_id => $category_data) {
+                    foreach ($info['user_field'] as $category_data) {
                         if (!empty($category_data['fields'])) {
                             echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
                                 echo '<div class="panel panel-default" style="height: 100%;">';
@@ -413,7 +410,7 @@ class Profile extends Core {
                         echo '<hr>';
 
                         $visited = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_lastvisit > UNIX_TIMESTAMP(CURDATE())"));
-                        $total_members = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1'"), 0);
+                        $total_members = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1'"));
                         echo '<div><b>'.$locale['ax9_041'].'</b><span class="pull-right">'.$visited.'/'.$total_members.'</span></div>';
 
                         $i = 0;

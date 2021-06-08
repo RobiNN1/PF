@@ -71,7 +71,7 @@ class Downloads extends Core {
             echo !empty($info['download_nav']) ? '<div class="heading text-center">'.$info['download_nav'].'</div>' : '';
 
             echo '<div class="p-20 p-b-0"><div class="row equal-height">';
-                foreach ($info['download_item'] as $download_id => $data) {
+                foreach ($info['download_item'] as $data) {
                     echo '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">';
                         echo '<div class="download-item">';
                             if ($dl_settings['download_screenshot'] == 1) {
@@ -108,7 +108,7 @@ class Downloads extends Core {
                     }
 
                     $_GET['rowstart'] = (isset($_GET['rowstart']) && isnum($_GET['rowstart']) && $_GET['rowstart'] <= $info['download_max_rows']) ? $_GET['rowstart'] : 0;
-                    echo makepagenav($_GET['rowstart'], $dl_settings['download_pagination'], $info['download_max_rows'], 3, $page_nav_link, 'rowstart');
+                    echo makepagenav($_GET['rowstart'], $dl_settings['download_pagination'], $info['download_max_rows'], 3, $page_nav_link);
                 echo '</div>';
             }
         } else {
@@ -154,7 +154,7 @@ class Downloads extends Core {
                         echo '<p class="m-t-20 m-b-10">'.$locale['a9_109'].'</p>';
                         echo '<div class="description">';
                             echo '<small class="display-block"><b>'.$locale['download_1021'].': </b>'.$data['download_post_time'].'</small>';
-                            echo '<small class="display-block"><b>'.$locale['a9_110'].': </b>'.profile_link($data['user_id'], $data['user_name'], $data['user_status'], 'profile-link').'</small>';
+                            echo '<small class="display-block"><b>'.$locale['a9_110'].': </b>'.profile_link($data['user_id'], $data['user_name'], $data['user_status']).'</small>';
                             echo '<small class="display-block"><b>'.$locale['download_1017'].': </b>'.$data['download_homepage'].'</small>';
                             echo '<small class="display-block"><b>'.$locale['download_1015'].': </b>'.$data['download_copyright'].'</small>';
                         echo '</div>';

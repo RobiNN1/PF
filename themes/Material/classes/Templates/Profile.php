@@ -77,7 +77,7 @@ class Profile extends Core {
             $info['buttons_'][] = ['link' => ADMIN.'members.php'.fusion_get_aidlink().'&ref=log&lookup='.$user_data['user_id'], 'name' => $locale['u054']];
 
             $buttons = '<div class="btn-group m-t-5 m-b-0" style="position: absolute;">';
-            foreach ($info['buttons_'] as $id => $button) {
+            foreach ($info['buttons_'] as $button) {
                 $buttons .= '<a class="btn btn-primary btn-sm" href="'.$button['link'].'">'.$button['name'].'</a>';
             }
             $buttons .= '</div>';
@@ -129,11 +129,7 @@ class Profile extends Core {
                                         }
                                         break;
                                     case 'profile_user_avatar':
-                                        $avatar['user_avatar'] = $field_data['value'];
-                                        $avatar['user_status'] = $field_data['status'];
-                                        break;
                                     case 'profile_user_name':
-                                        $user_level['user_name'] = $field_data['value'];
                                         break;
                                     case 'profile_user_level':
                                         $user_level['user_level'] = $field_data['value'];
@@ -154,7 +150,7 @@ class Profile extends Core {
                             echo '<div class="pull-right">';
                                 if (!empty($user_groups) && is_array($user_groups)) {
                                     $i = 0;
-                                    foreach ($user_groups as $id => $group) {
+                                    foreach ($user_groups as $group) {
                                         echo $i > 0 ? ', ' : '';
                                         echo '<a href="'.$group['group_url'].'">'.$group['group_name'].'</a>';
                                         $i++;
@@ -191,10 +187,10 @@ class Profile extends Core {
 
                     if (!empty($info['user_field'])) {
                         echo '<div class="row equal-height">';
-                            foreach ($info['user_field'] as $cat_id => $category_data) {
+                            foreach ($info['user_field'] as $category_data) {
                                 if (!empty($category_data['fields'])) {
                                     if (isset($category_data['fields'])) {
-                                        foreach ($category_data['fields'] as $field_id => $field_data) {
+                                        foreach ($category_data['fields'] as $field_data) {
                                             $fields[] = $field_data;
                                         }
                                     }

@@ -17,8 +17,8 @@
 +--------------------------------------------------------*/
 namespace CzechiaTheme;
 
-use \PHPFusion\Panels;
-use \PHPFusion\SiteLinks;
+use PHPFusion\Panels;
+use PHPFusion\SiteLinks;
 
 class Main extends Core {
     public function __construct() {
@@ -200,9 +200,7 @@ class Main extends Core {
             $action_url = cleanurl(urldecode($_GET['redirect']));
         }
 
-        $html = '';
-
-        $html .= openform('loginform', 'post', $action_url, ['form_id' => 'login-form']);
+        $html = openform('loginform', 'post', $action_url, ['form_id' => 'login-form']);
         switch (fusion_get_settings('login_method')) {
             case 2:
                 $placeholder = $locale['global_101c'];
@@ -236,7 +234,7 @@ class Main extends Core {
                         echo defined('USER4') && USER4 ? '<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">'.USER4.'</div>' : '';
                     echo '</div>';
 
-                    echo '<div class="p-20">'.nl2br(parse_textarea($settings['footer'], FALSE, TRUE)).'</div>';
+                    echo '<div class="p-20">'.nl2br(parse_textarea($settings['footer'], FALSE)).'</div>';
 
                     if ($settings['visitorcounter_enabled']) {
                         echo showcounter();

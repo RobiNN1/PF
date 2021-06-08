@@ -124,10 +124,10 @@ class Auth extends Core {
                     echo !empty($info['user_admin_password']) && iADMIN ? $info['user_admin_password'] : '';
 
                     if (!empty($info['user_field'])) {
-                        foreach ($info['user_field'] as $field => $fieldData) {
+                        foreach ($info['user_field'] as $fieldData) {
                             echo !empty($fieldData['title']) ? $fieldData['title'] : '';
                             if (!empty($fieldData['fields']) && is_array($fieldData['fields'])) {
-                                foreach ($fieldData['fields'] as $cField => $cFieldData) {
+                                foreach ($fieldData['fields'] as $cFieldData) {
                                     echo !empty($cFieldData) ? $cFieldData : '';
                                 }
                             }

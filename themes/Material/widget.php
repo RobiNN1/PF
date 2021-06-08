@@ -163,7 +163,7 @@ class MWidget {
             }
         }
 
-        echo openside('');
+        openside('');
         echo openform('form_network', 'post', FUSION_REQUEST);
         echo form_hidden('network_id', '', $this->sn_data['network_id']);
         echo form_hidden('network_order', '', $this->sn_data['network_order']);
@@ -187,7 +187,7 @@ class MWidget {
         echo form_button('save', $this->locale['save'], 'save', ['class' => 'btn-success', 'icon' => 'fa fa-plus']);
         echo form_button('cancel', $this->locale['cancel'], 'cancel', ['icon' => 'fa fa-fw fa-times']);
         echo closeform();
-        echo closeside();
+        closeside();
     }
 
     private function deleteSocialNetwork() {
@@ -230,7 +230,7 @@ class MWidget {
         echo '<div class="panel panel-default">';
         echo '<div class="panel-heading">'.$this->setLocale('widget_title_01').'</div>';
         echo '<div class="panel-body">';
-        echo openside();
+        openside();
         echo form_select('social_links', $this->setLocale('widget_05'), self::$settings['social_links'], [
             'inline'  => TRUE,
             'options' => $this->options
@@ -243,9 +243,9 @@ class MWidget {
                 2 => $this->setLocale('widget_09')
             ]
         ]);
-        echo closeside();
+        closeside();
 
-        echo openside();
+        openside();
         $panels = [];
         $file_list = makefilelist(THEME.'classes/Footer/', '.|..|.htaccess|.DS_Store|index.php');
         foreach ($file_list as $files) {
@@ -269,7 +269,7 @@ class MWidget {
         echo form_select('footer_col_2', $this->setLocale('widget_25'), self::$settings['footer_col_2'], ['options' => $panels, 'inline' => TRUE]);
         echo form_select('footer_col_3', $this->setLocale('widget_26'), self::$settings['footer_col_3'], ['options' => $panels, 'inline' => TRUE]);
         echo form_select('footer_col_4', $this->setLocale('widget_27'), self::$settings['footer_col_4'], ['options' => $panels, 'inline' => TRUE]);
-        echo closeside();
+        closeside();
 
         echo form_button('save_settings', $this->locale['save_changes'], $this->locale['save_changes'], ['class' => 'btn-success', 'icon' => 'fa fa-hdd-o']);
         echo form_button('cancel', $this->locale['cancel'], 'cancel', ['icon' => 'fa fa-fw fa-times']);

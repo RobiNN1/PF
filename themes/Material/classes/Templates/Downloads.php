@@ -19,7 +19,7 @@ namespace MaterialTheme\Templates;
 
 use MaterialTheme\Core;
 use MaterialTheme\Main;
-use \PHPFusion\Panels;
+use PHPFusion\Panels;
 
 class Downloads extends Core {
     public static function renderDownloads($info) {
@@ -54,7 +54,7 @@ class Downloads extends Core {
 
         if (!empty($info['download_item'])) {
             echo '<div class="row equal-height">';
-                foreach ($info['download_item'] as $download_id => $data) {
+                foreach ($info['download_item'] as $data) {
                     echo '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">';
                         echo '<div class="card download-item">';
                             $link = DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'&download_id='.$data['download_id'];
@@ -271,7 +271,7 @@ class Downloads extends Core {
         echo '<h4>'.$locale['download_1004'].'</h4>';
         echo '<ul class="list-style-none m-b-20">';
             if (!empty($info['download_author'])) {
-                foreach ($info['download_author'] as $author_id => $author_info) {
+                foreach ($info['download_author'] as $author_info) {
                     echo '<li'.($author_info['active'] ? ' class="active strong"' : '').'>';
                         echo '<a href="'.$author_info['link'].'">'.$author_info['title'].'</a> ';
                         echo '<span class="badge m-l-10">'.$author_info['count'].'</span>';

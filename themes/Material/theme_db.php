@@ -29,7 +29,7 @@ $theme_screenshot  = 'screenshot.png';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';
 $theme_license     = 'AGPL3';
-$theme_version     = '1.0.2';
+$theme_version     = '1.0.3';
 $theme_folder      = 'Material';
 
 if (!defined('DB_MT_NETWORKS')) {

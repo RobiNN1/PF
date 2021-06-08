@@ -140,9 +140,6 @@ hr {
 .select2-offscreen {
   display: none;
 }
-.select2-container {
-  width: 100% !important;
-}
 .panel-txtarea > .panel-heading {
   background-color: #e1e4e4 !important;
   border-radius: 0;
@@ -1492,7 +1489,6 @@ input:focus {
   line-height: 1.42857143;
   border-radius: 4px;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -2000,7 +1996,7 @@ input[type="button"].btn-block {
   padding: 10px 10px 0;
 }
 #main-menu {
-  background-color: #196496;
+  background-color: #2472a4;
   border-radius: 0;
   margin-bottom: 10px;
 }
@@ -4157,7 +4153,7 @@ a.list-group-item-danger.active:focus {
   border-radius: 3px;
 }
 .site-footer {
-  background: #07395a;
+  background: #246b9b;
   color: #fff;
 }
 .site-footer .opentable,
@@ -4176,7 +4172,7 @@ a.list-group-item-danger.active:focus {
   margin: 20px 0 15px;
 }
 #footer {
-  background: #094167;
+  background: #226593;
   color: #fff;
   padding: 15px 30px 30px 30px;
 }

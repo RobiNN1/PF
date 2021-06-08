@@ -55,7 +55,7 @@ class UsersOnline extends Core {
             '[GUESTS]'
         ], [
             format_word(self::$guests + count(self::$members), $locale['fmt_user']),
-            format_word(number_format(count(self::$members), 0), $locale['fmt_member']),
+            format_word(number_format(count(self::$members)), $locale['fmt_member']),
             format_word(self::$guests, $locale['fmt_guest'])
         ], self::setLocale('uo_02'));
         echo '<br/>';
@@ -81,7 +81,7 @@ class UsersOnline extends Core {
 
         // Visited
         $visited = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1' AND user_lastvisit > UNIX_TIMESTAMP(CURDATE())"));
-        $total_members = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1'"), 0);
+        $total_members = number_format(dbcount("(user_id)", DB_USERS, "user_status<='1'"));
         echo '<i class="fa fa-users fa-fw"></i> '.self::setLocale('uo_06').': '.$visited.'/'.$total_members;
         echo '<br/>';
 

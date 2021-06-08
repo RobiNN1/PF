@@ -25,7 +25,7 @@ class HomePage extends Core {
         self::setTplCss('homepage');
 
         echo '<div id="home-page">';
-            foreach ($info as $db_id => $content) {
+            foreach ($info as $content) {
                 echo '<div class="module">';
                     echo '<div class="title"><h1>'.$content['blockTitle'].'</h1></div>';
 

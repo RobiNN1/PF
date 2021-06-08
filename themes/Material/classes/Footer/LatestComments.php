@@ -91,8 +91,8 @@ class LatestComments extends Core {
                         $result_n = dbquery("SELECT n.news_subject
                             FROM ".DB_NEWS." AS n
                             LEFT JOIN ".DB_NEWS_CATS." AS nc ON nc.news_cat_id=n.news_cat
-                            WHERE n.news_id=:id AND (n.news_start=0 OR n.news_start<='".TIME."')
-                            AND (n.news_end=0 OR n.news_end>='".TIME."') AND n.news_draft=0
+                            WHERE n.news_id=:id AND (n.news_start=0 OR n.news_start<='".time()."')
+                            AND (n.news_end=0 OR n.news_end>='".time()."') AND n.news_draft=0
                             AND ".groupaccess('n.news_visibility')."
                             ".(multilang_table('NS') ? "AND n.news_language='".LANGUAGE."'" : '')."
                             ORDER BY n.news_datestamp DESC
@@ -166,7 +166,7 @@ class LatestComments extends Core {
                     echo '<div class="pull-left">'.display_avatar($data['data'], '35px', '', $link, 'img-rounded m-r-10 m-t-5').'</div>';
                     echo '<div class="overflow-hide">';
                         echo '<strong><a href="'.$data['url'].'">'.trim_text($data['title'], 35).'</a></strong>';
-                        echo '<div class="clearfix"><a href="'.$data['c_url'].'">'.trim_text(strip_tags(parse_textarea($data['data']['comment_message'], FALSE, TRUE)), 27).'</a></div>';
+                        echo '<div class="clearfix"><a href="'.$data['c_url'].'">'.trim_text(strip_tags(parse_textarea($data['data']['comment_message'], FALSE)), 27).'</a></div>';
                     echo '</div>';
                 echo '</li>';
             }

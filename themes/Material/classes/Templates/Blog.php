@@ -19,7 +19,7 @@ namespace MaterialTheme\Templates;
 
 use MaterialTheme\Core;
 use MaterialTheme\Main;
-use \PHPFusion\Panels;
+use PHPFusion\Panels;
 
 class Blog extends Core {
     private static function header($info, $bg = NULL) {
@@ -180,9 +180,7 @@ class Blog extends Core {
 
         ob_start();
 
-        $right_top = '';
-
-        $right_top .= '<div class="text-bigger"><h4>'.$locale['show'].'</h4></div>';
+        $right_top = '<div class="text-bigger"><h4>'.$locale['show'].'</h4></div>';
         $right_top .= '<ul class="list-style-none m-b-20">';
             foreach ($info['blog_filter'] as $filter_key => $filter) {
                 $active = isset($_GET['type']) && $_GET['type'] === $filter_key ? ' class="active strong"' : '';
@@ -201,7 +199,7 @@ class Blog extends Core {
                         echo '<a class="list-group-item p-5 p-l-15'.$active.'" href="'.INFUSIONS.'blog/blog.php?cat_id='.$id.'">'.$data['blog_cat_name'].'</a>';
 
                         if ($id != 0 && $info['blog_categories'] != 0) {
-                            foreach ($info['blog_categories'] as $sub_cats_id => $sub_cats) {
+                            foreach ($info['blog_categories'] as $sub_cats) {
                                 foreach ($sub_cats as $sub_cat_id => $sub_cat_data) {
                                     if (!empty($sub_cat_data['blog_cat_parent']) && $sub_cat_data['blog_cat_parent'] == $id) {
                                         $active = isset($_GET['cat_id']) && $_GET['cat_id'] == $sub_cat_id ? ' active' : '';
@@ -230,7 +228,7 @@ class Blog extends Core {
 
                         $collaped = isset($_GET['archive']) && $_GET['archive'] == $year ? ' in' : '';
                         echo '<ul id="blog-'.$year.'" class="collapse m-l-15 '.$collaped.'">';
-                            foreach ($archive_data as $month => $a_data) {
+                            foreach ($archive_data as $a_data) {
                                 echo '<li'.($a_data['active'] ? ' class="active strong"' : '').'><a href="'.$a_data['link'].'">'.$a_data['title'].' <span class="badge m-l-10">'.$a_data['count'].'</span></a></li>';
                             }
                         echo '</ul>';
@@ -244,7 +242,7 @@ class Blog extends Core {
         echo '<h4>'.$locale['blog_1005'].'</h4>';
         echo '<ul class="list-style-none m-b-20">';
             if (!empty($info['blog_author'])) {
-                foreach ($info['blog_author'] as $author_id => $author_info) {
+                foreach ($info['blog_author'] as $author_info) {
                     echo '<li'.($author_info['active'] ? ' class="active strong"' : '').'>';
                         echo '<a href="'.$author_info['link'].'">'.$author_info['title'].'</a> ';
                         echo '<span class="badge m-l-10">'.$author_info['count'].'</span>';

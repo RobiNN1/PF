@@ -18,7 +18,7 @@
 +--------------------------------------------------------*/
 namespace AtomXTheme;
 
-use \PHPFusion\Search\Search_Engine;
+use PHPFusion\Search\Search_Engine;
 
 class SearchEngine extends Core {
     public function __construct() {
@@ -69,7 +69,7 @@ class SearchEngine extends Core {
                             echo '<div class="m-b-10"><b>'.$this->locale['405'].'</b></div>';
 
                             if (!empty($modules['radio_button'])) {
-                                foreach ($modules['radio_button'] as $key => $value) {
+                                foreach ($modules['radio_button'] as $value) {
                                     echo $value;
                                 }
                             }
@@ -121,7 +121,7 @@ class SearchEngine extends Core {
                                 'reverse_label' => TRUE,
                                 'input_id'      => 'fields1',
                                 'class'         => 'm-b-0',
-                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array("fields1", $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array("fields1", $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
 
                             echo form_checkbox('fields', $this->locale['431'], Search_Engine::get_param('fields'), [
@@ -130,7 +130,7 @@ class SearchEngine extends Core {
                                 'reverse_label' => TRUE,
                                 'input_id'      => 'fields2',
                                 'class'         => 'm-b-0',
-                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array("fields2", $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array("fields2", $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
 
                             echo form_checkbox('fields', $this->locale['432'], Search_Engine::get_param('fields'), [
@@ -139,7 +139,7 @@ class SearchEngine extends Core {
                                 'reverse_label' => TRUE,
                                 'input_id'      => 'fields3',
                                 'class'         => 'm-b-0',
-                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array('fields3', $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array('fields3', $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
                         echo '</div>';
 
@@ -152,7 +152,7 @@ class SearchEngine extends Core {
                                     'subject'   => $this->locale['442'],
                                     'author'    => $this->locale['443']
                                 ],
-                                'deactivate'  => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array('sort', $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'  => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array('sort', $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
 
                             echo form_checkbox('order', $this->locale['450'], Search_Engine::get_param('order'), [
@@ -161,7 +161,7 @@ class SearchEngine extends Core {
                                 'reverse_label' => TRUE,
                                 'input_id'      => 'order1',
                                 'class'         => 'm-b-0',
-                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array('order1', $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array('order1', $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
 
                             echo form_checkbox('order', $this->locale['451'], Search_Engine::get_param('order'), [
@@ -170,7 +170,7 @@ class SearchEngine extends Core {
                                 'reverse_label' => TRUE,
                                 'input_id'      => 'order2',
                                 'class'         => 'm-b-0',
-                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array('order2', $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'    => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array('order2', $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
                         echo '</div>';
 
@@ -184,7 +184,7 @@ class SearchEngine extends Core {
                                     '150' => '150',
                                     '200' => '200'
                                 ],
-                                'deactivate'  => (Search_Engine::get_param('stype') != 'all' ? (isset($form_elements[Search_Engine::get_param('stype')]) && in_array('chars', $form_elements[Search_Engine::get_param('stype')]['disabled'])) : FALSE)
+                                'deactivate'  => (Search_Engine::get_param('stype') != 'all' && isset($form_elements[Search_Engine::get_param('stype')]) && in_array('chars', $form_elements[Search_Engine::get_param('stype')]['disabled']))
                             ]);
                         echo '</div>';
                     echo '</div>';

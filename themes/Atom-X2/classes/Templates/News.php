@@ -20,7 +20,7 @@ namespace AtomX2Theme\Templates;
 
 use AtomX2Theme\Core;
 use AtomX2Theme\Main;
-use \PHPFusion\News\NewsServer;
+use PHPFusion\News\NewsServer;
 
 class News extends Core {
     public static function displayMainNews($info) {
@@ -38,7 +38,7 @@ class News extends Core {
             echo '<div class="row">';
                 echo '<div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">';
                     $i = 0;
-                    foreach ($info['news_items'] as $id => $data) {
+                    foreach ($info['news_items'] as $data) {
                         $i++;
 
                         echo '<div class="panel panel-default">';
@@ -71,7 +71,7 @@ class News extends Core {
                 echo '<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">';
                     $news_items = array_slice($info['news_items'], 4, NULL, TRUE);
                     $i = 0;
-                    foreach ($news_items as $id => $data) {
+                    foreach ($news_items as $data) {
                         echo '<div class="m-t-10 m-b-10"'.($i > 0 ? ' style="border-top: 1px dashed #ccc;"' : '').'>';
                             echo '<h4 class="m-b-10"><a class="text-dark text-underline" href="'.$data['news_link'].'"><b>'.$data['news_subject'].'</b></a></h4>';
                             echo '<div class="clearfix m-b-10">';
@@ -242,8 +242,8 @@ class News extends Core {
             LEFT JOIN ".DB_NEWS_CATS." nc ON n.news_cat=nc.news_cat_id
             LEFT JOIN ".DB_NEWS_IMAGES." ni ON ni.news_id=n.news_id
             LEFT JOIN ".DB_COMMENTS." c ON (c.comment_item_id = n.news_id AND c.comment_type = 'N')
-            ".(multilang_table('NS') ? "WHERE ".in_group('n.news_language', LANGUAGE)." AND " : "WHERE ").groupaccess('news_visibility')." AND (news_start='0'||news_start<='".TIME."')
-            AND (news_end='0'||news_end>='".TIME."') AND news_draft='0'
+            ".(multilang_table('NS') ? "WHERE ".in_group('n.news_language', LANGUAGE)." AND " : "WHERE ").groupaccess('news_visibility')." AND (news_start='0'||news_start<='".time()."')
+            AND (news_end='0'||news_end>='".time()."') AND news_draft='0'
             GROUP BY n.news_id
             ORDER BY n.news_reads DESC, n.news_datestamp ASC
             LIMIT 10

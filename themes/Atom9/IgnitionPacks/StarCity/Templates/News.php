@@ -20,7 +20,7 @@ namespace Atom9Theme\IgnitionPacks\StarCity\Templates;
 
 use Atom9Theme\Core;
 use Atom9Theme\Main;
-use \PHPFusion\News\NewsServer;
+use PHPFusion\News\NewsServer;
 
 class News extends Core {
     public static function displayMainNews($info) {

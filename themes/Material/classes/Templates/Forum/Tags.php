@@ -70,7 +70,7 @@ class Tags {
                         if (!empty($info['tags'])) {
                             unset($info['tags'][0]);
 
-                            foreach ($info['tags'] as $tag_id => $tag_data) {
+                            foreach ($info['tags'] as $tag_data) {
                                 echo '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">';
                                     $color = $tag_data['tag_color'];
                                     echo '<div class="panel-body" style="height: 200px; background: '.$color.';">';

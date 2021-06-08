@@ -19,8 +19,8 @@ namespace MaterialTheme\Templates;
 
 use MaterialTheme\Core;
 use MaterialTheme\Main;
-use \PHPFusion\News\NewsServer;
-use \PHPFusion\Panels;
+use PHPFusion\News\NewsServer;
+use PHPFusion\Panels;
 
 class News extends Core {
     private static function header($info, $bg = NULL) {
@@ -110,7 +110,7 @@ class News extends Core {
         if (!empty($info['news_items'])) {
             echo '<div class="card">';
                 echo '<div class="row equal-height">';
-                    foreach ($info['news_items'] as $id => $data) {
+                    foreach ($info['news_items'] as $data) {
                         $link = INFUSIONS.'news/news.php?readmore='.$data['news_id'];
 
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 m-t-15 m-b-20">';

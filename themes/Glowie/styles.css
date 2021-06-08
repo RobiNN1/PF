@@ -142,7 +142,7 @@ a {
 
 @media (min-width: 992px) {
     .header-menu #main-menu .dropdown-menu {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 }
 

@@ -63,9 +63,7 @@ class Core {
         if (!empty($settings[$col])) {
             $panel = str_replace('.php', '', $settings[$col]);
             $col = new \ReflectionClass('Atom9Theme\\Footer\\'.$panel);
-            $col = $col->newInstance()->panel();
-
-            return $col;
+            return $col->newInstance()->panel();
         }
 
         return NULL;
@@ -99,7 +97,7 @@ class Core {
                 $base_url_count--;
             }
 
-            return (in_array($match_url, $exclude_list)) ? FALSE : TRUE;
+            return !in_array($match_url, $exclude_list);
         } else {
             return TRUE;
         }

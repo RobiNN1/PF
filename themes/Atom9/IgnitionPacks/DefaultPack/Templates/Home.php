@@ -34,7 +34,6 @@ class Home extends Core {
             foreach ($content['data'] as $data) {
                 $data['db_id'] = $db_id;
                 $data['blockTitle'] = $content['blockTitle'];
-                $data['norecord'] = $content['norecord'];
                 $row[$data['datestamp']][] = $data;
             }
         }
@@ -43,7 +42,7 @@ class Home extends Core {
 
         if (!empty($row)) {
             echo '<div class="row m-0 m-b-50">';
-            foreach ($row as $time => $cdata) {
+            foreach ($row as $cdata) {
                 foreach ($cdata as $data) {
                     $css = '';
 

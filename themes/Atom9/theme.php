@@ -21,9 +21,9 @@ defined('IN_FUSION') || exit;
 require_once INCLUDES.'theme_functions_include.php';
 require_once 'theme_autoloader.php';
 
-define('THEME_BULLET', '&middot;');
-define('BOOTSTRAP', TRUE);
-define('FONTAWESOME', TRUE);
+const THEME_BULLET = '&middot;';
+const BOOTSTRAP = TRUE;
+const FONTAWESOME = TRUE;
 
 if (!defined('ATOM9_LOCALE')) {
     if (file_exists(THEME.'locale/'.LANGUAGE.'.php')) {

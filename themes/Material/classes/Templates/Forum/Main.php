@@ -18,8 +18,8 @@
 namespace MaterialTheme\Templates\Forum;
 
 use MaterialTheme\Core;
-use \PHPFusion\Forums\ForumServer;
-use \PHPFusion\Panels;
+use PHPFusion\Forums\ForumServer;
+use PHPFusion\Panels;
 
 class Main extends Core {
     public static function header() {
@@ -74,13 +74,13 @@ class Main extends Core {
         echo '</div>';
     }
 
-    private static function renderForumMain($info, $id = 0) {
+    private static function renderForumMain($info) {
         $locale = fusion_get_locale();
 
-        if (!empty($info['forums'][$id])) {
-            $forums = $info['forums'][$id];
+        if (!empty($info['forums'][0])) {
+            $forums = $info['forums'][0];
 
-            foreach ($forums as $forum_id => $data) {
+            foreach ($forums as $data) {
                 if ($data['forum_type'] == 1) {
                     echo '<div class="panel panel-primary forum-cat-panel">';
                         echo '<div class="panel-heading">';
@@ -91,11 +91,11 @@ class Main extends Core {
                             }
                         echo '</div>';
 
-                        if (isset($forums[$forum_id]['child'])) {
+                        if (isset($data['child'])) {
                             echo '<div class="list-group">';
-                                $sub_forums = $forums[$forum_id]['child'];
+                                $sub_forums = $data['child'];
 
-                                foreach ($sub_forums as $sub_forum_id => $cdata) {
+                                foreach ($sub_forums as $cdata) {
                                     echo '<div class="list-group-item clearfix">';
                                     render_forum_item($cdata);
                                     echo '</div>';
@@ -185,7 +185,7 @@ class Main extends Core {
 
                         echo '<div class="panel panel-default">';
                             echo '<div class="list-group">';
-                                foreach ($info['item'][$_GET['forum_id']]['child'] as $subforum_id => $subforum_data) {
+                                foreach ($info['item'][$_GET['forum_id']]['child'] as $subforum_data) {
                                     echo '<div class="list-group-item clearfix">';
                                         render_forum_item($subforum_data);
                                     echo '</div>';
@@ -234,7 +234,7 @@ class Main extends Core {
                         }
 
                         $i = 0;
-                        foreach ($info['item'] as $post_id => $postData) {
+                        foreach ($info['item'] as $postData) {
                             echo '<div class="panel panel-default">';
                                 echo '<div class="panel-heading">';
                                     echo display_avatar($postData['post_author'], '30px', FALSE, '', 'm-r-10');
@@ -270,7 +270,7 @@ class Main extends Core {
 
                 echo '<div class="panel panel-default">';
                     echo '<div class="list-group">';
-                    foreach ($info['subforums'] as $subforum_id => $subforum_data) {
+                    foreach ($info['subforums'] as $subforum_data) {
                         echo '<div class="list-group-item clearfix">';
                             render_forum_item($subforum_data);
                         echo '</div>';
@@ -285,7 +285,7 @@ class Main extends Core {
 
             if ($info['forum_type'] > 1 && !empty($info['filters']['type'])) {
                 echo '<ul class="nav nav-tabs m-b-10">';
-                    foreach ($info['filters']['type'] as $key => $tab) {
+                    foreach ($info['filters']['type'] as $tab) {
                         $active = $tab['active'] == 1 ? ' class="active"' : '';
                         echo '<li'.$active.'><a href="'.$tab['link'].'">'.$tab['icon'].''.$tab['title'].' <span class="badge">'.$tab['count'].'</span></a></li>';
                     }
@@ -431,8 +431,8 @@ class Main extends Core {
             ".(multilang_column('FO') ? " WHERE forum_language='".LANGUAGE."' AND " : " WHERE ").groupaccess('forum_access')." AND (t.thread_lastpost >=:one_week AND t.thread_lastpost < :current) AND t.thread_locked=:not_locked AND t.thread_hidden=:not_hidden
             GROUP BY t.thread_id ORDER BY t.thread_postcount DESC LIMIT 10
         ", [
-            ':one_week'   => TIME - (7 * 24 * 3600),
-            ':current'    => TIME,
+            ':one_week'   => time() - (7 * 24 * 3600),
+            ':current'    => time(),
             ':not_locked' => 0,
             ':not_hidden' => 0
         ]);

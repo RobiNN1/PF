@@ -21,10 +21,10 @@ defined('IN_FUSION') || exit;
 require_once INCLUDES.'theme_functions_include.php';
 require_once 'theme_autoloader.php';
 
-define('THEME_BULLET', '&middot;');
-define('BOOTSTRAP', TRUE);
-define('FONTAWESOME', TRUE);
-define('SOCIAL_SHARE', TRUE); // Set FALSE to turn Off, used only in News
+const THEME_BULLET = '&middot;';
+const BOOTSTRAP = TRUE;
+const FONTAWESOME = TRUE;
+const SOCIAL_SHARE = TRUE; // Set FALSE to turn Off, used only in News
 
 // Uncomment and edit, if you want show social networks in right top
 /*define('ATOMX_SOCIAL_NETWORKS', [
@@ -74,7 +74,7 @@ function render_page() {
     cache_users();
 
     $atom = new AtomXTheme\Main;
-    echo $atom->renderPage();
+    $atom->renderPage();
 }
 
 function opentable($title = FALSE, $class = '') {

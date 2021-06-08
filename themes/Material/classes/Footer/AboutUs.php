@@ -30,7 +30,7 @@ class AboutUs extends Core {
         echo $settings['description'];
         echo '<br/>';
 
-        echo nl2br(parse_textarea($settings['footer'], FALSE, TRUE));
+        echo nl2br(parse_textarea($settings['footer'], FALSE));
 
         if ($settings['visitorcounter_enabled']) {
             echo '<br/>';

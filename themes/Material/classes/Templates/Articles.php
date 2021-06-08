@@ -19,8 +19,8 @@ namespace MaterialTheme\Templates;
 
 use MaterialTheme\Core;
 use MaterialTheme\Main;
-use \PHPFusion\Articles\ArticlesServer;
-use \PHPFusion\Panels;
+use PHPFusion\Articles\ArticlesServer;
+use PHPFusion\Panels;
 
 class Articles extends Core {
     private static $show_num_of_items = FALSE; // Set TRUE to show number of items in categories
@@ -47,7 +47,7 @@ class Articles extends Core {
         self::header($info);
 
         if (!empty($info['article_items'])) {
-            foreach ($info['article_items'] as $article_id => $data) {
+            foreach ($info['article_items'] as $data) {
                 echo '<div class="card article-item">';
                     echo '<div class="overflow-hide">';
                         echo '<span class="pull-right"><a class="label label-primary p-5" href="'.INFUSIONS.'articles/articles.php?cat_id='.$data['article_cat_id'].'">'.$data['article_cat_name'].'</a></span>';

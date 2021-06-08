@@ -19,7 +19,7 @@
 namespace AtomX2Theme\Templates;
 
 use AtomX2Theme\Core;
-use \PHPFusion\Panels;
+use PHPFusion\Panels;
 
 class Downloads extends Core {
     public static function renderRownloads($info) {
@@ -68,7 +68,7 @@ class Downloads extends Core {
 
         if (!empty($info['download_item'])) {
             echo '<div class="row m-b-10 m-l-0 m-r-0">';
-                foreach ($info['download_item'] as $download_id => $data) {
+                foreach ($info['download_item'] as $data) {
                     echo '<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 m-b-20 p-l-5 p-r-5" style="height: 230px;">';
                         echo '<div class="item-container">';
                             $link = DOWNLOADS.'downloads.php?cat_id='.$data['download_cat_id'].'&download_id='.$data['download_id'];

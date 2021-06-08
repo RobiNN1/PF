@@ -24,5 +24,5 @@ $theme_screenshot = 'screenshot.png';
 $theme_author = 'PHP Fusion Inc & RobiNN';
 $theme_web = 'https://phpfusion.com';
 $theme_license = 'AGPL3';
-$theme_version = '1.5.1';
+$theme_version = '1.5.2';
 $theme_folder = 'Atom-X2';

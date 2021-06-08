@@ -19,7 +19,7 @@
 namespace AtomXTheme;
 
 use PHPFusion\Panels;
-use \PHPFusion\SiteLinks;
+use PHPFusion\SiteLinks;
 
 class Main extends Core {
     public function renderPage() {
@@ -133,7 +133,7 @@ class Main extends Core {
 
                 echo '<div class="row">';
                     echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">';
-                        echo nl2br(parse_textarea($this->settings['footer'], FALSE, TRUE));
+                        echo nl2br(parse_textarea($this->settings['footer'], FALSE));
                         echo '<br>';
                         echo self::themeCopyright();
                     echo '</div>';
