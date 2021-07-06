@@ -290,6 +290,12 @@ class Main extends Core {
                         echo '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">'.self::getFooterPanel('footer_col_4').'</div>';
                     echo '</div>';
                 }
+
+                if (empty(get_theme_settings('Material'))) {
+                    echo '<div class="p-10 text-center">';
+                        echo nl2br(parse_textarea($settings['footer'], FALSE));
+                    echo '</div>';
+                }
             echo '</div>';
 
             echo '<div id="footer">';
