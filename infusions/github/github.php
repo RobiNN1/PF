@@ -454,7 +454,9 @@ if ($rate_limit > 2) {
 
                     echo '<li class="m-t-5 m-b-5">';
                         echo '<div><a target="_blank" style="font-weight: 700;" href="'.$commit['html_url'].'">'.$commit_title.'</a>'.$commit_desc.'</div>';
-                        echo '<a target="_blank" href="'.$commit['author']['html_url'].'"><div class="display-inline-block img-responsive pull-left m-r-5"><img style="width: 25px;height: 25px;" alt="'.$commit_author.'" src="'.$commit['author']['avatar_url'].'"/></div></a>';
+                        if (!empty($commit['author']['html_url'])) {
+                            echo '<a target="_blank" href="'.$commit['author']['html_url'].'"><div class="display-inline-block img-responsive pull-left m-r-5"><img style="width: 25px;height: 25px;" alt="'.$commit_author.'" src="'.$commit['author']['avatar_url'].'"></div></a>';
+                        }
                         echo '<div class="display-inline">';
                             echo '<a target="_blank" style="margin-bottom: -7px;" data-toggle="tooltip" title="View all commits by '.$commit_author.'" href="https://github.com/'.$repo['full_name'].'/commits?author='.$commit_author.'">'.$commit_author.'</a>';
                             echo ' <span>'.$locale['gh_038'].' '.timer($timestamp).'</span>';
