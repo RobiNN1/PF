@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1537ed3cc9ea69b2d0b9a810fd24cfba",
     "packages": [
         {
             "name": "austinb/gameq",
             "version": "v3.0.15",
-            "version_normalized": "3.0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Austinb/GameQ.git",
@@ -29,9 +34,7 @@
                 "phpunit/phpunit": "^4.8 || ^6.0 || ^7.0",
                 "squizlabs/php_codesniffer": "3.*@stable"
             },
-            "time": "2020-02-26T03:50:36+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GameQ\\": "src/GameQ/"
@@ -92,12 +95,11 @@
                     "type": "custom"
                 }
             ],
-            "install-path": "../austinb/gameq"
+            "time": "2020-02-26T03:50:36+00:00"
         },
         {
             "name": "phpfastcache/phpfastcache",
             "version": "8.0.6",
-            "version_normalized": "8.0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
@@ -140,9 +142,7 @@
                 "phpfastcache/riak-client": "~1.4.4",
                 "predis/predis": "~1.1.0"
             },
-            "time": "2021-07-07T14:21:56+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Phpfastcache\\": "lib/Phpfastcache/"
@@ -212,12 +212,11 @@
                     "type": "patreon"
                 }
             ],
-            "install-path": "../phpfastcache/phpfastcache"
+            "time": "2021-07-07T14:21:56+00:00"
         },
         {
             "name": "psr/cache",
             "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
@@ -232,14 +231,12 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2016-08-06T20:24:11+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Cache\\": "src/"
@@ -264,12 +261,11 @@
             "support": {
                 "source": "https://github.com/php-fig/cache/tree/master"
             },
-            "install-path": "../psr/cache"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/simple-cache",
             "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
@@ -284,14 +280,12 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2017-10-23T01:57:42+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\SimpleCache\\": "src/"
@@ -318,9 +312,18 @@
             "support": {
                 "source": "https://github.com/php-fig/simple-cache/tree/master"
             },
-            "install-path": "../psr/simple-cache"
+            "time": "2017-10-23T01:57:42+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7 || ^8"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

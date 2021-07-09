@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '63e3b0ae3aaacdf32f1958c57eb86dcfd6d52b8c',
+    'reference' => '94c20676785947ae56b9c469d034843eea428c47',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '63e3b0ae3aaacdf32f1958c57eb86dcfd6d52b8c',
+      'reference' => '94c20676785947ae56b9c469d034843eea428c47',
     ),
     'austinb/gameq' => 
     array (
@@ -31,12 +31,12 @@
     ),
     'phpfastcache/phpfastcache' => 
     array (
-      'pretty_version' => '8.0.4',
-      'version' => '8.0.4.0',
+      'pretty_version' => '8.0.6',
+      'version' => '8.0.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9',
+      'reference' => 'c93bd7d341176b64b428953365ef67002af9f61e',
     ),
     'psr/cache' => 
     array (
