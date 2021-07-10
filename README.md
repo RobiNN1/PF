@@ -15,6 +15,7 @@ This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "
 - [Czechia](themes/Czechia)
 - [Glowie](themes/Glowie)
 - [Material](themes/Material)
+- [MineFusion](themes/MineFusion)
 
 ## Admin Themes
 - [AdminLTE3](admin_themes/AdminLTE3)
