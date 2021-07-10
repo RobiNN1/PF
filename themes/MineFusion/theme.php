@@ -166,8 +166,13 @@ function closeside() {
     echo '</div>';
 }
 
+if (method_exists(PHPFusion\HomePage::class, 'setLimit')) { // Function works only in v9.10 and newer
+    PHPFusion\HomePage::setLimit(10); // Here you can change number of items
+}
+
 function display_home($info) {
     if (!empty($info)) {
+        // You can delete this statement to show all modules
         if (
             (defined('ARTICLES_EXISTS') && !empty($info[DB_ARTICLES])) ||
             (defined('BLOG_EXISTS') && !empty($info[DB_BLOG])) ||
