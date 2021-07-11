@@ -134,7 +134,7 @@ function render_page() {
                 echo showrendertime().showMemoryUsage().'<br>';
             }
 
-            echo parse_text($settings['footer'], ['parse_smileys' => FALSE, 'add_line_breaks' => TRUE]);
+            echo nl2br(parse_textarea($settings['footer'], FALSE));
 
             echo '<br>'.showcopyright('', TRUE).showprivacypolicy();
 
