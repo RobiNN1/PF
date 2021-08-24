@@ -24,7 +24,7 @@ add_to_title($locale['vid_076']);
 
 opentable('<i class="fa fa-play fa-lg fa-fw"></i>'.$locale['vid_076']);
 
-if (iMEMBER && $video_settings['video_allow_submission']) {
+if (iMEMBER && $video_settings['video_allow_submission'] && checkgroup($video_settings['video_submission_access'])) {
     $criteria_array = [
         'video_cat'         => 0,
         'video_title'       => '',
@@ -94,7 +94,7 @@ if (iMEMBER && $video_settings['video_allow_submission']) {
 
             dbquery_insert(DB_SUBMISSIONS, $input_array, 'save');
             addNotice('success', $locale['vid_079']);
-            redirect(clean_request('submitted=v', ['stype'], TRUE));
+            redirect(clean_request('submitted=v', ['stype']));
         }
     }
 
@@ -238,7 +238,7 @@ if (iMEMBER && $video_settings['video_allow_submission']) {
                         'inline'     => TRUE,
                         'error_text' => $locale['vid_025'],
                         'maxlength'  => '255',
-                        'autosize'   => fusion_get_settings('tinymce_enabled') ? FALSE : TRUE
+                        'autosize'   => !fusion_get_settings('tinymce_enabled')
                     ]);
                 echo closetabbody();
             echo closetab();

@@ -171,8 +171,8 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                             'form_name' => 'inputform',
                             'type'      => fusion_get_settings('tinymce_enabled') ? 'tinymce' : 'html',
                             'tinymce'   => fusion_get_settings('tinymce_enabled') ? 'simple' : '',
-                            'autosize'  => fusion_get_settings('tinymce_enabled') ? FALSE : TRUE,
-                            'preview'   => fusion_get_settings('tinymce_enabled') ? FALSE : TRUE,
+                            'autosize'  => !fusion_get_settings('tinymce_enabled'),
+                            'preview'   => !fusion_get_settings('tinymce_enabled'),
                             'height'    => '300px'
                         ]);
                         closeside();
@@ -202,18 +202,18 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                                     echo '<strong>'.$locale['vid_021'].'</strong>';
                                     echo '<a class="btn btn-default" href="'.VIDEOS.'submissions/'.$callback_data['video_file'].'">../'.$callback_data['video_file'].'</a>';
                                     echo form_hidden('video_file', '', $callback_data['video_file']);
-                                    echo form_hidden('video_url', '', '');
-                                    echo form_hidden('video_embed', '', '');
+                                    echo form_hidden('video_url');
+                                    echo form_hidden('video_embed');
                                 } else if (!empty($callback_data['video_url'])) {
                                     echo '<strong>'.$locale['vid_019'].'</strong>';
                                     echo form_text('video_url', '', $callback_data['video_url']);
-                                    echo form_hidden('video_file', '', '');
-                                    echo form_hidden('video_embed', '', '');
+                                    echo form_hidden('video_file');
+                                    echo form_hidden('video_embed');
                                 } else {
                                     echo '<strong>'.$locale['vid_020'].'</strong>';
                                     echo form_textarea('video_embed', '', $callback_data['video_embed']);
-                                    echo form_hidden('video_file', '', '');
-                                    echo form_hidden('video_url', '', '');
+                                    echo form_hidden('video_file');
+                                    echo form_hidden('video_url');
                                 }
                             echo '</div>';
                         echo '</div>';
@@ -291,7 +291,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                         echo '<td>'.$callback_data['submit_id'].'</td>';
                         echo '<td>'.display_avatar($callback_data, '20px', '', TRUE, 'img-rounded m-r-5').profile_link($callback_data['user_id'], $callback_data['user_name'], $callback_data['user_status']).'</td>';
                         echo '<td>'.timer($callback_data['submit_datestamp']).'</td>';
-                        echo '<td><a href="'.clean_request('submit_id='.$callback_data['submit_id'], ['section', 'aid'], TRUE).'">'.$submit_criteria['video_title'].'</a></td>';
+                        echo '<td><a href="'.clean_request('submit_id='.$callback_data['submit_id'], ['section', 'aid']).'">'.$submit_criteria['video_title'].'</a></td>';
                     echo '</tr>';
                 }
             echo '</tbody>';

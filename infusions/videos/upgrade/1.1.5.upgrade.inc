@@ -4,7 +4,7 @@
 | Copyright (C) PHP Fusion Inc
 | https://phpfusion.com/
 +--------------------------------------------------------+
-| Filename: 1.1.4.upgrade.inc
+| Filename: 1.1.5.upgrade.inc
 | Author: RobiNN
 +--------------------------------------------------------+
 | This program is released as free software under the
@@ -15,7 +15,7 @@
 | copyright header is strictly prohibited without
 | written permission from the original author(s).
 +--------------------------------------------------------*/
-$inf_version = '1.1.4';
+$inf_version = '1.1.5';
 
 $dbvideos = [
     'video_allow_likes' => " ADD video_allow_likes TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER video_allow_ratings"
@@ -38,7 +38,8 @@ foreach ($db_vid_cats as $key => $value) {
 }
 
 $db_vid_settings = [
-    'video_allow_likes' => 1
+    'video_allow_likes'       => 1,
+    'video_submission_access' => USER_LEVEL_MEMBER
 ];
 
 $settings = get_settings('videos');

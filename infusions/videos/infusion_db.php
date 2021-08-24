@@ -41,6 +41,10 @@ if (!defined('DB_VIDEO_CATS')) {
     define('DB_VIDEO_CATS', DB_PREFIX.'video_cats');
 }
 
+if (!defined('IS_V910')) {
+    define("IS_V910", (bool)version_compare(fusion_get_settings('version'), '9.03', (strpos(fusion_get_settings('version'), '9.10') === 0 ? '>' : '<')));
+}
+
 // Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('VID', '<i class="admin-ico fa fa-fw fa-play"></i>');
 \PHPFusion\Admins::getInstance()->setCommentType('VID', fusion_get_locale('vid_title', VID_LOCALE));

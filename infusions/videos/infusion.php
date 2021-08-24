@@ -20,14 +20,14 @@ defined('IN_FUSION') || exit;
 $locale = fusion_get_locale('', VID_LOCALE);
 
 // Infusion general information
-$inf_title       = $locale['vid_title'];
+$inf_title = $locale['vid_title'];
 $inf_description = $locale['vid_desc'];
-$inf_version     = '1.1.4';
-$inf_developer   = 'RobiNN';
-$inf_email       = 'robinn@php-fusion.eu';
-$inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'videos';
-$inf_image       = 'videos.svg';
+$inf_version = '1.1.5';
+$inf_developer = 'RobiNN';
+$inf_email = 'robinn@php-fusion.eu';
+$inf_weburl = 'https://github.com/RobiNN1';
+$inf_folder = 'videos';
+$inf_image = 'videos.svg';
 
 // Create tables
 $inf_newtable[] = DB_VIDEOS." (
@@ -81,14 +81,15 @@ $inf_insertdbrow[] = DB_PANELS." (panel_name, panel_filename, panel_content, pan
 
 // Insert settings
 $settings = [
-    'video_max_b'            => 52428800,
-    'video_types'            => '.flv,.mp4,.mov,.avi',
-    'video_screen_max_b'     => 153600,
-    'video_screen_max_w'     => 1024,
-    'video_screen_max_h'     => 768,
-    'video_pagination'       => 15,
-    'video_allow_submission' => 1,
-    'video_allow_likes'      => 1
+    'video_max_b'             => 52428800,
+    'video_types'             => '.flv,.mp4,.mov,.avi',
+    'video_screen_max_b'      => 153600,
+    'video_screen_max_w'      => 1024,
+    'video_screen_max_h'      => 768,
+    'video_pagination'        => 15,
+    'video_allow_submission'  => 1,
+    'video_allow_likes'       => 1,
+    'video_submission_access' => USER_LEVEL_MEMBER
 ];
 
 foreach ($settings as $name => $value) {

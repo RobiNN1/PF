@@ -19,6 +19,7 @@ defined('IN_FUSION') || exit;
 
 $locale = fusion_get_locale();
 $aidlink = fusion_get_aidlink();
+$video_settings = get_settings('videos');
 
 $data = [
     'video_id'             => 0,
@@ -87,7 +88,7 @@ if (isset($_POST['save_video'])) {
         'video_description'    => form_sanitizer($_POST['video_description'], '', 'video_description'),
         'video_keywords'       => form_sanitizer($_POST['video_keywords'], '', 'video_keywords'),
         'video_length'         => form_sanitizer($_POST['video_length'], '', 'video_length'),
-        'video_datestamp'      => isset($_POST['update_datestamp']) || empty($_POST['video_datestamp']) ? TIME : $_POST['video_datestamp'],
+        'video_datestamp'      => isset($_POST['update_datestamp']) || empty($_POST['video_datestamp']) ? time() : $_POST['video_datestamp'],
         'video_visibility'     => form_sanitizer($_POST['video_visibility'], 0, 'video_visibility'),
         'video_type'           => form_sanitizer($_POST['video_type'], '', 'video_type'),
         'video_file'           => isset($_POST['video_file']) ? form_sanitizer($_POST['video_file'], '', 'video_file') : '',
@@ -277,12 +278,12 @@ echo '<div class="row">';
                         // 'required'    => TRUE,
                         'width'       => '100%',
                         'upload_path' => VIDEOS.'videos/',
-                        'max_byte'    => $this->video_settings['video_max_b'],
-                        'valid_ext'   => $this->video_settings['video_types'],
+                        'max_byte'    => $video_settings['video_max_b'],
+                        'valid_ext'   => $video_settings['video_types'],
                         'error_text'  => $locale['vid_022'],
                         'type'        => 'video',
                         'preview_off' => TRUE,
-                        'ext_tip'     => sprintf($locale['vid_023'], parsebytesize($this->video_settings['video_max_b']), str_replace(',', ' ', $this->video_settings['video_types']))
+                        'ext_tip'     => sprintf($locale['vid_023'], parsebytesize($video_settings['video_max_b']), str_replace(',', ' ', $video_settings['video_types']))
                     ]);
                 }
             echo closetabbody();
@@ -308,11 +309,10 @@ echo '<div class="row">';
             echo opentabbody($tab_video_type['title'][2], $tab_video_type['id'][2], $tab_video_type_active);
                 if (empty($data['video_file'])) {
                     echo form_textarea('video_embed', $locale['vid_020'], $data['video_embed'], [
-                        // 'required'   => TRUE,
                         'inline'     => TRUE,
                         'error_text' => $locale['vid_025'],
                         'maxlength'  => '255',
-                        'autosize'   => fusion_get_settings('tinymce_enabled') ? FALSE : TRUE
+                        'autosize'   => !fusion_get_settings('tinymce_enabled')
                     ]);
                 } else {
                     echo form_hidden('video_embed', '', $data['video_embed']);
@@ -336,15 +336,15 @@ echo '<div class="row">';
             require_once INCLUDES.'mimetypes_include.php';
             echo form_fileinput('video_image', $locale['vid_015'], '', [
                 'upload_path'     => VIDEOS.'images/',
-                'max_width'       => $this->video_settings['video_screen_max_w'],
-                'max_height'      => $this->video_settings['video_screen_max_w'],
-                'max_byte'        => $this->video_settings['video_screen_max_b'],
+                'max_width'       => $video_settings['video_screen_max_w'],
+                'max_height'      => $video_settings['video_screen_max_w'],
+                'max_byte'        => $video_settings['video_screen_max_b'],
                 'type'            => 'image',
                 'delete_original' => FALSE,
                 'width'           => '100%',
                 'inline'          => TRUE,
                 'template'        => 'thumbnail',
-                'ext_tip'         => sprintf($locale['vid_016'], parsebytesize($this->video_settings['video_screen_max_b']), str_replace(',', ' ', '.jpg,.gif,.png'), $this->video_settings['video_screen_max_w'], $this->video_settings['video_screen_max_h']).'<br/>'.$locale['vid_015a']
+                'ext_tip'         => sprintf($locale['vid_016'], parsebytesize($video_settings['video_screen_max_b']), str_replace(',', ' ', '.jpg,.gif,.png'), $video_settings['video_screen_max_w'], $video_settings['video_screen_max_h']).'<br/>'.$locale['vid_015a']
             ]);
         }
 

@@ -19,7 +19,7 @@ namespace PHPFusion\Search;
 
 defined('IN_FUSION') || exit;
 
-if (db_exists(DB_VIDEOS)) {
+if (defined('VIDEOS_EXISTS')) {
     $form_elements = &$form_elements;
     $radio_button = &$radio_button;
 

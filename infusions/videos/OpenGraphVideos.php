@@ -26,7 +26,7 @@ class OpenGraphVideos extends \PHPFusion\OpenGraph {
         if (dbrows($result)) {
             $data = dbarray($result);
             $info['url'] = $settings['siteurl'].'infusions/videos/videos.php?video_id='.$video_id;
-            $info['keywords'] = $data['video_keywords'] ? $data['video_keywords'] : $settings['keywords'];
+            $info['keywords'] = !empty($data['video_keywords']) ? $data['video_keywords'] : $settings['keywords'];
             $info['title'] = $data['video_title'].' - '.$settings['sitename'];
             $info['description'] = $data['video_description'] ? fusion_first_words(strip_tags(html_entity_decode($data['video_description'])), 50) : $settings['description'];
             $info['type'] = 'video.movie';

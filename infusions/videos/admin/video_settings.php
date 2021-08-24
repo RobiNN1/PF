@@ -18,17 +18,19 @@
 defined('IN_FUSION') || exit;
 
 $locale = fusion_get_locale();
+$video_settings = get_settings('videos');
 
 if (isset($_POST['savesettings'])) {
     $settings = [
-        'video_max_b'            => form_sanitizer($_POST['calc_b'], 52428800, 'calc_b') * form_sanitizer($_POST['calc_c'], 1, 'calc_c'),
-        'video_types'            => form_sanitizer($_POST['video_types'], '.flv,.mp4,.mov,.f4v,.3gp,.3g2,.mp3,.flac', 'video_types'),
-        'video_screen_max_b'     => form_sanitizer($_POST['calc_bb'], 153600, 'calc_bb') * form_sanitizer($_POST['calc_cc'], 1, 'calc_cc'),
-        'video_screen_max_w'     => form_sanitizer($_POST['video_screen_max_w'], 1024, 'video_screen_max_w'),
-        'video_screen_max_h'     => form_sanitizer($_POST['video_screen_max_h'], 768, 'video_screen_max_h'),
-        'video_pagination'       => form_sanitizer($_POST['video_pagination'], 15, 'video_pagination'),
-        'video_allow_submission' => form_sanitizer($_POST['video_allow_submission'], 0, 'video_allow_submission'),
-        'video_allow_likes'      => form_sanitizer($_POST['video_allow_likes'], 0, 'video_allow_likes')
+        'video_max_b'             => form_sanitizer($_POST['calc_b'], 52428800, 'calc_b') * form_sanitizer($_POST['calc_c'], 1, 'calc_c'),
+        'video_types'             => form_sanitizer($_POST['video_types'], '.flv,.mp4,.mov,.f4v,.3gp,.3g2,.mp3,.flac', 'video_types'),
+        'video_screen_max_b'      => form_sanitizer($_POST['calc_bb'], 153600, 'calc_bb') * form_sanitizer($_POST['calc_cc'], 1, 'calc_cc'),
+        'video_screen_max_w'      => form_sanitizer($_POST['video_screen_max_w'], 1024, 'video_screen_max_w'),
+        'video_screen_max_h'      => form_sanitizer($_POST['video_screen_max_h'], 768, 'video_screen_max_h'),
+        'video_pagination'        => form_sanitizer($_POST['video_pagination'], 15, 'video_pagination'),
+        'video_allow_submission'  => form_sanitizer($_POST['video_allow_submission'], 0, 'video_allow_submission'),
+        'video_allow_likes'       => form_sanitizer($_POST['video_allow_likes'], 0, 'video_allow_likes'),
+        'video_submission_access' => form_sanitizer($_POST['video_submission_access'], USER_LEVEL_MEMBER, 'video_submission_access')
     ];
 
     if (\defender::safe()) {
@@ -50,10 +52,10 @@ if (isset($_POST['savesettings'])) {
 }
 
 $calc_opts = fusion_get_locale('1020', LOCALE.LOCALESET.'admin/settings.php');
-$calc_c = calculate_byte($this->video_settings['video_max_b']);
-$calc_b = $this->video_settings['video_max_b'] / $calc_c;
-$calc_cc = calculate_byte($this->video_settings['video_screen_max_b']);
-$calc_bb = $this->video_settings['video_screen_max_b'] / $calc_cc;
+$calc_c = calculate_byte($video_settings['video_max_b']);
+$calc_b = $video_settings['video_max_b'] / $calc_c;
+$calc_cc = calculate_byte($video_settings['video_screen_max_b']);
+$calc_bb = $video_settings['video_screen_max_b'] / $calc_cc;
 
 echo '<div class="well m-t-10">'.$locale['vid_059'].'</div>';
 
@@ -61,7 +63,7 @@ echo openform('settingsform', 'post', FUSION_REQUEST);
 echo '<div class="row">';
     echo '<div class="col-xs-12 col-sm-8">';
         openside('');
-        echo form_text('video_pagination', $locale['vid_060'], $this->video_settings['video_pagination'], [
+        echo form_text('video_pagination', $locale['vid_060'], $video_settings['video_pagination'], [
             'max_length'  => 4,
             'type'        => 'number',
             'inline'      => TRUE,
@@ -74,14 +76,14 @@ echo '<div class="row">';
             echo '<div class="display-block overflow-hide">';
                 echo '<label class="control-label col-xs-12 col-sm-3 col-md-3 col-lg-3 p-l-0" for="video_screen_max_w">'.$locale['vid_061'].'</label>';
                 echo '<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">';
-                    echo form_text('video_screen_max_w', '', $this->video_settings['video_screen_max_w'], [
+                    echo form_text('video_screen_max_w', '', $video_settings['video_screen_max_w'], [
                         'class'      => 'pull-left',
                         'max_length' => 4,
                         'type'       => 'number',
                         'width'      => '150px'
                     ]);
                     echo '<i class="fa fa-close pull-left m-r-5 m-l-5 m-t-10"></i>';
-                    echo form_text('video_screen_max_h', '', $this->video_settings['video_screen_max_h'], [
+                    echo form_text('video_screen_max_h', '', $video_settings['video_screen_max_h'], [
                         'class'      => 'pull-left',
                         'max_length' => 4,
                         'type'       => 'number',
@@ -137,12 +139,20 @@ echo '<div class="row">';
 
     echo '<div class="col-xs-12 col-sm-4">';
         openside('');
-        echo form_select('video_allow_submission', $locale['vid_065'], $this->video_settings['video_allow_submission'], [
+        echo form_select('video_allow_submission', $locale['vid_065'], $video_settings['video_allow_submission'], [
             'inline'  => TRUE,
             'options' => [$locale['disable'], $locale['enable']]
         ]);
 
-        echo form_select('video_allow_likes', $locale['vid_083'], $this->video_settings['video_allow_likes'], [
+        if (IS_V910) {
+            echo form_select('video_submission_access[]', $locale['submit_access'], $video_settings['video_submission_access'], [
+                'inline'   => TRUE,
+                'options'  => fusion_get_groups([USER_LEVEL_PUBLIC]),
+                'multiple' => TRUE,
+            ]);
+        }
+
+        echo form_select('video_allow_likes', $locale['vid_083'], $video_settings['video_allow_likes'], [
             'inline'  => TRUE,
             'options' => [$locale['disable'], $locale['enable']]
         ]);
@@ -157,7 +167,7 @@ echo '<div class="row">';
         }
 
         openside();
-        echo form_select('video_types[]', $locale['vid_066'], $this->video_settings['video_types'], [
+        echo form_select('video_types[]', $locale['vid_066'], $video_settings['video_types'], [
             'options'     => $mime_opts,
             'input_id'    => 'vdtype',
             'placeholder' => $locale['choose'],

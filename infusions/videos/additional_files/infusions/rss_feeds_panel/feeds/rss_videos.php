@@ -45,10 +45,10 @@ if (db_exists(DB_VIDEOS) && db_exists(DB_VIDEO_CATS)) {
 
         if (dbrows($result) != 0) {
             while ($data = dbarray($result)) {
-                $rss->AddItem($data['video_title'], $settings['siteurl'].'infusions/videos/videos.php?video_id='.$data['video_id'], $data['video_description']);
+                $rss->addItem($data['video_title'], $settings['siteurl'].'infusions/videos/videos.php?video_id='.$data['video_id'], $data['video_description']);
             }
         } else {
-            $rss->AddItem($settings['sitename'].' - '.fusion_get_locale('vid_title', VID_LOCALE), $settings['siteurl'], $locale['rss_nodata']);
+            $rss->addItem($settings['sitename'].' - '.fusion_get_locale('vid_title', VID_LOCALE), $settings['siteurl'], $locale['rss_nodata']);
         }
 
         $rss->Write();

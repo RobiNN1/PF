@@ -106,7 +106,7 @@ if (!function_exists('display_video_index')) {
         if (!empty($info['video_item'])) {
             echo '<div class="row equal-height">';
 
-            foreach ($info['video_item'] as $video_id => $data) {
+            foreach ($info['video_item'] as $data) {
                 echo '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
                     echo '<article class="item">';
                         echo '<figure class="thumb">';
@@ -187,7 +187,7 @@ if (!function_exists('display_video_menu')) {
         openside($locale['vid_073']);
             echo '<ul class="block">';
             if (!empty($info['video_author'])) {
-                foreach ($info['video_author'] as $author_id => $author_info) {
+                foreach ($info['video_author'] as $author_info) {
                     echo '<li'.($author_info['active'] ? ' class="active strong"' : '').'>';
                         echo '<a href="'.$author_info['link'].'">'.$author_info['title'].'</a> <span class="badge m-l-10">'.$author_info['count'].'</span>';
                     echo '</li>';

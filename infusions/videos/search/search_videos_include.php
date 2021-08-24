@@ -18,16 +18,14 @@
 namespace PHPFusion\Search;
 
 use PHPFusion\ImageRepo;
-use PHPFusion\Search;
 
 defined('IN_FUSION') || exit;
 
-if (db_exists(DB_VIDEOS)) {
+if (defined('VIDEOS_EXISTS')) {
     $formatted_result = '';
-    $settings = fusion_get_settings();
     $locale = fusion_get_locale('', INFUSIONS.'videos/locale/'.LOCALESET.'search/videos.php');
     $item_count = '0 '.$locale['v400'].' '.$locale['522'].'<br/>';
-    $date_search = (Search_Engine::get_param('datelimit') != 0 ? ' AND video_datestamp>='.(TIME - Search_Engine::get_param('datelimit')) : '');
+    $date_search = (Search_Engine::get_param('datelimit') != 0 ? ' AND video_datestamp>='.(time() - Search_Engine::get_param('datelimit')) : '');
 
     if (Search_Engine::get_param('stype') == 'videos' || Search_Engine::get_param('stype') == 'all') {
         $sort_by = [
@@ -88,8 +86,6 @@ if (db_exists(DB_VIDEOS)) {
                 $text_all = $data['video_description'];
                 $text_all = Search_Engine::search_striphtmlbbcodes($text_all);
                 $text_frag = Search_Engine::search_textfrag($text_all);
-                $subj_c = Search_Engine::search_stringscount($data['video_title']);
-                $text_c = Search_Engine::search_stringscount($data['video_description']);
 
                 $context = '';
                 if ($text_frag != '') {
@@ -100,25 +96,42 @@ if (db_exists(DB_VIDEOS)) {
                 $meta .= ' | <span class="alt">'.$locale['v403'].'</span> '.showdate('%d.%m.%y', $data['video_datestamp']).' | ';
                 $meta .= '<span class="alt">'.$locale['v404'].'</span> '.$data['video_views'].'</span>';
 
-                $search_result .= strtr(Search::render_search_item(), [
+                if (!IS_V910) {
+                    $search_result .= strtr(\PHPFusion\Search::render_search_item(), [
                         '{%item_url%}'             => VIDEOS.'videos.php?cat_id='.$data['video_cat'].'&video_id='.$data['video_id'].'&sref=search',
                         '{%item_image%}'           => '<i class="fa fa-play fa-lg"></i>',
                         '{%item_title%}'           => $data['video_title'],
                         '{%item_description%}'     => $meta,
                         '{%item_search_criteria%}' => '',
                         '{%item_search_context%}'  => $context
-                    ]
-                );
+                    ]);
+                } else {
+                    $search_result .= render_search_item([
+                        'item_url'             => VIDEOS.'videos.php?cat_id='.$data['video_cat'].'&video_id='.$data['video_id'].'&sref=search',
+                        'item_image'           => '<i class="fa fa-play fa-lg"></i>',
+                        'item_title'           => $data['video_title'],
+                        'item_description'     => $meta,
+                    ]);
+                }
             }
 
-            // Pass strings for theme developers
-            $formatted_result = strtr(Search::render_search_item_wrapper(), [
-                '{%image%}'          => '<img src="'.ImageRepo::getimage('ac_VID').'" alt="'.$locale['v400'].'" style="width:32px;"/>',
-                '{%icon_class%}'     => 'fa fa-cloud-video fa-lg fa-fw',
-                '{%search_title%}'   => $locale['v400'],
-                '{%search_result%}'  => $item_count,
-                '{%search_content%}' => $search_result
-            ]);
+            if (!IS_V910) {
+                $formatted_result = strtr(PHPFusion\Search::render_search_item_wrapper(), [
+                    '{%image%}'          => '<img src="'.ImageRepo::getimage('ac_VID').'" alt="'.$locale['v400'].'" style="width:32px;"/>',
+                    '{%icon_class%}'     => 'fa fa-cloud-video fa-lg fa-fw',
+                    '{%search_title%}'   => $locale['v400'],
+                    '{%search_result%}'  => $item_count,
+                    '{%search_content%}' => $search_result
+                ]);
+            } else {
+                $formatted_result =render_search_item_wrapper([
+                    'image'          => '<img src="'.ImageRepo::getimage('ac_VID').'" alt="'.$locale['v400'].'" style="width:32px;"/>',
+                    'icon_class'     => 'fa fa-cloud-video fa-lg fa-fw',
+                    'search_title'   => $locale['v400'],
+                    'search_result'  => $item_count,
+                    'search_content' => $search_result
+                ]);
+            }
         }
 
         Search_Engine::search_navigation($rows);

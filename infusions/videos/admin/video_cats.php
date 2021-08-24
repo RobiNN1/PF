@@ -35,12 +35,12 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
         || dbcount("(video_cat_id)", DB_VIDEO_CATS, "video_cat_parent='".intval($_GET['cat_id'])."'")
     ) {
         addNotice('danger', $locale['vid_032']);
-        redirect(clean_request('cat_view=1', ['section', 'aid'], TRUE));
+        redirect(clean_request('cat_view=1', ['section', 'aid']));
     } else {
 
         dbquery("DELETE FROM ".DB_VIDEO_CATS." WHERE video_cat_id='".intval($_GET['cat_id'])."'");
         addNotice('success', $locale['vid_notice_05']);
-        redirect(clean_request('cat_view=1', ['section', 'aid'], TRUE));
+        redirect(clean_request('cat_view=1', ['section', 'aid']));
     }
 }
 
@@ -80,7 +80,7 @@ if (isset($_POST['save_cat'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_VIDEO_CATS, $data, 'update');
                 addNotice('success', $locale['vid_notice_06']);
-                redirect(clean_request('cat_view=1', ['section', 'aid'], TRUE));
+                redirect(clean_request('cat_view=1', ['section', 'aid']));
             }
         } else {
             \defender::stop();
@@ -91,7 +91,7 @@ if (isset($_POST['save_cat'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_VIDEO_CATS, $data, 'save');
                 addNotice('success', $locale['vid_notice_08']);
-                redirect(clean_request('cat_view=1', ['section', 'aid'], TRUE));
+                redirect(clean_request('cat_view=1', ['section', 'aid']));
             }
         } else {
             \defender::stop();
@@ -119,7 +119,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'edit') && (isset($_GET['cat_i
 
         $data['video_cat_sort_order'] = $cat_sorting[1];
     } else {
-        redirect(clean_request('', ['section', 'aid'], TRUE));
+        redirect(clean_request('', ['section', 'aid']));
     }
 }
 
@@ -225,8 +225,8 @@ echo opentab($tab_cats, $tab_cats_active, 'categories', FALSE, 'nav-tabs');
                         echo '</div>';
 
                         echo '<div class="btn-group">';
-                            echo '<a class="btn btn-sm btn-default" href="'.clean_request("action=edit&cat_id=".$data['video_cat_id'], ['section', 'aid'], TRUE).'" title="'.$locale['edit'].'"><i class="fa fa-pencil"></i></a>';
-                            echo '<a class="btn btn-sm btn-danger '.($data['video_count'] || $data['child_categories'] ? 'disabled' : '').'" href="'.clean_request("action=delete&cat_id=".$data['video_cat_id'], ['section', 'aid'], TRUE).'" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
+                            echo '<a class="btn btn-sm btn-default" href="'.clean_request("action=edit&cat_id=".$data['video_cat_id'], ['section', 'aid']).'" title="'.$locale['edit'].'"><i class="fa fa-pencil"></i></a>';
+                            echo '<a class="btn btn-sm btn-danger '.($data['video_count'] || $data['child_categories'] ? 'disabled' : '').'" href="'.clean_request("action=delete&cat_id=".$data['video_cat_id'], ['section', 'aid']).'" title="'.$locale['delete'].'"><i class="fa fa-trash"></i></a>';
                         echo '</div>';
                     echo '</div>';
                 echo '</div>';
