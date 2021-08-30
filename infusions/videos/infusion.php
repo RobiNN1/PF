@@ -146,7 +146,6 @@ $inf_droptable[] = DB_VIDEO_CATS;
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='VID'";
 $inf_deldbrow[] = DB_COMMENTS." WHERE comment_type='VID'";
 $inf_deldbrow[] = DB_RATINGS." WHERE rating_type='VID'";
-$inf_deldbrow[] = DB_PANELS." WHERE panel_filename='latest_videos_panel'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='".$inf_folder."'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/videos/videos.php'";
 $inf_deldbrow[] = DB_SUBMISSIONS." WHERE submit_type='v'";
