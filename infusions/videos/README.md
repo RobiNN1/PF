@@ -12,7 +12,7 @@ E.g. `additional_files/infusions/latest_videos_panel/` upload to `root/infusions
 
 **Infusion also includes**
 
-- Latest Videos Panel (Is installed automatically with an infusion.)
+- Latest Videos Panel
 - RSS Feeds for Videos
 - Permalinks (SEO friendly URLs)
 - Search

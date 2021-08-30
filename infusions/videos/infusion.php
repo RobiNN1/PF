@@ -76,9 +76,6 @@ $inf_newtable[] = DB_VIDEO_CATS." (
     KEY video_cat_parent (video_cat_parent)
 ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci";
 
-// Insert panel
-$inf_insertdbrow[] = DB_PANELS." (panel_name, panel_filename, panel_content, panel_side, panel_order, panel_type, panel_access, panel_display, panel_status, panel_url_list, panel_restriction, panel_languages) VALUES('".$locale['vid_latest']."', 'latest_videos_panel', '', '3', '5', 'file', '0', '1', '1', '', '3', '".fusion_get_settings('enabled_languages')."')";
-
 // Insert settings
 $settings = [
     'video_max_b'             => 52428800,
@@ -123,11 +120,9 @@ if (!empty($enabled_languages)) {
 
         // Add
         $mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_status, link_language) VALUES('".$locale['vid_title']."', 'infusions/videos/videos.php', '0', '2', '0', '2', '1', '".$language."')";
-        $mlt_insertdbrow[$language][] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_status, link_language) VALUES ('".$locale['vid_submit']."', 'submit.php?stype=v', ".USER_LEVEL_MEMBER.", '1', '0', '27', '1', '".$language."')";
 
         // Delete
         $mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='infusions/videos/videos.php' AND link_language='".$language."'";
-        $mlt_deldbrow[$language][] = DB_SITE_LINKS." WHERE link_url='submit.php?stype=v' AND link_language='".$language."'";
         $mlt_deldbrow[$language][] = DB_VIDEO_CATS." WHERE video_cat_language='".$language."'";
         $mlt_deldbrow[$language][] = DB_ADMIN." WHERE admin_rights='VID' AND admin_language='".$language."'";
     }
@@ -142,7 +137,6 @@ if (!empty($enabled_languages)) {
     ];
 
     $inf_insertdbrow[] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_status, link_language) VALUES('".$locale['vid_title']."', 'infusions/videos/videos.php', '0', '2', '0', '2', '1', '".LANGUAGE."')";
-    $inf_insertdbrow[] = DB_SITE_LINKS." (link_name, link_url, link_visibility, link_position, link_window, link_order, link_status, link_language) VALUES ('".$locale['vid_submit']."', 'submit.php?stype=v', ".USER_LEVEL_MEMBER.", '1', '0', '27', '1', '".LANGUAGE."')";
 }
 
 // Uninstallation
@@ -155,7 +149,6 @@ $inf_deldbrow[] = DB_RATINGS." WHERE rating_type='VID'";
 $inf_deldbrow[] = DB_PANELS." WHERE panel_filename='latest_videos_panel'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='".$inf_folder."'";
 $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/videos/videos.php'";
-$inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='submit.php?stype=v'";
 $inf_deldbrow[] = DB_SUBMISSIONS." WHERE submit_type='v'";
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='VL'";
 $inf_delfiles[] = VIDEOS.'videos/';
