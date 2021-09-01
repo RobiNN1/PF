@@ -7,6 +7,7 @@ Some addons may require newer PHP.
 
 ## Infusions
 - [Content Generator](infusions/content_generator)
+- [CP Icon Sets](infusions/cp_icon_sets)
 - [Docs](infusions/docs)
 - [GitHub Client](infusions/github)
 - [Legal Pages](infusions/legal)
@@ -28,6 +29,6 @@ Some addons may require newer PHP.
 
 Other addons and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
 
-Icons used in addons made by [Freepik](https://flaticon.com/).
+Icons used in addons made by [Flaticon](https://flaticon.com/).
 
 <!-- Don't copy my code! -->
