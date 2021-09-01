@@ -37,12 +37,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
         || dbcount("(docs_cat_id)", DB_DOCS_CATS, "docs_cat_parent='".intval($_GET['cat_id'])."'")
     ) {
         addNotice('danger', $locale['docs_205']);
-        redirect(FUSION_SELF.fusion_get_aidlink().'&section=categories');
     } else {
         dbquery("DELETE FROM ".DB_DOCS_CATS." WHERE docs_cat_id='".intval($_GET['cat_id'])."'");
         addNotice('success', $locale['docs_206']);
-        redirect(FUSION_SELF.fusion_get_aidlink().'&section=categories');
     }
+    redirect(FUSION_SELF.fusion_get_aidlink().'&section=categories');
 }
 
 if (isset($_POST['save_cat']) || isset($_POST['save_and_close'])) {
@@ -174,11 +173,10 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'docs_cat_form') {
             }
 
             addNotice('success', $locale['docs_207']);
-            redirect(FUSION_REQUEST);
         } else {
             addNotice('warning', $locale['docs_212']);
-            redirect(FUSION_REQUEST);
         }
+        redirect(FUSION_REQUEST);
     }
 
     if (isset($_POST['docs_clear'])) {
@@ -270,7 +268,7 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'docs_cat_form') {
     echo '</div>';
 
     echo openform('docs_table', 'post', FUSION_REQUEST);
-    echo form_hidden('table_action', '', '');
+    echo form_hidden('table_action');
     display_docs_category($result);
     echo closeform();
 

@@ -46,7 +46,8 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                 'video_embed'          => form_sanitizer($_POST['video_embed'], '', 'video_embed'),
                 'video_image'          => !empty($_POST['video_image']) ? form_sanitizer($_POST['video_image'], '', 'video_image') : '',
                 'video_allow_comments' => isset($_POST['video_allow_comments']) ? 1 : 0,
-                'video_allow_ratings'  => isset($_POST['video_allow_ratings']) ? 1 : 0
+                'video_allow_ratings'  => isset($_POST['video_allow_ratings']) ? 1 : 0,
+                'video_allow_likes'    => isset($_POST['video_allow_likes']) ? 1 : 0
             ];
 
             if (\defender::safe()) {
@@ -125,7 +126,8 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                     'video_embed'          => $submit_criteria['video_embed'],
                     'video_image'          => $submit_criteria['video_image'],
                     'video_allow_comments' => 1,
-                    'video_allow_ratings'  => 1
+                    'video_allow_ratings'  => 1,
+                    'video_allow_likes'    => 1
                 ];
 
                 echo openform('publish_video', 'post', FUSION_REQUEST);
@@ -195,8 +197,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                                         'youtube' => 'YouTube',
                                         'embed'   => $locale['vid_020']
                                     ],
-                                    'required' => TRUE,
-                                    'inline'   => TRUE
+                                    'required' => TRUE
                                 ]);
                                 if (!empty($callback_data['video_file'])) {
                                     echo '<strong>'.$locale['vid_021'].'</strong>';
@@ -219,18 +220,6 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                         echo '</div>';
 
                         openside();
-                        if (fusion_get_settings('comments_enabled') == 0 || fusion_get_settings('ratings_enabled') == 0) {
-                            if (fusion_get_settings('comments_enabled') == 0 && fusion_get_settings('ratings_enabled') == 0) {
-                                $sys = $locale['comments_ratings'];
-                            } else if (fusion_get_settings('comments_enabled') == 0) {
-                                $sys = $locale['comments'];
-                            } else {
-                                $sys = $locale['ratings'];
-                            }
-
-                            echo '<div class="well">'.sprintf($locale['vid_026'], $sys).'</div>';
-                        }
-
                         echo form_select_tree('video_cat', $locale['vid_009'], $callback_data['video_cat'], [
                             'no_root'     => 1,
                             'placeholder' => $locale['choose'],
@@ -247,8 +236,20 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                         closeside();
 
                         openside('');
+                            if (fusion_get_settings('comments_enabled') == 0 || fusion_get_settings('ratings_enabled') == 0) {
+                                if (fusion_get_settings('comments_enabled') == 0 && fusion_get_settings('ratings_enabled') == 0) {
+                                    $sys = $locale['comments_ratings'];
+                                } else if (fusion_get_settings('comments_enabled') == 0) {
+                                    $sys = $locale['comments'];
+                                } else {
+                                    $sys = $locale['ratings'];
+                                }
+
+                                echo '<div class="well">'.sprintf($locale['vid_026'], $sys).'</div>';
+                            }
                             echo form_checkbox('video_allow_comments', $locale['vid_028'], $callback_data['video_allow_comments'], ['class' => 'm-b-0', 'reverse_label' => TRUE]);
                             echo form_checkbox('video_allow_ratings', $locale['vid_029'], $callback_data['video_allow_ratings'], ['class' => 'm-b-0', 'reverse_label' => TRUE]);
+                            echo form_checkbox('video_allow_likes', $locale['vid_083'], $callback_data['video_allow_likes'], ['class' => 'm-b-0', 'reverse_label' => TRUE]);
 
                             if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                                 echo form_checkbox('update_datestamp', $locale['vid_030'], '', ['class' => 'm-b-0', 'reverse_label' => TRUE]);
@@ -291,7 +292,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                         echo '<td>'.$callback_data['submit_id'].'</td>';
                         echo '<td>'.display_avatar($callback_data, '20px', '', TRUE, 'img-rounded m-r-5').profile_link($callback_data['user_id'], $callback_data['user_name'], $callback_data['user_status']).'</td>';
                         echo '<td>'.timer($callback_data['submit_datestamp']).'</td>';
-                        echo '<td><a href="'.clean_request('submit_id='.$callback_data['submit_id'], ['section', 'aid']).'">'.$submit_criteria['video_title'].'</a></td>';
+                        echo '<td><a href="'.clean_request('submit_id='.$callback_data['submit_id'], ['section', 'aid']).'">'.(!empty($submit_criteria['video_title']) ? $submit_criteria['video_title'] : 'n/a').'</a></td>';
                     echo '</tr>';
                 }
             echo '</tbody>';

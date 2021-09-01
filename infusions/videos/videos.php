@@ -90,6 +90,8 @@ switch ($_GET['type']) {
         $filter_condition = 'video_datestamp DESC';
 }
 
+$result = NULL;
+
 if (isset($_GET['video_id'])) {
     if (validate_video($_GET['video_id'])) {
         dbquery("UPDATE ".DB_VIDEOS." SET video_views=video_views+1 WHERE video_id='".intval($_GET['video_id'])."'");
@@ -317,7 +319,7 @@ if (isset($_GET['video_id'])) {
                 ".(multilang_table('VL') ? "WHERE ".in_group('vc.video_cat_language', LANGUAGE)." AND" : "WHERE")." ".groupaccess('video_visibility')."
                 ".$condition."
                 GROUP BY v.video_id
-                ORDER BY ".($filter_condition ? $filter_condition : "vc.video_cat_sorting")."
+                ORDER BY ".(!empty($filter_condition) ? $filter_condition : "vc.video_cat_sorting")."
                 LIMIT ".intval($_GET['rowstart']).",".intval($video_settings['video_pagination'])
             );
 
@@ -340,9 +342,9 @@ if (!empty($info['video_max_rows']) && ($info['video_max_rows'] > $video_setting
 
 if (!empty($info['video_rows'])) {
     while ($data = dbarray($result)) {
-        $data['comments_count'] = !empty($data['comments_count']) ? $data['comments_count'] : count_db($data['video_id'], 'VID');
-        $data['count_votes'] = !empty($data['count_votes']) ? $data['count_votes'] : sum_db($data['video_id'], 'VID');
-        $data['sum_rating'] = !empty($data['sum_rating']) ? $data['sum_rating'] : rating_db($data['video_id'], 'VID');
+        $data['comments_count'] = !empty($data['comments_count']) ? $data['comments_count'] : video_count_db($data['video_id'], 'VID');
+        $data['count_votes'] = !empty($data['count_votes']) ? $data['count_votes'] : video_sum_db($data['video_id'], 'VID');
+        $data['sum_rating'] = !empty($data['sum_rating']) ? $data['sum_rating'] : video_rating_db($data['video_id'], 'VID');
 
         $data = array_merge($data, parse_video_info($data));
         $info['video_item'][$data['video_id']] = $data;
@@ -385,10 +387,10 @@ function get_video_cats() {
 
 function validate_video($id) {
     if (isnum($id)) {
-        return (int)dbcount("('video_id')", DB_VIDEOS, "video_id='".intval($id)."'");
+        return dbcount("('video_id')", DB_VIDEOS, "video_id='".intval($id)."'");
     }
 
-    return (int)FALSE;
+    return FALSE;
 }
 
 function get_video_comments($data) {
@@ -466,10 +468,10 @@ function video_cats_breadcrumbs($index) {
 }
 
 function get_video_cats_index() {
-    return dbquery_tree(DB_VIDEO_CATS, 'video_cat_id', 'video_cat_parent',"".(multilang_table('VL') ? "WHERE ".in_group('video_cat_language', LANGUAGE) : '')."");
+    return dbquery_tree(DB_VIDEO_CATS, 'video_cat_id', 'video_cat_parent', "".(multilang_table('VL') ? "WHERE ".in_group('video_cat_language', LANGUAGE) : '')."");
 }
 
-function rating_db($id, $type) {
+function video_rating_db($id, $type) {
     $count_db = dbarray(dbquery("SELECT IF(SUM(rating_vote) > 0, SUM(rating_vote), 0) AS sum_rating
         FROM ".DB_RATINGS."
         WHERE rating_item_id='".$id."' AND rating_type='".$type."'
@@ -478,7 +480,7 @@ function rating_db($id, $type) {
     return $count_db['sum_rating'];
 }
 
-function sum_db($id, $type) {
+function video_sum_db($id, $type) {
     $count_db = dbarray(dbquery("SELECT COUNT(rating_item_id) AS count_votes
         FROM ".DB_RATINGS."
         WHERE rating_item_id='".$id."' AND rating_type='".$type."'
@@ -487,7 +489,7 @@ function sum_db($id, $type) {
     return $count_db['count_votes'];
 }
 
-function count_db($id, $type) {
+function video_count_db($id, $type) {
     $count_db = dbarray(dbquery("SELECT COUNT(comment_item_id) AS comments_count
         FROM ".DB_COMMENTS."
         WHERE comment_item_id='".$id."' AND comment_type='".$type."'

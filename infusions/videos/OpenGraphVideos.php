@@ -25,15 +25,15 @@ class OpenGraphVideos extends \PHPFusion\OpenGraph {
 
         if (dbrows($result)) {
             $data = dbarray($result);
-            $info['url'] = $settings['siteurl'].'infusions/videos/videos.php?video_id='.$video_id;
-            $info['keywords'] = !empty($data['video_keywords']) ? $data['video_keywords'] : $settings['keywords'];
             $info['title'] = $data['video_title'].' - '.$settings['sitename'];
             $info['description'] = $data['video_description'] ? fusion_first_words(strip_tags(html_entity_decode($data['video_description'])), 50) : $settings['description'];
+            $info['keywords'] = !empty($data['video_keywords']) ? $data['video_keywords'] : $settings['keywords'];
+            $info['url'] = $settings['siteurl'].'infusions/videos/videos.php?video_id='.$video_id;
             $info['type'] = 'video.movie';
 
             require_once VIDEOS.'functions.php';
 
-            $info['image'] = get_video_thumb($data);
+            $info['image'] = get_video_thumb($data, TRUE);
         }
 
         self::setValues($info);
@@ -46,12 +46,10 @@ class OpenGraphVideos extends \PHPFusion\OpenGraph {
 
         if (dbrows($result)) {
             $data = dbarray($result);
-            $info['url'] = $settings['siteurl'].'infusions/videos/videos.php?cat_id='.$cat_id;
-            $info['keywords'] = $settings['keywords'];
             $info['title'] = $data['video_cat_name'].' - '.$settings['sitename'];
             $info['description'] = $data['video_cat_description'] ? fusion_first_words(strip_tags(html_entity_decode($data['video_cat_description'])), 50) : $settings['description'];
-            $info['type'] = 'website';
-            $info['image'] = defined('THEME_ICON') ? THEME_ICON.'mstile-150x150.png' : $settings['siteurl'].'images/favicons/mstile-150x150.png';
+            $info['url'] = $settings['siteurl'].'infusions/videos/videos.php?cat_id='.$cat_id;
+            $info['keywords'] = $settings['keywords'];
         }
 
         self::setValues($info);

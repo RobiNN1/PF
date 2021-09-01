@@ -151,4 +151,4 @@ $inf_deldbrow[] = DB_SITE_LINKS." WHERE link_url='infusions/videos/videos.php'";
 $inf_deldbrow[] = DB_SUBMISSIONS." WHERE submit_type='v'";
 $inf_deldbrow[] = DB_LANGUAGE_TABLES." WHERE mlt_rights='VL'";
 $inf_delfiles[] = VIDEOS.'videos/';
-$inf_delfiles[] = VIDEOS.'cache/';
+$inf_delfiles[] = BASEDIR.'cache/videos/';

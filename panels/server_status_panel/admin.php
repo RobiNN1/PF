@@ -271,7 +271,7 @@ function server_listing() {
     echo '</table></div>';
 
     if ($total_rows > $rows) {
-        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section'], TRUE).'&');
+        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section']).'&');
     }
 }
 

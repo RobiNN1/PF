@@ -38,7 +38,7 @@ if (isset($_GET['page_id'])) {
 
         $info['cat_name'] = $data['docs_cat_name'];
         $info['page_title'] = $data['docs_name'];
-        $data['docs_article'] = parse_docs_text($data['docs_article']);
+        $data['docs_article'] = parse_textarea($data['docs_article'], TRUE, FALSE, TRUE, IMAGES, TRUE);
 
         $info += $data;
 

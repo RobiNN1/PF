@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('GH_LOCALE')) {
     if (file_exists(INFUSIONS.'github/locale/'.LANGUAGE.'.php')) {
         define('GH_LOCALE', INFUSIONS.'github/locale/'.LANGUAGE.'.php');
@@ -25,4 +26,5 @@ if (!defined('GH_LOCALE')) {
     }
 }
 
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('GH', '<i class="admin-ico fa fa-fw fa-github"></i>');

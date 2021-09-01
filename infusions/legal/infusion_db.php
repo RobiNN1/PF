@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('LG_LOCALE')) {
     if (file_exists(INFUSIONS.'legal/locale/'.LOCALESET.'legal.php')) {
         define('LG_LOCALE', INFUSIONS.'legal/locale/'.LOCALESET.'legal.php');
@@ -25,12 +26,11 @@ if (!defined('LG_LOCALE')) {
     }
 }
 
-if (!defined('LEGAL')) {
-    define('LEGAL', INFUSIONS.'legal/');
-}
+// Paths
+const LEGAL = INFUSIONS.'legal/';
 
-if (!defined('DB_LEGAL')) {
-    define('DB_LEGAL', DB_PREFIX.'legal');
-}
+// Database
+const DB_LEGAL = DB_PREFIX.'legal';
 
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('LG', '<i class="admin-ico fa fa-fw fa-gavel"></i>');

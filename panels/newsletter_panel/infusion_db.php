@@ -17,6 +17,9 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+use PHPFusion\Admins;
+
+// Locales
 if (!defined('NSL_LOCALE')) {
     if (file_exists(INFUSIONS.'newsletter_panel/locale/'.LOCALESET.'newsletter.php')) {
         define('NSL_LOCALE', INFUSIONS.'newsletter_panel/locale/'.LOCALESET.'newsletter.php');
@@ -25,37 +28,26 @@ if (!defined('NSL_LOCALE')) {
     }
 }
 
-if (!defined('NEWSLETTER')) {
-    define('NEWSLETTER', INFUSIONS.'newsletter_panel/');
-}
+// Paths
+const NEWSLETTER = INFUSIONS.'newsletter_panel/';
 
-if (!defined('DB_NEWSLETTER_HEADERS')) {
-    define('DB_NEWSLETTER_HEADERS', DB_PREFIX.'newsletter_headers');
-}
-
-if (!defined('DB_NEWSLETTER_SMTP')) {
-    define('DB_NEWSLETTER_SMTP', DB_PREFIX.'newsletter_smtp');
-}
-
-if (!defined('DB_NEWSLETTER_SUBS')) {
-    define('DB_NEWSLETTER_SUBS', DB_PREFIX.'newsletter_subs');
-}
-
-if (!defined('DB_NEWSLETTER_TEMPLATES')) {
-    define('DB_NEWSLETTER_TEMPLATES', DB_PREFIX.'newsletter_templates');
-}
+// Database
+const DB_NEWSLETTER_HEADERS = DB_PREFIX.'newsletter_headers';
+const DB_NEWSLETTER_SMTP = DB_PREFIX.'newsletter_smtp';
+const DB_NEWSLETTER_SUBS = DB_PREFIX.'newsletter_subs';
+const DB_NEWSLETTER_TEMPLATES = DB_PREFIX.'newsletter_templates';
 
 require_once NEWSLETTER.'includes/functions.php';
 
 // Admin Settings
-\PHPFusion\Admins::getInstance()->setAdminPageIcons('NSL', '<i class="admin-ico fa fa-fw fa-newspaper"></i>');
+Admins::getInstance()->setAdminPageIcons('NSL', '<i class="admin-ico fa fa-fw fa-newspaper"></i>');
 
-\PHPFusion\Admins::getInstance()->setFolderPermissions('newsletter_panel', [
+Admins::getInstance()->setFolderPermissions('newsletter_panel', [
     'infusions/newsletter_panel/email_templates/'         => TRUE,
     'infusions/newsletter_panel/email_templates/uploads/' => TRUE
 ]);
 
-\PHPFusion\Admins::getInstance()->setCustomFolder('NSL', [
+Admins::getInstance()->setCustomFolder('NSL', [
     [
         'path'  => NEWSLETTER.'email_templates/',
         'URL'   => fusion_get_settings('siteurl').'infusions/newsletter_panel/email_templates/',

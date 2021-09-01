@@ -57,7 +57,7 @@ $calc_b = $video_settings['video_max_b'] / $calc_c;
 $calc_cc = calculate_byte($video_settings['video_screen_max_b']);
 $calc_bb = $video_settings['video_screen_max_b'] / $calc_cc;
 
-echo '<div class="well m-t-10">'.$locale['vid_059'].'</div>';
+echo '<div class="well">'.$locale['vid_059'].'</div>';
 
 echo openform('settingsform', 'post', FUSION_REQUEST);
 echo '<div class="row">';

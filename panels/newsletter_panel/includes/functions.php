@@ -161,7 +161,7 @@ function send_newsletter($subject, $body, $email, $priority, $token, $style = NU
         '[LOGO]'           => $settings['siteurl'].$settings['sitebanner'],
         '[SITENAME]'       => $settings['sitename'],
         '[SITEURL]'        => $settings['siteurl'],
-        '[SITE_COPYRIGHT]' => nl2br(parse_textarea($settings['footer'], FALSE, TRUE)),
+        '[SITE_COPYRIGHT]' => nl2br(parse_textarea($settings['footer'], FALSE)),
         '[EMAIL]'          => $email,
         '[UNSUBSCRIBE]'    => $unsubscribe_text
     ]);

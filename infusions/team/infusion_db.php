@@ -17,6 +17,9 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+use PHPFusion\Admins;
+
+// Locales
 if (!defined('TM_LOCALE')) {
     if (file_exists(INFUSIONS.'team/locale/'.LOCALESET.'team.php')) {
         define('TM_LOCALE', INFUSIONS.'team/locale/'.LOCALESET.'team.php');
@@ -25,21 +28,20 @@ if (!defined('TM_LOCALE')) {
     }
 }
 
-if (!defined('TEAM')) {
-    define('TEAM', INFUSIONS.'team/');
-}
+// Paths
+const TEAM = INFUSIONS.'team/';
 
-if (!defined('DB_TEAM')) {
-    define('DB_TEAM', DB_PREFIX.'team');
-}
+// Database
+const DB_TEAM = DB_PREFIX.'team';
 
-\PHPFusion\Admins::getInstance()->setAdminPageIcons('TM', '<i class="admin-ico fa fa-fw fa-users"></i>');
+// Admin Settings
+Admins::getInstance()->setAdminPageIcons('TM', '<i class="admin-ico fa fa-fw fa-users"></i>');
 
-\PHPFusion\Admins::getInstance()->setFolderPermissions('team', [
+Admins::getInstance()->setFolderPermissions('team', [
     'infusions/team/images/' => TRUE
 ]);
 
-\PHPFusion\Admins::getInstance()->setCustomFolder('TM', [
+Admins::getInstance()->setCustomFolder('TM', [
     [
         'path'  => TEAM.'images/',
         'URL'   => fusion_get_settings('siteurl').'infusions/team/images/',

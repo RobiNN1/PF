@@ -74,7 +74,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'edit') && (isset($_GET['docs_
         $data = dbarray($result);
         $data['docs_hidden'] = [$data['docs_id']];
     } else {
-        redirect(clean_request('', ['section', 'aid'], TRUE));
+        redirect(clean_request('', ['section', 'aid']));
     }
 }
 
@@ -279,7 +279,7 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'form') {
     echo '</div>';
 
     echo openform('docs_table', 'post', FUSION_REQUEST);
-    echo form_hidden('table_action', '', '');
+    echo form_hidden('table_action');
 
     echo '<div class="table-responsive"><table class="table table-hover">';
         echo '<thead><tr>';

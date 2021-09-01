@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('CG_LOCALE')) {
     if (file_exists(INFUSIONS.'content_generator/locale/'.LANGUAGE.'.php')) {
         define('CG_LOCALE', INFUSIONS.'content_generator/locale/'.LANGUAGE.'.php');
@@ -25,4 +26,5 @@ if (!defined('CG_LOCALE')) {
     }
 }
 
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('CG', '<i class="admin-ico fa fa-fw fa-microphone"></i>');

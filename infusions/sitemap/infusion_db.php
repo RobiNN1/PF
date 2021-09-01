@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('SMG_LOCALE')) {
     if (file_exists(INFUSIONS.'sitemap/locale/'.LANGUAGE.'.php')) {
         define('SMG_LOCALE', INFUSIONS.'sitemap/locale/'.LANGUAGE.'.php');
@@ -25,23 +26,20 @@ if (!defined('SMG_LOCALE')) {
     }
 }
 
-if (!defined('DB_SITEMAP')) {
-    define('DB_SITEMAP', DB_PREFIX.'sitemap');
-}
+// Database
+const DB_SITEMAP = DB_PREFIX.'sitemap';
+const DB_SITEMAP_LINKS = DB_PREFIX.'sitemap_links';
 
-if (!defined('DB_SITEMAP_LINKS')) {
-    define('DB_SITEMAP_LINKS', DB_PREFIX.'sitemap_links');
-}
-
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SMG', '<i class="admin-ico fa fa-fw fa-sitemap"></i>');
 
-if (db_exists(DB_SITEMAP)) {
+if (defined('SITEMAP_EXISTS')) {
     require_once INFUSIONS.'sitemap/includes/SitemapGenerator.php';
 
     $smg = new SitemapGenerator();
 
     if (is_file($smg->sitemap_file) && $smg->sitemap_settings['auto_update'] == 1) {
-        if ((TIME - filemtime($smg->sitemap_file)) > $smg->sitemap_settings['update_interval']) {
+        if ((time() - filemtime($smg->sitemap_file)) > $smg->sitemap_settings['update_interval']) {
             $smg->generateXml();
         }
     }

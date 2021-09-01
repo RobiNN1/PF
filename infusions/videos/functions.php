@@ -69,11 +69,12 @@ function get_video_thumb($data, $full_url = FALSE) {
 function cache_curl($url) {
     global $config_inc;
 
+    $cache_dir = BASEDIR.'cache/videos/';
     $cache_time = 604800; // One week
     $hash = md5($url);
 
     if (!empty($config_inc['cache']) && class_exists('PHPFusion\Cache\Cache')) {
-        $cache = new PHPFusion\Cache\Cache();
+        $cache = new PHPFusion\Cache\Cache(['path' => $cache_dir]);
 
         if (!empty($cache->get($hash))) {
             $data = $cache->get($hash);
@@ -82,8 +83,6 @@ function cache_curl($url) {
             $cache->set($hash, $data, $cache_time);
         }
     } else {
-        $cache_dir = BASEDIR.'cache/videos/';
-
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir, 0777, TRUE);
         }

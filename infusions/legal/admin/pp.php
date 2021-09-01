@@ -64,7 +64,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'edit') && (isset($_GET['legal
     if (dbrows($result)) {
         $data = dbarray($result);
     } else {
-        redirect(clean_request('', ['section', 'aid'], TRUE));
+        redirect(clean_request('', ['section', 'aid']));
     }
 }
 

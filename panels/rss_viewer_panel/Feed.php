@@ -43,7 +43,7 @@ class Feed {
      * Loads RSS feed.
      *
      * @param string  RSS feed URL
-     * @param string  optional user name
+     * @param string  optional username
      * @param string  optional password
      *
      * @return Feed
@@ -57,7 +57,7 @@ class Feed {
      * Loads Atom feed.
      *
      * @param string  Atom feed URL
-     * @param string  optional user name
+     * @param string  optional username
      * @param string  optional password
      *
      * @return Feed

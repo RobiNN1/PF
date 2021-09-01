@@ -20,14 +20,14 @@ defined('IN_FUSION') || exit;
 $locale = fusion_get_locale('', CG_LOCALE);
 
 // Infusion general information
-$inf_title       = $locale['cg_title'];
+$inf_title = $locale['cg_title'];
 $inf_description = $locale['cg_desc'];
-$inf_version     = '1.1.6';
-$inf_developer   = 'RobiNN';
-$inf_email       = 'robinn@php-fusion.eu';
-$inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'content_generator';
-$inf_image       = 'content_generator.svg';
+$inf_version = '1.1.6';
+$inf_developer = 'RobiNN';
+$inf_email = 'robinn@php-fusion.eu';
+$inf_weburl = 'https://github.com/RobiNN1';
+$inf_folder = 'content_generator';
+$inf_image = 'content_generator.svg';
 
 // Multilanguage links
 $enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');

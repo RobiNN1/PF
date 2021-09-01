@@ -19,14 +19,15 @@ defined('IN_FUSION') || exit;
 
 $locale = fusion_get_locale('', GH_LOCALE);
 
-$inf_title       = $locale['gh_title'];
+// Infusion general information
+$inf_title = $locale['gh_title'];
 $inf_description = $locale['gh_desc'];
-$inf_version     = '1.0.1';
-$inf_developer   = 'RobiNN';
-$inf_email       = 'robinn@php-fusion.eu';
-$inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'github';
-$inf_image       = 'github.svg';
+$inf_version = '1.0.1';
+$inf_developer = 'RobiNN';
+$inf_email = 'robinn@php-fusion.eu';
+$inf_weburl = 'https://github.com/RobiNN1';
+$inf_folder = 'github';
+$inf_image = 'github.svg';
 
 // Multilanguage links
 $enabled_languages = makefilelist(LOCALE, '.|..', TRUE, 'folders');
@@ -61,12 +62,12 @@ if (!empty($enabled_languages)) {
     ];
 }
 
+// Insert settings
 $inf_insertdbrow[] = DB_SETTINGS_INF." (settings_name, settings_value, settings_inf) VALUES ('owner', 'PHPFusion', '".$inf_folder."')";
 
-if (!column_exists('users', 'user_github_access_token')) {
-    $inf_altertable[] = DB_USERS." ADD user_github_access_token VARCHAR(50)";
-}
+$inf_altertable[] = DB_USERS." ADD user_github_access_token VARCHAR(50)";
 
+// Uninstallation
 $inf_deldbrow[] = DB_ADMIN." WHERE admin_rights='GH'";
 $inf_deldbrow[] = DB_SETTINGS_INF." WHERE settings_inf='".$inf_folder."'";
 $inf_dropcol[] = ['table' => DB_USERS, 'column' => 'user_github_access_token'];

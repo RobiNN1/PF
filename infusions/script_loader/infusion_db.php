@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('SCL_LOCALE')) {
     if (file_exists(INFUSIONS.'script_loader/locale/'.LANGUAGE.'.php')) {
         define('SCL_LOCALE', INFUSIONS.'script_loader/locale/'.LANGUAGE.'.php');
@@ -25,17 +26,16 @@ if (!defined('SCL_LOCALE')) {
     }
 }
 
-if (!defined('SCRIPT_LOADERS')) {
-    define('SCRIPT_LOADER', INFUSIONS.'script_loader/');
-}
+// Paths
+const SCRIPT_LOADER = INFUSIONS.'script_loader/';
 
-if (!defined('DB_SCRIPT_LOADER')) {
-    define('DB_SCRIPT_LOADER', DB_PREFIX.'script_loader');
-}
+// Database
+const DB_SCRIPT_LOADER = DB_PREFIX.'script_loader';
 
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SCL', '<i class="admin-ico fa fa-fw fa-code"></i>');
 
-if (!defined('ADMIN_PANEL') && db_exists(DB_SCRIPT_LOADER)) {
+if (!defined('ADMIN_PANEL') && defined('SCRIPT_LOADER_EXISTS')) {
     $result = dbquery("SELECT * FROM ".DB_SCRIPT_LOADER);
     if (dbrows($result) > 0) {
         while ($data = dbarray($result)) {

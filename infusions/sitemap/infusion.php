@@ -20,14 +20,14 @@ defined('IN_FUSION') || exit;
 $locale = fusion_get_locale('', SMG_LOCALE);
 
 // Infusion general information
-$inf_title       = $locale['smg_title'];
+$inf_title = $locale['smg_title'];
 $inf_description = $locale['smg_desc'];
-$inf_version     = '1.3.0';
-$inf_developer   = 'RobiNN';
-$inf_email       = 'robinn@php-fusion.eu';
-$inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'sitemap';
-$inf_image       = 'sitemap.svg';
+$inf_version = '1.3.0';
+$inf_developer = 'RobiNN';
+$inf_email = 'robinn@php-fusion.eu';
+$inf_weburl = 'https://github.com/RobiNN1';
+$inf_folder = 'sitemap';
+$inf_image = 'sitemap.svg';
 
 // Create tables
 $inf_newtable[] = DB_SITEMAP." (
@@ -47,23 +47,23 @@ $inf_newtable[] = DB_SITEMAP_LINKS." (
 
 $modules = [
     'customlinks'    => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.6'],
-    'profiles'       => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.1'],
-    'articles'       => ['enabled' => 1, 'frequency' => 'always',  'priority' => '0.5'],
+    'profiles'       => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.1'],
+    'articles'       => ['enabled' => 1, 'frequency' => 'always', 'priority' => '0.5'],
     'article_cats'   => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
-    'blogs'          => ['enabled' => 1, 'frequency' => 'always',  'priority' => '0.6'],
+    'blogs'          => ['enabled' => 1, 'frequency' => 'always', 'priority' => '0.6'],
     'blog_cats'      => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
-    'custompages'    => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.4'],
-    'downloads'      => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.5'],
+    'custompages'    => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.4'],
+    'downloads'      => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.5'],
     'download_cats'  => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
     'faq_cats'       => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
-    'forum'          => ['enabled' => 1, 'frequency' => 'daily',   'priority' => '0.6'],
-    'gallery'        => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.3'],
-    'gallery_albums' => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.4'],
-    'news'           => ['enabled' => 1, 'frequency' => 'always',  'priority' => '0.6'],
+    'forum'          => ['enabled' => 1, 'frequency' => 'daily', 'priority' => '0.6'],
+    'gallery'        => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.3'],
+    'gallery_albums' => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.4'],
+    'news'           => ['enabled' => 1, 'frequency' => 'always', 'priority' => '0.6'],
     'news_cats'      => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
-    'videos'         => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.5'],
+    'videos'         => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.5'],
     'video_cats'     => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3'],
-    'weblinks'       => ['enabled' => 1, 'frequency' => 'weekly',  'priority' => '0.5'],
+    'weblinks'       => ['enabled' => 1, 'frequency' => 'weekly', 'priority' => '0.5'],
     'weblink_cats'   => ['enabled' => 1, 'frequency' => 'monthly', 'priority' => '0.3']
 ];
 

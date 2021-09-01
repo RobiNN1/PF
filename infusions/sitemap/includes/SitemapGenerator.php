@@ -33,17 +33,7 @@ class SitemapGenerator {
         'link_id' => 0,
         'url'     => ''
     ];
-    private $customlinks;
-    private $profiles;
-    private $articles;
-    private $blogs;
-    private $downloads;
-    private $faqs;
-    private $forum;
-    private $gallery;
-    private $news;
-    private $videos;
-    private $weblinks;
+    private $module_check;
     private $modules = [
         'customlinks',
         'profiles',
@@ -66,17 +56,19 @@ class SitemapGenerator {
         $this->sitemap = new Sitemap($this->sitemap_file);
         $this->sitemap_settings = get_settings('sitemap');
 
-        $this->customlinks = dbcount('(link_id)', DB_SITEMAP_LINKS) > 0;
-        $this->profiles = $this->settings['hide_userprofiles'] == 0;
-        $this->articles = function_exists('infusion_exists') ? infusion_exists('articles') : db_exists(DB_PREFIX.'articles');
-        $this->blogs = function_exists('infusion_exists') ? infusion_exists('blog') : db_exists(DB_PREFIX.'blog');
-        $this->downloads = function_exists('infusion_exists') ? infusion_exists('downloads') : db_exists(DB_PREFIX.'downloads');
-        $this->faqs = function_exists('infusion_exists') ? infusion_exists('faq') : db_exists(DB_PREFIX.'faqs');
-        $this->forum = function_exists('infusion_exists') ? infusion_exists('forum') : db_exists(DB_PREFIX.'forums');
-        $this->gallery = function_exists('infusion_exists') ? infusion_exists('gallery') : db_exists(DB_PREFIX.'photos');
-        $this->news = function_exists('infusion_exists') ? infusion_exists('news') : db_exists(DB_PREFIX.'news');
-        $this->videos = function_exists('infusion_exists') ? infusion_exists('videos') : db_exists(DB_PREFIX.'videos');
-        $this->weblinks = function_exists('infusion_exists') ? infusion_exists('weblinks') : db_exists(DB_PREFIX.'weblinks');
+        $this->module_check = [
+            'customlinks' => defined('SITEMAP_EXISTS'),
+            'profiles'    => $this->settings['hide_userprofiles'] == 0,
+            'articles'    => defined('ARTICLES_EXISTS'),
+            'blog'        => defined('BLOG_EXISTS'),
+            'downloads'   => defined('DOWNLOADS_EXISTS'),
+            'faq'         => defined('FAQ_EXISTS'),
+            'forum'       => defined('FORUM_EXISTS'),
+            'gallery'     => defined('GALLERY_EXISTS'),
+            'news'        => defined('NEWS_EXISTS'),
+            'videos'      => defined('VIDEOS_EXISTS'),
+            'weblinks'    => defined('WEBLINKS_EXISTS')
+        ];
     }
 
     private function customLinks($options = []) {
@@ -116,7 +108,7 @@ class SitemapGenerator {
 
         if ($cats == TRUE) {
             $result = dbquery("SELECT article_cat_id, article_cat_status, article_cat_visibility, article_cat_language
-                FROM ". DB_PREFIX."article_cats
+                FROM ".DB_PREFIX."article_cats
                 WHERE article_cat_status=1 AND ".groupaccess('article_cat_visibility')."
                 ".(multilang_table('AR') ? " AND ".in_group('article_cat_language', LANGUAGE) : '')."
                 ORDER BY article_cat_id ASC
@@ -130,7 +122,7 @@ class SitemapGenerator {
         } else {
             $result = dbquery("SELECT a.article_id, a.article_datestamp, a.article_language, a.article_visibility, a.article_draft
                 FROM ".DB_PREFIX."articles AS a
-                LEFT JOIN ". DB_PREFIX."article_cats AS ac ON a.article_cat=ac.article_cat_id
+                LEFT JOIN ".DB_PREFIX."article_cats AS ac ON a.article_cat=ac.article_cat_id
                 ".(multilang_table('AR') ? "WHERE ".in_group('a.article_language', LANGUAGE)." AND ".in_group('ac.article_cat_language', LANGUAGE)." AND " : "WHERE ")."
                 a.article_draft=0 AND ".groupaccess('a.article_visibility')." AND ac.article_cat_status=1 AND ".groupaccess('ac.article_cat_visibility')."
                 ORDER BY article_datestamp DESC
@@ -175,7 +167,7 @@ class SitemapGenerator {
             $result = dbquery("SELECT blog_id, blog_datestamp, blog_language, blog_visibility, blog_draft
                 FROM ".DB_PREFIX."blog
                 ".(multilang_table('BL') ? "WHERE ".in_group('blog_language', LANGUAGE)." AND" : 'WHERE')." ".groupaccess('blog_visibility')." AND blog_draft=0
-                AND (blog_start=0 || blog_start<=".TIME.") AND (blog_end=0 || blog_end>=".TIME.")
+                AND (blog_start=0 || blog_start<=".time().") AND (blog_end=0 || blog_end>=".time().")
                 ORDER BY blog_datestamp DESC
             ");
 
@@ -362,7 +354,7 @@ class SitemapGenerator {
             $result = dbquery("SELECT news_id, news_datestamp, news_language, news_visibility, news_draft
                 FROM ".DB_PREFIX."news
                 ".(multilang_table('NS') ? "WHERE ".in_group('news_language', LANGUAGE)." AND " : "WHERE ").groupaccess('news_visibility')." AND news_draft=0
-                AND (news_start=0 || news_start<='".TIME."') AND (news_end=0 || news_end>='".TIME."')
+                AND (news_start=0 || news_start<='".time()."') AND (news_end=0 || news_end>='".time()."')
                 ORDER BY news_datestamp DESC
             ");
 
@@ -498,7 +490,7 @@ class SitemapGenerator {
             }
         }
 
-        if ($this->customlinks) {
+        if ($this->module_check['customlinks'] && dbcount('(link_id)', DB_SITEMAP_LINKS) > 0) {
             $customlinks = $this->getSettings('customlinks');
             if ($customlinks['enabled'] == 1) {
                 if ($this->sitemap_settings['sitemap_index'] == 1)
@@ -514,7 +506,7 @@ class SitemapGenerator {
             }
         }
 
-        if ($this->profiles) {
+        if ($this->module_check['profiles']) {
             $profiles = $this->getSettings('profiles');
             if ($profiles['enabled'] == 1) {
                 if ($this->sitemap_settings['sitemap_index'] == 1)
@@ -530,7 +522,7 @@ class SitemapGenerator {
             }
         }
 
-        if ($this->articles) {
+        if ($this->module_check['articles']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_articles.xml');
 
@@ -554,7 +546,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->blogs) {
+        if ($this->module_check['blog']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_blogs.xml');
 
@@ -592,7 +584,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->downloads) {
+        if ($this->module_check['downloads']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_downloads.xml');
 
@@ -616,7 +608,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->faqs) {
+        if ($this->module_check['faq']) {
             $faqs = $this->getSettings('faq_cats');
             if ($faqs['enabled'] == 1) {
                 if ($this->sitemap_settings['sitemap_index'] == 1)
@@ -632,7 +624,7 @@ class SitemapGenerator {
             }
         }
 
-        if ($this->forum) {
+        if ($this->module_check['forum']) {
             $forum = $this->getSettings('forum');
             if ($forum['enabled'] == 1) {
                 if ($this->sitemap_settings['sitemap_index'] == 1)
@@ -648,7 +640,7 @@ class SitemapGenerator {
             }
         }
 
-        if ($this->gallery) {
+        if ($this->module_check['gallery']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_gallery.xml');
 
@@ -672,7 +664,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->news) {
+        if ($this->module_check['news']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_news.xml');
 
@@ -696,7 +688,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->videos) {
+        if ($this->module_check['videos']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_videos.xml');
 
@@ -720,7 +712,7 @@ class SitemapGenerator {
                 $this->sitemap->write();
         }
 
-        if ($this->weblinks) {
+        if ($this->module_check['weblinks']) {
             if ($this->sitemap_settings['sitemap_index'] == 1)
                 $this->sitemap = new Sitemap($this->sitemap_folder.'sitemap_weblinks.xml');
 
@@ -762,55 +754,55 @@ class SitemapGenerator {
     private function modules() {
         $modules = [];
 
-        if ($this->customlinks) {
+        if ($this->module_check['customlinks'] && dbcount('(link_id)', DB_SITEMAP_LINKS) > 0) {
             $modules['customlinks'] = ['locale' => '01'];
         }
 
-        if ($this->profiles) {
+        if ($this->module_check['profiles']) {
             $modules['profiles'] = ['locale' => '02'];
         }
 
-        if ($this->articles) {
+        if ($this->module_check['articles']) {
             $modules['articles'] = ['locale' => '03'];
             $modules['article_cats'] = ['locale' => '04'];
         }
 
-        if ($this->blogs) {
+        if ($this->module_check['blog']) {
             $modules['blogs'] = ['locale' => '05'];
             $modules['blog_cats'] = ['locale' => '06'];
         }
 
         $modules['custompages'] = ['locale' => '07'];
 
-        if ($this->downloads) {
+        if ($this->module_check['downloads']) {
             $modules['downloads'] = ['locale' => '08'];
             $modules['download_cats'] = ['locale' => '09'];
         }
 
-        if ($this->faqs) {
+        if ($this->module_check['faq']) {
             $modules['faq_cats'] = ['locale' => '10'];
         }
 
-        if ($this->forum) {
+        if ($this->module_check['forum']) {
             $modules['forum'] = ['locale' => '11'];
         }
 
-        if ($this->gallery) {
+        if ($this->module_check['gallery']) {
             $modules['gallery'] = ['locale' => '12'];
             $modules['gallery_albums'] = ['locale' => '13'];
         }
 
-        if ($this->news) {
+        if ($this->module_check['news']) {
             $modules['news'] = ['locale' => '14'];
             $modules['news_cats'] = ['locale' => '15'];
         }
 
-        if ($this->videos) {
+        if ($this->module_check['videos']) {
             $modules['videos'] = ['locale' => '16'];
             $modules['video_cats'] = ['locale' => '17'];
         }
 
-        if ($this->weblinks) {
+        if ($this->module_check['weblinks']) {
             $modules['weblinks'] = ['locale' => '18'];
             $modules['weblink_cats'] = ['locale' => '19'];
         }
@@ -939,35 +931,35 @@ class SitemapGenerator {
 
         if (file_exists($this->sitemap_file)) {
             echo '<div class="well">';
-                echo $this->locale['smg_001'].' '.showdate('longdate', filemtime($this->sitemap_file));
-                echo '<br/><a href="'.$this->sitemap_file.'" target="_blank">'.$this->locale['smg_002'].'</a></span>';
+            echo $this->locale['smg_001'].' '.showdate('longdate', filemtime($this->sitemap_file));
+            echo '<br/><a href="'.$this->sitemap_file.'" target="_blank">'.$this->locale['smg_002'].'</a></span>';
             echo '</div>';
         }
 
         add_to_css('#sitemaptable .form-group {margin-bottom: 0;}');
 
         echo openform('savechanges', 'post', FUSION_REQUEST, ['class' => 'm-t-15']);
-            echo '<div class="panel panel-default" id="sitemaptable">';
-                echo '<div class="table-responsive"><table class="table table-striped">';
-                    echo '<thead><tr>';
-                        echo '<th></th>';
-                        echo '<th>'.$this->locale['smg_006'].'</th>';
-                        echo '<th>'.$this->locale['smg_014'].'</th>';
-                    echo '</tr></thead>';
-                    echo '<tbody>';
-                        echo $this->modules();
-                    echo '</tbody>';
-                echo '</table></div>';
+        echo '<div class="panel panel-default" id="sitemaptable">';
+        echo '<div class="table-responsive"><table class="table table-striped">';
+        echo '<thead><tr>';
+        echo '<th></th>';
+        echo '<th>'.$this->locale['smg_006'].'</th>';
+        echo '<th>'.$this->locale['smg_014'].'</th>';
+        echo '</tr></thead>';
+        echo '<tbody>';
+        echo $this->modules();
+        echo '</tbody>';
+        echo '</table></div>';
 
-                $selectall = form_checkbox('selectall', $this->locale['smg_003'], '', [
-                    'reverse_label' => TRUE,
-                    'class'         => 'm-b-0'
-                ]);
-                $save = form_button('save_changes', $this->locale['save_changes'], 'save', ['class' => 'btn-success btn-sm']);
-                echo '<div class="panel-footer"><div class="pull-left">'.$selectall.'</div><div class="text-center">'.$save.'</div></div>';
-            echo '</div>'; // .panel
+        $selectall = form_checkbox('selectall', $this->locale['smg_003'], '', [
+            'reverse_label' => TRUE,
+            'class'         => 'm-b-0'
+        ]);
+        $save = form_button('save_changes', $this->locale['save_changes'], 'save', ['class' => 'btn-success btn-sm']);
+        echo '<div class="panel-footer"><div class="pull-left">'.$selectall.'</div><div class="text-center">'.$save.'</div></div>';
+        echo '</div>'; // .panel
 
-            add_to_jquery('
+        add_to_jquery('
                 var checkbox = $(\'input[id ^= "enabled_"]\');
 
                 if ($(\'input[id ^= "enabled_"]:checked\').length == checkbox.length) {
@@ -981,7 +973,7 @@ class SitemapGenerator {
         echo closeform();
 
         echo openform('generatexml', 'post', FUSION_REQUEST, ['class' => 'm-t-15']);
-            echo form_button('generate', $this->locale['smg_004'], 'generate', ['class' => 'btn-default text-center']);
+        echo form_button('generate', $this->locale['smg_004'], 'generate', ['class' => 'btn-default text-center']);
         echo closeform();
     }
 
@@ -1033,35 +1025,35 @@ class SitemapGenerator {
         }
 
         echo '<div class="row m-t-30">';
-            echo '<div class="col-xs-12 col-sm-6">';
-                openside();
-                    echo openform('addlink', 'post', FUSION_REQUEST);
-                    echo form_hidden('link_id', '', $this->custom_links['link_id']);
-                    echo form_text('url', $this->locale['smg_005'], $this->custom_links['url'], ['type' => 'url', 'required' => TRUE, 'placeholder' => 'https://example.com/']);
-                    echo form_button('save', $this->locale['save'], 'save', ['class' => 'btn-success']);
-                    echo form_button('cancel', $this->locale['cancel'], 'cancel');
-                    echo closeform();
-                closeside();
-            echo '</div>';
+        echo '<div class="col-xs-12 col-sm-6">';
+        openside();
+        echo openform('addlink', 'post', FUSION_REQUEST);
+        echo form_hidden('link_id', '', $this->custom_links['link_id']);
+        echo form_text('url', $this->locale['smg_005'], $this->custom_links['url'], ['type' => 'url', 'required' => TRUE, 'placeholder' => 'https://example.com/']);
+        echo form_button('save', $this->locale['save'], 'save', ['class' => 'btn-success']);
+        echo form_button('cancel', $this->locale['cancel'], 'cancel');
+        echo closeform();
+        closeside();
+        echo '</div>';
 
-            echo '<div class="col-xs-12 col-sm-6">';
-                $result = dbquery("SELECT * FROM ".DB_SITEMAP_LINKS);
+        echo '<div class="col-xs-12 col-sm-6">';
+        $result = dbquery("SELECT * FROM ".DB_SITEMAP_LINKS);
 
-                if (dbrows($result) > 0) {
-                    openside($this->locale['smg_type_01']);
-                    while ($data = dbarray($result)) {
-                        echo '<div>';
-                            echo '<span class="badge">'.$data['url'].'</span> ';
-                            echo '<span class="pull-right">';
-                                echo '<a href="'.FUSION_SELF.fusion_get_aidlink().'&section=links&action=edit&link_id='.$data['link_id'].'">'.$this->locale['edit'].'</a>';
-                                echo ' | ';
-                                echo '<a href="'.FUSION_SELF.fusion_get_aidlink().'&section=links&action=delete&link_id='.$data['link_id'].'">'.$this->locale['delete'].'</a>';
-                            echo '</span>';
-                        echo '</div>';
-                    }
-                    closeside();
-                }
-            echo '</div>';
+        if (dbrows($result) > 0) {
+            openside($this->locale['smg_type_01']);
+            while ($data = dbarray($result)) {
+                echo '<div>';
+                echo '<span class="badge">'.$data['url'].'</span> ';
+                echo '<span class="pull-right">';
+                echo '<a href="'.FUSION_SELF.fusion_get_aidlink().'&section=links&action=edit&link_id='.$data['link_id'].'">'.$this->locale['edit'].'</a>';
+                echo ' | ';
+                echo '<a href="'.FUSION_SELF.fusion_get_aidlink().'&section=links&action=delete&link_id='.$data['link_id'].'">'.$this->locale['delete'].'</a>';
+                echo '</span>';
+                echo '</div>';
+            }
+            closeside();
+        }
+        echo '</div>';
         echo '</div>';
     }
 
@@ -1091,16 +1083,16 @@ class SitemapGenerator {
 
         echo openform('savesettings', 'post', FUSION_REQUEST, ['class' => 'm-t-15']);
         openside();
-            $update_interval = $this->sitemap_settings['update_interval'] / 60 / 60;
-            echo form_text('update_interval', $this->locale['smg_016'], $update_interval, ['type' => 'number', 'inline' => TRUE]);
-            echo form_checkbox('auto_update', $this->locale['smg_015'], $this->sitemap_settings['auto_update'], ['reverse_label' => TRUE]);
+        $update_interval = $this->sitemap_settings['update_interval'] / 60 / 60;
+        echo form_text('update_interval', $this->locale['smg_016'], $update_interval, ['type' => 'number', 'inline' => TRUE]);
+        echo form_checkbox('auto_update', $this->locale['smg_015'], $this->sitemap_settings['auto_update'], ['reverse_label' => TRUE]);
 
-            echo form_select('sitemap_index', $this->locale['smg_018'], $this->sitemap_settings['sitemap_index'], [
-                'options' => [1 => $this->locale['yes'], 0 => $this->locale['no']],
-                'inline'  => TRUE
-            ]);
+        echo form_select('sitemap_index', $this->locale['smg_018'], $this->sitemap_settings['sitemap_index'], [
+            'options' => [1 => $this->locale['yes'], 0 => $this->locale['no']],
+            'inline'  => TRUE
+        ]);
 
-            echo form_button('save_settings', $this->locale['save'], 'save', ['class' => 'btn-success m-t-5']);
+        echo form_button('save_settings', $this->locale['save'], 'save', ['class' => 'btn-success m-t-5']);
         closeside();
         echo closeform();
     }

@@ -36,9 +36,9 @@ $data = [
     'video_url'            => '',
     'video_embed'          => '',
     'video_image'          => '',
-    'video_allow_comments' => 0,
-    'video_allow_ratings'  => 0,
-    'video_allow_likes'    => 0
+    'video_allow_comments' => 1,
+    'video_allow_ratings'  => 1,
+    'video_allow_likes'    => 1
 ];
 
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['video_id']) && isnum($_GET['video_id']))) {

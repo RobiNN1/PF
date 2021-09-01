@@ -35,13 +35,12 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
         || dbcount("(video_cat_id)", DB_VIDEO_CATS, "video_cat_parent='".intval($_GET['cat_id'])."'")
     ) {
         addNotice('danger', $locale['vid_032']);
-        redirect(clean_request('cat_view=1', ['section', 'aid']));
     } else {
 
         dbquery("DELETE FROM ".DB_VIDEO_CATS." WHERE video_cat_id='".intval($_GET['cat_id'])."'");
         addNotice('success', $locale['vid_notice_05']);
-        redirect(clean_request('cat_view=1', ['section', 'aid']));
     }
+    redirect(clean_request('cat_view=1', ['section', 'aid']));
 }
 
 if (isset($_POST['save_cat'])) {
@@ -147,27 +146,23 @@ echo opentab($tab_cats, $tab_cats_active, 'categories', FALSE, 'nav-tabs');
                 'autosize' => TRUE,
             ]);
 
+            echo '<label class="control-label">'.$locale['vid_037'].'</label>';
             echo '<div class="row">';
-                echo '<div class="col-xs-12 col-sm-7">';
-                    echo '<label class="control-label">'.$locale['vid_037'].'</label>';
+                echo '<div class="col-xs-12 col-sm-3">';
                     echo form_select('video_cat_sort_by', '', $data['video_cat_sort_by'], [
                         'options'     => [
                             '1' => $locale['vid_038'],
                             '2' => $locale['vid_010'],
                             '3' => $locale['vid_039']
                         ],
-                        'class'       => 'pull-left',
-                        'inner_width' => '200px',
-                        'inline'      => TRUE
+                        'width' => '200px'
                     ]);
                 echo '</div>';
 
-                echo '<div class="col-xs-12 col-sm-5">';
-                    echo '<label class="control-label"><!-- --></label>';
+                echo '<div class="col-xs-12 col-sm-9">';
                     echo form_select('video_cat_sort_order', '', $data['video_cat_sort_order'], [
                         'options'     => ['ASC' => $locale['vid_040'], 'DESC' => $locale['vid_041']],
-                        'inner_width' => '200px',
-                        'inline'      => TRUE
+                        'width' => '200px'
                     ]);
                 echo '</div>';
             echo '</div>';

@@ -132,7 +132,7 @@ function subs_members() {
     echo '</div></table>';
 
     if ($total_rows > $rows) {
-        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section'], TRUE).'&subs=members&');
+        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section']).'&subs=members&');
     }
 }
 
@@ -187,7 +187,7 @@ function subs_guests($link) {
     $rows = dbrows($result);
 
     echo openform('subs_table', 'post', FUSION_REQUEST);
-    echo form_hidden('table_action', '', '');
+    echo form_hidden('table_action');
 
     echo '<div class="table-responsive"><table id="subs-table" class="table table-striped table-bordered">';
         echo '<thead><tr>';
@@ -214,9 +214,9 @@ function subs_guests($link) {
         echo '</tbody>';
     echo '</div></table>';
 
-    closeform();
+    echo closeform();
 
     if ($total_rows > $rows) {
-        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section'], TRUE).'&');
+        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section']).'&');
     }
 }

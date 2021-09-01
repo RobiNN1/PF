@@ -41,9 +41,13 @@ foreach ($sites as $site) {
         echo '<div class="col-xs-12 col-sm-6">';
         openside($site['name']);
 
-        foreach ($rss->item as $item) {
-            echo '<a href="'.htmlspecialchars($item->url).'" target="_blank">'.htmlspecialchars($item->title).'</a>';
-            echo '<hr class="m-0">';
+        if (!empty($rss->item)) {
+            foreach ($rss->item as $item) {
+                if (!empty($item->url) && !empty($item->title)) {
+                    echo '<a href="'.htmlspecialchars($item->url).'" target="_blank">'.htmlspecialchars($item->title).'</a>';
+                    echo '<hr class="m-0">';
+                }
+            }
         }
 
         closeside();

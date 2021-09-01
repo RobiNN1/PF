@@ -20,14 +20,14 @@ defined('IN_FUSION') || exit;
 $locale = fusion_get_locale('', DOCS_LOCALE);
 
 // Infusion general information
-$inf_title       = $locale['docs_title'];
+$inf_title = $locale['docs_title'];
 $inf_description = $locale['docs_desc'];
-$inf_version     = '1.0.1';
-$inf_developer   = 'RobiNN';
-$inf_email       = 'robinn@php-fusion.eu';
-$inf_weburl      = 'https://github.com/RobiNN1';
-$inf_folder      = 'docs';
-$inf_image       = 'docs.svg';
+$inf_version = '1.0.1';
+$inf_developer = 'RobiNN';
+$inf_email = 'robinn@php-fusion.eu';
+$inf_weburl = 'https://github.com/RobiNN1';
+$inf_folder = 'docs';
+$inf_image = 'docs.svg';
 
 // Create tables
 $inf_newtable[] = DB_DOCS." (

@@ -105,7 +105,7 @@ if (get('ref') == 'form') {
     echo form_text('tpl_name', $locale['nsl_019'], $data['tpl_name'], ['required' => TRUE]);
 
     $email_templates = ['none' => $locale['nsl_041']];
-    $templates = makefilelist(NEWSLETTER.'email_templates/', '.|..|index.php|newsletter_confirm.html', TRUE, 'files');
+    $templates = makefilelist(NEWSLETTER.'email_templates/', '.|..|index.php|newsletter_confirm.html');
     foreach ($templates as $name) {
         $email_templates[$name] = $name;
     }
@@ -113,8 +113,8 @@ if (get('ref') == 'form') {
     echo form_select('tpl_file', $locale['nsl_042'], $data['tpl_file'], ['options' => $email_templates]);
 
     if (!empty($_GET['tpl'])) {
-        if (file_exists(NEWSLETTER.'admin/tpls/'.(string) $_GET['tpl'].'.html')) {
-            $data['tpl_body'] = file_get_contents(NEWSLETTER.'admin/tpls/'.(string) $_GET['tpl'].'.html');
+        if (file_exists(NEWSLETTER.'admin/tpls/'.$_GET['tpl'].'.html')) {
+            $data['tpl_body'] = file_get_contents(NEWSLETTER.'admin/tpls/'.$_GET['tpl'].'.html');
             $data['tpl_style'] = (file_get_contents(NEWSLETTER.'admin/tpls/default.css'));
         }
     }
@@ -195,7 +195,7 @@ if (get('ref') == 'form') {
     $rows = dbrows($result);
 
     if ($total_rows > $rows) {
-        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section'], TRUE).'&');
+        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section']).'&');
     }
 
     echo '<div class="clearfix m-b-20">';
@@ -218,7 +218,7 @@ if (get('ref') == 'form') {
     echo closemodal();
 
     echo openform('subs_table', 'post', FUSION_REQUEST);
-    echo form_hidden('table_action', '', '');
+    echo form_hidden('table_action');
 
     echo '<div class="table-responsive"><table id="subs-table" class="table table-striped table-bordered">';
         echo '<thead><tr>';
@@ -245,9 +245,9 @@ if (get('ref') == 'form') {
         echo '</tbody>';
     echo '</div></table>';
 
-    closeform();
+    echo closeform();
 
     if ($total_rows > $rows) {
-        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section'], TRUE).'&');
+        echo makepagenav($rowstart, $limit, $total_rows, $limit, clean_request('', ['aid', 'section']).'&');
     }
 }

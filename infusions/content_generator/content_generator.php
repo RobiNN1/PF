@@ -332,7 +332,7 @@ class ContentGenerator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $type = $addons[array_rand($addons, 1)];
+                $type = $addons[array_rand($addons)];
 
                 $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
                 $values .= $i < $num ? ', ' : ';';
@@ -355,7 +355,7 @@ class ContentGenerator {
 
             $values = '';
             for ($i = 1; $i <= $num; $i++) {
-                $type = $addons[array_rand($addons, 1)];
+                $type = $addons[array_rand($addons)];
 
                 $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".rand(1, 5)."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 4)";
                 $values .= $i < $num ? ', ' : ';';

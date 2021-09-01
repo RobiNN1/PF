@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('SS_LOCALE')) {
     if (file_exists(INFUSIONS.'server_status_panel/locale/'.LOCALESET.'.php')) {
         define('SS_LOCALE', INFUSIONS.'server_status_panel/locale/'.LOCALESET.'.php');
@@ -25,13 +26,11 @@ if (!defined('SS_LOCALE')) {
     }
 }
 
-if (!defined('S_STATUS')) {
-    define('S_STATUS', INFUSIONS.'server_status_panel/');
-}
+// Paths
+const S_STATUS = INFUSIONS.'server_status_panel/';
 
-if (!defined('DB_SERVER_STATUS')) {
-    define('DB_SERVER_STATUS', DB_PREFIX.'server_status');
-}
+// Database
+const DB_SERVER_STATUS = DB_PREFIX.'server_status';
 
 // Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SS', '<i class="admin-ico fa fa-fw fa-server"></i>');

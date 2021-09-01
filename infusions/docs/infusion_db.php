@@ -17,6 +17,7 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
+// Locales
 if (!defined('DOCS_LOCALE')) {
     if (file_exists(INFUSIONS.'docs/locale/'.LANGUAGE.'.php')) {
         define('DOCS_LOCALE', INFUSIONS.'docs/locale/'.LANGUAGE.'.php');
@@ -25,16 +26,12 @@ if (!defined('DOCS_LOCALE')) {
     }
 }
 
-if (!defined('DOCS')) {
-    define('DOCS', INFUSIONS.'docs/');
-}
+// Paths
+const DOCS = INFUSIONS.'docs/';
 
-if (!defined('DB_DOCS')) {
-    define('DB_DOCS', DB_PREFIX.'docs');
-}
+// Database
+const DB_DOCS = DB_PREFIX.'docs';
+const DB_DOCS_CATS = DB_PREFIX.'docs_cats';
 
-if (!defined('DB_DOCS_CATS')) {
-    define('DB_DOCS_CATS', DB_PREFIX.'docs_cats');
-}
-
+// Admin Settings
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('DOCS', '<i class="admin-ico fa fa-fw fa-file-alt"></i>');
