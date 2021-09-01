@@ -10,6 +10,7 @@ Some addons may require newer PHP.
 - [CP Icon Sets](infusions/cp_icon_sets)
 - [Docs](infusions/docs)
 - [GitHub Client](infusions/github)
+- [Jobs](infusions/jobs)
 - [Legal Pages](infusions/legal)
 - [Script Loader](infusions/script_loader)
 - [Sitemap Generator](infusions/sitemap)
