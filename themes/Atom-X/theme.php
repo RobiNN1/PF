@@ -26,7 +26,7 @@ const BOOTSTRAP = TRUE;
 const FONTAWESOME = TRUE;
 const SOCIAL_SHARE = TRUE; // Set FALSE to turn Off, used only in News
 
-// Uncomment and edit, if you want show social networks in right top
+// Uncomment and edit, if you want to show social networks in right top
 /*define('ATOMX_SOCIAL_NETWORKS', [
     'https://www.facebook.com/PHPFusion' => 'fa fa-facebook',
     'https://github.com/PHPFusion' => 'fa fa-github',

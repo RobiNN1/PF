@@ -24,6 +24,13 @@ class HomePage extends Core {
         $locale = fusion_get_locale();
         self::setTplCss('homepage');
 
+        // Push News to top
+        if (defined('NEWS_EXISTS') && !empty($info[DB_NEWS])) {
+            $temp = [DB_NEWS => $info[DB_NEWS]];
+            unset($info[DB_NEWS]);
+            $info = $temp + $info;
+        }
+
         echo '<div id="home-page">';
             foreach ($info as $content) {
                 echo '<div class="module">';
