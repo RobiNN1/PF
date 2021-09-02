@@ -34,7 +34,7 @@ $data = [
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['tpl_id']) && isnum($_GET['tpl_id']))) {
     dbquery("DELETE FROM ".DB_NEWSLETTER_TEMPLATES." WHERE tpl_id='".$_GET['tpl_id']."'");
 
-    addNotice('success', $locale['nsl_notice_15']);
+    addnotice('success', $locale['nsl_notice_15']);
     redirect($link);
 }
 
@@ -68,21 +68,21 @@ if (isset($_POST['save_tpl']) || isset($_POST['test_tpl'])) {
         $sender = !empty($nsl_settings['test_email']) ? $nsl_settings['test_email'] : $nsl_settings['sender_email'];
         $mail = send_newsletter($data['tpl_name'], $body, $sender, $data['tpl_priority'], random_token(), $data['tpl_style']);
         if ($mail['result'] == TRUE) {
-            addNotice('success', $locale['nsl_notice_16'].' '.$nsl_settings['sender_email']);
+            addnotice('success', $locale['nsl_notice_16'].' '.$nsl_settings['sender_email']);
         } else {
-            addNotice('warning', $locale['nsl_notice_17'].' '.$mail['error']);
+            addnotice('warning', $locale['nsl_notice_17'].' '.$mail['error']);
         }
     }
 
     if (dbcount("(tpl_id)", DB_NEWSLETTER_TEMPLATES, "tpl_id='".$data['tpl_id']."'")) {
         dbquery_insert(DB_NEWSLETTER_TEMPLATES, $data, 'update');
         if (\defender::safe() && !isset($_POST['test_tpl'])) {
-            addNotice('success', $locale['nsl_notice_18']);
+            addnotice('success', $locale['nsl_notice_18']);
         }
     } else {
         dbquery_insert(DB_NEWSLETTER_TEMPLATES, $data, 'save');
         if (\defender::safe() && !isset($_POST['test_tpl'])) {
-            addNotice('success', $locale['nsl_notice_19']);
+            addnotice('success', $locale['nsl_notice_19']);
         }
     }
 
@@ -173,7 +173,7 @@ if (get('ref') == 'form') {
                     switch ($_POST['table_action']) {
                         case 'delete':
                             dbquery("DELETE FROM ".DB_NEWSLETTER_TEMPLATES." WHERE tpl_id = :tpl_id", [':tpl_id' => (int)$tpl_id]);
-                            addNotice('success', $locale['nsl_notice_20']);
+                            addnotice('success', $locale['nsl_notice_20']);
                             break;
                         default:
                             redirect(FUSION_REQUEST);
@@ -183,7 +183,7 @@ if (get('ref') == 'form') {
             redirect(FUSION_REQUEST);
         }
 
-        addNotice('warning', $locale['nsl_notice_21']);
+        addnotice('warning', $locale['nsl_notice_21']);
         redirect(FUSION_REQUEST);
     }
 

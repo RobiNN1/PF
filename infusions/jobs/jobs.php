@@ -108,7 +108,7 @@ if (isset($_GET['job_id'])) {
 
                 if (!$_CAPTCHA_IS_VALID) {
                     \defender::stop();
-                    addNotice('warning', $locale['jb_169']);
+                    addnotice('warning', $locale['jb_169']);
                 }
             }
 
@@ -122,20 +122,20 @@ if (isset($_GET['job_id'])) {
                         $data['job_applicant_cv'] = $upload['target_file'];
                     } else {
                         \defender::stop();
-                        addNotice('warning', $locale['jb_170']);
+                        addnotice('warning', $locale['jb_170']);
                     }
                 }
 
                 unset($upload);
             } else if ($jobs_settings['required_cv'] == 1) {
                 \Defender::stop();
-                addNotice('danger', $locale['jb_196']);
+                addnotice('danger', $locale['jb_196']);
             }
 
             dbquery_insert(DB_JOB_APPLICANTS, $data, 'save');
 
             if (\defender::safe()) {
-                addNotice('success', $locale['jb_171']);
+                addnotice('success', $locale['jb_171']);
                 redirect(FUSION_REQUEST);
             }
         }

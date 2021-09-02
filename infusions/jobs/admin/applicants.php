@@ -35,7 +35,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['app
 
     dbquery("DELETE FROM ".DB_JOB_APPLICANTS." WHERE job_applicant_id='".intval($_GET['applicant_id'])."'");
 
-    addNotice('success', $locale['jb_143']);
+    addnotice('success', $locale['jb_143']);
     redirect(clean_request('', ['action', 'applicant_id'], FALSE));
 }
 
@@ -103,7 +103,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'view') && (isset($_GET['appli
                 if (!sendemail($data['job_applicant_firstname'].' '.$data['job_applicant_lastname'], $data['job_applicant_email'],
                     fusion_get_userdata('user_name'), $jobs_settings['email'], $input['subject'], $input['message'])) {
                     \defender::stop();
-                    addNotice('danger', $locale['jb_150']);
+                    addnotice('danger', $locale['jb_150']);
                     $email = FALSE;
                 }
 
@@ -117,7 +117,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'view') && (isset($_GET['appli
                 }
 
                 if (\defender::safe()) {
-                    addNotice('success', $locale['jb_151']);
+                    addnotice('success', $locale['jb_151']);
                     redirect($link);
                 }
             }

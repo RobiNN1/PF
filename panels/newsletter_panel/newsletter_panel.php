@@ -44,7 +44,7 @@ if (defined('NEWSLETTER_PANEL_EXISTS')) {
                 ];
 
                 dbquery_insert(DB_USERS, $db, 'update');
-                addNotice('success', $locale['nsl_notice_24']);
+                addnotice('success', $locale['nsl_notice_24']);
             }
         } else {
             $data = [
@@ -71,7 +71,7 @@ if (defined('NEWSLETTER_PANEL_EXISTS')) {
                 ]);
 
                 send_newsletter($locale['nsl_061'], $body, $data['sub_email'], 3, 'html', $data['sub_token']);
-                addNotice('success', $locale['nsl_notice_25']);
+                addnotice('success', $locale['nsl_notice_25']);
             }
         }
 

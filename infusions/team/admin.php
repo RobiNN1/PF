@@ -18,7 +18,7 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('TM');
+pageaccess('TM');
 
 $locale = fusion_get_locale('', TM_LOCALE);
 $aidlink = fusion_get_aidlink();
@@ -73,7 +73,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['tea
         dbquery("DELETE FROM ".DB_TEAM." WHERE team_id='".intval($_GET['team_id'])."'");
     }
 
-    addNotice('success', $locale['tm_011']);
+    addnotice('success', $locale['tm_011']);
     redirect(FUSION_SELF.$aidlink);
 }
 
@@ -131,13 +131,13 @@ switch ($_GET['section']) {
             if (dbcount('(team_id)', DB_TEAM, "team_id='".$data['team_id']."'")) {
                 dbquery_insert(DB_TEAM, $data, 'update');
                 if (\defender::safe()) {
-                    addNotice('success', $locale['tm_010']);
+                    addnotice('success', $locale['tm_010']);
                     redirect(FUSION_SELF.$aidlink);
                 }
             } else {
                 dbquery_insert(DB_TEAM, $data, 'save');
                 if (\defender::safe()) {
-                    addNotice('success', $locale['tm_009']);
+                    addnotice('success', $locale['tm_009']);
                     redirect(FUSION_SELF.$aidlink);
                 }
             }

@@ -41,7 +41,7 @@ if (check_post('save_settings')) {
             dbquery_insert(DB_SETTINGS_INF, $db, 'update', ['primary_key' => 'settings_name']);
         }
 
-        addNotice('success', $locale['settings_updated']);
+        addnotice('success', $locale['settings_updated']);
         redirect(FUSION_REQUEST);
     }
 }

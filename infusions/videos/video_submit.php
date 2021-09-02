@@ -62,7 +62,7 @@ if (iMEMBER && $video_settings['video_allow_submission'] && checkgroup($video_se
                     $criteria_array['video_file'] = $upload['target_file'];
                 } else {
                     \defender::stop();
-                    addNotice('warning', $locale['vid_078']);
+                    addnotice('warning', $locale['vid_078']);
                 }
             }
 
@@ -73,7 +73,7 @@ if (iMEMBER && $video_settings['video_allow_submission'] && checkgroup($video_se
             $criteria_array['video_embed'] = form_sanitizer($_POST['video_embed'], '', 'video_embed');
         } else if (empty($data['video_file']) && empty($data['video_url']) && empty($data['video_embed'])) {
             \defender::stop();
-            addNotice('danger', $locale['vid_notice_04']);
+            addnotice('danger', $locale['vid_notice_04']);
         }
 
         if (\defender::safe() && !empty($_FILES['video_image']['name']) && is_uploaded_file($_FILES['video_image']['tmp_name'])) {
@@ -93,7 +93,7 @@ if (iMEMBER && $video_settings['video_allow_submission'] && checkgroup($video_se
             ];
 
             dbquery_insert(DB_SUBMISSIONS, $input_array, 'save');
-            addNotice('success', $locale['vid_079']);
+            addnotice('success', $locale['vid_079']);
             redirect(clean_request('submitted=v', ['stype']));
         }
     }

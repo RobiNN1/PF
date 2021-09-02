@@ -18,7 +18,7 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('SS');
+pageaccess('SS');
 
 $locale = fusion_get_locale('', SS_LOCALE);
 $link = FUSION_SELF.fusion_get_aidlink();
@@ -59,7 +59,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['ser
         dbquery("DELETE FROM ".DB_SERVER_STATUS." WHERE server_id='".intval($_GET['server_id'])."'");
     }
 
-    addNotice('success', $locale['ss_notice_01']);
+    addnotice('success', $locale['ss_notice_01']);
     redirect($link);
 }
 
@@ -120,13 +120,13 @@ function server_form() {
         if (dbcount('(server_id)', DB_SERVER_STATUS, "server_id='".$data['server_id']."'")) {
             dbquery_insert(DB_SERVER_STATUS, $data, 'update');
             if (\defender::safe()) {
-                addNotice('success', $locale['ss_notice_02']);
+                addnotice('success', $locale['ss_notice_02']);
                 redirect($link);
             }
         } else {
             dbquery_insert(DB_SERVER_STATUS, $data, 'save');
             if (\defender::safe()) {
-                addNotice('success', $locale['ss_notice_03']);
+                addnotice('success', $locale['ss_notice_03']);
                 redirect($link);
             }
         }
@@ -145,7 +145,7 @@ function server_form() {
             dbquery("UPDATE ".DB_SERVER_STATUS." SET server_order = server_order - 1 WHERE server_id = '".$data['server_id']."'");
         }
 
-        addNotice('success', $locale['ss_notice_04']);
+        addnotice('success', $locale['ss_notice_04']);
         redirect($link);
     }
 

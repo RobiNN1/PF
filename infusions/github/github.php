@@ -28,7 +28,7 @@ require_once THEMES.'templates/admin_header.php';
  * @link https://github.com/erusev/parsedown
  */
 
-pageAccess('GH');
+pageaccess('GH');
 
 $locale = fusion_get_locale('', GH_LOCALE);
 $gh_settings = get_settings('github');
@@ -104,7 +104,7 @@ if ($rate_limit > 2) {
                     dbquery_insert(DB_SETTINGS_INF, $db, 'update', ['primary_key' => 'settings_name']);
                 }
 
-                addNotice('success', $locale['gh_003']);
+                addnotice('success', $locale['gh_003']);
                 redirect(FUSION_REQUEST);
             }
         }
@@ -117,7 +117,7 @@ if ($rate_limit > 2) {
                 ':user_id'      => $userdata['user_id']
             ]);
 
-            addNotice('success', $locale['gh_004']);
+            addnotice('success', $locale['gh_004']);
             redirect(FUSION_REQUEST);
         }
 
@@ -246,7 +246,7 @@ if ($rate_limit > 2) {
                                 if (\defender::safe()) {
                                     $client->api('issue')->create($owner, $repo_name, ['title' => $title, 'body' => !empty($_POST['comment_body']) ? $_POST['comment_body'] : '']);
 
-                                    addNotice('success', $locale['gh_025']);
+                                    addnotice('success', $locale['gh_025']);
                                     redirect(FUSION_REQUEST);
                                 }
                             }

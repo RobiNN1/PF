@@ -18,7 +18,7 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('SCL');
+pageaccess('SCL');
 
 $locale = fusion_get_locale('', SCL_LOCALE);
 
@@ -47,7 +47,7 @@ if (isset($_POST['savecode'])) {
 
     if (\defender::safe()) {
         dbquery_insert(DB_SCRIPT_LOADER, $data, 'update', ['primary_key' => 'type']);
-        addNotice('success', $locale['scl_notice']);
+        addnotice('success', $locale['scl_notice']);
     }
 
     redirect(FUSION_REQUEST);

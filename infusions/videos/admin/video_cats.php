@@ -34,11 +34,11 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
     if (dbcount("(video_cat)", DB_VIDEOS, "video_cat='".intval($_GET['cat_id'])."'")
         || dbcount("(video_cat_id)", DB_VIDEO_CATS, "video_cat_parent='".intval($_GET['cat_id'])."'")
     ) {
-        addNotice('danger', $locale['vid_032']);
+        addnotice('danger', $locale['vid_032']);
     } else {
 
         dbquery("DELETE FROM ".DB_VIDEO_CATS." WHERE video_cat_id='".intval($_GET['cat_id'])."'");
-        addNotice('success', $locale['vid_notice_05']);
+        addnotice('success', $locale['vid_notice_05']);
     }
     redirect(clean_request('cat_view=1', ['section', 'aid']));
 }
@@ -78,23 +78,23 @@ if (isset($_POST['save_cat'])) {
         if (!dbcount("(video_cat_id)", DB_VIDEO_CATS, $category_name_check['when_updating'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_VIDEO_CATS, $data, 'update');
-                addNotice('success', $locale['vid_notice_06']);
+                addnotice('success', $locale['vid_notice_06']);
                 redirect(clean_request('cat_view=1', ['section', 'aid']));
             }
         } else {
             \defender::stop();
-            addNotice('danger', $locale['vid_notice_07']);
+            addnotice('danger', $locale['vid_notice_07']);
         }
     } else {
         if (!dbcount("(video_cat_id)", DB_VIDEO_CATS, $category_name_check['when_saving'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_VIDEO_CATS, $data, 'save');
-                addNotice('success', $locale['vid_notice_08']);
+                addnotice('success', $locale['vid_notice_08']);
                 redirect(clean_request('cat_view=1', ['section', 'aid']));
             }
         } else {
             \defender::stop();
-            addNotice('danger', $locale['vid_notice_07']);
+            addnotice('danger', $locale['vid_notice_07']);
         }
     }
 }

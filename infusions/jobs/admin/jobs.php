@@ -32,7 +32,7 @@ $data = [
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['job_id']) && isnum($_GET['job_id']))) {
     dbquery("DELETE FROM ".DB_JOBS." WHERE job_id='".intval($_GET['job_id'])."'");
     dbquery("DELETE FROM ".DB_JOB_FAQ." WHERE job_faq_job='".intval($_GET['job_id'])."'");
-    addNotice('success', $locale['jb_112']);
+    addnotice('success', $locale['jb_112']);
     redirect($link);
 }
 
@@ -49,13 +49,13 @@ if (isset($_POST['save_job'])) {
         dbquery_insert(DB_JOBS, $data, 'update');
 
         if (\defender::safe()) {
-            addNotice('success', $locale['jb_113']);
+            addnotice('success', $locale['jb_113']);
             redirect(FUSION_REQUEST);
         }
     } else {
         dbquery_insert(DB_JOBS, $data, 'save');
         if (\defender::safe()) {
-            addNotice('success', $locale['jb_114']);
+            addnotice('success', $locale['jb_114']);
             redirect($link);
         }
     }
@@ -82,7 +82,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'faq' && (isset($_GET['job_id']
             dbquery("UPDATE ".DB_JOB_FAQ." SET job_faq_order = job_faq_order + 1 WHERE job_faq_order = '".($data['job_faq_order'] - 1)."'");
             dbquery("UPDATE ".DB_JOB_FAQ." SET job_faq_order = job_faq_order - 1 WHERE job_faq_id = '".$data['job_faq_id']."'");
         }
-        addNotice('success', $locale['jb_116']);
+        addnotice('success', $locale['jb_116']);
         redirect($link.'&section=form&action=faq&job_id='.$_GET['job_id'].'&edit_faq='.$_GET['edit_faq']);
     }
 
@@ -97,7 +97,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'faq' && (isset($_GET['job_id']
 
     if ((isset($_GET['delete_faq']) && isnum($_GET['delete_faq']))) {
         dbquery("DELETE FROM ".DB_JOB_FAQ." WHERE job_faq_id='".intval($_GET['delete_faq'])."'");
-        addNotice('success', $locale['jb_115']);
+        addnotice('success', $locale['jb_115']);
         redirect($link.'&action=faq&job_id='.$_GET['job_id']);
     }
 
@@ -113,13 +113,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'faq' && (isset($_GET['job_id']
             dbquery_insert(DB_JOB_FAQ, $data, 'update');
 
             if (\defender::safe()) {
-                addNotice('success', $locale['jb_116']);
+                addnotice('success', $locale['jb_116']);
                 redirect(FUSION_REQUEST);
             }
         } else {
             dbquery_insert(DB_JOB_FAQ, $data, 'save');
             if (\defender::safe()) {
-                addNotice('success', $locale['jb_117']);
+                addnotice('success', $locale['jb_117']);
                 redirect($link.'&section=form&action=faq&job_id='.$_GET['job_id']);
             }
         }

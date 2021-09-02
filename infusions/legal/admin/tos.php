@@ -36,7 +36,7 @@ if (isset($_POST['save_item'])) {
             ]);
         }
 
-        addNotice('success', $locale['lg_06']);
+        addnotice('success', $locale['lg_06']);
         redirect(FUSION_REQUEST);
     }
 }

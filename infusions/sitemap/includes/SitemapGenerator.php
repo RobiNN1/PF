@@ -875,7 +875,7 @@ class SitemapGenerator {
         if (isset($_POST['generate'])) {
             $this->generateXml();
 
-            addNotice('success', $this->locale['smg_notice_03']);
+            addnotice('success', $this->locale['smg_notice_03']);
             redirect(FUSION_SELF.fusion_get_aidlink());
         }
 
@@ -925,7 +925,7 @@ class SitemapGenerator {
                 }
             }
 
-            addNotice('success', $this->locale['smg_notice_04']);
+            addnotice('success', $this->locale['smg_notice_04']);
             redirect(FUSION_SELF.fusion_get_aidlink());
         }
 
@@ -987,7 +987,7 @@ class SitemapGenerator {
             if (dbcount('(link_id)', DB_SITEMAP_LINKS, "link_id='".$this->custom_links['link_id']."'")) {
                 dbquery_insert(DB_SITEMAP_LINKS, $this->custom_links, 'update');
                 if (\defender::safe()) {
-                    addNotice('success', $this->locale['smg_notice_01']);
+                    addnotice('success', $this->locale['smg_notice_01']);
 
                     redirect(FUSION_SELF.fusion_get_aidlink().'&section=links');
                 }
@@ -995,7 +995,7 @@ class SitemapGenerator {
                 dbquery_insert(DB_SITEMAP_LINKS, $this->custom_links, 'save');
 
                 if (\defender::safe()) {
-                    addNotice('success', $this->locale['smg_notice_02']);
+                    addnotice('success', $this->locale['smg_notice_02']);
                     redirect(FUSION_SELF.fusion_get_aidlink().'&section=links');
                 }
             }
@@ -1016,7 +1016,7 @@ class SitemapGenerator {
                 dbquery("DELETE FROM ".DB_SITEMAP_LINKS." WHERE link_id='".intval($_GET['link_id'])."'");
             }
 
-            addNotice('success', $this->locale['smg_notice_06']);
+            addnotice('success', $this->locale['smg_notice_06']);
             redirect(INFUSIONS.'sitemap/admin.php'.fusion_get_aidlink());
         }
 
@@ -1077,7 +1077,7 @@ class SitemapGenerator {
                 }
             }
 
-            addNotice('success', $this->locale['smg_notice_05']);
+            addnotice('success', $this->locale['smg_notice_05']);
             redirect(FUSION_REQUEST);
         }
 
@@ -1098,7 +1098,7 @@ class SitemapGenerator {
     }
 
     public function displayAdmin() {
-        pageAccess('SMG');
+        pageaccess('SMG');
 
         add_to_title($this->locale['smg_title_admin']);
 

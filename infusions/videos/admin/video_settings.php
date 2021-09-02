@@ -45,7 +45,7 @@ if (isset($_POST['savesettings'])) {
             }
         }
 
-        addNotice('success', $locale['vid_notice_09']);
+        addnotice('success', $locale['vid_notice_09']);
     }
 
     redirect(FUSION_SELF.fusion_get_aidlink().'&section=settings');

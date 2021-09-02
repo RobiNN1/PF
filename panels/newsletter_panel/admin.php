@@ -18,7 +18,7 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('NSL');
+pageaccess('NSL');
 
 class NewsLetterAdmin {
     private $locale;

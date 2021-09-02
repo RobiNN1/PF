@@ -34,7 +34,7 @@ if (isset($_POST['cancel'])) {
 
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['docs_id']) && isnum($_GET['docs_id']))) {
     dbquery("DELETE FROM ".DB_DOCS." WHERE docs_id='".intval($_GET['docs_id'])."'");
-    addNotice('success', $locale['docs_201']);
+    addnotice('success', $locale['docs_201']);
     redirect(DOCS.'admin.php'.fusion_get_aidlink());
 }
 
@@ -51,12 +51,12 @@ if (isset($_POST['save_page']) || isset($_POST['save_and_close'])) {
     if (dbcount("(docs_id)", DB_DOCS, "docs_id='".$data['docs_id']."'")) {
         if (\defender::safe()) {
             dbquery_insert(DB_DOCS, $data, 'update');
-            addNotice('success', $locale['docs_202']);
+            addnotice('success', $locale['docs_202']);
         }
     } else {
         if (\defender::safe()) {
             dbquery_insert(DB_DOCS, $data, 'save');
-            addNotice('success', $locale['docs_203']);
+            addnotice('success', $locale['docs_203']);
         }
     }
 
@@ -151,11 +151,11 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'form') {
                 }
             }
 
-            addNotice('success', $locale['docs_202']);
+            addnotice('success', $locale['docs_202']);
             redirect(FUSION_REQUEST);
         }
 
-        addNotice('warning', $locale['docs_204']);
+        addnotice('warning', $locale['docs_204']);
         redirect(FUSION_REQUEST);
     }
 

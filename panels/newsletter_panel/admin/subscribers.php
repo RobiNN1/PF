@@ -32,7 +32,7 @@ $data = [
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['sub_id']) && isnum($_GET['sub_id']))) {
     dbquery("DELETE FROM ".DB_NEWSLETTER_SUBS." WHERE sub_id='".$_GET['sub_id']."'");
 
-    addNotice('success', $locale['nsl_notice_08']);
+    addnotice('success', $locale['nsl_notice_08']);
     redirect($link);
 }
 
@@ -48,13 +48,13 @@ if (isset($_POST['save_sub'])) {
     if (dbcount("(sub_id)", DB_NEWSLETTER_SUBS, "sub_id='".$data['sub_id']."'")) {
         dbquery_insert(DB_NEWSLETTER_SUBS, $data, 'update');
         if (\defender::safe()) {
-            addNotice('success', $locale['nsl_notice_09']);
+            addnotice('success', $locale['nsl_notice_09']);
             redirect($link);
         }
     } else {
         dbquery_insert(DB_NEWSLETTER_SUBS, $data, 'save');
         if (\defender::safe()) {
-            addNotice('success', $locale['nsl_notice_10']);
+            addnotice('success', $locale['nsl_notice_10']);
             redirect($link);
         }
     }
@@ -149,15 +149,15 @@ function subs_guests($link) {
                     switch ($_POST['table_action']) {
                         case 'activate':
                             dbquery("UPDATE ".DB_NEWSLETTER_SUBS." SET sub_active = 1 WHERE sub_id = :sub_id", [':sub_id' => (int)$sub_id]);
-                            addNotice('success', $locale['nsl_notice_11']);
+                            addnotice('success', $locale['nsl_notice_11']);
                             break;
                         case 'deactivate':
                             dbquery("UPDATE ".DB_NEWSLETTER_SUBS." SET sub_active = 0 WHERE sub_id = :sub_id", [':sub_id' => (int)$sub_id]);
-                            addNotice('success', $locale['nsl_notice_12']);
+                            addnotice('success', $locale['nsl_notice_12']);
                             break;
                         case 'delete':
                             dbquery("DELETE FROM ".DB_NEWSLETTER_SUBS." WHERE sub_id = :sub_id", [':sub_id' => (int)$sub_id]);
-                            addNotice('success', $locale['nsl_notice_13']);
+                            addnotice('success', $locale['nsl_notice_13']);
                             break;
                         default:
                             redirect(FUSION_REQUEST);
@@ -167,7 +167,7 @@ function subs_guests($link) {
             redirect(FUSION_REQUEST);
         }
 
-        addNotice('warning', $locale['nsl_notice_14']);
+        addnotice('warning', $locale['nsl_notice_14']);
         redirect(FUSION_REQUEST);
     }
 

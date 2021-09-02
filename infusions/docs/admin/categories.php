@@ -36,10 +36,10 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat
     if (dbcount("(docs_cat)", DB_DOCS, "docs_cat='".intval($_GET['cat_id'])."'")
         || dbcount("(docs_cat_id)", DB_DOCS_CATS, "docs_cat_parent='".intval($_GET['cat_id'])."'")
     ) {
-        addNotice('danger', $locale['docs_205']);
+        addnotice('danger', $locale['docs_205']);
     } else {
         dbquery("DELETE FROM ".DB_DOCS_CATS." WHERE docs_cat_id='".intval($_GET['cat_id'])."'");
-        addNotice('success', $locale['docs_206']);
+        addnotice('success', $locale['docs_206']);
     }
     redirect(FUSION_SELF.fusion_get_aidlink().'&section=categories');
 }
@@ -63,21 +63,21 @@ if (isset($_POST['save_cat']) || isset($_POST['save_and_close'])) {
         if (!dbcount("(docs_cat_id)", DB_DOCS_CATS, $category_name_check['when_updating'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_DOCS_CATS, $data, 'update');
-                addNotice('success', $locale['docs_207']);
+                addnotice('success', $locale['docs_207']);
             }
         } else {
             \defender::stop();
-            addNotice('danger', $locale['docs_208']);
+            addnotice('danger', $locale['docs_208']);
         }
     } else {
         if (!dbcount("(docs_cat_id)", DB_DOCS_CATS, $category_name_check['when_saving'])) {
             if (\defender::safe()) {
                 dbquery_insert(DB_DOCS_CATS, $data, 'save');
-                addNotice('success', $locale['docs_209']);
+                addnotice('success', $locale['docs_209']);
             }
         } else {
             \defender::stop();
-            addNotice('danger', $locale['docs_209']);
+            addnotice('danger', $locale['docs_209']);
         }
     }
 
@@ -162,8 +162,8 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'docs_cat_form') {
                             if (!dbcount("(docs_id)", DB_DOCS, "docs_cat=:docs_cat", [':docs_cat' => $docs_cat_id]) && !dbcount("(docs_cat_id)", DB_DOCS_CATS, "docs_cat_parent=:catparent", [':catparent' => $docs_cat_id])) {
                                 dbquery("DELETE FROM  ".DB_DOCS_CATS." WHERE docs_cat_id=:docs_cat_id", [':docs_cat_id' => intval($docs_cat_id)]);
                             } else {
-                                addNotice('warning', $locale['docs_210']);
-                                addNotice('warning', $locale['docs_211']);
+                                addnotice('warning', $locale['docs_210']);
+                                addnotice('warning', $locale['docs_211']);
                             }
                             break;
                         default:
@@ -172,9 +172,9 @@ if (isset($_GET['ref']) && $_GET['ref'] == 'docs_cat_form') {
                 }
             }
 
-            addNotice('success', $locale['docs_207']);
+            addnotice('success', $locale['docs_207']);
         } else {
-            addNotice('warning', $locale['docs_212']);
+            addnotice('warning', $locale['docs_212']);
         }
         redirect(FUSION_REQUEST);
     }

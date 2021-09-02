@@ -71,7 +71,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
 
                 dbquery_insert(DB_VIDEOS, $callback_data, 'save');
                 dbquery("DELETE FROM ".DB_SUBMISSIONS." WHERE submit_id='".intval($_GET['submit_id'])."'");
-                addNotice('success', $locale['vid_047']);
+                addnotice('success', $locale['vid_047']);
                 redirect(clean_request('', ['submit_id'], FALSE));
             }
         } else  {
@@ -97,7 +97,7 @@ if (isset($_GET['submit_id']) && isnum($_GET['submit_id'])) {
                 }
 
                 dbquery("DELETE FROM ".DB_SUBMISSIONS." WHERE submit_id='".intval($callback_data['submit_id'])."'");
-                addNotice('success', $locale['vid_048']);
+                addnotice('success', $locale['vid_048']);
             }
             redirect(clean_request('', ['submit_id'], FALSE));
         } else {

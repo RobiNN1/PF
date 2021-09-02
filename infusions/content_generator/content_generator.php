@@ -18,7 +18,7 @@
 require_once '../../maincore.php';
 require_once THEMES.'templates/admin_header.php';
 
-pageAccess('CG');
+pageaccess('CG');
 
 class ContentGenerator {
     private $locale;
@@ -93,9 +93,9 @@ class ContentGenerator {
 
     private function notice($num, $delete = FALSE) {
         if ($delete == TRUE) {
-            addNotice('success', $this->locale['cg_002']);
+            addnotice('success', $this->locale['cg_002']);
         } else {
-            addNotice('success', $this->locale['cg_003'].' ('.$num.')');
+            addnotice('success', $this->locale['cg_003'].' ('.$num.')');
         }
 
         redirect(FUSION_REQUEST);

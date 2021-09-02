@@ -29,7 +29,7 @@ $data = [
 
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['cat_id']) && isnum($_GET['cat_id']))) {
     dbquery("DELETE FROM ".DB_JOB_CATS." WHERE job_cat_id='".intval($_GET['cat_id'])."'");
-    addNotice('success', $locale['jb_131']);
+    addnotice('success', $locale['jb_131']);
     redirect($link);
 }
 
@@ -44,13 +44,13 @@ if (isset($_POST['save_cat'])) {
         dbquery_insert(DB_JOB_CATS, $data, 'update');
 
         if (\defender::safe()) {
-            addNotice('success', $locale['jb_132']);
+            addnotice('success', $locale['jb_132']);
             redirect($link);
         }
     } else {
         dbquery_insert(DB_JOB_CATS, $data, 'save');
         if (\defender::safe()) {
-            addNotice('success', $locale['jb_133']);
+            addnotice('success', $locale['jb_133']);
             redirect($link);
         }
     }

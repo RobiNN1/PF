@@ -20,7 +20,7 @@ require_once THEMES.'templates/admin_header.php';
 
 require_once INFUSIONS.'sitemap/includes/SitemapGenerator.php';
 
-pageAccess('SMG');
+pageaccess('SMG');
 
 $smg = new SitemapGenerator();
 $smg->displayAdmin();

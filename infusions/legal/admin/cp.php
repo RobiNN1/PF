@@ -30,7 +30,7 @@ $link = LEGAL.'admin.php'.fusion_get_aidlink().'&section=cp';
 if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['legal_id']) && isnum($_GET['legal_id']))) {
     dbquery("DELETE FROM ".DB_LEGAL." WHERE legal_id='".$_GET['legal_id']."'");
 
-    addNotice('success', $locale['lg_07']);
+    addnotice('success', $locale['lg_07']);
     redirect($link);
 }
 
@@ -46,13 +46,13 @@ if (isset($_POST['save_item'])) {
         dbquery_insert(DB_LEGAL, $data, 'update');
 
         if (\defender::safe()) {
-            addNotice('success', $locale['lg_06']);
+            addnotice('success', $locale['lg_06']);
             redirect($link);
         }
     } else {
         dbquery_insert(DB_LEGAL, $data, 'save');
         if (\defender::safe()) {
-            addNotice('success', $locale['lg_05']);
+            addnotice('success', $locale['lg_05']);
             redirect($link);
         }
     }

@@ -44,7 +44,7 @@ if (isset($_POST['savesettings'])) {
             }
         }
 
-        addNotice('success', $locale['jb_164']);
+        addnotice('success', $locale['jb_164']);
     }
 
     redirect($link);

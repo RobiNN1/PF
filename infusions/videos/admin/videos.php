@@ -59,7 +59,7 @@ if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['vid
         dbquery("DELETE FROM ".DB_VIDEO_LIKES." WHERE video_id='".$_GET['video_id']."'");
     }
 
-    addNotice('success', $locale['vid_notice_03']);
+    addnotice('success', $locale['vid_notice_03']);
     redirect(FUSION_SELF.$aidlink);
 }
 
@@ -116,7 +116,7 @@ if (isset($_POST['save_video'])) {
         $data['video_url'] = '';
     } else if (empty($data['video_file']) && empty($data['video_url']) && empty($data['video_embed'])) {
         \defender::stop();
-        addNotice('danger', $locale['vid_notice_04']);
+        addnotice('danger', $locale['vid_notice_04']);
     }
 
     if (\defender::safe() && isset($_POST['delete_image']) && isset($_GET['video_id']) && isnum($_GET['video_id'])) {
@@ -139,13 +139,13 @@ if (isset($_POST['save_video'])) {
     if (dbcount("(video_id)", DB_VIDEOS, "video_id='".$data['video_id']."'")) {
         dbquery_insert(DB_VIDEOS, $data, 'update');
         if (\defender::safe()) {
-            addNotice('success', $locale['vid_notice_01']);
+            addnotice('success', $locale['vid_notice_01']);
             redirect(FUSION_SELF.$aidlink);
         }
     } else {
         dbquery_insert(DB_VIDEOS, $data, 'save');
         if (\defender::safe()) {
-            addNotice('success', $locale['vid_notice_02']);
+            addnotice('success', $locale['vid_notice_02']);
             redirect(FUSION_SELF.$aidlink);
         }
     }

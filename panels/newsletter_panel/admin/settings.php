@@ -78,7 +78,7 @@ function sending_settings() {
                 }
             }
 
-            addNotice('success', $locale['nsl_notice_01']);
+            addnotice('success', $locale['nsl_notice_01']);
         }
 
         redirect(FUSION_SELF.fusion_get_aidlink().'&section=settings');
@@ -198,7 +198,7 @@ function additional_headers() {
     if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['header_id']) && isnum($_GET['header_id']))) {
         dbquery("DELETE FROM ".DB_NEWSLETTER_HEADERS." WHERE header_id='".$_GET['header_id']."'");
 
-        addNotice('success', $locale['nsl_notice_02']);
+        addnotice('success', $locale['nsl_notice_02']);
         redirect($link);
     }
 
@@ -212,13 +212,13 @@ function additional_headers() {
         if (dbcount("(header_id)", DB_NEWSLETTER_HEADERS, "header_id='".$data['header_id']."'")) {
             dbquery_insert(DB_NEWSLETTER_HEADERS, $data, 'update');
             if (\defender::safe()) {
-                addNotice('success', $locale['nsl_notice_03']);
+                addnotice('success', $locale['nsl_notice_03']);
                 redirect($link);
             }
         } else {
             dbquery_insert(DB_NEWSLETTER_HEADERS, $data, 'save');
             if (\defender::safe()) {
-                addNotice('success', $locale['nsl_notice_04']);
+                addnotice('success', $locale['nsl_notice_04']);
                 redirect($link);
             }
         }
@@ -299,7 +299,7 @@ function smtp_servers() {
     if ((isset($_GET['action']) && $_GET['action'] == 'delete') && (isset($_GET['smtp_id']) && isnum($_GET['smtp_id']))) {
         dbquery("DELETE FROM ".DB_NEWSLETTER_SMTP." WHERE smtp_id='".$_GET['smtp_id']."'");
 
-        addNotice('success', $locale['nsl_notice_05']);
+        addnotice('success', $locale['nsl_notice_05']);
         redirect($link);
     }
 
@@ -318,13 +318,13 @@ function smtp_servers() {
         if (dbcount("(smtp_id)", DB_NEWSLETTER_SMTP, "smtp_id='".$data['smtp_id']."'")) {
             dbquery_insert(DB_NEWSLETTER_SMTP, $data, 'update');
             if (\defender::safe()) {
-                addNotice('success', $locale['nsl_notice_06']);
+                addnotice('success', $locale['nsl_notice_06']);
                 redirect($link);
             }
         } else {
             dbquery_insert(DB_NEWSLETTER_SMTP, $data, 'save');
             if (\defender::safe()) {
-                addNotice('success', $locale['nsl_notice_07']);
+                addnotice('success', $locale['nsl_notice_07']);
                 redirect($link);
             }
         }
