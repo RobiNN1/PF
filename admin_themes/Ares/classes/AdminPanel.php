@@ -164,7 +164,7 @@ class AdminPanel {
 
             $html .= '<div class="notice">';
                 $html .= '<div id="updatechecker_result" class="alert alert-info" style="display:none;"></div>';
-                $html .= renderNotices(getNotices());
+                $html .= renderNotices(getnotices());
             $html .= '</div>';
 
             $html .= '<div class="main-content">';

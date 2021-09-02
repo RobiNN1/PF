@@ -58,7 +58,7 @@ class AdminPanel {
                 $html .= '</div>';
 
                 $html .= '<div id="updatechecker_result" class="alert alert-info" style="display:none;"></div>';
-                $html .= renderNotices(getNotices());
+                $html .= renderNotices(getnotices());
                 $html .= CONTENT;
 
                 $html .= '<footer class="copyright">';

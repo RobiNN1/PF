@@ -56,7 +56,7 @@ class Auth extends Core {
                         echo '<a href="'.BASEDIR.$settings['opening_page'].'">'.$locale['home'].'</a>';
                     echo '</div>';
                 } else {
-                    echo renderNotices(getNotices(['all', FUSION_SELF]));
+                    echo renderNotices(getnotices(['all', FUSION_SELF]));
 
                     echo '<a href="'.BASEDIR.$settings['opening_page'].'"><img style="margin: 5px auto;" class="img-responsive m-b-20" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'"/></a>';
 
@@ -92,7 +92,7 @@ class Auth extends Core {
         echo '<div class="form-block">';
             echo '<div class="heading">'.$locale['global_107'].'</div>';
             echo '<div class="p-20">';
-                echo renderNotices(getNotices(['all', FUSION_SELF]));
+                echo renderNotices(getnotices(['all', FUSION_SELF]));
 
                 echo '<a href="'.BASEDIR.$settings['opening_page'].'"><img style="margin: 5px auto;" class="img-responsive" src="'.BASEDIR.$settings['sitebanner'].'" alt="'.$settings['sitename'].'"/></a>';
 

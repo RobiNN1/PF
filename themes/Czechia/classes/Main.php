@@ -63,7 +63,7 @@ class Main extends Core {
 
             echo '<div class="container">';
                 if ($this->getParam('notices') == TRUE) {
-                    echo renderNotices(getNotices(['all', FUSION_SELF]));
+                    echo renderNotices(getnotices(['all', FUSION_SELF]));
                 }
 
                 echo defined('AU_CENTER') && AU_CENTER ? AU_CENTER : '';

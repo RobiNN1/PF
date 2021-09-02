@@ -189,7 +189,7 @@ function render_admin_panel() {
 
         $html .= '<section id="content">';
             $html .= '<div id="updatechecker_result" class="alert alert-info" style="display:none;"></div>';
-            $html .= renderNotices(getNotices());
+            $html .= renderNotices(getnotices());
 
             $html .= CONTENT;
         $html .= '</section>'; // #content

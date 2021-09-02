@@ -26,7 +26,7 @@ class Login {
         add_to_jquery('$("#admin_password").focus();');
 
         $html = '<div class="login-container">';
-            $html .= renderNotices(getNotices());
+            $html .= renderNotices(getnotices());
 
             $html .= '<div class="logo">';
                 $html .= '<h1><strong>'.$locale['280'].'</strong></h1>';

@@ -55,7 +55,7 @@ class Main extends Core {
             new SearchEngine();
 
             echo '<div class="notices">';
-                echo renderNotices(getNotices(['all', FUSION_SELF]));
+                echo renderNotices(getnotices(['all', FUSION_SELF]));
             echo '</div>';
 
             if (self::getParam('section_header')) {

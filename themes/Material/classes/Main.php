@@ -100,7 +100,7 @@ class Main extends Core {
 
             if ($this->getParam('notices') == TRUE) {
                 echo '<div class="notices">';
-                    echo renderNotices(getNotices(['all', FUSION_SELF]));
+                    echo renderNotices(getnotices(['all', FUSION_SELF]));
                 echo '</div>';
             }
 

@@ -40,8 +40,8 @@ class AdminPanel {
         $html .= '<div class="content-wrapper animate">';
             $html .= '<div id="updatechecker_result" class="alert alert-info m-b-0" style="display:none;"></div>';
 
-            if (function_exists('renderNotices') && function_exists('getNotices')) {
-                $html .= renderNotices(getNotices());
+            if (function_exists('renderNotices') && function_exists('getnotices')) {
+                $html .= renderNotices(getnotices());
             }
 
             $html .= CONTENT;

@@ -169,7 +169,7 @@ class Main extends Core {
     private function dispalyBody() {
         $theme_settings = get_theme_settings('Atom9');
 
-        $notices = getNotices(['all', FUSION_SELF]);
+        $notices = getnotices(['all', FUSION_SELF]);
 
         if (!empty($notices) && $this->getParam('notices') == TRUE) {
             echo '<section class="top">';

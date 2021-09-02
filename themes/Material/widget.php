@@ -127,10 +127,10 @@ class MWidget {
             if (\defender::safe()) {
                 if (isset($_GET['mt_action']) && $_GET['mt_action'] == 'edit_network' && isset($_GET['network_id']) && isnum($_GET['network_id'])) {
                     dbquery_insert(DB_MT_NETWORKS, $this->sn_data, 'update');
-                    addNotice('success', $this->setLocale('widget_notice_02'));
+                    addnotice('success', $this->setLocale('widget_notice_02'));
                 } else {
                     dbquery_insert(DB_MT_NETWORKS, $this->sn_data, 'save');
-                    addNotice('success', $this->setLocale('widget_notice_01'));
+                    addnotice('success', $this->setLocale('widget_notice_01'));
                 }
 
                 redirect($this->link.'list');
@@ -150,7 +150,7 @@ class MWidget {
                 dbquery("UPDATE ".DB_MT_NETWORKS." SET network_order = network_order - 1 WHERE network_id = '".$data['network_id']."'");
             }
 
-            addNotice('success', $this->setLocale('widget_notice_08'));
+            addnotice('success', $this->setLocale('widget_notice_08'));
             redirect($this->link.'list');
         }
 
@@ -193,7 +193,7 @@ class MWidget {
     private function deleteSocialNetwork() {
         if ((isset($_GET['mt_action']) && $_GET['mt_action'] == 'delete_network') && (isset($_GET['network_id']) && isnum($_GET['network_id']))) {
             dbquery("DELETE FROM ".DB_MT_NETWORKS." WHERE network_id='".intval($_GET['network_id'])."'");
-            addNotice('success', $this->setLocale('widget_notice_03'));
+            addnotice('success', $this->setLocale('widget_notice_03'));
             redirect($this->link.'list');
         }
     }
@@ -221,7 +221,7 @@ class MWidget {
                     dbquery_insert(DB_SETTINGS_THEME, $db, 'update');
                 }
 
-                addNotice('success', $this->setLocale('widget_notice_04'));
+                addnotice('success', $this->setLocale('widget_notice_04'));
                 redirect(FUSION_REQUEST);
             }
         }
