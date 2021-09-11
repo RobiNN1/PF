@@ -18,7 +18,7 @@
 $locale['docs_title'] = 'Docs';
 $locale['docs_desc'] = 'Dokumentationssystem.';
 $locale['docs_001'] = 'Kategorier';
-$locale['docs_002'] = 'Ingen kategorier oprettet.<br/>Du skal oprette mindst en kategorier før du kan tilføje dokumentation.';
+$locale['docs_002'] = 'Ingen kategorier oprettet.<br/>Du skal oprette mindst en kategori før du kan tilføje dokumentation.';
 $locale['docs_003'] = 'Navn';
 $locale['docs_004'] = 'Artikel';
 $locale['docs_005'] = 'Kategori';
