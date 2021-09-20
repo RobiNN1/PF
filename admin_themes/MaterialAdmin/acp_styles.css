@@ -1249,6 +1249,7 @@ main {
 
 .icon-wrapper .btn-app > img {
     max-width: 45px;
+    max-height: 45px;
 }
 
 .copyright {

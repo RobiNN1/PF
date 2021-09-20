@@ -24318,6 +24318,7 @@ a.text-muted:hover {
 .icon-wrapper img {
     margin: 5px auto;
     max-width: 45px;
+    max-height: 45px;
 }
 
 .icon-wrapper .btn-app > span {

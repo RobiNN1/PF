@@ -584,6 +584,7 @@ html:not(.ie9) .mCS-minimal-dark.mCSB_scrollTools_onDrag .mCSB_dragger .mCSB_dra
 
 .icon-wrapper .btn-app > img {
     max-width: 45px;
+    max-height: 45px;
 }
 
 #site-links {
