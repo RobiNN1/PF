@@ -94,7 +94,7 @@ function render_page() {
             $content = ['sm' => 12, 'md' => 12, 'lg' => 12];
             $right   = ['sm' => 4,  'md' => 3,  'lg' => 3];
 
-            if (defined('RIGHT') && RIGHT) {
+            if ((defined('RIGHT') && RIGHT) || (defined('LEFT') && LEFT)) {
                 $content['sm'] = $content['sm'] - $right['sm'];
                 $content['md'] = $content['md'] - $right['md'];
                 $content['lg'] = $content['lg'] - $right['lg'];
@@ -107,7 +107,7 @@ function render_page() {
                 echo showbanners(2);
             echo '</div>';
 
-            if (defined('RIGHT') && RIGHT || defined('LEFT') && LEFT) {
+            if ((defined('RIGHT') && RIGHT) || (defined('LEFT') && LEFT)) {
                 echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
                     echo defined('RIGHT') && RIGHT ? RIGHT : '';
                     echo defined('LEFT') && LEFT ? LEFT : '';
