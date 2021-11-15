@@ -1,0 +1,34 @@
+{
+    "name": "pf/pf-cli",
+    "description": "PHPFusion CLI",
+    "keywords": ["cli", "phpfusion"],
+    "authors": [
+        {
+            "name": "Róbert Kelčák",
+            "email": "robo@kelcak.com",
+            "homepage": "https://kelcak.com"
+        }
+    ],
+    "type": "library",
+    "license": "AGPL-3.0",
+    "require": {
+        "php": "^7.2.5 || ^8",
+        "symfony/console": "^5.3",
+        "symfony/filesystem": "^5.3"
+    },
+    "autoload": {
+        "classmap": [
+            "cli/src"
+        ],
+        "exclude-from-classmap": [
+            "cli/src/boilerplates"
+        ]
+    },
+    "bin": [
+        "bin/pf"
+    ],
+    "config": {
+        "vendor-dir": "cli/vendor"
+    },
+    "minimum-stability": "stable"
+}
