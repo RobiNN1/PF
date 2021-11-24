@@ -23,7 +23,9 @@ class Core {
         'header'        => TRUE,
         'footer'        => TRUE,
         'footer_panels' => TRUE, // set FALSE to disable panels in footer
-        'notices'       => TRUE
+        'notices'       => TRUE,
+        'container'     => TRUE,
+        'main_row'      => TRUE
     ];
 
     protected static function getParam($name = NULL) {

@@ -61,33 +61,37 @@ class Main extends Core {
                 echo '<aside class="leftmenu"><div class="left-content">'.LEFT.'</div></aside>';
             }
 
-            echo '<div class="container">';
+            echo self::getParam('container') == TRUE ? '<div class="container">' : '';
                 if ($this->getParam('notices') == TRUE) {
                     echo renderNotices(getnotices(['all', FUSION_SELF]));
                 }
 
                 echo defined('AU_CENTER') && AU_CENTER ? AU_CENTER : '';
 
-                echo '<div class="row m-t-20 m-b-20">';
+                if (self::getParam('main_row') == TRUE) {
+                    echo '<div class="row m-t-20 m-b-20">';
                     echo '<div class="col-xs-12 col-sm-'.$content['sm'].' col-md-'.$content['md'].' col-lg-'.$content['lg'].'">';
+                }
                         echo showbanners(1);
                         echo defined('U_CENTER') && U_CENTER ? U_CENTER : '';
                         echo CONTENT;
                         echo defined('L_CENTER') && L_CENTER ? L_CENTER : '';
-                    echo '</div>';
+
+                    echo self::getParam('main_row') == TRUE ? '</div>' : '';
 
                     if (defined('RIGHT') && RIGHT && $this->getParam('right') == TRUE) {
                         echo '<div class="col-xs-12 col-sm-'.$right['sm'].' col-md-'.$right['md'].' col-lg-'.$right['lg'].'">';
                             echo defined('RIGHT') && RIGHT ? RIGHT : '';
                         echo '</div>';
                     }
-                echo '</div>';
+
+                echo self::getParam('main_row') == TRUE ? '</div>' : '';
 
                 echo defined('BL_CENTER') && BL_CENTER ? BL_CENTER : '';
 
                 echo showbanners(2);
 
-            echo '</div>'; // container
+            echo self::getParam('container') == TRUE ? '</div>' : ''; // container
 
         echo '</main>';
 
