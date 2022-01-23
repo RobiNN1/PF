@@ -1,0 +1,37 @@
+{% if info.item %}
+    {% if info.pagenav %}
+        <div class="clearfix mb-3">{{ info.pagenav|raw }}</div>
+    {% endif %}
+
+    {% if info.max_post_count %}
+        <div class="forum-box p-10"><b>{{ info.count }} | <a href="{{ info.last_activity.link|raw }}">{{ locale.forum_0020 }}</a> {{ info.date|raw }}</b></div>
+    {% endif %}
+
+    {% for data in info.item %}
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ data.avatar|raw }}
+                <small><b>{{ data.profile_link|raw }} {{ data.date|raw }}, {{ data.date2|raw }}</b></small>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item no-border">
+                    <div class="text-smaller text-lighter m-b-10">
+                        <b>{{ locale.forum_0023 }} {{ data.thread_link.title }}</b></div>
+                    {{ data.message|raw }}
+                </div>
+                <div class="list-group-item no-border">
+                    <div class="text-smaller strong">{{ locale.forum_0022 }}
+                        <a href="{{ data.thread_link.link|raw }}">{{ data.thread_link.title }}</a>
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if info.pagenav %}
+        <div class="clearfix mb-3">{{ info.pagenav|raw }}</div>
+    {% endif %}
+{% else %}
+    <div class="forum-box p-10 text-center">{{ locale.forum_4121 }}</div>
+{% endif %}

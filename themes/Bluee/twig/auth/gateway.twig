@@ -1,0 +1,29 @@
+{% import 'layout.twig' as layout %}
+
+{% macro left(settings) %}
+    <a class="d-block d-md-none" href="{{ constant('BASEDIR') }}index.php">
+        <img loading="lazy" class="img-fluid" src="{{ constant('BASEDIR') }}{{ settings.sitebanner }}" alt="Logo">
+    </a>
+{% endmacro %}
+
+{% macro right(locale, info, validated, incorrect) %}
+    <h1>{{ locale.gateway_069 }}</h1>
+
+    {% if info.showform %}
+        {{ info.openform|raw }}
+        {{ info.hiddeninput|raw }}
+        <h4>{{ info.gateway_question|raw }}</h4>
+        {{ info.textinput|raw }}
+        {{ info.button|raw }}
+        {{ info.closeform|raw }}
+    {% elseif validated %}
+        <h3 class="m-0">{{ locale.gateway_068 }}</h3>
+    {% endif %}
+
+    {% if incorrect %}
+        <p>{{ locale.gateway_066|raw }}</p>
+        <input type="button" value="{{ locale.gateway_067 }}" class="text-center btn btn-primary btn-block" onclick="location='{{ constant('BASEDIR') }}register.php'">
+    {% endif %}
+{% endmacro %}
+
+{{ layout.auth(_self.left(settings), _self.right(locale, info, validated, incorrect), ' justify-content-center align-items-center', footer, false, true, copyright) }}

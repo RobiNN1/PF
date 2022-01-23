@@ -1,0 +1,11 @@
+<div class="forum-box mt-3 mb-3">
+    <h2>{{ locale.bluee_024 }} <i class="pull-right fas fa-tags"></i></h2>
+    <div class="p-10">
+        {% for data in tags %}
+            <a href="{{ data.tag_link }}" class="text-white badge m-1" style="background-color: {{ data.tag_color }}">
+                {{ (data.tag_icon ? '<i class="'~data.tag_icon~'"></i> ' : '')|raw }}
+                {{ data.tag_title|raw }}
+            </a>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,42 @@
+{% import 'layout.twig' as layout %}
+
+{% macro left(settings) %}
+    <a href="{{ constant('BASEDIR') }}index.php">
+        <img loading="lazy" class="img-fluid" src="{{ constant('BASEDIR') }}{{ settings.sitebanner }}" alt="Logo">
+    </a>
+{% endmacro %}
+
+{% macro right(locale, settings, notices, info, open_tab, no_uf, ufs, button, close_tab) %}
+    <h1>{{ locale.bluee_015 }}</h1>
+
+    {{ notices|raw }}
+
+    {{ open_tab|raw }}
+
+    {% if no_uf %}
+        <div class="text-white text-center">{{ locale.uf_108 }}</div>
+    {% else %}
+        {{ info.openform|raw }}
+        {{ info.user_name|raw }}
+        {{ info.user_email|raw }}
+        {{ info.user_avatar|raw }}
+        {{ info.user_password|raw }}
+        {% if constant('iADMIN') %}
+            {{ info.user_admin_password|raw }}
+        {% endif %}
+        {{ ufs|raw }}
+        {{ info.validate|raw }}
+        {{ info.terms|raw }}
+        {{ button|raw }}
+        {{ info.closeform|raw }}
+    {% endif %}
+
+    {{ close_tab|raw }}
+
+    <div class="m-t-30 text-center text-smaller">
+        {{ locale.bluee_016}} <a href="{{ constant('BASEDIR') }}login.php">{{ locale.login }}</a>
+    </div>
+
+{% endmacro %}
+
+{{ layout.auth(_self.left(settings), _self.right(locale, settings, notices, info, open_tab, no_uf, ufs, button, close_tab), '', footer, false, true, copyright) }}

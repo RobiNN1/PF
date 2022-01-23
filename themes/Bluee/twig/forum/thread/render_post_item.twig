@@ -1,0 +1,107 @@
+<div id="post_{{ data.post_id }}" data-postid="{{ data.post_id }}" class="thread-card card p-0 m-b-20">
+    <div class="userinfo">
+        <div class="user-avatar">
+            {{ data.useravatar|raw }}
+            <i class="status fa fa-circle text-{{ (data.user_online) ? 'success' : 'danger' }}" title="{{ (data.user_online) ? locale.online : locale.offline }}"></i>
+        </div>
+
+        <div class="user-details">
+            <div class="d-block">
+                {{ data.user_profile_link|raw }}
+
+                <span class="links">
+                    {% if data.admin_link %}
+                        <a href="{{ data.admin_link.edit }}" target="_blank" title="{{ locale.edit }}"><i class="fas fa-pencil-alt"></i></a>
+                        <a class="text-danger" href="{{ data.admin_link.delete }}" target="_blank" title="{{ locale.delete }}"><i class="fas fa-trash"></i></a>
+                    {% endif %}
+
+                    {% if data.user_message.link %}
+                        <a rel="nofollow noopener noreferrer" href="{{ data.user_message.link }}" title="{{ data.user_message.title }}"><i class="fas fa-at"></i></a>
+                    {% endif %}
+
+                    {% if data.user_facebook.link %}
+                        <a rel="nofollow noopener noreferrer" href="https://facebook.com/{{ data.user_facebook.link }}" target="_blank" title="Facebook"><i class="fa fa-facebook-official" style="color: #1979f4;"></i></a>
+                    {% endif %}
+
+                    {% if data.user_github.link %}
+                        <a rel="nofollow noopener noreferrer" href="https://github.com/{{ data.user_github.link }}" target="_blank" title="Github"><i class="fa fa-github" style="color: #333;"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+
+            {% if forum_settings.forum_rank_style == 0 and forum_settings.forum_ranks == 1 %}
+                <span class="forum-rank">{{ data.user_rank|raw }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="post-body">
+        <div class="post-attr clearfix">
+            {{ data.post_shortdate|raw }}
+
+            <div class="pull-right">
+                {% if data.post_quote %}
+                    <a class="link" href="{{ data.post_quote.link|raw }}" title="{{ data.post_quote.title }}"><i class="fas fa-quote-right"></i></a>
+                {% endif %}
+
+                {% if data.post_edit %}
+                    <a class="link" href="{{ data.post_edit.link|raw }}" title="{{ locale.forum_0507 }}"><i class="fas fa-pencil-alt"></i></a>
+                {% endif %}
+
+                {% if constant('iMOD') %}
+                    <label class="checkpost"><input type="checkbox" data-check="post" name="delete_post[]" value="{{ data.post_id }}"></label>
+                {% endif %}
+
+                <a class="link" href="#post_{{ data.post_id }}">#{{ post_i }}</a>
+            </div>
+        </div>
+
+        {% if data.votebox %}
+            <div class="d-flex flex-row">
+                <div class="votebox m-r-10">{{ data.votebox|raw }}</div>
+                {{ data.post_message|raw }}
+            </div>
+        {% else %}
+            {{ data.post_message|raw }}
+        {% endif %}
+
+        {% if data.user_sig or data.post_edit_reason or data.post_attachments or data.post_moods or data.post_bounty %}
+            <hr>
+        {% endif %}
+
+        {% if data.user_sig %}
+            <div class="usersig">{{ data.user_sig|raw }}</div>
+        {% endif %}
+
+        {{ data.post_edit_reason|raw }}
+
+        {% if data.post_attachments %}
+            <div class="forum_attachments clearfix">{{ data.post_attachments|raw }}</div>
+        {% endif %}
+
+        {% if data.post_moods %}
+            <div class="forum-mood">
+                <a class="small" data-toggle="collapse" aria-expanded="false" aria-controls="#moods{{ data.post_id }}" href="#moods{{ data.post_id }}">
+                    {{ data.post_moods.count }} {{ locale.forum_0528 }} <i class="fas fa-chevron-down"></i>
+                </a>
+                <div id="moods{{ data.post_id }}" class="moods collapse">
+                    {% for mdata in data.post_moods %}
+                        {% if mdata.users %}
+                            <div class="mood_users" title="{{ mdata.mood_name }}">
+                                <i class="{{ mdata.mood_icon }} fa-fw"></i> {{ mdata.users_list|raw }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if data.post_mood_buttons %}
+            <div class="mood-buttons">{{ data.post_mood_buttons|raw }}</div>
+        {% endif %}
+
+        {% if data.post_bounty %}
+            <div><a href="{{ data.post_bounty.link }}">{{ data.post_bounty.title }}</a></div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,50 @@
+{% import 'layout.twig' as layout %}
+
+{% macro left(locale, settings) %}
+    <a href="{{ constant('BASEDIR') }}index.php">
+        <img loading="lazy" class="img-fluid" src="{{ constant('BASEDIR') }}{{ settings.sitebanner }}" alt="Logo">
+    </a>
+
+    {% if settings.enable_registration == 1 %}
+        <div class="m-t-30">
+            {{ locale.bluee_012 }}
+            <a href="{{ constant('BASEDIR') }}register.php">{{ locale.bluee_013 }}</a>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro right(locale, notices, info, form, userdata, links) %}
+    {% if not constant('iMEMBER') %}
+        <h1>{{ locale.global_100 }}</h1>
+
+        {{ notices|raw }}
+
+        {{ info.open_form|raw }}
+        {{ form.name|raw }}
+        {{ form.pass|raw }}
+        <div class="m-t-20">
+            <span class="display-inline-block">{{ form.check|raw }}</span>
+            {{ form.link|raw }}
+        </div>
+
+        {{ form.login|raw }}
+        {{ info.close_form|raw }}
+
+        {% if info.connect_buttons %}
+            <hr>
+            {% for btn in info.connect_buttons %}
+                {{ btn|raw }}
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <h1>{{ userdata.user_name }}</h1>
+
+        <div>
+            {% for item in links %}
+                <a href="{{ item.link }}">{{ item.title }}</a><br>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{{ layout.auth(_self.left(locale, settings), _self.right(locale, notices, info, form, userdata, links), ' justify-content-center align-items-center', footer, false, true, copyright) }}

@@ -1,0 +1,36 @@
+{% if if_msg %}
+    <h4>{{ info.item.message.message_header|raw }}</h4>
+    <div class="m-b-20">
+        {{ info.item.avatar|raw }}
+        {{ info.item.profile|raw }}
+        {{ info.item.date|raw }}
+    </div>
+
+    <div class="mb-4">{{ info.item.message.message_text|raw }}</div>
+
+    {{ info.reply_form|raw }}
+{% elseif get.msg_send %}
+    {{ info.reply_form|raw }}
+{% else %}
+    {% if info.items is not null %}
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                {% for id, data in info.items %}
+                    <tr class="{{ (data.message_read) ? 'read': 'unread text-bold' }}">
+                        <td class="text-left align-middle">{{ data.checkbox|raw }}</td>
+                        <td class="align-middle">{{ data.contact_user.user_name|raw }}</td>
+                        <td><a class="display-block" href="{{ data.message.link|raw }}">{{ data.message.name }}</a></td>
+                        <td class="align-middle text-right">{{ data.date|raw }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <svg class="no-messages" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#1e88e5" d="M480 512H32a31.97 31.97 0 0 1-32-32V192h512v288a31.97 31.97 0 0 1-32 32z"/><path fill="#64b5f6" d="M0 192l246.5 156.9c2.8 2.1 6.1 3.1 9.5 3.1s6.7-1 9.5-3.1L512 192 265.6 3.2a15.9 15.9 0 0 0-19.2 0L0 192z"/><path fill="#2196f3" d="M480 512H32c-18 0-32-14-32-32 0-5.1 2.4-9.9 6.5-12.9l240-160c2.8-2.1 6.1-3.1 9.5-3.1s6.7 1 9.5 3.1l240 160c4.1 3 6.5 7.8 6.5 12.9 0 17.9-14 32-32 32z"/></svg>
+            <div class="m-t-20"><h4>{{ info.no_item }}</h4></div>
+        </div>
+    {% endif %}
+{% endif %}

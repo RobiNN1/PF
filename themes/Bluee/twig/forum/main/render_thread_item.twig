@@ -1,0 +1,36 @@
+<div id="thread_{{ info.thread_id }}" class="thread-item">
+    {% if threadtags %}
+        <div class="thread-tags">{{ threadtags|raw }}</div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-3 col-lg-3 mt-3 mt-md-0 mb-3 mb-md-0">
+            <div class="pull-left m-r-5">{{ avatar|raw }}</div>
+            <div class="pull-left"><small>{{ info.thread_last.profile_link|raw }}<br>{{ latest_time|raw }}</small></div>
+        </div>
+
+        <div class="col-xs-12 col-md-5 col-lg-6 order-first order-md-0">
+            {% if info.forum_type == 4 and info.thread_bounty != 0 %}
+                <i title="{{ locale.forum_4124 }}" class="fas fa-award m-r-5"></i>
+            {% endif %}
+            <a class="forum-link strong" href="{{ info.thread_link.link|raw }}">{{ info.thread_link.title|raw }}</a>
+
+            {% if thead_icons %}
+                <span class="thread-icons">{{ thead_icons|raw }}</span>
+            {% endif %}
+
+            <div>{{ starter_text|raw }}</div>
+
+            {{ info.thread_pages|raw }}
+        </div>
+
+        <div class="col-xs-12 col-md-4 col-lg-3 text-left text-md-right">
+            <div><i class="fas fa-eye"></i> {{ views }}</div>
+            <div><i class="fas fa-comments"></i> {{ posts }}</div>
+
+            {% if info.forum_type == 4 %}
+                <div><i class="fas fa-thumbs-up"></i> {{ votes }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>

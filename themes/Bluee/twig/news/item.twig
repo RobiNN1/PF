@@ -1,0 +1,45 @@
+<h1 class="main-title">{{ data.news_subject }}</h1>
+
+{% if data.news_admin_actions %}
+    <div class="btn-group btn-group-sm">
+        <a href="{{ data.news_admin_actions.edit.link|raw }}" class="btn btn-secondary" title="{{ locale.edit }}"><i class="fa-fw fas fa-edit"></i></a>
+        <a href="{{ data.news_admin_actions.delete.link|raw }}" class="btn btn-danger" title="{{ locale.delete }}"><i class="fa-fw fas fa-trash"></i></a>
+    </div>
+{% endif %}
+
+{% if data.image %}
+    <div class="news-image">
+        <img loading="lazy" src="{{ data.image }}" alt="{{ data.news_subject }}">
+    </div>
+{% endif %}
+
+<div class="overflow-hide mt-5 text-justify">
+    <div class="news-intro">{{ data.news_news|raw }}</div>
+    <br/>
+    {{ data.news_extended|raw }}
+</div>
+
+{% if data.news_pagenav %}
+    <div class="clearfix m-b-20">
+        <div class="pull-right">{{ data.news_pagenav|raw }}</div>
+    </div>
+{% endif %}
+
+<div class="text-center mt-5 mb-5">
+    <span class="m-l-10"><i class="fas fa-user"></i> {{ data.profile|raw }}</span>
+    <span class="m-l-10"><i class="fas fa-calendar-alt"></i> {{ data.date|raw }}</span>
+    <span class="m-l-10"><i class="fas fa-eye"></i> {{ data.reads }}</span>
+
+    {% if data.comments %}
+        <span class="m-l-10"><i class="fas fa-comment{{ (data.news_comments > 1) ? 's' : '' }}"></i> {{ data.comments|raw }}</span>
+    {% endif %}
+
+    {% if data.news_display_ratings %}
+        <span><i class="fas fa-eye"></i> {{ data.news_display_ratings|raw }}</span>
+    {% endif %}
+</div>
+
+<div class="m-b-20">
+    {{ data.news_show_comments|raw }}
+    {{ data.news_show_ratings|raw }}
+</div>

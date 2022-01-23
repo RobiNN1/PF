@@ -1,0 +1,20 @@
+<div class="justify-content-between">
+    <div class="col-md-5 mx-auto mb-5">
+        <div class="contact-form">
+            <h1 class="main-title">{{ locale.CT_400 }}</h1>
+            {{ mailname|raw }}
+            {{ email|raw }}
+            {{ subject|raw }}
+            {{ message|raw }}
+
+            {% if constant('iGUEST') %}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">{{ info.captcha|raw }}</div>
+                    <div class="col-xs-12 col-sm-6">{{ info.captcha_code|raw }}</div>
+                </div>
+            {% endif %}
+
+            {{ button|raw }}
+        </div>
+    </div>
+</div>

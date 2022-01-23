@@ -1,0 +1,63 @@
+{{ header|raw }}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="forum-title">{{ locale.forum_tag_0100 }}</div>
+
+        {% if get.tag_id %}
+            {{ filter|raw }}
+
+            {% if info.threads.pagenav %}
+                <div class="text-right">{{ info.threads.pagenav|raw }}</div>
+            {% endif %}
+
+            <div class="mb-4">
+                {% if info.threads is not null %}
+                    {{ info.threads.items|raw }}
+                {% else %}
+                    <div class="text-center p-20">{{ locale.forum_0269 }}</div>
+                {% endif %}
+            </div>
+
+            {% if info.threads.pagenav %}
+                <div class="text-right hidden-xs m-t-15">{{ info.threads.pagenav|raw }}</div>
+            {% endif %}
+
+            {% if info.threads.pagenav2 %}
+                <div class="hidden-sm hidden-md hidden-lg m-t-15">{{ info.threads.pagenav2|raw }}</div>
+            {% endif %}
+        {% else %}
+            {% if info.tags %}
+                <div class="row tagslist mb-4 p-l-15 p-r-15">
+                    {% for data in info.tags %}
+                        <div class="col-xs-12 col-md-6 col-lg-4 p-0 card m-0 no-border" style="height: 200px; background-color: {{ data.tag_color }};">
+                            <div class="card-body">
+                                <a href="{{ data.tag_link }}">
+                                    <h4 class="text-white">{{ data.tag_title }}</h4>
+                                </a>
+
+                                {% if data.tag_description %}
+                                    <p class="text-white">{{ data.tag_description }}</p>
+                                {% endif %}
+
+                                {% if data.threads %}
+                                    <hr/>
+                                    <span class="text-white text-smaller">
+                                        <a class="text-white" href="{{ constant('FORUM') }}viewthread.php?thread_id={{ data.threads.thread_id }}">
+                                            {{ data.threads.thread_subject|raw }}
+                                        </a> - {{ data.date|raw }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        {{ links|raw }}
+        {{ tags|raw }}
+    </div>
+</div>

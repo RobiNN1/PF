@@ -1,0 +1,33 @@
+{% if download_cat_description is not null %}
+    <div class="display-block">{{ download_cat_description }}</div>
+{% endif %}
+
+{% if info.download_item %}
+    <div class="row">
+        {% for data in info.download_item %}
+            <div class="col-md-3">
+                <div class="card m-b-25">
+                    {% if dl_settings.download_screenshot %}
+                        <img loading="lazy" src="{{ data.img }}" class="card-img-top" alt="{{ data.download_title }}">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">{{ data.download_title }}</h5>
+                        <a href="{{ constant('DOWNLOADS') }}downloads.php?cat_id={{ data.download_cat_id }}">{{ data.download_cat_name }}</a>
+                        <span class="d-none">{{ data.download_count }}</span>
+                        <a href="{{ constant('DOWNLOADS') }}downloads.php?download_id={{ data.download_id }}" class="btn btn-primary btn-block mt-1">
+                            <i class="fas fa-cloud-download-alt"></i> {{ locale.download_1007 }}
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if info.download_nav %}
+        <div class="text-center m-b-20">{{ info.download_nav|raw }}</div>
+    {% endif %}
+{% else %}
+    <div class="card text-center p-20 mb-4 text-black">{{ locale.download_3000 }}</div>
+{% endif %}

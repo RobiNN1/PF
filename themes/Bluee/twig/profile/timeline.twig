@@ -1,0 +1,20 @@
+{% if timeline %}
+    <h4>{{ locale.bluee_026 }}</h4>
+
+    <div class="timeline">
+        {% for time, items in timeline %}
+            <span class="badge">{{ time }}</span>
+            <div class="items card">
+                <div class="item card-body">
+                    {% for item in items %}
+                        {{ item.type }} {{ locale.in }} <a href="{{ item.link }}"><b>{{ item.title|raw }}</b></a><br>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="card text-center">
+        <div class="card-body">{{ user_data.user_name }} {{ locale.bluee_027 }}</div>
+    </div>
+{% endif %}

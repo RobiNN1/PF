@@ -1,0 +1,54 @@
+{% if data.admin_link %}
+    <div class="btn-group pull-right">
+        <a class="btn btn-default btn-sm" href="{{ data.admin_link.edit|raw }}" title="{{ locale.edit }}"><i class="fas fa-pencil-alt"></i></a>
+        <a class="btn btn-danger btn-sm" href="{{ data.admin_link.delete|raw }}" title="{{ locale.delete }}"><i class="fas fa-trash"></i></a>
+    </div>
+{% endif %}
+
+<h3 class="m-t-0 m-b-0">{{ data.download_title }}</h3>
+{{ data.download_description_short|raw }}
+<hr/>
+
+{% if dl_settings.download_screenshot and ifimage %}
+    <img loading="lazy" class="img-fluid rounded" src="{{ image }}" alt="{{ data.download_title }}">
+{% endif %}
+
+{% if data.download_description %}
+    <div class="mt-5 mb-5">{{ data.download_description|raw }}</div>
+{% endif %}
+
+<div class="mt-5 mb-5">
+    <b>{{ locale.download_1010 }}</b>
+    <div class="row mt-2">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-code-branch"></i> {{ locale.download_1011 }}:</span> <b>{{ data.download_version }}</b>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-cloud-download-alt"></i> {{ locale.download_1012 }}:</span> <b>{{ data.download_count }}</b>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-clock"></i> {{ locale.download_1021 }}:</span> <b>{{ data. download_post_time }}</b>
+        </div>
+    </div>
+    <hr/>
+    <div class="row mb-2">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-certificate"></i> {{ locale.download_1013 }}:</span> <b>{{ data.download_license }}</b>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-cogs"></i> {{ locale.download_1014 }}:</span> <b>{{ data.download_os }}</b>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <span><i class="fa-fw fas fa-copyright"></i> {{ locale.download_1015 }}:</span> <b>{{ data.download_copyright }}</b>
+        </div>
+    </div>
+
+    <div>{{ locale.download_1017 }}: {{ data.download_homepage|raw }}</div>
+</div>
+
+<a href="{{ data.download_file_link }}" class="btn btn-primary m-b-20"><i class="fas fa-download"></i> {{ locale.download_1007 }}</a>
+
+<div class="m-b-20">
+    {{ data.download_show_comments|raw }}
+    {{ data.download_show_ratings|raw }}
+</div>

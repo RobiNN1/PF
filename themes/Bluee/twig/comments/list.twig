@@ -1,0 +1,39 @@
+<hr>
+
+<li id="{{ info.comment_list_id }}" class="m-b-15">
+    {% if enabled_avatar %}
+        <div class="pull-left text-center m-r-15 m-t-5">{{ info.user_avatar|raw }}</div>
+    {% endif %}
+
+    <div class="overflow-hide">
+        <div class="comment_name display-inline-block">{{ info.user_name|raw }}</div>
+        {{ info.comment_ratings|raw }}
+
+        {% if info.comment_subject %}
+            <div class="comment_title">{{ info.comment_subject|raw }}</div>
+        {% endif %}
+
+        <div class="comment_message">{{ info.comment_message|raw }}</div>
+        <div>
+            <small>
+                {% if info.reply_link %}
+                    <a href="{{ info.reply_link|raw }}" title="{{ locale.c112 }}"><i class="fas fa-reply"></i></a>
+                {% endif %}
+
+                {% if info.edit_link %}
+                    <a class="m-l-5" href="{{ info.edit_link.link|raw }}" title="{{ info.edit_link.name }}"><i class="fas fa-pencil-alt"></i></a>
+                {% endif %}
+
+                {% if info.delete_link %}
+                    <a class="m-l-5" href="{{ info.delete_link.link|raw }}" title="{{ info.delete_link.name }}"><i class="fas fa-trash"></i></a>
+                {% endif %}
+
+                <span class="comment_date">{{ info.comment_date|raw }}</span>
+            </small>
+        </div>
+
+        {{ info.comment_reply_form|raw }}
+
+        <ul class="sub_comments list-style-none">{{ info.comment_sub_comments|raw }}</ul>
+    </div>
+</li>

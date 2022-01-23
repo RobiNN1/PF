@@ -1,0 +1,23 @@
+<section class="container latestitems">
+
+    {% for module in info %}
+        <h2 class="mb-5">{{ module.blockTitle }}</h2>
+
+        {% if module.data %}
+            <div class="row align-items-center">
+                {% for data in module.data %}
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <a href="{{ data.url }}" class="card bg-dark">
+                            <div class="card-img rounded" style="min-height: 350px; background: url({{ data.image }}) center no-repeat;background-size: cover;"></div>
+                            <div class="card-img-overlay">
+                                <h6 class="mb-0 text-white">{{ data.title }}</h6>
+                                <span class="mb-0 text-white">{{ data.content }}</span>
+                                <span class="mb-0 text-white small display-block">{{ data.date }}</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</section>

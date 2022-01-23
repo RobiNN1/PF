@@ -14,6 +14,7 @@ This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "
 - [Atom9](themes/Atom9)
 - [Atom-X](themes/Atom-X)
 - [Atom-X2](themes/Atom-X2)
+- [Bluee](themes/Bluee)
 - [Czechia](themes/Czechia)
 - [Glowie](themes/Glowie)
 - [Material](themes/Material)

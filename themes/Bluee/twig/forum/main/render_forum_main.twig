@@ -1,0 +1,26 @@
+{% if forums %}
+    {% for forum_id, data in forums %}
+        {% if data.forum_type == 1 %}
+            <div class="forum-box mb-3 forum-category">
+                <div class="header">
+                    <a href="{{ data.forum_link.link|raw }}">{{ data.forum_link.title }}</a>
+                    {% if data.forum_description %}
+                        <small>{{ data.forum_description|raw }}</small>
+                    {% endif %}
+                </div>
+
+                {% if forums[forum_id].child %}
+                    {% for cdata in forums[forum_id].child %}
+                        {{ cdata.item|raw }}
+                    {% endfor %}
+                {% else %}
+                    <div class="p-10">{{ locale.forum_0327 }}</div>
+                {% endif %}
+            </div>
+        {% else %}
+            {{ data.item|raw }}
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div class="text-center card p-20 mb-3">{{ locale.forum_0328 }}</div>
+{% endif %}
