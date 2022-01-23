@@ -18,6 +18,7 @@ Some addons may require newer PHP.
 - [Sitemap Generator](infusions/sitemap)
 - [Team](infusions/team)
 - [Videos](infusions/videos)
+- [Wiki](infusions/wiki)
 
 ## Panles
 - [Latest Photos](panels/latest_photos_panel)

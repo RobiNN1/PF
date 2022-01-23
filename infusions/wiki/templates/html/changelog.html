@@ -1,0 +1,33 @@
+<div class="row m-b-20">
+    <div id="versions_select">
+        <div class="form-group col-xs-12 col-sm-2">
+            <div class="input-group">
+                <label for="versions" class="input-group-addon"><i class="fa fa-code-branch"></i></label>
+                <select id="versions" class="form-control">
+                    {versions.{
+                        <option value="{%id%}">{%name%}</option>
+                    }}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-9">
+        {changelog.{
+            <div class="row m-b-20" id="{%id%}">
+                <div class="col-xs-12 col-sm-3">
+                    <div class="strong" style="font-size: 35px;">{%version%}</div>
+                    <div>{%codename%}</div>
+                    <div>{%published%}</div>
+                    <a href="{%download%}"><i class="entypo entypo-download"></i> Download</a>
+                    {%admin_links%}
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    {%changes%}
+                </div>
+            </div>
+        }}
+    </div>
+</div>
