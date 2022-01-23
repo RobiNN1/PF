@@ -1,4 +1,6 @@
-# PHPFusion Themes
+# PHPFusion Themes (Discontinued)
+
+![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Themes)
 
 > Compatibility with older versions is not guaranteed.
 If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
