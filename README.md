@@ -1,5 +1,7 @@
 # PHPFusion Themes (Discontinued)
 
+**No free support**
+
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Themes)
 
 > Compatibility with older versions is not guaranteed.
