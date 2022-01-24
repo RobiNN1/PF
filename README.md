@@ -1,5 +1,7 @@
 # PHPFusion CLI (Discontinued)
 
+**This was experimental project**
+
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-CLI)
 
 ## Installation
