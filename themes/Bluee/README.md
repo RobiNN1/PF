@@ -29,5 +29,5 @@ CSS is written in LESS and theme uses Twig template engine.
 Theme requires PHPFusion 9.03.100 and above.
 At least PHP 7.2.5 due to Twig.
 
-* Screenshot is from old SK/CZ NSS. And custom content like homepage have been removed.
+**Screenshot is from old SK/CZ NSS. And custom content like homepage have been removed.**
 ![Preview](screenshot.png)
