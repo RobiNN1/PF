@@ -1,6 +1,6 @@
-# PHPFusion Addons (Discontinued)
+# PHPFusion Addons
 
-**No free support**
+**Codes are provided as is, no support is guaranteed**
 
 Addon is a term for Infusions, Panels, [Themes](https://github.com/PF-Projects/PF-Themes), User Fields and BB Codes.
 
