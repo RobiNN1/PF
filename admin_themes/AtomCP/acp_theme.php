@@ -113,7 +113,7 @@ foreach ($pages_data as $section) {
 
         foreach (['.svg', '.png', '.gif', '.jpg'] as $ext) {
             if (file_exists($path.$ext)) {
-                $img = $path.$ext;
+                $img = fusion_get_settings('site_path').'themes/admin_themes/AtomCP/icons/'.$page['admin_rights'].$ext;
                 break;
             }
         }

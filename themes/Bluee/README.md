@@ -31,5 +31,4 @@ At least PHP 7.2.5 due to Twig.
 
 Run `composer install` before use.
 
-**Screenshot is from old SK/CZ NSS. And custom content like homepage have been removed.**
 ![Preview](screenshot.png)
