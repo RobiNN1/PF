@@ -58,7 +58,7 @@ $rate_limit_reset = $github_api->rate->reset;
 // echo 'Your max. Rate Limit is: <b>'.$github_api->rate->limit.'</b>. Actual limit is: <b>'.$rate_limit.'</b>. Will be restored in '.showdate('%d.%m.%Y %H:%M:%S', $rate_limit_reset);
 
 if ($rate_limit > 2) {
-    require_once INFUSIONS.'github/includes/vendor/autoload.php';
+    require_once INFUSIONS.'github/vendor/autoload.php';
 
     $filesystemAdapter = new \League\Flysystem\Adapter\Local(__DIR__.'/');
     $filesystem        = new \League\Flysystem\Filesystem($filesystemAdapter);

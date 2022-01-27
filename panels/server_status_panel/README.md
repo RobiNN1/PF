@@ -13,4 +13,6 @@ https://github.com/Austinb/GameQ/wiki/Supported-servers-list-v3
 - PHP bz2 extension
 - PHP +7.3
 
+Run `composer install` before use.
+
 ![Preview](screenshot.png)

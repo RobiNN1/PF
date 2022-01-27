@@ -133,7 +133,7 @@ class ContentGenerator {
                 $username = $this->randomName();
                 $ip = $this->randomIp();
                 $mail = strtolower($username.'@'.$mailnames[rand(1, 6)]);
-                $joined_rand = rand(0, (time() / 2));
+                $joined_rand = rand(0, ( (int) (time() / 2)));
                 $joined = time() - $joined_rand;
                 $lastvisit = time() - rand(0, $joined_rand);
 
@@ -182,7 +182,7 @@ class ContentGenerator {
         if (isset($_POST['create_private_messages'])) {
             $num = $_POST['num_private_messages'];
             for ($i = 1; $i <= $num; $i++) {
-                send_pm(rand(1, $this->users / 2), rand($this->users / 2, $this->users), $this->locale['cg_041'].' '.$i, $this->message_text);
+                send_pm(rand(1, (int) ($this->users / 2)), rand((int) ($this->users / 2), $this->users), $this->locale['cg_041'].' '.$i, $this->message_text);
             }
 
             $this->notice($num);
@@ -217,7 +217,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $article_cats = dbcount('(article_cat_id)', DB_ARTICLE_CATS);
                 $article_cats = rand(1, $article_cats);
-                $values .= "('".$this->locale['cg_010']." ".$i."', ".$article_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_010']." ".$i."', ".$article_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -259,7 +259,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $blog_cats = dbcount('(blog_cat_id)', DB_BLOG_CATS);
                 $blog_cats = rand(1, $blog_cats);
-                $values .= "('".$this->locale['cg_013']." ".$i."', ".$blog_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_013']." ".$i."', ".$blog_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".rand(1, 10000)."', 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -334,7 +334,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $type = $addons[array_rand($addons)];
 
-                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 0)";
+                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".$this->locale['cg_048']." ".$i."', '".$this->shout_text[rand(1, 5)]."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".$this->randomIp()."', 0)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -357,7 +357,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $type = $addons[array_rand($addons)];
 
-                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".rand(1, 5)."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 4)";
+                $values .= "('".rand(1, $type['max'])."', '".$type['type']."', '".rand(1, $this->users)."', '".rand(1, 5)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".$this->randomIp()."', 4)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -384,7 +384,7 @@ class ContentGenerator {
             $values2 = '';
             $values3 = '';
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "(".$i.", '".$this->locale['cg_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
+                $values .= "(".$i.", '".$this->locale['cg_016']." ".$i."', 0, '".$this->body."', 1, 1, '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
 
                 $values2 .= "(".$i.", ".$i.", ".$i.", 'content', '".$this->body."', '', '')";
@@ -432,7 +432,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $download_cats = dbcount('(download_cat_id)', DB_DOWNLOAD_CATS);
                 $download_cats = rand(1, $download_cats);
-                $values .= "('".rand(1, $this->users)."', '".$this->locale['cg_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://phpfusion.com/home.php', ".$download_cats.", '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1)";
+                $values .= "('".rand(1, $this->users)."', '".$this->locale['cg_018']." ".$i."', '".$this->short_text."', '".$this->body."', 'https://phpfusion.com/home.php', ".$download_cats.", '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, ".rand(1, 10000).", 1, 1)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -474,7 +474,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $faq_cats = dbcount('(faq_cat_id)', DB_FAQ_CATS);
                 $faq_cats = rand(1, $faq_cats);
-                $values .= "(".$faq_cats.", '".$this->locale['cg_021']." ".$i."', '".$this->short_text."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, 1, '".LANGUAGE."')";
+                $values .= "(".$faq_cats.", '".$this->locale['cg_021']." ".$i."', '".$this->short_text."', 'y', '".rand(1, $this->users)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -522,7 +522,7 @@ class ContentGenerator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".$this->locale['cg_046']." ".$i."', '".$this->locale['cg_007']."', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_046']." ".$i."', '".$this->locale['cg_007']."', '".rand(1, $this->users)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -559,7 +559,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $news_cats = dbcount('(news_cat_id)', DB_NEWS_CATS);
                 $news_cats = rand(1, $news_cats);
-                $values .= "('".$this->locale['cg_024']." ".$i."', ".$news_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - rand(0, time() / 2))."', 0, ".rand(1, 10000).", 1, 1, '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_024']." ".$i."', ".$news_cats.", '".$this->snippet."', '".$this->body."', 'y', '".rand(1, $this->users)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, ".rand(1, 10000).", 1, 1, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -585,7 +585,7 @@ class ContentGenerator {
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".serialize([LANGUAGE => $this->locale['cg_027'].' '.$i])."', '".serialize([[LANGUAGE => $this->locale['cg_028']], [LANGUAGE => $this->locale['cg_029']]])."', '".(time() - rand(0, time() / 2))."', 0, 0)";
+                $values .= "('".serialize([LANGUAGE => $this->locale['cg_027'].' '.$i])."', '".serialize([[LANGUAGE => $this->locale['cg_028']], [LANGUAGE => $this->locale['cg_029']]])."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, 0)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -602,11 +602,11 @@ class ContentGenerator {
     private function shouts() {
         if (isset($_POST['create_shouts'])) {
             $num = $_POST['num_shouts'];
-            $insert = 'shout_name, shout_message, shout_datestamp, shout_ip, shout_ip_type, shout_hidden, shout_language';
+            $insert = 'shout_name, shout_message, shout_datestamp, shout_ip, shout_ip_type, shout_language';
             $values = '';
 
             for ($i = 1; $i <= $num; $i++) {
-                $values .= "('".rand(1, $this->users)."', '".$this->shout_text[rand(1, 5)]."', '".(time() - rand(0, time() / 2))."', '".$this->randomIp()."', 4, 0, '".LANGUAGE."')";
+                $values .= "('".rand(1, $this->users)."', '".$this->shout_text[rand(1, 5)]."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', '".$this->randomIp()."', 4, '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -649,7 +649,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $video_cats = dbcount('(video_cat_id)', DB_VIDEO_CATS);
                 $video_cats = rand(1, $video_cats);
-                $values .= "(".$video_cats.", '".rand(1, $this->users)."', '".$this->locale['cg_050']." ".$i."', '".$this->body."', '".rand(0, 60).":".rand(0, 60)."', '".(time() - rand(0, time() / 2))."', 0, 'youtube', '".$video_urls[rand(1, 3)]."', ".rand(1, 10000).", 1, 1)";
+                $values .= "(".$video_cats.", '".rand(1, $this->users)."', '".$this->locale['cg_050']." ".$i."', '".$this->body."', '".rand(0, 60).":".rand(0, 60)."', '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, 'youtube', '".$video_urls[rand(1, 3)]."', ".rand(1, 10000).", 1, 1)";
                 $values .= $i < $num ? ', ' : ';';
             }
 
@@ -691,7 +691,7 @@ class ContentGenerator {
             for ($i = 1; $i <= $num; $i++) {
                 $weblink_cats = dbcount('(weblink_cat_id)', DB_WEBLINK_CATS);
                 $weblink_cats = rand(1, $weblink_cats);
-                $values .= "('".$this->locale['cg_033']." ".$i."', '".$this->locale['cg_007']."', 'https://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - rand(0, time() / 2))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
+                $values .= "('".$this->locale['cg_033']." ".$i."', '".$this->locale['cg_007']."', 'https://".strtolower($this->randomName()).".com', ".$weblink_cats.", '".(time() - (int) rand(0,  (int) (time() / 2)))."', 0, 1, ".rand(1, 10000).", '".LANGUAGE."')";
                 $values .= $i < $num ? ', ' : ';';
             }
 

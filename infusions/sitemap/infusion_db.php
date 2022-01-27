@@ -34,11 +34,11 @@ const DB_SITEMAP_LINKS = DB_PREFIX.'sitemap_links';
 \PHPFusion\Admins::getInstance()->setAdminPageIcons('SMG', '<i class="admin-ico fa fa-fw fa-sitemap"></i>');
 
 if (defined('SITEMAP_EXISTS')) {
-    require_once INFUSIONS.'sitemap/includes/SitemapGenerator.php';
+    require_once INFUSIONS.'sitemap/SitemapGenerator.php';
 
     $smg = new SitemapGenerator();
 
-    if (is_file($smg->sitemap_file) && $smg->sitemap_settings['auto_update'] == 1) {
+    if (is_file($smg->sitemap_file) && !empty($smg->sitemap_settings['auto_update']) && $smg->sitemap_settings['auto_update'] == 1) {
         if ((time() - filemtime($smg->sitemap_file)) > $smg->sitemap_settings['update_interval']) {
             $smg->generateXml();
         }

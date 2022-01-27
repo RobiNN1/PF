@@ -8,4 +8,6 @@ GitHub client that allows you to view a basic overview of the project, create a 
 
 - PHP +7.2.5
 
+Run `composer install` before use.
+
 ![Preview](screenshot.png)

@@ -17,10 +17,10 @@
 +--------------------------------------------------------*/
 defined('IN_FUSION') || exit;
 
-require_once S_STATUS.'includes/vendor/autoload.php';
+require_once S_STATUS.'vendor/autoload.php';
 
 function protocols_list() {
-    $protocols_path = S_STATUS.'includes/vendor/austinb/gameq/src/GameQ/Protocols/';
+    $protocols_path = S_STATUS.'vendor/austinb/gameq/src/GameQ/Protocols/';
     $dir = dir($protocols_path);
     $protocols = [];
 
