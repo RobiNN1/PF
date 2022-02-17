@@ -31,10 +31,12 @@ class Home extends Core {
 
         $row = [];
         foreach ($info as $db_id => $content) {
-            foreach ($content['data'] as $data) {
-                $data['db_id'] = $db_id;
-                $data['blockTitle'] = $content['blockTitle'];
-                $row[$data['datestamp']][] = $data;
+            if (!empty($content['data'])) {
+                foreach ($content['data'] as $data) {
+                    $data['db_id'] = $db_id;
+                    $data['blockTitle'] = $content['blockTitle'];
+                    $row[$data['datestamp']][] = $data;
+                }
             }
         }
 
