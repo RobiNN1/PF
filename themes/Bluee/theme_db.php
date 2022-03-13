@@ -18,7 +18,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title = 'Bluee';
-$theme_description = '';
+$theme_description = 'The Lite version of theme from the former Slovak & Czech NSS.';
 $theme_screenshot = 'screenshot.png';
 $theme_author = 'RobiNN';
 $theme_web = 'https://github.com/RobiNN1';
