@@ -4,13 +4,10 @@
 
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Themes)
 
-> Compatibility with older versions is not guaranteed.
-If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
+> Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version. Also some addons may require newer PHP.
 
 ## Don't edit Copyright!
 This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "RobiNN" linking to my GitHub (https://github.com/RobiNN1), YEAR is optional.
-
-> I will not provide any support for sites that change or remove it.
 
 ## Site Themes
 - [Atom9](themes/Atom9)
