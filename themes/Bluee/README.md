@@ -2,9 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Version-2.2.0-blue.svg)
 
-
-Bootstrap 4 theme.
-
+The Lite version of theme from the former Slovak & Czech NSS.
 
 **Custom templates**
 
