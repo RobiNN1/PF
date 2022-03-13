@@ -4,7 +4,8 @@
 
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Themes)
 
-> Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version. Also some addons may require newer PHP.
+> Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version of theme and cms.
+> Also some themes may require newer PHP.
 
 ## Don't edit Copyright!
 This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "RobiNN" linking to my GitHub (https://github.com/RobiNN1), YEAR is optional.
