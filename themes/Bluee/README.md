@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Version-2.2.0-blue.svg)
 
-The Lite version of theme from the former Slovak & Czech NSS.
+The Lite version of theme from the former Slovak & Czech NSS. This version does not includes additional features created for the original page.
 
 **Custom templates**
 
@@ -23,9 +23,6 @@ The Lite version of theme from the former Slovak & Czech NSS.
 - Contact
 
 CSS is written in LESS and theme uses Twig template engine.
-
-Theme requires PHPFusion 9.03.100 and above.
-At least PHP 7.2.5 due to Twig.
 
 Run `composer install` before use.
 

@@ -18,7 +18,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title       = 'MineFusion';
-$theme_description = 'Bootstrap 4 Minecraft theme.';
+$theme_description = 'Bootstrap 4 Minecraft theme designed by Nikita Zotov and customized for PHPFusion.';
 $theme_screenshot  = 'screenshot.png';
 $theme_author      = 'RobiNN';
 $theme_web         = 'https://github.com/RobiNN1';

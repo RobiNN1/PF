@@ -19,7 +19,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title = 'Glowie';
-$theme_description = '';
+$theme_description = 'Simple light theme with gradients';
 $theme_screenshot = 'screenshot.png';
 $theme_author = 'Frederick MC Chan & RobiNN';
 $theme_web = 'https://phpfusion.com';

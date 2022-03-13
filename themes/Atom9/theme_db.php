@@ -19,7 +19,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title = 'Atom9';
-$theme_description = 'Atom 9 Ignition Pack.';
+$theme_description = 'Atom9 is a package of 3 themes with a shared core.';
 $theme_screenshot = 'screenshot.png';
 $theme_author = 'Frederick MC Chan & RobiNN';
 $theme_web = 'https://phpfusion.com';

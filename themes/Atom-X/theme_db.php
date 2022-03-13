@@ -19,7 +19,7 @@
 defined('IN_FUSION') || exit;
 
 $theme_title = 'Atom-X';
-$theme_description = 'The Atom-X Theme for PHP Fusion 9.';
+$theme_description = 'Atom-X theme originally created for v7 ported to v9.';
 $theme_screenshot = 'screenshot.png';
 $theme_author = 'PHP Fusion Inc & RobiNN';
 $theme_web = 'https://phpfusion.com';

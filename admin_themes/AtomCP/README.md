@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Version-2.0.0-blue.svg)
 
-Icons by [Icons8](https://icons8.com/).
+The most advanced admin theme for PHPFusion.
 
 **Features**
 
@@ -15,6 +15,6 @@ Icons by [Icons8](https://icons8.com/).
 - Online users panel
 - Debug bar
 
-Theme requires PHPFusion 9.03.100 and above.
-
 ![Preview](screenshot.png)
+
+Icons by [Icons8](https://icons8.com/).

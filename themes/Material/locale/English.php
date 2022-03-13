@@ -16,7 +16,7 @@
 | written permission from the original author(s).
 +--------------------------------------------------------*/
 $locale['mt_title'] = 'Material Theme';
-$locale['mt_description'] = 'Material Theme is inspired by Google Material Design.';
+$locale['mt_description'] = 'Fully featured theme inspired by Google Material Design.';
 $locale['readmore'] = 'Read More';
 $locale['leave_comment'] = 'Leave a Comment';
 
