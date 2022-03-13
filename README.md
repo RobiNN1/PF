@@ -6,9 +6,7 @@ Addon is a term for Infusions, Panels, [Themes](https://github.com/PF-Projects/P
 
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Addons)
 
-> Compatibility with older versions is not guaranteed.
-If something doesn't work, make sure you're using the latest version. Everything is always created for the latest PHPFusion.
-Some addons may require newer PHP.
+> Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version. Also some addons may require newer PHP.
 
 ## Infusions
 - [Content Generator](infusions/content_generator)
