@@ -4,7 +4,7 @@
 
 Upload own videos, load video from URL, YouTube, Vimeo or embed code.
 
-**Audio files are not supported**
+**Audio files are not supported!**
 
 If you need the Latest videos panel or RSS Feeds, upload all the relevant files from `additional_files` to the appropriate folder.
 
