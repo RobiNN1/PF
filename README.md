@@ -29,10 +29,4 @@
 - [RSS Viewer](panels/rss_viewer_panel)
 - [Server Status](panels/server_status_panel)
 
----
-
-Other addons and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
-
-Icons used in addons made by [Flaticon](https://flaticon.com/).
-
-<!-- Don't copy my code! -->
+> Icons used in addons made by [Flaticon](https://flaticon.com/).
