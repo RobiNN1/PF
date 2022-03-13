@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Version-2.2.0-blue.svg)
 
-The Lite version of theme from the former Slovak & Czech NSS. This version does not includes additional features created for the original page.
+The Lite version of Bootstrap 4 theme from the former Slovak & Czech NSS. This version does not includes additional features created for the original page.
 
 **Custom templates**
 
