@@ -27,9 +27,3 @@ This text must be in a visible place: `© YEAR Theme created by RobiNN` - with "
 - [Atom-XCP](admin_themes/Atom-XCP)
 - [MaterialAdmin](admin_themes/MaterialAdmin)
 - [MDashboard](admin_themes/MDashboard)
-
----
-
-Other themes and SDK [PHPFusion/Addons](https://github.com/PHPFusion/Addons).
-
-<!-- Don't copy my code! -->
