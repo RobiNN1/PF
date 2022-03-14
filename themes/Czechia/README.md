@@ -4,7 +4,7 @@
 
 The Lite version of Czechia theme from the former Czech NSS. This version does not includes additional features created for the original page.
 
-**Custom templates**
+## Custom templates
 
 - Downloads
 - Errors Page

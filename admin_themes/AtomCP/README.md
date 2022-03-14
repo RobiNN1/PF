@@ -4,7 +4,7 @@
 
 The most advanced admin theme for PHPFusion.
 
-**Features**
+## Features
 
 - Light and Dark mode
 - Ajax Admin Chat
@@ -14,6 +14,10 @@ The most advanced admin theme for PHPFusion.
 - Stats panel
 - Online users panel
 - Debug bar
+
+## Requirements
+
+- PHPFusion >= 9.03.100
 
 ![Preview](screenshot.png)
 

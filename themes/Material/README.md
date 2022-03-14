@@ -4,7 +4,7 @@
 
 Fully featured theme inspired by Google Material Design.
 
-**Custom templates**
+## Custom templates
 
 - Articles
 - Blog
@@ -14,11 +14,15 @@ Fully featured theme inspired by Google Material Design.
 - News
 - Profile
 
-**Features**
+## Features
 
 - Light and Dark mode
 - Social Networks Admin
 - Built-in Footer Panels with Excluding
 - Ability to choose Image logo or text logo in menu
+
+## Requirements
+
+- PHPFusion >= 9.03.90
 
 ![Preview](screenshot.png)

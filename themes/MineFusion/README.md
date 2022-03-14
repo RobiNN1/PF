@@ -4,8 +4,12 @@
 
 Bootstrap 4 Minecraft theme designed by [Nikita Zotov](https://www.behance.net/shenderroef87) and customized for PHPFusion.
 
-**Custom templates**
+## Custom templates
 
 - Home
+
+## Requirements
+
+- PHPFusion >= 9.03.100
 
 ![Preview](screenshot.png)

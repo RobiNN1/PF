@@ -4,7 +4,7 @@
 
 The Lite version of Bootstrap 4 theme from the former Slovak & Czech NSS. This version does not includes additional features created for the original page.
 
-**Custom templates**
+## Custom templates
 
 - Login
 - Register
@@ -25,5 +25,10 @@ The Lite version of Bootstrap 4 theme from the former Slovak & Czech NSS. This v
 CSS is written in LESS and theme uses Twig template engine.
 
 Run `composer install` before use.
+
+## Requirements
+
+- PHP >= 7.2.5
+- PHPFusion >= 9.03.100
 
 ![Preview](screenshot.png)

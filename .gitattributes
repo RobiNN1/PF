@@ -4,24 +4,11 @@
 # Force LF for all text files
 *.* text eol=lf
 
-# Force images/audio/video/fonts to be handled as binaries
-*.gif binary
-*.ico binary
+# Force images/fonts to be handled as binaries
 *.jpg binary
 *.jpeg binary
-*.pdf binary
 *.png binary
-*.psd binary
-*.wbmp binary
-*.webp binary
-*.mp3 binary
-*.wav binary
-*.mp4 binary
-*.mpeg binary
 *.webm binary
-*.swf binary
-*.rar binary
-*.zip binary
 *.ttf binary
 *.eot binary
 *.otf binary
