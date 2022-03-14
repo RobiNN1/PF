@@ -129,5 +129,5 @@ W.I.P
 
 ## Requirements
 
-- PHPFusion 9.10.00 or newer
-- PHP +7.2.5
+- PHP >= 7.2.5
+- PHPFusion >= 9.10.00
