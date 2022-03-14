@@ -4,7 +4,7 @@
 
 Simple alternative to Custom Pages, that allows you to have this important pages in one place.
 
-**Usage**
+## Usage
 
 Add these links to your page (usually in the footer)
 
