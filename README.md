@@ -1,2 +1,3 @@
 # Random-Codes
-Random scripts for PHPFusion.
+
+**Codes are provided as is, no support is guaranteed**
