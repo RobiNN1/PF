@@ -14,6 +14,7 @@
 - [GitHub Client](infusions/github)
 - [Jobs](infusions/jobs)
 - [Legal Pages](infusions/legal)
+- [Logs](infusions/logs)
 - [Script Loader](infusions/script_loader)
 - [Sitemap Generator](infusions/sitemap)
 - [Team](infusions/team)
