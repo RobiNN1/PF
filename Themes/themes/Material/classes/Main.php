@@ -428,6 +428,8 @@ class Main extends Core {
         if ($options['background'] == TRUE || !empty($options['background'])) {
             if ($options['random_image'] == TRUE || $options['background'] !== NULL) {
                 $background = !empty($options['background']) && file_exists($options['background']) ? $options['background'] : self::getRandImg();
+                $background = str_replace(INFUSIONS, fusion_get_settings('siteurl').'infusions/', $background);
+
                 self::setParam('header_styles', 'background: url('.$background.')');
             }
         }
