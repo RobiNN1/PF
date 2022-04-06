@@ -1,6 +1,4 @@
-# PHPFusion Themes
-
-**Codes are provided as is, no support is guaranteed**
+# Themes
 
 > Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version of theme and cms.
 > Also some themes may require newer PHP.
