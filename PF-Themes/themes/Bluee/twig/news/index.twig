@@ -1,0 +1,52 @@
+<h1 class="main-title">{{ locale.news_0004 }}</h1>
+
+<div class="mb-3">
+    <span>
+        <strong>{{ locale.show }}: </strong>
+        {% for link, title in info.news_filter %}
+            <a href="{{ link|raw }}" class="display-inline m-r-10">{{ title }}</a>
+        {% endfor %}
+    </span>
+
+    <div class="dropdown display-inline pull-right">
+        <a href="#" id="news-cats" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ locale.news_0009 }}
+            <i class="fas fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="news-cats">
+            {% for cat in info.news_categories %}
+                <li><a{{ cat.active ? ' class="text-dark"' : '' }} href="{{ cat.link }}">{{ cat.name }}</a></li>
+
+                {% if cat.sub %}
+                    {% for sub_cat in cat.sub %}
+                        <li>
+                            <a class="p-l-15{{ sub_cat.active ? ' text-dark' : '' }}" href="{{ sub_cat.link }}">{{ sub_cat.name }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% if info.news_items %}
+    <div class="row mb-5">
+        {% for data in info.news_items %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <a href="{{ data.link }}"><img loading="lazy" class="card-img-top" src="{{ data.thumb }}" alt="{{ data.news_subject }}"></a>
+                    <div class="card-body">
+                        <h5 class="mb-3"><a href="{{ data.link }}">{{ data.news_subject }}</a></h5>
+                        {{ data.news_news }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if info.pagenav is not null %}
+        <div class="text-center mb-4">{{ info.pagenav|raw }}</div>
+    {% endif %}
+{% else %}
+    <div class="card text-center p-20 mb-3">{{ locale.news_0005 }}</div>
+{% endif %}

@@ -1,0 +1,42 @@
+{% macro auth(left, right, leftclass, footer, footer_left = false, footer_right = true, copyright) %}
+    <div class="container">
+        <div class="box">
+            <div class="authbox row equal-height">
+                <div class="col-12 col-md-6 leftside{{ leftclass }}">
+                    <div class="content">
+                        {{ left|raw }}
+
+                        {% if footer_left %}
+                            {{ _self.links(footer) }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 rightside justify-content-center align-items-center">
+                    <div class="content">
+                        {{ right|raw }}
+
+                        {% if footer_right %}
+                            {{ _self.links(footer) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6 copyright">{{ copyright|raw }}</div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro links(footer) %}
+    <div class="links">
+        {% for link in footer %}
+            <a href="{{ link.link }}"{{ (link.new_w) ? ' target="_blank"' : '' }}>{{ link.title }}</a>
+            {% if not loop.last %}
+                &middot;
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,80 @@
+.inbox-card {
+    padding: 1.25rem;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+
+    .no-messages {
+        width: 25%;
+        height: auto;
+    }
+}
+
+.msg-form {
+    .dropdown-menu {
+        li {
+            button {
+                display: block;
+                width: 100%;
+                padding: 0.25rem 1.5rem;
+                text-align: left;
+                color: #2D323B;
+                text-decoration: none;
+                border-radius: 0;
+
+                &:hover {
+                    color: #fff;
+                    background-color: #027af6;
+                }
+            }
+        }
+    }
+}
+
+.inbox-sidebar .nav-link {
+    margin-bottom: 5px;
+    color: #222;
+
+    > .badge {
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: #777;
+        border-radius: 10px;
+    }
+
+    &:hover,
+    &.active {
+        color: #222;
+        background-color: #f1f1f1;
+
+        > .badge {
+            color: #337ab7;
+            background-color: #fff;
+        }
+    }
+
+    &.inbox > i {
+        color: #03A9F4;
+    }
+
+    &.outbox > i {
+        color: #4CAF50;
+    }
+
+    &.archive > i {
+        color: #FF9800;
+    }
+
+    &.options > i {
+        color: #607D8B;
+    }
+}

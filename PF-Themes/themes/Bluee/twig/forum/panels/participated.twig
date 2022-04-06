@@ -1,0 +1,12 @@
+<div class="forum-box mt-3 mb-3">
+    <h2>{{ locale.bluee_021}} <i class="pull-right fas fa-users"></i></h2>
+    <div class="list-group">
+        {% for user in users %}
+            <a href="{{ constant('BASEDIR') }}profile.php?lookup={{ user.user_id }}" class="list-group-item" style="padding: 7px 10px;">
+                {{ user.avatar|raw }}
+                <strong>{{ user.user_name }}</strong>
+                <br/><small>{{ locale.bluee_022}} {{ user.post_count }}</small>
+            </a>
+        {% endfor %}
+    </div>
+</div>

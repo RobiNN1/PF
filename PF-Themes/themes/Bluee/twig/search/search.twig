@@ -1,0 +1,54 @@
+<div class="row m-b-15">
+    <div class="col-12 col-md-9">{{ info.search_text|raw }}</div>
+    <div class="col-12 col-md-3 mt-md-4">
+        <div style="margin-top: 7px;">
+            {{ info.search_button|raw }}
+            <a href="#" id="advanced_options" class="btn btn-secondary"><i class="fas fa-cogs"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="advnaced-options card m-b-20" style="display: block;">
+    <div class="card-body p-b-0">
+        {{ info.search_method|raw }}
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div>
+                    <div class="mb-2 mr-1"><strong>{{ locale.405 }}</strong></div>
+                    <div>
+                        {% for input in info.search_sources.radio_buttons %}
+                            {{ input|raw }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+                <div class="row mb-1 mb-md-0">
+                    <div class="col-12 col-md-4"><strong>{{ locale.420 }}</strong></div>
+                    <div class="col-12 col-md-8">
+                        {{ info.search_areas.datelimit|raw }}
+                        {{ info.search_areas.title_message|raw }}
+                        {{ info.search_areas.message|raw }}
+                        {{ info.search_areas.title|raw }}
+                    </div>
+                </div>
+
+                <div class="row mb-1 mb-md-0">
+                    <div class="col-12 col-md-4"><strong>{{ locale.440 }}</strong></div>
+                    <div class="col-12 col-md-8">
+                        {{ info.sort_areas.sort|raw }}
+                        {{ info.sort_areas.desc|raw }}
+                        {{ info.sort_areas.asc|raw }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4"><strong>{{ locale.460 }}</strong></div>
+                    <div class="col-12 col-md-8">{{ info.char_areas|raw }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

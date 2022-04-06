@@ -1,0 +1,19 @@
+<div class="mb-3">
+    {% if constant('iMEMBER') %}
+        <a href="{{ constant('FORUM') }}newthread.php{{ forum_id }}" class="btn btn-primary btn-block d-none d-sm-block m-b-20">
+            <i class="fas fa-comment"></i> {{ locale.forum_0057 }}
+        </a>
+    {% endif %}
+
+    <a class="d-block m-b-5{{ (get.section == 'latest') ? ' text-dark' : '' }}" href="{{ constant('FORUM') }}index.php?section=latest">
+        <span class="fa-stack m-r-5"><i class="fa fa-circle fa-stack-2x"></i><i class="text-white fas fa-comment-alt fa-stack-1x"></i></span>
+        {{ locale.bluee_019 }}
+    </a>
+
+    {% if constant('iMEMBER') %}
+        <a class="d-block{{ (get.section == 'tracked') ? ' text-dark' : '' }}" href="{{ constant('FORUM') }}index.php?section=tracked">
+            <span class="fa-stack m-r-5"><i class="fa fa-circle fa-stack-2x"></i><i class="text-white fas fa-star fa-stack-1x"></i></span>
+            {{ locale.bluee_020 }}
+        </a>
+    {% endif %}
+</div>

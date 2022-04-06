@@ -1,0 +1,91 @@
+<h1 class="main-title">{{ locale.400 }}</h1>
+
+<div class="row mb-4">
+    <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="text-center"><a class="btn btn-primary btn-block" href="{{ info.button.new.link|raw }}"><i class="fas fa-comment-medical"></i> {{ locale.401 }}</a></div>
+
+        <ul class="nav nav-pills nav-stacked m-t-20 mb-4 inbox-sidebar">
+            {% for key, folder in info.folders %}
+                <li class="nav-item display-block">
+                    <a class="nav-link p-t-5 p-b-5 {{ key }}{{ (get.folder is same as(key)) ? ' active' : '' }}" href="{{ folder.link }}">
+                        {% if folder.icon %}
+                            <i class="{{ folder.icon}} fa-fw"></i>
+                        {% endif %}
+
+                        {{ folder.title }}
+
+                        {% if info[key ~ '_count'] %}
+                            <span class="badge m-t-3 pull-right">{{ info[key ~ '_count'] }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-md-9">
+        <div class="inbox-card">
+            {% if if_form %}
+                <div class="m-b-20">
+                    {% if get.msg_read %}
+                        <a class="btn btn-outline-primary btn-sm m-r-10" href="{{ info.button.back.link|raw }}" title="{{ info.button.back.title|raw }}"><i class="fas fa-arrow-left"></i></a>
+                    {% endif %}
+
+                    <div class="display-inline-block msg-form">
+                        {{ info.actions_form.openform|raw }}
+
+                        {% if if_read %}
+                            <div class="btn-group btn-group-sm m-r-10">
+                                {% if get.folder == 'archive' %}
+                                    {{ info.actions_form.unlockbtn|raw }}
+                                {% elseif get.folder == 'inbox' %}
+                                    {{ info.actions_form.lockbtn|raw }}
+                                {% endif %}
+
+                                {{ info.actions_form.deletebtn|raw }}
+                            </div>
+                        {% else %}
+                            <div class="dropdown display-inline-block m-r-10">
+                                <a id="ddactions" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-outline-primary btn-sm dropdown-toggle"><i id="chkv" class="fas fa-square"></i> <i class="fas fa-angle-down"></i></a>
+                                <ul class="dropdown-menu" aria-labelledby="ddactions">
+                                {% for id,title in info.actions_form.check %}
+                                    <li class="dropdown-item"><a id="{{ id }}" data-action="check" class="pointer">{{ title }}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="btn-group btn-group-sm m-r-10">
+                                {% if get.folder == 'archive' %}
+                                    {{ info.actions_form.unlockbtn|raw }}
+                                {% elseif not get.folder == 'outbox' %}
+                                    {{ info.actions_form.lockbtn|raw }}
+                                {% endif %}
+
+                                {{ info.actions_form.deletebtn|raw }}
+                            </div>
+
+                            <div class="dropdown display-inline-block m-r-10">
+                                <a id="ddactions2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-outline-primary btn-sm dropdown-toggle">{{ locale.444 }} <i class="fas fa-angle-down"></i></a>
+                                <ul class="dropdown-menu" aria-labelledby="ddactions2">
+                                    <li class="dropdown-item">{{ info.actions_form.mark_all|raw }}</li>
+                                    <li class="dropdown-item">{{ info.actions_form.mark_read|raw }}</li>
+                                    <li class="dropdown-item">{{ info.actions_form.mark_unread|raw }}</li>
+                                    <li class="dropdown-item">{{ info.actions_form.unmark_all|raw }}</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {{ info.actions_form.closeform|raw }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {{ content|raw }}
+
+            {% if info.pagenav %}
+                <div class="clearfix">
+                    <div class="pull-right">{{ info.pagenav|raw }}</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

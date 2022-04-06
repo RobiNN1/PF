@@ -1,0 +1,19 @@
+{{ header|raw }}
+
+{% if constant('iMEMBER') %}
+    <a href="{{ constant('FORUM') }}newthread.php{{ forum_id }}" class="btn btn-primary btn-block d-sm-none m-b-20">
+        <i class="fas fa-comment"></i> {{ locale.forum_0057 }}
+    </a>
+{% endif %}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        {{ content|raw }}
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        {{ links|raw }}
+        {{ tags|raw }}
+        {{ stats|raw }}
+    </div>
+</div>

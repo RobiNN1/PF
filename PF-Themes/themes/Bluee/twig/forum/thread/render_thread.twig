@@ -1,0 +1,144 @@
+{{ header|raw }}
+
+{% set disable_btn = (info.permissions.can_post == false) ? ' disabled' : '' %}
+
+<div class="forum-header m-b-20">
+    {{ breadcrumbs|raw }}
+
+    <h2 class="m-t-10 word-break">
+        {{ info.thread.thread_subject|raw }}
+
+        <span class="m-r-10 text-lighter small">
+            {% if info.thread.thread_locked %}
+                <i title="{{ locale.forum_0102 }}" class="fas fa-lock"></i>
+            {% endif %}
+
+            {% if info.thread.thread_sticky %}
+                <i title="{{ locale.forum_0103 }}" class="fas fa-thumbtack"></i>
+            {% endif %}
+        </span>
+    </h2>
+
+    <div class="m-r-5 display-inline-block"><i class="fas fa-comments"></i> {{ info.postcount }}</div>
+    <div class="m-r-5 display-inline-block"><i class="fas fa-eye"></i> {{ info.threadviews }}</div>
+    <div class="m-r-5 display-inline-block">
+        <i class="fas fa-clock"></i> {{ locale.forum_0363 }} {{ info.threadlastpost|raw }}</div>
+
+    {% if info.thread_tags_display %}
+        <div><i class="fas fa-tags"></i> <span class="thread-tags">{{ info.threadtags|raw }}</span></div>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        {% if info.thread_bounty %}
+            <div class="m-b-20">
+                <div class="block-bounty list-group m-b-20">
+                    <div class="list-group-item list-group-item-info">
+                        {% if info.thread_bounty.bounty_edit %}
+                            <a href="{{ info.thread_bounty.bounty_edit.link }}">{{ info.thread_bounty.bounty_edit.title }}</a>
+                        {% endif %}
+                        <h4>{{ info.thread_bounty.bounty_title|raw }}</h4>
+                        {{ locale.forum_4102 }}
+                        <p class="text-dark">{{ info.thread_bounty.bounty_description|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="clearfix m-b-20">
+            <div class="clearfix">
+                <div class="pull-left">
+                    {% if info.post_filters %}
+                        <div id="ddfiltertime" class="dropdown display-inline-block m-r-10">
+                            <a class="btn btn-default btn-sm m-b-5 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <b>{{ locale.forum_0183 }}</b> {{ info.selector }}
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="ddfiltertime">
+                                {% for filter in info.post_filters %}
+                                    <li><a class="text-smaller" href="{{ filter.value|raw }}">{{ filter.locale }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    {% if info.buttons.notify and constant('iMEMBER') %}
+                        <a class="btn btn-default btn-sm m-b-5 m-r-10" href="{{ info.buttons.notify.link|raw }}">{{ info.buttons.notify.title }}</a>
+                    {% endif %}
+
+                    <a class="btn btn-default btn-sm m-b-5 m-r-10" href="{{ info.buttons.print.link|raw }}">{{ info.buttons.print.title }}</a>
+                </div>
+
+                <div class="pull-right">
+                    {% if info.permissions.can_start_bounty %}
+                        <a class="btn btn-primary btn-sm m-b-5 m-l-10{{ (info.permissions.can_start_bounty == false) ? ' disabled' : '' }}" href="{{ info.buttons.bounty.link|raw }}">{{ info.buttons.bounty.title }}</a>
+                    {% endif %}
+
+                    {% if info.permissions.can_create_poll and info.permissions.can_post %}
+                        <a class="btn btn-primary btn-sm m-b-5 m-l-10{{ (info.permissions.can_create_poll == false and info.permissions.can_post == false) ? ' disabled' : '' }}" href="{{ info.buttons.poll.link|raw }}">{{ info.buttons.poll.title }}</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if info.page_nav %}
+                <div class="pull-right m-t-10">{{ info.page_nav|raw }}</div>
+            {% endif %}
+        </div>
+
+        {{ posts|raw }}
+
+        {% if info.thread.thread_locked %}
+            <div class="alert bg-danger text-white">
+                <i class="fas fa-lock"></i> {{ locale.bluee_025 }}
+            </div>
+        {% endif %}
+
+        {% if info.mod_form %}
+            <div class="card">
+                <div class="card-body p-2">
+                    {{ info.mod_form|raw }}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="clearfix m-t-20 m-b-10">
+            <div class="pull-left">
+                {% if info.permissions.can_post %}
+                    <a class="btn btn-primary btn-sm m-r-10{{ disable_btn }}" href="{{ info.buttons.newthread.link|raw }}">{{ info.buttons.newthread.title }}</a>
+
+                    {% if info.buttons.reply %}
+                        <a class="btn btn-primary btn-sm{{ disable_btn }}" href="{{ info.buttons.reply.link|raw }}">{{ info.buttons.reply.title }}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            {% if info.page_nav %}
+                <div class="pull-right mb-4">{{ info.page_nav|raw }}</div>
+            {% endif %}
+        </div>
+
+        {{ info.quick_reply_form|raw }}
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        {{ links|raw }}
+
+        {% if info.poll_form %}
+            <div class="poll-form">{{ info.poll_form|raw }}</div>
+        {% endif %}
+
+        {{ tags|raw }}
+        {{ participated|raw }}
+
+        {% if info.forum_moderators %}
+            <div class="card p-10 mb-3">
+                <div class="card-body p-0">
+                    {{ locale.forum_0185 }} {{ info.forum_moderators|raw }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

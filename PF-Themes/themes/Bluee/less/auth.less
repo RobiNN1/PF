@@ -1,0 +1,193 @@
+.auth-page {
+    background: #1269ec;
+
+    @media (min-width: 768px) {
+        position: relative;
+        height: 100vh;
+        background: #fff;
+
+        &:before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            background: #1269ec;
+            z-index: -1;
+        }
+    }
+
+    .box {
+        padding-top: 8%;
+
+        @media (max-width: 767px) {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+
+    .copyright {
+        color: #fff;
+        font-size: 14px;
+        padding: 10px 0 10px 0;
+    }
+}
+
+.authbox {
+    height: 100%;
+    box-shadow: 0 3px 50px rgba(0, 0, 0, .16);
+    border-radius: 12px;
+
+    .leftside,
+    .rightside {
+        padding: 0;
+        height: auto;
+    }
+
+    .content {
+        padding: 40px;
+        margin: 50px 0;
+    }
+
+    .leftside {
+        box-shadow: 0 3px 50px rgba(0, 0, 0, .16);
+        border-radius: 12px 0 0 12px;
+        background: #1269ec;
+        text-align: center;
+        color: #fff;
+
+        img {
+            width: 60%;
+        }
+    }
+
+    .rightside {
+        border-radius: 0 12px 12px 0;
+        background: #fff;
+
+        h1 {
+            color: #1E78FF;
+            margin-bottom: 20px;
+        }
+    }
+
+    .links {
+        text-align: center;
+        margin: 20px 0;
+
+        a {
+            color: #2D323B;
+            font-size: 13px;
+            font-weight: normal !important;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        @media (min-width: 768px) {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .content {
+            padding: 15px;
+            margin: 5px 0;
+        }
+
+        .leftside {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .rightside {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .links {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.authbox .leftside a,
+.auth-page .copyright a {
+    color: #fff;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.form-group.overflow-hide {
+    overflow: inherit;
+}
+
+.register-page {
+    height: auto;
+
+    .box {
+        padding-top: 4%;
+    }
+
+    .authbox {
+        @media (min-width: 768px) {
+            .leftside {
+                background: url('assets/img/auth/register.svg') no-repeat center;
+
+                .content {
+                    margin: 5px 0;
+                }
+            }
+        }
+
+        .rightside .content {
+            margin: 5px 0;
+        }
+    }
+
+    .form-group {
+        .radio {
+            display: inline-block;
+
+            img {
+                display: none;
+            }
+        }
+    }
+}
+
+.lostpassword-page {
+    #send_password {
+        margin-bottom: 15px;
+    }
+
+    .authbox {
+        @media (min-width: 768px) {
+            .rightside {
+                background: #fff url('assets/img/auth/lostpassword.svg') no-repeat center;
+            }
+        }
+    }
+}
+
+.gateway-page {
+    .authbox {
+        @media (min-width: 768px) {
+            .leftside {
+                background: url('assets/img/auth/gateway.svg') no-repeat center;
+            }
+        }
+    }
+}
+
+#send_password,
+#gateway_submit {
+    display: block;
+    width: 100%;
+}

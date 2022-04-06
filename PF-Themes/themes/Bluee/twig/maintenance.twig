@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center text-center">
+        <div class="col-12">
+            {{ maintenance_message|raw }}
+
+            {% if info %}
+                {{ info.open_form|raw }}
+                <div class="row mt-5">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ info.user_name|raw }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ info.user_pass|raw }}</div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">{{ info.login_button|raw }}</div>
+                </div>
+                {{ info.close_form|raw }}
+            {% else %}
+                <div class="text-center">
+                    <a href="{{ constant('BASEDIR') }}index.php?logout=yes" class="btn btn-primary m-t-10">{{ locale.global_124 }}</a>
+
+                    {% if admin %}
+                        <div class="display-block m-t-10">
+                            <a class="display-inline-block m-r-10" href="{{ constant('BASEDIR') }}index.php">{{ locale.home }}</a>
+                            <a class="display-inline-block" href="{{ admin_link }}">{{ locale.global_123 }}</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

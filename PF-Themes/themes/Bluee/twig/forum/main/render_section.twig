@@ -1,0 +1,19 @@
+<div class="clearfix">
+    {% if data.pagenav %}
+        <div class="pull-right m-b-20">{{ data.pagenav|raw }}</div>
+    {% endif %}
+
+    {% if info.threads_time_filter %}
+        <div class="threads_time_filter pull-left">{{ info.threads_time_filter|raw }}</div>
+    {% endif %}
+</div>
+
+{% if data %}
+    <div class="threads">{{ content|raw }}</div>
+{% else %}
+    <div class="card text-center p-20 mb-3">{{ locale.forum_0269 }}</div>
+{% endif %}
+
+{% if data.pagenav %}
+    <div class="text-right hidden-xs m-t-15 mb-3">{{ data.pagenav|raw }}</div>
+{% endif %}

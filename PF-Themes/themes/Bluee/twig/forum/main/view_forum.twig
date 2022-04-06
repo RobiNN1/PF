@@ -1,0 +1,90 @@
+{{ header|raw }}
+
+<div class="forum-header m-b-20">
+    {{ breadcrumbs|raw }}
+
+    <div class="row m-t-10">
+        <div class="d-none d-sm-block col-sm-1 forum-icon">{{ info.forum_image|raw }}</div>
+        <div class="col-sm-11 align-self-center">
+            <h2 class="word-break">{{ info.forum_name }}</h2>
+
+            {% if info.forum_description %}
+                <div class="description">{{ info.forum_description|raw }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if info.forum_rules %}
+    <div class="alert alert-info">
+        <h5 class="alert-heading"><i class="fas fa-tasks"></i> {{ locale.bluee_033 }}</h5>
+        <p class="mb-0">{{ info.forum_rules|raw }}</p>
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="clearfix">
+            {% if new_link %}
+                <div class="d-xl-none pull-right">
+                    <a class="btn btn-primary btn-sm" href="{{ info.new_thread_link.link|raw }}"><i class="fas fa-comment"></i> {{ info.new_thread_link.title }}</a>
+                </div>
+            {% endif %}
+
+            {% if info.forum_type > 1 and info.forum_page_link %}
+                <ul class="nav nav-pills mb-3 forum-nav pull-left">
+                    {% for data in info.forum_page_link %}
+                        <li class="nav-item">
+                            <a class="nav-link{{ (data.active) ? ' active' : '' }}" href="{{ data.link|raw }}">{{ data.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        {# {% if info.filters.type %}
+            <ul class="nav nav-tabs mb-3">
+                {% for tab in info.filters.type %}
+                    <li class="nav-item"><a class="nav-link{{ (tab.active) ? ' active' : '' }}" href="{{ tab.link|raw }}">{{ tab.icon|raw }} {{ tab.title }} <span class="badge badge-dark">{{ tab.count }}</span></a></li>
+                {% endfor %}
+            </ul>
+        {% endif %} #}
+
+        {% if get.view %}
+            {{ content|raw }}
+        {% else %}
+            {% if info.subforums %}
+                {% if constant('iMEMBER') %}
+                    <a href="{{ constant('FORUM') }}newthread.php{{ forum_id }}" class="btn btn-primary btn-block d-sm-none m-b-20">
+                        <i class="fas fa-comment"></i> {{ locale.forum_0057 }}
+                    </a>
+                {% endif %}
+
+                {% if info.forum_type != 1 %}
+                    <div class="forum-title">{{ locale.forum_0351 }}</div>
+                {% endif %}
+
+                <div class="m-b-20">{{ subforums|raw }}</div>
+            {% else %}
+                {% if info.forum_type == 1 %}
+                    <div class="forum-box p-10 text-center">{{ locale.forum_0327 }}</div>
+                {% endif %}
+            {% endif %}
+
+            {% if info.forum_type > 1 %}
+                {{ filter|raw }}
+                {{ threads|raw }}
+            {% endif %}
+        {% endif %}
+
+        {% if info.forum_moderators %}
+            <div class="forum-box p-10">{{ locale.forum_0185 }} {{ info.forum_moderators|raw }}</div>
+        {% endif %}
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        {{ links|raw }}
+        {{ tags|raw }}
+        {{ stats|raw }}
+    </div>
+</div>

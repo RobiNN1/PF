@@ -1,0 +1,74 @@
+<ul class="navbar-nav secondary ml-0">
+    <li class="nav-item dropdown">
+        <a id="ddsearch" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-lg-none m-r-5">{{ locale.search }}</span><i class="fas fa-search"></i></a>
+        <ul class="dropdown-menu" aria-labelledby="ddsearch">
+            {{ searchbox|raw }}
+        </ul>
+    </li>
+
+    {% set basedir = constant('BASEDIR') %}
+
+    {% if languages|length > 1 %}
+        {% set language = constant('LANGUAGE') %}
+
+        <li class="nav-item dropdown">
+            <a id="ddlangs" href="#" class="dropdown-toggle pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ language }}">
+                <i class="fas fa-globe-europe"></i>
+                <img src="{{ basedir }}locale/{{ language }}/{{ language }}-s.png" alt="{{ current_lang }}"/>
+                <i class="fas fa-angle-down"></i>
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="ddlangs" style="min-width: 150px;">
+                {% for language_folder, language_name in languages %}
+                    {% set language_link = get_function('clean_request', TRUE, 'lang=' ~ language_folder, ['lang'], FALSE) %}
+
+                    <li class="dropdown-item">
+                        <a class="display-block" href="{{ language_link|raw }}">
+                            <img class="m-r-5" src="{{ basedir }}locale/{{ language_folder }}/{{ language_folder }}-s.png" alt="{{ language_folder }}"/>
+                            {{ language_name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if constant('iMEMBER') %}
+        <li class="nav-item">
+            {% set msg_count = msg_count > 0 ? '<span class="msg-count badge badge-danger"> '~msg_count~'</span>' : '' %}
+            <a href="{{ basedir }}messages.php"><span class="d-lg-none m-r-5">{{ locale.message }}</span><i class="fas fa-envelope"></i>{{ msg_count|raw }}</a>
+        </li>
+
+        <li id="user-info" class="nav-item dropdown">
+            <a href="#" id="user-menu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ userdata.user_name }} <i class="fas fa-angle-down"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="user-menu" style="min-width: 180px;">
+                <li class="dropdown-item"><a href="{{ basedir }}profile.php?lookup={{ userdata.user_id }}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x icon-bg"></i><i class="fas fa-user fa-stack-1x"></i></span> {{ locale.view }} {{ locale.profile }}</a></li>
+                <li class="dropdown-item"><a href="{{ basedir }}edit_profile.php"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x icon-bg"></i><i class="fas fa-user-edit fa-stack-1x"></i></span> {{ locale.UM080 }}</a></li>
+
+                {% if constant('iADMIN') %}
+                    <li class="dropdown-item"><a href="{{ adminlink }}&pagenum=0"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x icon-bg"></i><i class="fas fa-tachometer-alt fa-stack-1x"></i></span> {{ locale.global_123 }}</a></li>
+                {% endif %}
+
+                {% if loginas %}
+                    <li class="dropdown-item"><a href="{{ basedir }}index.php?logoff={{ userdata.user_id }}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x icon-bg"></i><i class="fas fa-sign-out-alt fa-stack-1x"></i></span> {{ locale.UM103 }}</a></li>
+                {% endif %}
+
+                <li class="dropdown-item"><a href="{{ basedir }}index.php?logout=yes"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x icon-bg"></i><i class="fas fa-sign-out-alt fa-stack-1x"></i></span> {{ locale.logout }}</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li class="nav-item dropdown loginform">
+            <a href="#" id="login-register" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-lg-none m-r-5">{{ locale.login }}</span> <i class="fas fa-sign-in-alt"></i> <i class="fas fa-angle-down"></i></a>
+
+            <ul class="dropdown-menu dropdown-login" aria-labelledby="login-register">
+                <li class="dropdown-header"><h4 class="m-b-0">{{ locale.global_100 }}</h4></li>
+                <li>{{ loginform|raw }}</li>
+                <li class="dropdown-item">{{ lostpassword|raw }}</li>
+            </ul>
+        </li>
+
+        {% if settings.enable_registration %}
+            <li class="nav-item register-btn"><a href="{{ basedir }}register.php">{{ locale.register }}</a></li>
+        {% endif %}
+    {% endif %}
+</ul>

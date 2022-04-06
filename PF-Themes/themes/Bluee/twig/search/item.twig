@@ -1,0 +1,6 @@
+<li>
+    {{ info.item_image|raw }}
+    <a{{ info.new_window and info.new_window == 1 ? ' target="_blank"' : '' }} href="{{ info.item_url|raw }}">{{ info.item_title }}</a>
+    <br>
+    {{ info.item_description|raw }}
+</li>

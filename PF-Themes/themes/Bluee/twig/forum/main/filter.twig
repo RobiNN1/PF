@@ -1,0 +1,41 @@
+<div class="filters">
+    <div class="dropdown display-inline-block">
+        <button id="ddfilter1" class="btn btn-sm btn-link btn-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ selector }} <i class="fas fa-angle-down"></i></button>
+
+        <ul class="dropdown-menu" aria-labelledby="ddfilter1">
+            {% for locale, link in filter.time %}
+                <li class="dropdown-item"><a href="{{ link|raw }}">{{ locale }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dropdown display-inline-block">
+        <button id="ddfilter2" class="btn btn-sm btn-link btn-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ selector2 }} <i class="fas fa-angle-down"></i></button>
+
+        <ul class="dropdown-menu" aria-labelledby="ddfilter2">
+            {% for locale, link in filter.type %}
+                <li class="dropdown-item"><a href="{{ link|raw }}">{{ locale }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dropdown display-inline-block">
+        <button id="ddfilter3" class="btn btn-sm btn-link btn-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ selector3 }} <i class="fas fa-angle-down"></i></button>
+
+        <ul class="dropdown-menu" aria-labelledby="ddfilter3">
+            {% for locale, link in filter.sort %}
+                <li class="dropdown-item"><a href="{{ link|raw }}">{{ locale }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="dropdown display-inline-block">
+        <button id="ddfilter4" class="btn btn-sm btn-link btn-filter dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ selector4 }} <i class="fas fa-angle-down"></i></button>
+
+        <ul class="dropdown-menu" aria-labelledby="ddfilter4">
+            {% for locale, link in filter.order %}
+                <li class="dropdown-item"><a href="{{ link|raw }}">{{ locale }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

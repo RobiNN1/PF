@@ -1,0 +1,60 @@
+.img-profile {
+    overflow: hidden;
+}
+
+.social {
+    margin-top: -40px;
+}
+
+.social img {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+}
+
+.profile-card .nav-tabs {
+    margin: -15px -15px 15px;
+    white-space: nowrap;
+}
+
+.profile-card .nav-tabs > li > a {
+    text-transform: uppercase;
+    color: #7a7a7a;
+    font-weight: 800;
+    padding: 15px;
+}
+
+.profile-card .nav-tabs > li.active > a {
+    color: #000;
+}
+
+.card-block {
+    padding: 20px 40px;
+}
+
+.card-block img {
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.cat-field {
+    color: #444;
+    font-size: 14px;
+}
+
+.cat-title {
+    font-size: 20px;
+}
+
+.m-50 {
+    margin: 50px;
+}
+
+.p-b-60 {
+    padding-bottom: 60px !important;
+}
+
+.p-b-9 {
+    padding-bottom: 9px;
+}

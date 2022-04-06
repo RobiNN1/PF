@@ -1,0 +1,11 @@
+<div class="mb-5 postify-box">
+    <div class="card-body text-center">
+        <div class="mt-5">{{ locale.bluee_018 }}</div>
+        {{ info.message }}
+        <br>
+
+        {% for link in info.link %}
+            <a class="link d-block d-md-inline" href="{{ link.url|raw }}">{{ link.title }}</a>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div id="forum{{ data.forum_id }}" class="clearfix forum-item">
+    <div class="pull-left forum-icon">{{ data.forum_image|raw }}</div>
+
+    <div class="row m-0">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <a class="display-inline-block forum-link strong text-dark" href="{{ data.forum_link.link|raw }}">{{ data.forum_link.title }}</a>
+
+            {% if data.forum_new_status %}
+                <span class="m-l-5">{{ data.forum_new_status|raw }}</span>
+            {% endif %}
+
+            {% if data.forum_description %}
+                <div class="forum-description">{{ data.forum_description|raw }}</div>
+            {% endif %}
+
+            {% if data.forum_moderators %}
+                <div class="forum-moderators text-smaller">
+                    <b>{{ locale.forum_0007 }}</b> {{ data.forum_moderators|raw }}
+                </div>
+            {% endif %}
+
+            {% if data.child %}
+                <div class="clearfix subforums">
+                    <div class="overflow-hide">
+                        {% for cdata in data.child %}
+                            <span>
+                                {% if cdata.forum_icon %}
+                                    <i class="{{ cdata.forum_icon }}"></i>
+                                {% endif %}
+                                <a href="{{ constant('INFUSIONS') }}forum/index.php?viewforum&forum_id={{ cdata.forum_id }}">{{ cdata.forum_name }}</a>
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 order-2 order-md-1 text-right">
+            <div class="display-inline-block m-l-10">{{ data.threadcount }}</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-truncate">
+            {% if data.forum_lastpost %}
+                {% if data.last_post_avatar %}
+                    <div class="pull-left m-r-10">{{ data.last_post_avatar|raw }}</div>
+                {% endif %}
+
+                {% if data.thread_subject %}
+                    <a href="{{ data.last_post.post_link|raw }}" title="{{ data.thread_subject|raw }}">{{ data.thread_subject|raw }}</a>
+                    <br>
+                    {{ data.last_post.time|raw }}
+                {% endif %}
+            {% else %}
+                <strong>{{ locale.forum_0005 }}</strong>
+            {% endif %}
+        </div>
+    </div>
+</div>

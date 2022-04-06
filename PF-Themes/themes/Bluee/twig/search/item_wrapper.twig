@@ -1,0 +1,17 @@
+<div class="card m-b-20">
+    <div class="card-header">
+        <span class="m-r-5">
+            {% if info.icon_class %}
+                <i class="{{ info.icon_class }}"></i>
+            {% else %}
+                {{ info.image|raw }}
+            {% endif %}
+        </span>
+        {{ info.search_title }}
+    </div>
+    <div class="card-body">
+        {{ info.search_result|raw }}
+        <hr>
+        <ul class="list-style-none">{{ info.search_content|raw }}</ul>
+    </div>
+</div>

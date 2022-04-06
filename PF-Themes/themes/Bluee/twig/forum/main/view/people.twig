@@ -1,0 +1,18 @@
+{% if info.item %}
+    <div class="row">
+        {% for data in info.item %}
+            <div class="col col-sm-4 m-b-20">
+                <div class="card">
+                    <div class="card-body">
+                        {{ data.avatar|raw }}{{ data.profile_link|raw }}
+                        <div class="m-t-10"><strong>{{ locale.bluee_017 }}</strong> {{ data.post_count }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if info.pagenav %}
+        <div class="text-right m-t-15 mb-3">{{ info.pagenav|raw }}</div>
+    {% endif %}
+{% endif %}

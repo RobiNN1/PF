@@ -1,0 +1,7 @@
+{% if subforums %}
+    <div class="forum-title">{{ locale.forum_0351 }}</div>
+
+    {{ items|raw }}
+{% else %}
+    <div class="forum-box p-10 text-center">{{ locale.forum_0019 }}</div>
+{% endif %}

@@ -1,0 +1,139 @@
+{% if notices is not null %}
+    <div class="notices">{{ notices|raw }}</div>
+{% endif %}
+
+{% if getparam.header == true %}
+    <header class="topbg">
+        {{ mainmenu|raw }}
+    </header>
+{% endif %}
+
+{% if getparam.section == true %}
+<section class="pt-2">
+    <div class="container">
+        {% endif %}
+
+        {% if constant('AU_CENTER') is defined %}
+            {{ constant('AU_CENTER')|raw }}
+        {% endif %}
+        {{ banner1|raw }}
+
+        {% if getparam.row == true %}
+        <div class="row">
+            {% endif %}
+
+            {% if getparam.row == true %}
+            <div class="col-xs-12 col-sm-{{ content.sm }} col-md-{{ content.md }} col-lg-{{ content.lg }}">
+                {% endif %}
+                {% if constant('U_CENTER') is defined %}
+                    {{ constant('U_CENTER')|raw }}
+                {% endif %}
+                {{ constant('CONTENT')|raw }}
+                {% if constant('U_CENTER') is defined %}
+                    {{ constant('U_CENTER')|raw }}
+                {% endif %}
+                {{ banner2|raw }}
+                {% if getparam.row == true %}
+            </div>
+            {% endif %}
+
+            {% if ifright == true or ifleft == true %}
+                <div class="col-xs-12 col-sm-{{ right.sm }} col-md-{{ right.md }} col-lg-{{ right.lg }}">
+                    {% if constant('RIGHT') is defined %}
+                        {{ constant('RIGHT')|raw }}
+                    {% endif %}
+
+                    {% if constant('LEFT') is defined %}
+                        {{ constant('LEFT')|raw }}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% if getparam.row == true %}
+        </div>
+        {% endif %}
+
+        {% if constant('BL_CENTER') is defined %}
+            {{ constant('BL_CENTER')|raw }}
+        {% endif %}
+
+        {% if getparam.section == true %}
+    </div>
+</section>
+{% endif %}
+
+{% if getparam.footer == true %}
+    <footer class="site-footer">
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    {% if constant('USER1') is defined %}
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">{{ constant('USER1')|raw }}</div>
+                    {% endif %}
+                    {% if constant('USER2') is defined %}
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">{{ constant('USER2')|raw }}</div>
+                    {% endif %}
+                    {% if constant('USER3') is defined %}
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">{{ constant('USER3')|raw }}</div>
+                    {% endif %}
+                    {% if constant('USER4') is defined %}
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">{{ constant('USER4')|raw }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="row footer">
+                    <div class="order-last order-md-first col-md-3 col-lg-3">
+                        <div class="title"><i class="fas fa-link"></i> {{ locale.bluee_028 }}</div>
+
+                        {% for link in footer %}
+                            <a class="d-block" href="{{ link.link }}"{{ (link.new_w) ? ' target="_blank"' : '' }}><i class="fa-fw {{ link.icon }}"></i> {{ link.title }}
+                            </a>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 text-center mb-4 mb-md-0">
+                        <div class="m-b-10">
+                            <img src="{{ constant('BASEDIR') }}{{ settings.sitebanner }}" alt="{{ settings.sitename }}" class="m-t-5 m-b-15 img-fluid" style="display: inline-block;max-width: 260px;">
+                        </div>
+                        {{ settings.description|raw }}
+                        <br>
+                        {{ footer_text|raw }}
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 mb-4 mb-md-0">
+                        <div class="title"><i class="fas fa-users"></i> {{ locale.global_012 }}</div>
+                        <div class="members">
+                            <span>{{ locale.bluee_029 }} {{ newer_user|raw }}</span>
+                            <span>{{ locale.bluee_030 }} {{ guests_count }}</span>
+                            <span>{{ locale.bluee_031 }} {{ members_count }}</span>
+
+                            {% if members %}
+                                <span>{{ locale.bluee_032 }} {{ members|raw }}</span>
+                            {% endif %}
+                            <div style="display:none;">{{ counter|raw }}</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="copyright" class="clearfix">
+            <div class="container">
+                <div id="rendertime">
+                    {{ errors|raw }}
+
+                    {% if ifrendertime == true %}
+                        {{ rendertime|raw }}
+                        {{ memoryusage|raw }}
+                    {% endif %}
+                </div>
+                <div>{{ copyright|raw }}<br>
+                    &copy; {{ 'now' | date('Y') }} Theme created by <a href="https://github.com/RobiNN1">RobiNN</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endif %}
