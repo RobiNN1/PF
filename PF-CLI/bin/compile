@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+/*
+ * This file is part of the PF-CLI package.
+ *
+ * (c) Róbert Kelčák <robo@kelcak.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// Create PHAR archive
+
+$phar = new Phar(__DIR__.'/../pf.phar');
+$phar->buildFromDirectory(__DIR__.'/../cli');
+$phar->setStub("#!/usr/bin/env php
+<?php
+require 'phar://'.__FILE__.'/pf.php';
+__HALT_COMPILER();");
+$phar->compressFiles(Phar::GZ);
+
+print 'Compiled';
+exit(0);
