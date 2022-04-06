@@ -1,0 +1,7 @@
+{
+    "require": {
+        "php": "^7 || ^8",
+        "austinb/gameq": "^3.0",
+        "phpfastcache/phpfastcache": "^8.0"
+    }
+}

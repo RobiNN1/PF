@@ -1,0 +1,43 @@
+<div class="row"><div class="col-xs-12 col-sm-6 col-sm-offset-3">{%wiki_search%}</div></div>
+<div class="text-center">
+    <h1>{[wiki_306]}</h1>
+</div>
+
+<hr>
+
+<p class="text-center" style="font-size: large;">
+    {[wiki_309]}<br/>
+    <a href="{%changelog_link%}" class="btn btn-info changelog-link"><i class="fa fa-clipboard-list"></i> {[wiki_002]}</a>
+</p>
+
+<hr>
+
+<h2 class="text-bold"><i class="entypo entypo-open-book"></i> {[wiki_310]}</h2>
+<div class="categories m-t-20 row equal-height">
+    {categories.{
+        <div class="col-xs-12 col-sm-6"><div style="height: 100%;">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="m-t-0">{%name%}</h4>
+                    <p class="text-smaller">{%description%}</p>
+                </div>
+                <div class="panel-footer"><a class="display-block" href="{%link%}">{[view]} <i class="fa fa-arrow-right"></i></a></div>
+            </div>
+        </div></div>
+    }}
+</div>
+
+<h3><i class="entypo entypo-book"></i> {[wiki_311]}</h3>
+<div class="latest-docs row">
+    <div class="col-xs-12 col-sm-6">
+        {latest_pages.{
+            {%div%}
+            <div class="item">
+                <h4 class="item-title"><a href="{%link%}">{%name%}</a> <span style="font-size: 15px;">{[wiki_312]}</span> <a class="badge" href="{%cat_link%}">{%cat_name%}</a></h4>
+                <small>{[wiki_313]} {%date%}</small>
+                <div class="item-snippet">{%snippet%}</div>
+            </div>
+        }}
+    </div>
+</div>
+{%no_pages%}
