@@ -1,6 +1,6 @@
-# PHPFusion CLI (Experimental project)
+# PHPFusion CLI
 
-![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Cli)
+Experimental project
 
 ## Installation
 
