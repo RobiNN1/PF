@@ -2,8 +2,6 @@
 
 **Codes are provided as is, no support is guaranteed**
 
-![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=PF-Projects.PF-Addons)
-
 > Compatibility with older versions is not guaranteed. If something doesn't work, make sure you're using the latest version of addon and cms.
 > Also some addons may require newer PHP.
 
